@@ -1,0 +1,17 @@
+.env
+.env.*
+.githooks/
+.local/
+.netlify/
+.vercel/
+node_modules/
+coverage/
+playwright-report/
+test-results/
+supabase-setup.sql
+supabase-admin-seed.sql
+*.log
+*.tmp
+*.temp
+*.bak
+*.local

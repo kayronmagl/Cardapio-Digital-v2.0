@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description"
+    content="Painel administrativo oficial do Tobia's Lanches para gerenciamento do cardápio online.">
+  <meta name="theme-color" content="#17120d">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>Painel - Tobia's Lanches</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./dist/styles.css?v=2.0.16">
+</head>
+
+<body class="admin-page">
+  <main class="admin-shell">
+    <header class="admin-topo">
+      <div>
+        <p class="admin-kicker">Painel</p>
+        <h1 class="admin-title">Gerenciar cardápio</h1>
+        <p class="admin-subtitle">Painel oficial do Tobia's Lanches com publicação online segura.</p>
+      </div>
+      <div class="admin-topbar-actions">
+        <a class="botao botao-secundario admin-public-link" href="index.html">Ver cardápio público</a>
+        <label class="idioma-box idioma-box-admin" for="adminLocaleSelector">
+          <span class="idioma-rotulo" id="adminLocaleLabel">Idioma</span>
+          <select id="adminLocaleSelector" class="idioma-seletor" aria-label="Selecionar idioma"></select>
+        </label>
+        <button id="logoutButton" type="button" class="botao botao-secundario" hidden>Sair</button>
+      </div>
+    </header>
+
+    <p id="adminStatus" class="admin-status" aria-live="polite"></p>
+    <section id="authPanel" class="admin-card"></section>
+    <section id="adminApp" hidden></section>
+  </main>
+
+  <script src="./config.js?v=1.0.0"></script>
+  <script src="./dist/core/shared-utils.js?v=2.1.2"></script>
+  <script src="./dist/core/admin-auth.js?v=2.1.0"></script>
+  <script src="./dist/core/state-manager.js?v=2.0.3"></script>
+  <script src="./dist/admin.js?v=2.0.11"></script>
+</body>
+
+</html>

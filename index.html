@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description"
+    content="Cardápio digital oficial do Tobia's Lanches. Faça seu pedido pelo WhatsApp, escolha retirada ou consumo no local.">
+  <meta name="theme-color" content="#17120d">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>Tobia's Lanches</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./dist/styles.css?v=2.0.16">
+</head>
+
+<body>
+  <div class="fundo-animado" aria-hidden="true"></div>
+
+  <header class="topo layout-shell" id="topo">
+    <div class="caixa-logo">
+      <img id="logoSite" src="./assets/logo-tobias-lanches-web.png" alt="Logo Tobia's Lanches" class="logo-site">
+      <div class="marca-topo">
+        <h1 id="tituloSite" class="titulo-site">Tobia's Lanches</h1>
+        <p id="subtituloTopo" class="subtitulo-topo">Pastéis, hambúrgueres, combos e bebidas</p>
+        <p id="enderecoTopo" class="endereco-topo" hidden></p>
+      </div>
+    </div>
+    <div class="topo-acoes">
+      <div class="topo-utilitarios" aria-label="Controles rápidos do cardápio">
+        <label class="idioma-box" for="seletorIdioma">
+          <span id="rotuloIdioma" class="idioma-rotulo">Idioma</span>
+          <select id="seletorIdioma" class="idioma-seletor" aria-label="Selecionar idioma"></select>
+        </label>
+        <div class="accessibility-box">
+          <button id="botaoAcessibilidade" class="accessibility-toggle" type="button" aria-pressed="false"
+            aria-describedby="textoAcessibilidadeEstado">
+            <span id="textoAcessibilidadeLabel" class="accessibility-toggle-label">Acessibilidade</span>
+            <span id="textoAcessibilidadeEstado" class="accessibility-toggle-state">Modo acessível: desativado</span>
+          </button>
+        </div>
+        <p id="statusQuiosque" class="status-quiosque" aria-live="polite" role="status"></p>
+      </div>
+      <button id="botaoCarrinho" class="cart-header-button" type="button" aria-controls="caixaCarrinho"
+        aria-expanded="false">
+        <span id="textoBotaoCarrinho" class="cart-header-button__label">Carrinho</span>
+        <span class="cart-header-button__count"><span id="quantidadeCarrinho">0</span></span>
+      </button>
+    </div>
+  </header>
+
+  <section id="topoBlocos" class="topo-blocos layout-shell" aria-label="Resumo inicial">
+    <section id="secaoDestaqueInicial" class="destaque-inicial" aria-label="Destaques do atendimento">
+      <div class="destaque-inicial-grade">
+        <div class="destaque-inicial-conteudo">
+          <p id="destaqueChamada" class="destaque-chamada">Cardápio digital oficial</p>
+          <h2 id="destaqueTitulo" class="destaque-titulo">Peça pelo WhatsApp com atendimento direto.</h2>
+          <p id="destaqueSubtitulo" class="destaque-subtitulo">Escolha os produtos, revise o carrinho e envie o pedido
+            para o Tobia's Lanches.</p>
+          <div id="destaqueInformacoes" class="destaque-informacoes" aria-label="Informações rápidas">
+            <span id="destaqueTempo" class="destaque-info">
+              <span class="destaque-info-label">Tempo médio</span>
+              <span class="destaque-info-value">20 a 35 min</span>
+            </span>
+            <span id="destaquePagamento" class="destaque-info">
+              <span class="destaque-info-label">Pagamento</span>
+              <span class="destaque-info-value">Pix, cartão e dinheiro</span>
+            </span>
+          </div>
+          <ul id="destaqueSelos" class="destaque-selos destaque-selos--hero"></ul>
+        </div>
+        <div id="destaqueImagem" class="destaque-imagem oculto">
+          <img id="destaqueImagemArquivo" src="" alt="" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+    <section class="faixa-operacao" aria-live="polite">
+      <div class="painel-horario">
+        <div class="painel-horario-topo">
+          <div class="painel-horario-head">
+            <p id="tituloHorario" class="titulo-horario">Horários de funcionamento</p>
+            <p id="ajudaHorario" class="horario-ajuda">Confira se estamos atendendo agora.</p>
+          </div>
+        </div>
+        <div class="painel-horario-grade">
+          <div class="horario-bloco">
+            <p id="rotuloProximoHorario" class="rotulo-horario">Próximo horário</p>
+            <p id="detalheHorario" class="detalhe-horario"></p>
+          </div>
+          <div class="horario-bloco">
+            <p id="rotuloAgendaHorario" class="rotulo-horario">Agenda semanal</p>
+            <ul id="agendaHorario" class="agenda-horario" aria-label="Agenda semanal"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <nav id="menuCategorias" class="menu-categorias layout-shell" aria-label="Categorias do cardápio"></nav>
+  <p id="statusCategoria" class="sr-only" aria-live="polite"></p>
+
+  <section id="catalogTools" class="catalog-tools layout-shell" aria-label="Ferramentas do catálogo">
+    <details id="catalogFiltersPanel" class="catalog-filters-panel">
+      <summary id="catalogFiltersSummary" class="catalog-filters-summary">Busca e filtros</summary>
+      <div id="catalogToolbar" class="catalog-toolbar"></div>
+    </details>
+    <p id="catalogSummary" class="catalog-summary" aria-live="polite"></p>
+  </section>
+
+  <section id="secaoOfertas" class="ofertas-section layout-shell oculto" aria-label="Combos" hidden>
+    <div class="ofertas-head">
+      <div>
+        <p id="ofertasKicker" class="ofertas-kicker">Combos</p>
+        <h2 id="ofertasTitulo" class="ofertas-title">Combos</h2>
+      </div>
+      <p id="ofertasResumo" class="ofertas-summary"></p>
+    </div>
+    <div id="ofertasCombos" class="ofertas-grid"></div>
+  </section>
+
+  <main id="areaProdutos" class="grade-produtos layout-shell" aria-live="polite"></main>
+
+  <footer id="rodapeUtilitarios" class="rodape-utilitarios layout-shell" aria-label="Informações do cardápio">
+    <p id="rodapeNota" class="rodape-nota">Atendimento direto do Tobia's Lanches.</p>
+    <nav id="rodapeLinks" class="rodape-links" aria-label="Links do site">
+      <a id="linkTopo" class="rodape-link" href="#topo">Voltar ao topo</a>
+      <a id="linkCardapio" class="rodape-link" href="#areaProdutos">Ver cardápio</a>
+      <a id="linkPainelAdmin" class="rodape-link" href="admin.html" rel="nofollow">Entrar no Admin</a>
+    </nav>
+    <p id="creditoAutoria" class="rodape-credito" aria-label="Crédito de autoria">
+      <span id="creditoAutoriaPrefixo">Cardápio digital por</span>
+      <a id="creditoAutoriaLink" href="https://www.instagram.com/kayronmagl/" target="_blank"
+        rel="noopener noreferrer">Kayron Magalhães</a>
+    </p>
+  </footer>
+
+  <section id="caixaCarrinho" class="fundo-escuro oculto" tabindex="-1" hidden inert aria-hidden="true">
+    <div class="caixa-centro caixa-carrinho" role="dialog" aria-modal="true" aria-labelledby="tituloCarrinho"
+      aria-describedby="descricaoCarrinho">
+      <div class="carrinho-conteudo">
+        <div class="carrinho-cabecalho">
+          <h2 class="titulo-caixa" id="tituloCarrinho">Carrinho e pedido</h2>
+          <p id="descricaoCarrinho" class="bloco-form-intro">Revise seu pedido, informe os dados e confirme antes de
+            abrir
+            o WhatsApp.</p>
+        </div>
+        <p id="carrinhoSubtitulo" class="carrinho-subtitulo">Seu carrinho está vazio.</p>
+
+        <div class="cart-card">
+          <p id="tituloItensPedido" class="cart-section-title">Itens do pedido</p>
+          <section id="painelCarrinho" class="painel-carrinho" aria-label="Itens do carrinho">
+            <ul id="listaCarrinho"></ul>
+          </section>
+          <p id="tituloResumoPedido" class="cart-section-title">Resumo do pedido</p>
+          <section id="totaisCarrinho" class="totais-carrinho" aria-label="Resumo financeiro do pedido">
+            <p id="resumoPedido" class="resumo-pedido"></p>
+            <p id="valorTotal"></p>
+          </section>
+        </div>
+
+        <form id="formCliente" novalidate>
+          <fieldset class="bloco-form">
+            <legend id="legendaTipoAtendimento">1. Tipo de atendimento</legend>
+            <p id="ajudaTipoAtendimento" class="bloco-form-intro">Escolha entrega, retirada no local ou consumo no
+              local.</p>
+            <div id="grupoTipoAtendimento" class="segmented" role="radiogroup" aria-label="Tipo de atendimento">
+              <label class="segmented-item">
+                <input type="radio" name="tipoAtendimento" value="delivery" checked
+                  aria-describedby="ajudaTipoAtendimento">
+                <span id="textoAtendimentoDelivery">Entrega ou retirada</span>
+              </label>
+              <label class="segmented-item">
+                <input type="radio" name="tipoAtendimento" value="no_local" aria-describedby="ajudaTipoAtendimento">
+                <span id="textoAtendimentoLocal">Consumo no local</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="bloco-form" id="blocoDelivery">
+            <legend id="legendaEntrega">2. Como você vai receber</legend>
+            <label id="labelTipoEntrega" for="tipoEntrega">Pedido para:</label>
+            <select id="tipoEntrega" required aria-describedby="ajudaTipoEntrega">
+              <option id="opcaoEntregaSelecione" value="">Selecione</option>
+              <option id="opcaoEntregaDelivery" value="entrega">Entrega</option>
+              <option id="opcaoEntregaRetirada" value="retirada">Retirada no local</option>
+            </select>
+            <p id="ajudaTipoEntrega" class="ajuda-texto">Escolha entrega para receber no endereço ou retirada para
+              buscar no local.</p>
+            <p class="aviso tempo-espera" id="tempoEsperaInfo">Tempo aproximado: 20 a 35 minutos.</p>
+
+            <div id="camposEntrega" class="painel-condicional oculto">
+              <label id="labelBairroEntrega" for="bairroEntrega">Localidade de entrega:</label>
+              <select id="bairroEntrega" aria-describedby="taxaEntregaInfo bloqueioEntregaInfo">
+                <option id="opcaoBairroSelecione" value="">Selecione a localidade</option>
+              </select>
+
+              <label id="labelEnderecoEntrega" for="enderecoEntrega">Endereço para entrega:</label>
+              <input type="text" id="enderecoEntrega" placeholder="Rua, número e complemento" maxlength="140"
+                autocomplete="street-address" aria-describedby="ajudaEnderecoEntrega">
+              <p id="ajudaEnderecoEntrega" class="ajuda-texto">Informe rua, número e complemento para facilitar a
+                entrega.</p>
+
+              <label id="labelReferencia" for="referencia">Ponto de referência:</label>
+              <input type="text" id="referencia" placeholder="Ex.: perto da praça" maxlength="100"
+                aria-describedby="ajudaReferencia">
+              <p id="ajudaReferencia" class="ajuda-texto">Opcional, mas ajuda o entregador a localizar você mais rápido.
+              </p>
+
+              <label id="labelClienteMapsUrl" for="clienteMapsUrl">Link da sua localização no Google Maps
+                (opcional)</label>
+              <input type="url" id="clienteMapsUrl" placeholder="https://maps.app.goo.gl/..." maxlength="600"
+                inputmode="url" aria-describedby="ajudaClienteMapsUrl ajudaEnderecoSuficiente">
+              <p id="ajudaClienteMapsUrl" class="ajuda-texto">Abra o Google Maps, escolha sua localização, toque em
+                Compartilhar e cole o link aqui para facilitar a entrega.</p>
+              <p id="ajudaEnderecoSuficiente" class="ajuda-texto">O endereço é suficiente para enviar o pedido. O link
+                do Google Maps é opcional e ajuda o entregador a encontrar o local com mais facilidade.</p>
+
+              <div class="checkout-coordinate-group" role="group" aria-labelledby="labelClienteCoordenadas"
+                aria-describedby="ajudaClienteCoordenadas">
+                <span id="labelClienteCoordenadas" class="checkout-coordinate-label">Coordenadas (opcional)</span>
+                <p id="ajudaClienteCoordenadas" class="ajuda-texto">Use apenas se você souber sua latitude e longitude.
+                  Exemplo: -6.025839, -38.348820</p>
+                <div class="checkout-coordinate-grid">
+                  <input type="text" id="clienteLatitude" placeholder="Latitude" maxlength="40" inputmode="decimal"
+                    aria-label="Latitude">
+                  <input type="text" id="clienteLongitude" placeholder="Longitude" maxlength="40" inputmode="decimal"
+                    aria-label="Longitude">
+                </div>
+              </div>
+
+              <p id="taxaEntregaInfo" class="aviso taxa" aria-live="polite"></p>
+              <p id="bloqueioEntregaInfo" class="erro oculto" role="alert"></p>
+            </div>
+
+            <div id="enderecoRetirada" class="painel-condicional oculto">
+              <p id="avisoRetirada" class="aviso aviso-retirada">
+                <strong>Retirada no local:</strong><br>
+                Endereço de retirada ainda não informado.
+              </p>
+            </div>
+          </fieldset>
+
+          <fieldset class="bloco-form oculto" id="blocoNoLocal">
+            <legend id="legendaNoLocal">2. Consumo no local</legend>
+            <p id="ajudaNoLocal" class="bloco-form-intro">Informe o número da mesa para o pedido ser identificado com
+              facilidade.</p>
+            <p class="aviso tempo-espera" id="tempoEsperaLocal">Tempo aproximado: 20 a 35 minutos.</p>
+            <label id="labelNumeroMesa" for="numeroMesa">Número da mesa:</label>
+            <input type="number" id="numeroMesa" min="1" max="999" step="1" placeholder="Ex.: 3" inputmode="numeric">
+          </fieldset>
+
+          <fieldset class="bloco-form">
+            <legend id="legendaCliente">3. Dados do cliente</legend>
+            <label id="labelNome" for="nome">Nome completo:</label>
+            <input type="text" id="nome" autocomplete="name" maxlength="80" required aria-describedby="ajudaNome">
+            <p id="ajudaNome" class="ajuda-texto">Informe o nome usado para identificação do pedido.</p>
+            <label class="checkbox-linha">
+              <input type="checkbox" id="lembrarDadosCliente">
+              <span id="textoLembrarDados">Lembrar meus dados neste aparelho</span>
+            </label>
+          </fieldset>
+
+          <fieldset class="bloco-form">
+            <legend id="legendaPagamento">4. Pagamento</legend>
+            <label id="labelPagamento" for="pagamento">Forma de pagamento:</label>
+            <select id="pagamento" required aria-describedby="ajudaPagamento">
+              <option id="opcaoPagamentoSelecione" value="">Selecione</option>
+              <option id="opcaoPagamentoPix" value="pix">Pix</option>
+              <option id="opcaoPagamentoDinheiro" value="cash">Dinheiro</option>
+              <option id="opcaoPagamentoCartao" value="card">Cartão</option>
+            </select>
+            <p id="ajudaPagamento" class="ajuda-texto">Ao escolher Pix, a chave aparece logo abaixo para copiar.</p>
+
+            <div id="pixInfo" class="painel-condicional oculto">
+              <div class="pix-card">
+                <p id="tituloPix" class="pix-titulo">Dados do Pix</p>
+                <p class="pix-linha"><strong id="labelPixChave">Chave:</strong> <span id="chavePixTexto"
+                    class="pix-valor">-</span></p>
+                <p class="pix-linha"><strong id="labelPixTitular">Titular:</strong> <span id="pixTitularTexto"
+                    class="pix-valor">-</span></p>
+                <p class="pix-linha"><strong id="labelPixBanco">Banco:</strong> <span id="pixBancoTexto"
+                    class="pix-valor">-</span></p>
+              </div>
+              <button type="button" id="botaoCopiarPix" class="botao botao-secundario">Copiar chave Pix</button>
+              <p id="mensagemCopiaPix" class="sucesso oculto" role="status">Chave Pix copiada.</p>
+              <p id="mensagemErroCopiaPix" class="erro oculto" role="alert"></p>
+            </div>
+
+            <div id="trocoInfo" class="painel-condicional oculto">
+              <label class="checkbox-linha">
+                <input type="checkbox" id="precisaTroco">
+                <span id="textoPrecisaTroco">Precisa de troco?</span>
+              </label>
+
+              <div id="trocoParaBox" class="oculto">
+                <label id="labelTrocoPara" for="trocoPara">Troco para quanto?</label>
+                <input type="number" id="trocoPara" min="0" step="0.01" placeholder="Ex.: 50" inputmode="decimal">
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="bloco-form">
+            <legend id="legendaObservacoes">5. Observações</legend>
+            <label id="labelObservacoes" for="observacoes">Detalhes do pedido:</label>
+            <textarea id="observacoes" placeholder="Ex.: sem cebola, sem verdura, etc." maxlength="250"
+              aria-describedby="ajudaObservacoes"></textarea>
+            <p id="ajudaObservacoes" class="ajuda-texto">Use este campo para observações gerais do pedido.</p>
+            <p id="contadorObservacoes" class="char-counter" aria-live="polite">0/250</p>
+          </fieldset>
+
+          <fieldset class="bloco-form">
+            <legend id="legendaConsentimento">6. Consentimento</legend>
+            <label class="checkbox-linha">
+              <input type="checkbox" id="aceiteLgpd">
+              <span id="textoAceiteLgpd">Autorizo o uso dos meus dados para contato e processamento deste pedido.</span>
+            </label>
+          </fieldset>
+
+          <button type="submit" class="sr-only" tabindex="-1">Enviar pedido</button>
+          <p id="mensagemStatus" class="sucesso oculto" role="status" aria-live="polite"></p>
+          <p id="mensagemErro" class="erro oculto" role="alert" tabindex="-1"></p>
+        </form>
+      </div>
+
+      <div class="botoes-carrinho acoes-checkout">
+        <button id="botaoFinalizar" class="botao botao-principal" type="button">Revisar pedido</button>
+        <button id="botaoLimparCarrinho" class="botao botao-secundario botao-perigo-discreto" type="button">Limpar
+          carrinho</button>
+        <button id="botaoFechar" class="botao botao-secundario" type="button">Fechar</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="modalConfirmacao" class="fundo-escuro oculto" tabindex="-1" hidden inert aria-hidden="true">
+    <div class="caixa-centro caixa-confirmacao" role="dialog" aria-modal="true" aria-labelledby="tituloConfirmacao"
+      aria-describedby="descricaoConfirmacao">
+      <h2 class="titulo-caixa" id="tituloConfirmacao">Confirmar pedido</h2>
+      <p id="descricaoConfirmacao" class="aviso">Confira os dados abaixo antes de abrir o pedido no WhatsApp.</p>
+      <div id="resumoConfirmacao" class="resumo-confirmacao"></div>
+      <div class="botoes-carrinho confirmation-actions">
+        <button id="botaoConfirmarEnvio" class="botao botao-principal" type="button">Enviar pelo WhatsApp</button>
+        <button id="botaoCancelarConfirmacao" class="botao botao-secundario" type="button">Voltar</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="barra-mobile" id="barraMobile">
+    <div class="barra-mobile-info">
+      <span id="barraMobileLabel" class="barra-mobile-label">
+        <span class="barra-mobile-label-count">0 itens</span>
+      </span>
+      <strong id="totalBarraMobile">R$ 0,00</strong>
+    </div>
+    <button type="button" id="botaoAbrirCarrinhoMobile" class="botao botao-principal" aria-controls="caixaCarrinho"
+      aria-expanded="false">
+      <span id="textoBotaoCarrinhoMobile">Ver carrinho</span>
+    </button>
+  </div>
+
+  <script src="./config.js?v=1.0.0"></script>
+  <script src="./dist/core/shared-utils.js?v=2.1.2"></script>
+  <script src="./dist/core/state-manager.js?v=2.0.3"></script>
+  <script src="./dist/app.js?v=2.0.5"></script>
+</body>
+
+</html>
+
