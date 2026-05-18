@@ -55,7 +55,7 @@
       openNow: "Aberto agora",
       closed: "Fechado",
       closedToday: "Fechado",
-      closedNow: "Fechado no momento",
+      closedNow: "Fechado",
       noSchedule: "Sem horários configurados",
       serviceUntil: "Atendimento até {{time}}",
       scheduleFlexible: "Pedidos sem bloqueio por horário.",

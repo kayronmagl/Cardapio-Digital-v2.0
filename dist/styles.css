@@ -13695,6 +13695,13 @@ body.admin-page [data-admin-tab-panel="settings"] .admin-settings-nav a {
   line-height: 1.12;
 }
 
+body.admin-page [data-admin-tab-panel="settings"] #settings-top,
+body.admin-page [data-admin-tab-panel="settings"] .admin-settings-section,
+body.admin-page [data-admin-tab-panel="settings"] .admin-hours-fieldset,
+body.admin-page #admin-products-top {
+  scroll-margin-top: clamp(4.75rem, 10vw, 6.5rem);
+}
+
 body.admin-page [data-admin-tab-panel="products"] .admin-products-tools-card {
   justify-items: stretch;
 }

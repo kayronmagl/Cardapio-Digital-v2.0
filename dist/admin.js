@@ -6460,6 +6460,26 @@
         return;
       }
 
+      const anchor = event?.target?.closest?.('a[href^="#"]');
+      if (anchor) {
+        const href = String(anchor?.getAttribute?.("href") || "")?.trim();
+        const target = href && href !== "#" ? resolveAdminTarget(href) : null;
+        if (target) {
+          event?.preventDefault?.();
+          renewAdminSession();
+          if (typeof window?.history?.replaceState === "function") {
+            window.history.replaceState(null, "", href);
+          } else {
+            window.location.hash = href;
+          }
+          guideAdminTarget(target, {
+            focus: false,
+            block: "start",
+          });
+          return;
+        }
+      }
+
       const button = event?.target?.closest("button");
       if (!button) {
         return;
