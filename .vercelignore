@@ -1,9 +1,13 @@
 .env
 .env.*
+.gitignore
+.vercelignore
 .githooks/
 .local/
 .netlify/
 .vercel/
+LICENSE
+README.md
 node_modules/
 coverage/
 playwright-report/
