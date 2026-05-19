@@ -4,7 +4,7 @@ Esta é a v2.0 do cardápio digital anterior do Tobia's Lanches. A proposta cont
 
 Em relação à versão anterior, a navegação pública, o carrinho, o checkout e o gerenciamento do catálogo ficaram mais consistentes em desktop e mobile. A estrutura também ficou mais pronta para operação online, sem deixar de ser simples de publicar como projeto estático.
 
-Veja a demo em: [democardapio.netlify.app](https://democardapio.netlify.app/)
+Veja o projeto já online em: [Cardápio Digital v2.0](https://cardapio-digital-tobias-lanches-v2-0.vercel.app/)
 
 ## O que mudou na v2.0
 
