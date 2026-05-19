@@ -1,95 +1,89 @@
 # Cardápio Digital v2.0 - Tobia's Lanches
 
-A v2.0 do **Cardápio Digital - Tobia's Lanches** representa a evolução direta da primeira versão do projeto. A proposta continua a mesma: permitir que o cliente escolha os produtos, revise o pedido e finalize tudo pelo WhatsApp de forma simples. A diferença é que, nesta versão, a base foi reorganizada para entregar uma experiência mais consistente no público e uma manutenção muito mais prática no Admin.
-
-Em relação à versão anterior, a interface pública ficou mais clara, o fluxo do carrinho e do checkout ficou mais sólido, e o gerenciamento do catálogo passou a cobrir melhor a rotina real do estabelecimento. O projeto também foi preparado para operação online com Supabase, sem perder a simplicidade de publicação como site estático.
-
-## Acesso ao projeto
-
-- **Projeto online:** [Cardápio Digital v2.0](https://cardapio-digital-tobias-lanches-v2-0.vercel.app/)
-- **Repositório:** [kayronmagl/Cardapio-Digital-v2.0](https://github.com/kayronmagl/Cardapio-Digital-v2.0)
+<div align="center">
+  <p>Uma evolução real da primeira versão do cardápio digital, com catálogo mais consistente, checkout mais sólido e um painel Admin mais preparado para manutenção diária.</p>
+  <p>
+    <a href="https://cardapio-digital-tobias-lanches-v2-0.vercel.app/"><b>Ver projeto online</b></a>
+    ·
+    <a href="https://github.com/kayronmagl/Cardapio-Digital-v2.0"><b>Ver repositório</b></a>
+  </p>
+</div>
 
 ---
 
 ## Visão geral
 
-Esta versão foi pensada para melhorar dois pontos ao mesmo tempo:
+O **Cardápio Digital v2.0** é a continuação direta da primeira versão criada para o Tobia's Lanches. A proposta continua simples: o cliente escolhe os itens, revisa o pedido e envia tudo pelo WhatsApp. A diferença é que, nesta versão, a base foi refinada para entregar uma navegação pública mais consistente e uma rotina de manutenção mais prática no Admin.
 
-1. **Experiência do cliente**
-   - navegação mais organizada no cardápio
-   - carrinho mais claro
-   - checkout mais consistente
-   - confirmação do pedido com envio direto para o WhatsApp
-
-2. **Operação do estabelecimento**
-   - painel Admin mais estruturado
-   - melhor controle do catálogo
-   - ajustes de disponibilidade, horários, taxas e dados de entrega
-   - base mais preparada para operação online e manutenção frequente
-
-O resultado é um projeto mais maduro do que a primeira versão, sem fugir da proposta original: um cardápio digital simples, funcional e fácil de publicar.
+Em vez de depender de uma estrutura improvisada, a v2.0 organiza melhor o catálogo, melhora o fluxo de carrinho e checkout, amplia o controle operacional e deixa o projeto mais pronto para uso online com Supabase, sem perder a simplicidade de publicação como site estático.
 
 ---
 
-## O que mudou na v2.0
+## Resumo rápido
 
-A v2.0 não é apenas uma continuação visual da versão anterior. Ela traz uma reorganização real da experiência e da estrutura do projeto.
+| Área | O que a v2.0 entrega |
+| --- | --- |
+| Público | Navegação mais limpa, carrinho mais claro e checkout mais consistente |
+| Admin | Melhor manutenção de produtos, categorias, adicionais, combos e configurações |
+| Operação | Controle de disponibilidade, horários, taxas, Pix e localidades |
+| Publicação | Estrutura simples para uso local e deploy estático |
+| Online | Integração com Supabase por `config.js` |
 
-### Melhorias na área pública
-- Interface mais limpa e mais consistente para navegação no cardápio
-- Melhor leitura das categorias, produtos e combos
-- Carrinho com fluxo mais claro para revisão do pedido
-- Checkout mais bem organizado para entrega, retirada ou consumo no local
-- Melhor comportamento em desktop e mobile
-- Revisão do envio final pelo WhatsApp com mensagem mais estruturada
+---
 
-### Melhorias na área administrativa
-- Painel Admin mais sólido para manutenção do catálogo
-- Edição de produtos, categorias, adicionais e combos em uma estrutura mais consistente
-- Ajustes de configurações do estabelecimento sem precisar alterar a base principal do projeto
-- Melhor controle operacional para rotina diária
+## O que mudou em relação à versão anterior
 
-### Melhorias operacionais
+### Interface pública
+- Navegação mais organizada entre categorias e produtos
+- Leitura mais clara de títulos, descrições e preços
+- Área de combos melhor integrada ao restante do cardápio
+- Fluxo do carrinho mais estável em desktop e mobile
+- Checkout mais bem distribuído para entrega, retirada e consumo no local
+- Envio final para o WhatsApp com revisão mais consistente dos dados
+
+### Painel administrativo
+- Estrutura mais sólida para editar o catálogo
+- Melhor organização entre produtos, categorias, adicionais e combos
+- Área de configurações mais alinhada ao uso diário
+- Base mais prática para ajustes recorrentes sem mexer no HTML principal
+
+### Operação do estabelecimento
 - Controle de disponibilidade de produtos
-- Controle de horários
+- Controle de horários de funcionamento
 - Configuração de Pix e formas de pagamento
 - Configuração de taxas e localidades de entrega
-- Base mais preparada para sincronização online com Supabase
+- Estrutura mais preparada para sincronização online
 
 ---
 
-## Principais recursos
+## Principais funcionalidades
 
-## Catálogo público
-A área pública do sistema foi pensada para que o cliente consiga navegar com rapidez, principalmente no celular.
+### Catálogo público
+Na área pública, o cliente pode:
 
-### O cliente pode:
-- visualizar categorias do cardápio
-- consultar produtos com nome, descrição e preço
-- acessar combos em área dedicada
-- adicionar produtos ao carrinho
+- navegar pelas categorias do cardápio
+- visualizar produtos com nome, descrição e preço
+- acessar combos em seção dedicada
+- adicionar itens ao carrinho
 - escolher adicionais quando aplicável
-- revisar o pedido antes de enviar
-- escolher entre entrega, retirada ou consumo no local
-- finalizar pelo WhatsApp com a mensagem já montada
+- revisar o pedido antes do envio
+- finalizar tudo pelo WhatsApp
 
-## Carrinho e checkout
-O fluxo de pedido foi estruturado para reduzir atrito na finalização.
+### Carrinho e checkout
+O fluxo de pedido cobre:
 
-### O checkout cobre:
 - revisão dos itens do carrinho
 - resumo financeiro do pedido
-- escolha do tipo de atendimento
-- seleção de localidade de entrega
+- escolha entre entrega, retirada ou consumo no local
+- seleção da localidade de entrega
 - cálculo de taxa quando aplicável
-- campos de endereço e referência
-- opção de coordenadas e link do Google Maps
+- preenchimento de endereço e referência
+- uso opcional de coordenadas e link do Google Maps
 - confirmação final antes de abrir o WhatsApp
 
-## Painel Admin
-O `admin.html` concentra a parte de gestão.
+### Painel Admin
+O `admin.html` concentra a gestão do sistema e cobre:
 
-### O Admin cobre:
 - **Produtos**
 - **Categorias**
 - **Adicionais**
@@ -98,7 +92,7 @@ O `admin.html` concentra a parte de gestão.
 - **Nuvem**
 - **Relatórios**
 
-Na prática, isso permite manter o cardápio e os dados do estabelecimento sem depender de edição manual do HTML principal para tarefas do dia a dia.
+Na prática, isso permite atualizar o cardápio e os dados operacionais com mais controle do que na primeira versão.
 
 ---
 
@@ -106,42 +100,33 @@ Na prática, isso permite manter o cardápio e os dados do estabelecimento sem d
 
 ```text
 Cardapio Digital v2.0/
-├─ index.html
-├─ admin.html
-├─ config.js
-├─ vercel.json
-├─ robots.txt
-├─ LICENSE
-├─ README.md
-├─ assets/
-└─ dist/
+|-- index.html
+|-- admin.html
+|-- config.js
+|-- vercel.json
+|-- robots.txt
+|-- LICENSE
+|-- README.md
+|-- assets/
+`-- dist/
 ```
 
 ### Arquivos principais
 
-- `index.html`  
-  Entrada da área pública do cardápio.
-
-- `admin.html`  
-  Entrada do painel administrativo.
-
-- `config.js`  
-  Configuração pública do modo online. Centraliza a integração com Supabase no ambiente publicado.
-
-- `vercel.json`  
-  Configuração de deploy e headers para publicação na Vercel.
-
-- `assets/`  
-  Arquivos de identidade visual, como logo e favicon.
-
-- `dist/`  
-  Scripts e estilos usados tanto na interface pública quanto no Admin.
+| Arquivo | Função |
+| --- | --- |
+| `index.html` | Entrada do cardápio público |
+| `admin.html` | Entrada do painel administrativo |
+| `config.js` | Configuração pública do modo online |
+| `assets/` | Logo, favicon e arquivos visuais |
+| `dist/` | Scripts e estilos usados pelo público e pelo Admin |
+| `vercel.json` | Regras de deploy e headers para publicação |
 
 ---
 
 ## Fluxo de uso
 
-## Área pública
+### Área pública
 1. O cliente abre o cardápio
 2. Navega pelas categorias
 3. Escolhe os produtos
@@ -151,11 +136,11 @@ Cardapio Digital v2.0/
 7. Confirma os dados
 8. Abre o WhatsApp com a mensagem pronta para envio
 
-## Área administrativa
+### Área administrativa
 1. O responsável acessa `admin.html`
 2. Entra no painel
 3. Ajusta catálogo e configurações
-4. Publica ou sincroniza os dados, conforme o modo configurado
+4. Publica ou sincroniza os dados conforme o modo configurado
 5. Revisa o resultado no cardápio público
 
 ---
@@ -175,19 +160,18 @@ Cardapio Digital v2.0/
 ### Publicação
 - Vercel
 
-A escolha dessa base mantém o projeto simples de publicar, mas ainda suficiente para suportar operação online quando necessário.
+Essa base mantém o projeto leve, simples de publicar e viável para operação online quando necessário.
 
 ---
 
 ## Modo online
 
-A v2.0 suporta operação online com Supabase.
-
-A configuração pública atual fica centralizada em:
+O projeto suporta operação online com Supabase, e a configuração pública fica centralizada em:
 
 - `config.js`
 
-Hoje, essa configuração inclui:
+Hoje, essa configuração cobre:
+
 - ativação do modo online
 - provider usado
 - realtime
@@ -197,7 +181,7 @@ Hoje, essa configuração inclui:
 - nomes das tabelas
 - bucket de imagens
 
-### Estrutura configurada no modo online
+### Estrutura configurada
 - `menu_categories`
 - `menu_products`
 - `menu_add_ons`
@@ -206,13 +190,15 @@ Hoje, essa configuração inclui:
 - bucket `product-images`
 
 ### Importante
-O `config.js` deve conter apenas dados públicos de integração compatíveis com frontend, como:
+O `config.js` deve conter apenas dados públicos compatíveis com frontend, como:
+
 - URL pública
 - chave `anon`
-- nomes de tabelas
+- nomes das tabelas
 - bucket
 
 Ele **não** deve receber:
+
 - `service_role`
 - credenciais privadas
 - segredos de backend
@@ -221,15 +207,15 @@ Ele **não** deve receber:
 
 ## Como usar
 
-## Uso local
-Para abrir localmente:
+### Uso local
 
 - abra `index.html` para acessar o cardápio
 - abra `admin.html` para acessar o painel administrativo
 
 Esta versão já inclui a pasta `dist/`, então não depende de build para uso comum.
 
-## Uso publicado
+### Uso publicado
+
 O projeto pode ser publicado como site estático.
 
 - para uso simples, basta hospedar os arquivos
@@ -238,8 +224,6 @@ O projeto pode ser publicado como site estático.
 ---
 
 ## Publicação
-
-A v2.0 foi organizada para continuar simples de publicar.
 
 ### Opção 1: uso local
 - abrir os arquivos principais diretamente no navegador
@@ -250,15 +234,14 @@ A v2.0 foi organizada para continuar simples de publicar.
 ### Opção 3: Vercel
 - usar o `vercel.json` já incluído
 - manter os arquivos principais na estrutura atual
-- publicar o projeto com a configuração de headers já prevista
+- publicar o projeto com os headers previstos
 
 ---
 
 ## Personalização
 
-A estrutura principal da v2.0 permite adaptar o projeto sem refazer a base.
+Sem alterar a estrutura principal, é possível ajustar:
 
-### É possível ajustar com facilidade:
 - logo
 - favicon
 - textos do estabelecimento
@@ -272,29 +255,31 @@ A estrutura principal da v2.0 permite adaptar o projeto sem refazer a base.
 - disponibilidade
 - localidades e taxas de entrega
 
-Isso permite reaproveitar a base do projeto sem alterar sua estrutura central.
+Isso permite reaproveitar a base do projeto sem reconstruir a aplicação.
 
 ---
 
-## Diferença em relação à versão anterior
+## Diferença de posicionamento
 
-A primeira versão do projeto cumpria bem a função de transformar um cardápio estático em uma experiência clicável com envio por WhatsApp.
+A primeira versão cumpria bem a função de transformar um cardápio estático em uma experiência clicável com envio por WhatsApp.
 
 A v2.0 amplia essa proposta com:
+
 - interface mais bem resolvida
 - fluxo público mais consistente
-- melhor uso em telas diferentes
+- melhor adaptação entre desktop e mobile
 - Admin mais preparado para manutenção real
-- base mais organizada para continuidade do projeto
+- estrutura mais organizada para continuidade do projeto
 - suporte mais claro à operação online
 
-Em resumo: a proposta continua simples, mas a estrutura ficou mais madura.
+Em resumo: a proposta continua simples, mas a execução ficou mais madura.
 
 ---
 
 ## Indicação de uso
 
-Este projeto é adequado para cenários como:
+Esta base é adequada para cenários como:
+
 - quiosques
 - lanchonetes
 - pequenos negócios de alimentação
@@ -304,18 +289,17 @@ Este projeto é adequado para cenários como:
 
 ---
 
-## Observações importantes
+## Observações finais
 
-- O projeto continua simples de publicar
-- A área pública foi pensada com foco forte em mobile
-- O Admin foi preparado para facilitar manutenção diária
-- A configuração online depende do `config.js`
-- Alterações de branding e conteúdo podem ser feitas sem reestruturar a base
-- A existência de Supabase não impede o uso do projeto como entrega estática
+- o projeto continua simples de publicar
+- a área pública foi pensada com foco forte em mobile
+- o Admin foi preparado para facilitar manutenção diária
+- a configuração online depende do `config.js`
+- branding e conteúdo podem ser ajustados sem reestruturar a base
 
 ---
 
-## Licença e uso
+## Licença
 
 Este projeto é protegido por direitos autorais.
 
