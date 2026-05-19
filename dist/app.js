@@ -3252,6 +3252,15 @@
       return;
     }
 
+    const signature = normalizeComparableText((type || "ok") + " " + text);
+    const now = Date.now();
+    if (
+      showMicroFeedback.lastSignature === signature
+      && now - Number(showMicroFeedback.lastAt || 0) < 900
+    ) {
+      return;
+    }
+
     let feedback = $("publicActionFeedback");
     if (!feedback) {
       feedback = document?.createElement("div");
@@ -3267,15 +3276,6 @@
     if (state?.feedbackTimer) {
       window?.clearTimeout(state?.feedbackTimer);
       state.feedbackTimer = null;
-    }
-
-    const signature = normalizeComparableText((type || "ok") + " " + text);
-    const now = Date.now();
-    if (
-      showMicroFeedback.lastSignature === signature
-      && now - Number(showMicroFeedback.lastAt || 0) < 900
-    ) {
-      return;
     }
     showMicroFeedback.lastSignature = signature;
     showMicroFeedback.lastAt = now;
