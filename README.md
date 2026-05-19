@@ -48,6 +48,56 @@ Em relação à versão anterior, a navegação pública ficou mais clara, o car
 - Configuração de taxas e localidades de entrega
 - Estrutura mais preparada para sincronização online
 
+## Recursos novos da v2.0
+
+Além da reorganização visual e estrutural, a v2.0 passou a concentrar recursos que deixam o sistema mais completo no uso real.
+
+### Recursos novos no público
+
+- **Idioma em PT-BR e EN**
+  - A interface pública conta com seletor de idioma e estrutura preparada para conteúdo bilíngue.
+
+- **Modo de acessibilidade**
+  - O topo da aplicação inclui um modo acessível com leitura reforçada para melhorar a experiência de uso.
+
+- **Combos com destaque próprio**
+  - A versão 2.0 ganhou uma área dedicada para combos, com leitura mais clara, indicação de economia e adição direta ao carrinho.
+
+- **Checkout mais completo**
+  - O cliente pode escolher entre entrega, retirada ou consumo no local, sem depender de um fluxo único e engessado.
+
+- **Pedido no local com identificação de mesa**
+  - Para consumo no estabelecimento, o sistema permite informar o número da mesa no próprio checkout.
+
+- **Entrega por localidade**
+  - A taxa pode variar por localidade, e o sistema também trata casos em que determinada área não está disponível para entrega.
+
+- **Link do Google Maps e coordenadas opcionais**
+  - O cliente pode informar um link da localização ou preencher latitude e longitude para facilitar a entrega.
+
+- **Painel de Pix no checkout**
+  - Ao escolher Pix, a chave aparece no fluxo de pagamento com suporte para cópia rápida.
+
+- **Feedback de atualização online**
+  - Quando o modo online está ativo, o público recebe mensagens de atualização do cardápio sem depender de recarga manual como única saída.
+
+### Recursos novos no Admin
+
+- **Gestão mais ampla do catálogo**
+  - A manutenção não fica restrita a produtos: a v2.0 organiza também categorias, adicionais, combos e configurações do estabelecimento.
+
+- **Área de Nuvem**
+  - O projeto passa a ter uma área específica para operação online, conectando a manutenção diária com a estrutura de sincronização.
+
+- **Relatórios**
+  - O painel inclui uma área dedicada para leitura operacional e acompanhamento, ampliando o escopo além do simples cadastro.
+
+- **Imagens preparadas para operação online**
+  - A estrutura do projeto já considera bucket de imagens (`product-images`) para publicação e manutenção visual do catálogo.
+
+- **Base mais preparada para publicação recorrente**
+  - Em vez de funcionar apenas como uma página estática editada manualmente, a v2.0 foi organizada para suportar manutenção contínua.
+
 ## Principais funcionalidades
 
 ### Catálogo público
@@ -58,6 +108,8 @@ Na área pública, o cliente pode:
 - acessar combos em seção dedicada
 - adicionar itens ao carrinho
 - escolher adicionais quando aplicável
+- alternar idioma da interface
+- ativar o modo de acessibilidade
 - revisar o pedido antes do envio
 - finalizar tudo pelo WhatsApp
 
@@ -70,7 +122,9 @@ O fluxo de pedido cobre:
 - seleção da localidade de entrega
 - cálculo de taxa quando aplicável
 - preenchimento de endereço e referência
+- preenchimento de número da mesa para consumo no local
 - uso opcional de coordenadas e link do Google Maps
+- exibição de dados do Pix com cópia rápida da chave
 - confirmação final antes de abrir o WhatsApp
 
 ### Painel Admin
@@ -226,6 +280,11 @@ A v2.0 amplia essa proposta com:
 - interface mais bem resolvida
 - fluxo público mais consistente
 - melhor adaptação entre desktop e mobile
+- suporte a idioma e acessibilidade na experiência pública
+- checkout mais completo para entrega, retirada e consumo no local
+- localidade de entrega com cálculo e bloqueio por área
+- Pix integrado ao fluxo de fechamento do pedido
+- combos tratados como parte real da experiência, não como exceção
 - Admin mais preparado para manutenção real
 - estrutura mais organizada para continuidade do projeto
 - suporte mais claro à operação online
