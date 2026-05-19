@@ -1,7 +1,7 @@
 # Cardápio Digital v2.0 - Tobia's Lanches
 
 <div align="center">
-  <p>Uma evolução real da primeira versão do cardápio digital, com catálogo mais consistente, checkout mais sólido e um painel Admin mais preparado para manutenção diária.</p>
+  <p>Uma evolução direta da primeira versão do cardápio digital, com navegação pública mais consistente, checkout mais sólido e um painel Admin mais preparado para manutenção diária.</p>
   <p>
     <a href="https://cardapio-digital-tobias-lanches-v2-0.vercel.app/"><b>Ver projeto online</b></a>
     ·
@@ -9,15 +9,11 @@
   </p>
 </div>
 
----
-
 ## Visão geral
 
-O **Cardápio Digital v2.0** é a continuação direta da primeira versão criada para o Tobia's Lanches. A proposta continua simples: o cliente escolhe os itens, revisa o pedido e envia tudo pelo WhatsApp. A diferença é que, nesta versão, a base foi refinada para entregar uma navegação pública mais consistente e uma rotina de manutenção mais prática no Admin.
+O **Cardápio Digital v2.0** é a continuação da primeira versão criada para o Tobia's Lanches. A proposta continua simples: o cliente escolhe os itens, revisa o pedido e envia tudo pelo WhatsApp. O que mudou foi a base do projeto, que ficou mais organizada para entregar uma experiência pública melhor e uma rotina de manutenção mais prática no Admin.
 
-Em vez de depender de uma estrutura improvisada, a v2.0 organiza melhor o catálogo, melhora o fluxo de carrinho e checkout, amplia o controle operacional e deixa o projeto mais pronto para uso online com Supabase, sem perder a simplicidade de publicação como site estático.
-
----
+Em relação à versão anterior, a navegação pública ficou mais clara, o carrinho e o checkout ficaram mais consistentes, e a estrutura passou a atender melhor a operação real do estabelecimento. O projeto também foi preparado para funcionar online com Supabase, sem perder a simplicidade de publicação como site estático.
 
 ## Resumo rápido
 
@@ -26,10 +22,8 @@ Em vez de depender de uma estrutura improvisada, a v2.0 organiza melhor o catál
 | Público | Navegação mais limpa, carrinho mais claro e checkout mais consistente |
 | Admin | Melhor manutenção de produtos, categorias, adicionais, combos e configurações |
 | Operação | Controle de disponibilidade, horários, taxas, Pix e localidades |
-| Publicação | Estrutura simples para uso local e deploy estático |
 | Online | Integração com Supabase por `config.js` |
-
----
+| Publicação | Estrutura simples para uso local e deploy estático |
 
 ## O que mudou em relação à versão anterior
 
@@ -39,7 +33,7 @@ Em vez de depender de uma estrutura improvisada, a v2.0 organiza melhor o catál
 - Área de combos melhor integrada ao restante do cardápio
 - Fluxo do carrinho mais estável em desktop e mobile
 - Checkout mais bem distribuído para entrega, retirada e consumo no local
-- Envio final para o WhatsApp com revisão mais consistente dos dados
+- Revisão mais consistente antes do envio para o WhatsApp
 
 ### Painel administrativo
 - Estrutura mais sólida para editar o catálogo
@@ -53,8 +47,6 @@ Em vez de depender de uma estrutura improvisada, a v2.0 organiza melhor o catál
 - Configuração de Pix e formas de pagamento
 - Configuração de taxas e localidades de entrega
 - Estrutura mais preparada para sincronização online
-
----
 
 ## Principais funcionalidades
 
@@ -92,9 +84,7 @@ O `admin.html` concentra a gestão do sistema e cobre:
 - **Nuvem**
 - **Relatórios**
 
-Na prática, isso permite atualizar o cardápio e os dados operacionais com mais controle do que na primeira versão.
-
----
+Na prática, isso permite atualizar o cardápio e os dados operacionais com muito mais controle do que na primeira versão.
 
 ## Estrutura do projeto
 
@@ -122,8 +112,6 @@ Cardapio Digital v2.0/
 | `dist/` | Scripts e estilos usados pelo público e pelo Admin |
 | `vercel.json` | Regras de deploy e headers para publicação |
 
----
-
 ## Fluxo de uso
 
 ### Área pública
@@ -143,8 +131,6 @@ Cardapio Digital v2.0/
 4. Publica ou sincroniza os dados conforme o modo configurado
 5. Revisa o resultado no cardápio público
 
----
-
 ## Tecnologias utilizadas
 
 ### Frontend
@@ -162,13 +148,9 @@ Cardapio Digital v2.0/
 
 Essa base mantém o projeto leve, simples de publicar e viável para operação online quando necessário.
 
----
-
 ## Modo online
 
-O projeto suporta operação online com Supabase, e a configuração pública fica centralizada em:
-
-- `config.js`
+O projeto suporta operação online com Supabase, e a configuração pública fica centralizada em `config.js`.
 
 Hoje, essa configuração cobre:
 
@@ -203,40 +185,18 @@ Ele **não** deve receber:
 - credenciais privadas
 - segredos de backend
 
----
-
-## Como usar
+## Uso e publicação
 
 ### Uso local
-
 - abra `index.html` para acessar o cardápio
 - abra `admin.html` para acessar o painel administrativo
 
 Esta versão já inclui a pasta `dist/`, então não depende de build para uso comum.
 
-### Uso publicado
-
-O projeto pode ser publicado como site estático.
-
+### Publicação
 - para uso simples, basta hospedar os arquivos
 - para deploy na Vercel, o projeto já inclui `vercel.json`
-
----
-
-## Publicação
-
-### Opção 1: uso local
-- abrir os arquivos principais diretamente no navegador
-
-### Opção 2: deploy estático
-- publicar a raiz do projeto como site estático
-
-### Opção 3: Vercel
-- usar o `vercel.json` já incluído
-- manter os arquivos principais na estrutura atual
-- publicar o projeto com os headers previstos
-
----
+- a estrutura atual já está pronta para publicação estática
 
 ## Personalização
 
@@ -257,8 +217,6 @@ Sem alterar a estrutura principal, é possível ajustar:
 
 Isso permite reaproveitar a base do projeto sem reconstruir a aplicação.
 
----
-
 ## Diferença de posicionamento
 
 A primeira versão cumpria bem a função de transformar um cardápio estático em uma experiência clicável com envio por WhatsApp.
@@ -274,8 +232,6 @@ A v2.0 amplia essa proposta com:
 
 Em resumo: a proposta continua simples, mas a execução ficou mais madura.
 
----
-
 ## Indicação de uso
 
 Esta base é adequada para cenários como:
@@ -287,8 +243,6 @@ Esta base é adequada para cenários como:
 - cardápios digitais com necessidade de manutenção frequente
 - publicação rápida de uma solução estática com possibilidade de integração online
 
----
-
 ## Observações finais
 
 - o projeto continua simples de publicar
@@ -297,15 +251,11 @@ Esta base é adequada para cenários como:
 - a configuração online depende do `config.js`
 - branding e conteúdo podem ser ajustados sem reestruturar a base
 
----
-
 ## Licença
 
 Este projeto é protegido por direitos autorais.
 
 Consulte o arquivo `LICENSE` para a política de uso desta base.
-
----
 
 ## Autor
 
