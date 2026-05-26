@@ -3,10 +3,7 @@
 <div align="center">
   <p>Uma evolução direta da primeira versão do cardápio digital, com navegação pública mais consistente, checkout mais sólido e um painel Admin mais preparado para manutenção diária.</p>
   <p>
-    <a href="https://cardapio-digital-tobias-lanches-v2-0.vercel.app/"><b>Ver projeto online</b></a>
-    ·
-    <a href="https://github.com/kayronmagl/Cardapio-Digital-v2.0"><b>Ver repositório</b></a>
-  </p>
+    <a href="https://cardapio-digital-tobias-lanches-v2-0.vercel.app/"><b>Ver projeto online</b>
 </div>
 
 ## Visão geral
