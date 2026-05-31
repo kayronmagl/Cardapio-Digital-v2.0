@@ -232,7 +232,7 @@ O `config.js` deve conter apenas dados públicos compatíveis com frontend, como
 
 Ele **não** deve receber:
 
-- `service_role`
+- chave administrativa do Supabase
 - credenciais privadas
 - segredos de backend
 

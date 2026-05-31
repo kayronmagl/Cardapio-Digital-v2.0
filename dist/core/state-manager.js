@@ -7,6 +7,7 @@
     brandConfig: "brand_config",
     cloudConfig: "cloud_config",
     metrics: "system_metrics",
+    metricSession: "menu_metric_session_id",
     favorites: "favorite_products",
     clientUi: "client_ui_state",
   };
@@ -24,6 +25,7 @@
       products: "menu_products",
       productAddOns: "menu_product_add_ons",
       settings: "menu_settings",
+      metricEvents: "menu_metric_events",
     },
     storage: {
       bucket: "product-images",
@@ -197,6 +199,21 @@
           "palette": "gold",
           "productLayoutMode": "expanded",
           "catalogMode": "default"
+      },
+      "legal": {
+          "enabled": true,
+          "showPrivacyPolicy": true,
+          "showTermsOfUse": true,
+          "businessName": "Tobia's Lanches",
+          "businessNameEn": "Tobia's Lanches",
+          "contactEmail": "",
+          "contactPhone": "",
+          "businessAddress": "",
+          "lastUpdated": "2026-05-31",
+          "privacyPolicyMode": "internal",
+          "termsOfUseMode": "internal",
+          "privacyPolicyUrl": "",
+          "termsOfUseUrl": ""
       }
   };
 
@@ -1173,6 +1190,16 @@
     adds: {},
     lastViewedAt: {},
     lastAddedAt: {},
+    checkoutOpened: 0,
+    orderPrepared: 0,
+    payments: {},
+    serviceChoices: {},
+    searchNoResults: {},
+    lastCheckoutOpenedAt: "",
+    lastOrderPreparedAt: "",
+    lastPaymentAt: {},
+    lastServiceChoiceAt: {},
+    lastSearchNoResultAt: {},
   };
 
   const DEFAULT_CLIENT_UI = {
@@ -1245,6 +1272,45 @@
     }
   }
 
+  function sanitizeLegalMode(value) {
+    return sanitizeText(value, "internal", 20)?.toLowerCase() === "external" ? "external" : "internal";
+  }
+
+  function sanitizeLegalUrl(value) {
+    const raw = sanitizeText(value, "", 600);
+    if (!raw) {
+      return "";
+    }
+
+    try {
+      const url = new URL(raw);
+      return /^https?:$/i.test(url?.protocol) ? url?.toString() : "";
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function sanitizeLegalConfig(rawLegal) {
+    const input = rawLegal && typeof rawLegal === "object" ? rawLegal : {};
+    const source = { ...(DEFAULT_BRAND?.legal || {}), ...clone(input) };
+
+    return {
+      enabled: source?.enabled !== false,
+      showPrivacyPolicy: source?.showPrivacyPolicy !== false,
+      showTermsOfUse: source?.showTermsOfUse !== false,
+      businessName: sanitizeText(source?.businessName, DEFAULT_BRAND?.legal?.businessName || "Tobia's Lanches", 120),
+      businessNameEn: sanitizeText(source?.businessNameEn, DEFAULT_BRAND?.legal?.businessNameEn || "Tobia's Lanches", 120),
+      contactEmail: sanitizeText(source?.contactEmail, "", 160),
+      contactPhone: sanitizeText(source?.contactPhone, "", 40),
+      businessAddress: sanitizeText(source?.businessAddress, "", 240),
+      lastUpdated: sanitizeText(source?.lastUpdated, DEFAULT_BRAND?.legal?.lastUpdated || "2026-05-31", 40),
+      privacyPolicyMode: sanitizeLegalMode(source?.privacyPolicyMode),
+      termsOfUseMode: sanitizeLegalMode(source?.termsOfUseMode),
+      privacyPolicyUrl: sanitizeLegalUrl(source?.privacyPolicyUrl),
+      termsOfUseUrl: sanitizeLegalUrl(source?.termsOfUseUrl),
+    };
+  }
+
   function sanitizeCoordinate(value, min, max) {
     const raw = sanitizeText(value, "", 40)?.replace(",", ".");
     if (!raw) {
@@ -1302,6 +1368,7 @@
         products: sanitizeText(tables.products || input?.tableProducts, SUPABASE_DEFAULTS?.tables.products, 80),
         productAddOns: sanitizeText(tables.productAddOns || input?.tableProductAddOns, SUPABASE_DEFAULTS?.tables.productAddOns, 80),
         settings: sanitizeText(tables.settings || input?.tableSettings, SUPABASE_DEFAULTS?.tables.settings, 80),
+        metricEvents: sanitizeText(tables.metricEvents || input?.tableMetricEvents, SUPABASE_DEFAULTS?.tables.metricEvents, 80),
       },
       storage: {
         bucket: sanitizeText(storage?.bucket || input?.storageBucket, SUPABASE_DEFAULTS?.storage?.bucket, 120),
@@ -1959,6 +2026,7 @@
       productLayoutMode: sanitizeText(source?.appearance?.productLayoutMode, "expanded", 20),
       catalogMode: sanitizeText(source?.appearance?.catalogMode, "default", 20),
     };
+    next.legal = sanitizeLegalConfig(source?.legal);
 
     return next;
   }
@@ -1990,6 +2058,11 @@
         settings: sanitizeText(
           source?.tables?.settings,
           SUPABASE_DEFAULTS?.tables.settings,
+          80
+        ),
+        metricEvents: sanitizeText(
+          source?.tables?.metricEvents,
+          SUPABASE_DEFAULTS?.tables.metricEvents,
           80
         ),
       },
@@ -2127,6 +2200,7 @@
       delivery: clone(brandConfig?.delivery),
       schedule: clone(brandConfig?.schedule),
       appearance: clone(brandConfig?.appearance),
+      legal: clone(brandConfig?.legal),
       supabase: {
         enabled: cloudConfig?.enabled,
         provider: cloudConfig?.provider,
@@ -2160,13 +2234,165 @@
     emitStateChange(meta || { type: "sync" });
   }
 
+  function metricBucket(value) {
+    return value && typeof value === "object" && !Array.isArray(value) ? { ...value } : {};
+  }
+
+  function metricCount(value) {
+    const count = Number(value || 0);
+    return Number.isFinite(count) && count > 0 ? count : 0;
+  }
+
+  function normalizeMetrics(metrics) {
+    const source = metrics && typeof metrics === "object" ? metrics : {};
+    return {
+      views: metricBucket(source?.views),
+      adds: metricBucket(source?.adds),
+      lastViewedAt: metricBucket(source?.lastViewedAt),
+      lastAddedAt: metricBucket(source?.lastAddedAt),
+      checkoutOpened: metricCount(source?.checkoutOpened),
+      orderPrepared: metricCount(source?.orderPrepared),
+      payments: metricBucket(source?.payments),
+      serviceChoices: metricBucket(source?.serviceChoices),
+      searchNoResults: metricBucket(source?.searchNoResults),
+      lastCheckoutOpenedAt: sanitizeText(source?.lastCheckoutOpenedAt, "", 40),
+      lastOrderPreparedAt: sanitizeText(source?.lastOrderPreparedAt, "", 40),
+      lastPaymentAt: metricBucket(source?.lastPaymentAt),
+      lastServiceChoiceAt: metricBucket(source?.lastServiceChoiceAt),
+      lastSearchNoResultAt: metricBucket(source?.lastSearchNoResultAt),
+    };
+  }
+
   function getMetrics() {
-    return readStorage(STORAGE_KEYS?.metrics, DEFAULT_METRICS);
+    return normalizeMetrics(readStorage(STORAGE_KEYS?.metrics, DEFAULT_METRICS));
   }
 
   function saveMetrics(metrics, meta) {
     writeStorage(STORAGE_KEYS?.metrics, metrics);
     emitStateChange(meta || { type: "metrics" });
+  }
+
+  const ONLINE_METRIC_EVENTS = new Set([
+    "product_view",
+    "add_to_cart",
+    "checkout_opened",
+    "order_prepared",
+    "payment_selected",
+    "service_selected",
+    "search_no_result",
+  ]);
+
+  function metricEventTableName(cloudConfig) {
+    return sanitizeText(
+      cloudConfig?.tables?.metricEvents,
+      SUPABASE_DEFAULTS?.tables?.metricEvents,
+      80
+    );
+  }
+
+  function getMetricSessionId() {
+    const current = sanitizeText(readStorage(STORAGE_KEYS?.metricSession, ""), "", 80);
+    if (current) {
+      return current;
+    }
+
+    const generated = sanitizeText(
+      window?.crypto?.randomUUID?.() || `metric-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
+      "",
+      80
+    );
+    writeStorage(STORAGE_KEYS?.metricSession, generated);
+    return generated;
+  }
+
+  function sanitizeMetricEventType(value) {
+    const eventType = sanitizeText(value, "", 40);
+    return ONLINE_METRIC_EVENTS.has(eventType) ? eventType : "";
+  }
+
+  function sanitizeMetricProductId(value) {
+    return sanitizeText(value, "", 80);
+  }
+
+  function sanitizeMetricValue(value, maxLength) {
+    return sanitizeText(value, "", maxLength || 120);
+  }
+
+  function sanitizeMetricSearchTerm(value) {
+    const term = sanitizeMetricValue(value, 80)?.trim()?.toLowerCase();
+    if (!term || term.length < 3) {
+      return "";
+    }
+
+    if (/@/.test(term) || /\d{8,}/.test(term)) {
+      return "";
+    }
+
+    return term;
+  }
+
+  function buildMetricEventPayload(eventType, details) {
+    const type = sanitizeMetricEventType(eventType);
+    if (!type) {
+      return null;
+    }
+
+    const productId = sanitizeMetricProductId(details?.productId);
+    const value = sanitizeMetricValue(details?.value, 120);
+
+    return {
+      event_type: type,
+      product_id: productId || null,
+      value: value || null,
+      session_id: getMetricSessionId(),
+      source: "public_menu",
+      metadata: {},
+    };
+  }
+
+  function recordMetricEventOnline(eventType, details) {
+    const cloudConfig = getStates()?.cloudConfig;
+    if (!isSupabaseConfigured(cloudConfig)) {
+      return Promise.resolve({ ok: false, skipped: true });
+    }
+
+    const tableName = metricEventTableName(cloudConfig);
+    const payload = buildMetricEventPayload(eventType, details || {});
+    if (!tableName || !payload) {
+      return Promise.resolve({ ok: false, skipped: true });
+    }
+
+    return fetch(buildCloudRestUrl(cloudConfig, tableName), {
+      method: "POST",
+      headers: supabaseHeaders(cloudConfig, { Prefer: "return=minimal" }),
+      body: JSON?.stringify(payload),
+    })
+      .then(function (response) {
+        if (!response?.ok) {
+          return response?.text?.()
+            ?.catch(() => "")
+            ?.then(function (detailsText) {
+              warnCloudSync("Metrica online ignorada; fallback local preservado.", {
+                eventType: payload?.event_type,
+                status: response?.status,
+                details: detailsText,
+              });
+              return { ok: false, status: response?.status };
+            });
+        }
+        return { ok: true };
+      })
+      .catch(function (error) {
+        warnCloudSync("Metrica online ignorada; fallback local preservado.", {
+          eventType: payload?.event_type,
+          message: error?.message || String(error),
+        });
+        return { ok: false };
+      });
+  }
+
+  function recordMetricEventOnlineSilently(eventType, details) {
+    recordMetricEventOnline(eventType, details || {});
   }
 
   function getFavorites() {
@@ -2274,6 +2500,7 @@
     removeStorage(STORAGE_KEYS?.brandConfig);
     removeStorage(STORAGE_KEYS?.cloudConfig);
     removeStorage(STORAGE_KEYS?.metrics);
+    removeStorage(STORAGE_KEYS?.metricSession);
     removeStorage(STORAGE_KEYS?.favorites);
     removeStorage(STORAGE_KEYS?.clientUi);
     removeStorage(STORAGE_KEYS?.legacyCatalog);
@@ -2335,12 +2562,88 @@
     const bucket = metrics[bucketKey];
     const timeBucket = bucketKey === "views" ? metrics?.lastViewedAt : metrics?.lastAddedAt;
 
-    bucket[productId] = Number(bucket[productId] || 0) + 1;
+    bucket[productId] = metricCount(bucket[productId]) + 1;
     timeBucket[productId] = new Date()?.toISOString();
     saveMetrics(metrics, {
       type: bucketKey === "views" ? "track-view" : "track-add",
       productId,
     });
+    recordMetricEventOnlineSilently(bucketKey === "views" ? "product_view" : "add_to_cart", {
+      productId,
+    });
+  }
+
+  function metricBucketTotal(bucket) {
+    return Object?.values(bucket || {})?.reduce(function (total, count) {
+      return total + metricCount(count);
+    }, 0);
+  }
+
+  function addMetricChoice(metrics, bucketKey, lastBucketKey, value, now) {
+    const key = sanitizeText(value, "", 80);
+    if (!key) {
+      return;
+    }
+
+    metrics[bucketKey] = metricBucket(metrics[bucketKey]);
+    metrics[lastBucketKey] = metricBucket(metrics[lastBucketKey]);
+    metrics[bucketKey][key] = metricCount(metrics[bucketKey][key]) + 1;
+    metrics[lastBucketKey][key] = now;
+  }
+
+  function trackCheckoutOpened() {
+    const metrics = getMetrics();
+    metrics.checkoutOpened = metricCount(metrics?.checkoutOpened) + 1;
+    metrics.lastCheckoutOpenedAt = new Date()?.toISOString();
+    saveMetrics(metrics, { type: "track-checkout-opened" });
+    recordMetricEventOnlineSilently("checkout_opened");
+  }
+
+  function serviceChoiceKey(details) {
+    if (details?.service === "dine_in" || details?.service === "pickup" || details?.service === "delivery") {
+      return details?.service;
+    }
+    if (details?.serviceMode === "no_local") {
+      return "dine_in";
+    }
+    if (details?.deliveryType === "retirada") {
+      return "pickup";
+    }
+    if (details?.deliveryType === "entrega") {
+      return "delivery";
+    }
+    return "";
+  }
+
+  function trackOrderPrepared(details) {
+    const metrics = getMetrics();
+    const now = new Date()?.toISOString();
+    metrics.orderPrepared = metricCount(metrics?.orderPrepared) + 1;
+    metrics.lastOrderPreparedAt = now;
+    addMetricChoice(metrics, "payments", "lastPaymentAt", details?.payment, now);
+    const serviceChoice = serviceChoiceKey(details);
+    addMetricChoice(metrics, "serviceChoices", "lastServiceChoiceAt", serviceChoice, now);
+    saveMetrics(metrics, { type: "track-order-prepared" });
+    recordMetricEventOnlineSilently("order_prepared");
+    if (details?.payment) {
+      recordMetricEventOnlineSilently("payment_selected", { value: details?.payment });
+    }
+    if (serviceChoice) {
+      recordMetricEventOnlineSilently("service_selected", { value: serviceChoice });
+    }
+  }
+
+  function trackSearchNoResult(query) {
+    const term = sanitizeMetricSearchTerm(query);
+    if (!term || term?.length < 3) {
+      return;
+    }
+
+    const metrics = getMetrics();
+    const now = new Date()?.toISOString();
+    addMetricChoice(metrics, "searchNoResults", "lastSearchNoResultAt", term, now);
+    saveMetrics(metrics, { type: "track-search-no-result", query: term });
+    recordMetricEventOnlineSilently("search_no_result", { value: term });
   }
 
   function getTopMetrics(bucketKey, limit) {
@@ -2350,13 +2653,111 @@
     const byId = new Map(menuState?.products?.map((product) => [product?.id, product]));
 
     return Object?.entries(source)
-      .sort((left, right) => Number(right[1]) - Number(left[1]))
+      .sort((left, right) => metricCount(right[1]) - metricCount(left[1]))
       ?.slice(0, limit || 5)
       .map(([productId, count]) => ({
         productId,
-        count: Number(count),
+        count: metricCount(count),
         product: byId?.get(productId) || null,
       }));
+  }
+
+  function getTopChoiceMetrics(bucketKey, limit) {
+    const metrics = getMetrics();
+    const source = metrics[bucketKey] || {};
+    return Object?.entries(source)
+      .sort((left, right) => metricCount(right[1]) - metricCount(left[1]))
+      ?.slice(0, limit || 5)
+      .map(([value, count]) => ({
+        value,
+        count: metricCount(count),
+      }));
+  }
+
+  function getReportSummary() {
+    const metrics = getMetrics();
+    return {
+      productsViewed: metricBucketTotal(metrics?.views),
+      productsAdded: metricBucketTotal(metrics?.adds),
+      checkoutOpened: metricCount(metrics?.checkoutOpened),
+      orderPrepared: metricCount(metrics?.orderPrepared),
+    };
+  }
+
+  function productLookupById() {
+    const products = getStates()?.menuState?.products || [];
+    return new Map(products.map((product) => [product?.id, product]));
+  }
+
+  function topProductMetricRows(source, limit) {
+    const byId = productLookupById();
+    return Object?.entries(source || {})
+      .sort((left, right) => metricCount(right[1]) - metricCount(left[1]))
+      ?.slice(0, limit || 5)
+      .map(([productId, count]) => ({
+        productId,
+        count: metricCount(count),
+        product: byId?.get(productId) || null,
+      }));
+  }
+
+  function topChoiceMetricRows(source, limit) {
+    return Object?.entries(source || {})
+      .sort((left, right) => metricCount(right[1]) - metricCount(left[1]))
+      ?.slice(0, limit || 5)
+      .map(([value, count]) => ({
+        value,
+        count: metricCount(count),
+      }));
+  }
+
+  function buildOnlineReportData(rows, limit) {
+    const viewed = {};
+    const added = {};
+    const payments = {};
+    const serviceChoices = {};
+    const searchNoResults = {};
+    let checkoutOpened = 0;
+    let orderPrepared = 0;
+
+    (Array.isArray(rows) ? rows : []).forEach(function (row) {
+      const eventType = sanitizeMetricEventType(row?.event_type);
+      const productId = sanitizeMetricProductId(row?.product_id);
+      const value = sanitizeMetricValue(row?.value, 120);
+
+      if (eventType === "product_view" && productId) {
+        viewed[productId] = metricCount(viewed[productId]) + 1;
+      } else if (eventType === "add_to_cart" && productId) {
+        added[productId] = metricCount(added[productId]) + 1;
+      } else if (eventType === "checkout_opened") {
+        checkoutOpened += 1;
+      } else if (eventType === "order_prepared") {
+        orderPrepared += 1;
+      } else if (eventType === "payment_selected" && value) {
+        payments[value] = metricCount(payments[value]) + 1;
+      } else if (eventType === "service_selected" && value) {
+        serviceChoices[value] = metricCount(serviceChoices[value]) + 1;
+      } else if (eventType === "search_no_result" && value) {
+        searchNoResults[value] = metricCount(searchNoResults[value]) + 1;
+      }
+    });
+
+    return {
+      source: "online",
+      loadedAt: new Date()?.toISOString(),
+      rowsRead: Array.isArray(rows) ? rows.length : 0,
+      summary: {
+        productsViewed: metricBucketTotal(viewed),
+        productsAdded: metricBucketTotal(added),
+        checkoutOpened,
+        orderPrepared,
+      },
+      topViewed: topProductMetricRows(viewed, limit || 5),
+      topAdded: topProductMetricRows(added, limit || 5),
+      paymentChoices: topChoiceMetricRows(payments, limit || 5),
+      serviceChoices: topChoiceMetricRows(serviceChoices, limit || 5),
+      searchesWithNoResult: topChoiceMetricRows(searchNoResults, limit || 5),
+    };
   }
 
   function getSystemStatus() {
@@ -2976,6 +3377,7 @@
       }),
       makeRow("pix", clone(brand?.pix)),
       makeRow("theme", clone(brand?.appearance)),
+      makeRow("legal", clone(brand?.legal)),
       makeRow("delivery", clone(brand?.delivery)),
       makeRow("business_hours", {
         schedule: clone(brand?.schedule),
@@ -3009,6 +3411,7 @@
     const whatsapp = settingsMap.get("whatsapp");
     const pix = settingsMap.get("pix");
     const theme = settingsMap.get("theme");
+    const legal = settingsMap.get("legal");
     const delivery = settingsMap.get("delivery");
     const businessHours = settingsMap.get("business_hours");
     const orderMessage = settingsMap.get("order_message");
@@ -3050,6 +3453,10 @@
         ...next.appearance,
         ...clone(theme),
       };
+    }
+
+    if (legal && typeof legal === "object") {
+      next.legal = clone(legal);
     }
 
     if (delivery && typeof delivery === "object") {
@@ -3343,6 +3750,44 @@
     }
   }
 
+  async function loadOnlineReportData(limit) {
+    const cloudConfig = getStates()?.cloudConfig;
+    if (!isSupabaseConfigured(cloudConfig)) {
+      throw new Error("Supabase não configurado.");
+    }
+
+    const tableName = metricEventTableName(cloudConfig);
+    if (!tableName) {
+      throw new Error("Tabela de métricas online não configurada.");
+    }
+
+    const params = new URLSearchParams({
+      select: "event_type,product_id,value,created_at",
+      order: "created_at.desc",
+      limit: String(limit || 2000),
+    });
+    const response = await requestCloud(`${tableName}?${params?.toString()}`, {
+      method: "GET",
+    });
+    const rows = await response?.json();
+    return buildOnlineReportData(rows, 10);
+  }
+
+  async function clearOnlineMetrics() {
+    const cloudConfig = getStates()?.cloudConfig;
+    if (!isSupabaseConfigured(cloudConfig)) {
+      throw new Error("Supabase não configurado.");
+    }
+
+    const tableName = metricEventTableName(cloudConfig);
+    if (!tableName) {
+      throw new Error("Tabela de métricas online não configurada.");
+    }
+
+    await deleteCloudRows(tableName, "created_at", "all");
+    return true;
+  }
+
   async function saveMenuSettingsOnline(brandConfig, cloudConfig, menuState) {
     const resolvedCloud = sanitizeCloudConfig(cloudConfig || getStates()?.cloudConfig);
     const settingsTable = resolvedCloud?.tables?.settings;
@@ -3518,15 +3963,36 @@
     trackAdd(productId) {
       trackMetric("adds", productId);
     },
+    trackCheckoutOpened() {
+      trackCheckoutOpened();
+    },
+    trackOrderPrepared(details) {
+      trackOrderPrepared(details || {});
+    },
+    trackSearchNoResult(query) {
+      trackSearchNoResult(query);
+    },
     getTopViewed(limit) {
       return getTopMetrics("views", limit || 5);
     },
     getTopAdded(limit) {
       return getTopMetrics("adds", limit || 5);
     },
+    getTopPaymentChoices(limit) {
+      return getTopChoiceMetrics("payments", limit || 5);
+    },
+    getTopServiceChoices(limit) {
+      return getTopChoiceMetrics("serviceChoices", limit || 5);
+    },
+    getTopSearchNoResults(limit) {
+      return getTopChoiceMetrics("searchNoResults", limit || 5);
+    },
+    getReportSummary,
+    loadOnlineReportData,
     clearMetrics() {
       saveMetrics(clone(DEFAULT_METRICS), { type: "clear-metrics" });
     },
+    clearOnlineMetrics,
     toggleFavorite,
     saveFavorites,
     getSystemStatus,

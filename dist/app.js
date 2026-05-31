@@ -601,6 +601,16 @@
     productAdded: "Produto adicionado ao carrinho.",
     comboAdded: "Combo adicionado ao carrinho.",
     offerIncludesField: "Inclui: {{value}}",
+    footerPrivacyPolicy: "Política de Privacidade",
+    footerTermsOfUse: "Termos de Uso",
+    legalBackToMenu: "Voltar ao cardápio",
+    legalUpdatedAt: "Última atualização: {{date}}",
+    legalContactTitle: "Contato do estabelecimento",
+    legalContactEmail: "E-mail",
+    legalContactPhone: "Telefone",
+    legalBusinessAddress: "Endereço",
+    legalNotProvided: "Não informado",
+    legalUnavailable: "Documento indisponível.",
   });
 
   Object.assign(MESSAGES["en-US"], {
@@ -677,7 +687,132 @@
     productAdded: "Product added to cart.",
     comboAdded: "Combo added to cart.",
     offerIncludesField: "Includes: {{value}}",
+    footerPrivacyPolicy: "Privacy Policy",
+    footerTermsOfUse: "Terms of Use",
+    legalBackToMenu: "Back to menu",
+    legalUpdatedAt: "Last updated: {{date}}",
+    legalContactTitle: "Business contact",
+    legalContactEmail: "Email",
+    legalContactPhone: "Phone",
+    legalBusinessAddress: "Address",
+    legalNotProvided: "Not provided",
+    legalUnavailable: "Document unavailable.",
   });
+
+  const LEGAL_CONTENT = {
+    "pt-BR": {
+      privacy: {
+        title: "Política de Privacidade",
+        intro: "Esta política explica como o {{business}} usa os dados informados no cardápio digital para receber, organizar e confirmar pedidos.",
+        sections: [
+          {
+            title: "Dados usados no pedido",
+            paragraphs: [
+              "Podemos usar nome, endereço, ponto de referência, telefone, mesa, observações e forma de pagamento apenas para preparar o atendimento solicitado.",
+              "Essas informações são enviadas ao canal de atendimento configurado, como WhatsApp, para que o estabelecimento consiga confirmar e separar o pedido."
+            ],
+          },
+          {
+            title: "Finalidade",
+            paragraphs: [
+              "Os dados são usados para processar pedidos, calcular entrega quando aplicável, identificar retirada ou consumo no local e manter o histórico necessário ao atendimento.",
+              "O cardápio não solicita dados bancários completos nem senhas de clientes."
+            ],
+          },
+          {
+            title: "Responsabilidade do estabelecimento",
+            paragraphs: [
+              "O {{business}} é responsável por conferir, atualizar e adaptar este texto conforme sua operação, canais de atendimento e regras aplicáveis.",
+              "Em caso de dúvida sobre dados ou pedidos, use os canais oficiais de contato do estabelecimento."
+            ],
+          },
+        ],
+      },
+      terms: {
+        title: "Termos de Uso",
+        intro: "Estes termos descrevem o uso do cardápio digital, do carrinho e do envio de pedidos do {{business}}.",
+        sections: [
+          {
+            title: "Uso do cardápio",
+            paragraphs: [
+              "O cardápio permite consultar produtos, montar o pedido, revisar valores e abrir a mensagem final no canal de atendimento configurado.",
+              "A disponibilidade de produtos, preços, horários, taxas e formas de pagamento pode mudar conforme a operação do estabelecimento."
+            ],
+          },
+          {
+            title: "Confirmação do pedido",
+            paragraphs: [
+              "O pedido só deve ser considerado recebido após confirmação pelo estabelecimento no canal de atendimento.",
+              "Antes de enviar, confira itens, endereço, forma de atendimento, observações e total exibido."
+            ],
+          },
+          {
+            title: "Entrega, retirada e consumo no local",
+            paragraphs: [
+              "Entrega, retirada e consumo no local dependem dos horários, áreas atendidas, disponibilidade da equipe e regras operacionais do {{business}}.",
+              "Taxas ou prazos informados no cardápio podem precisar de confirmação final pelo atendimento."
+            ],
+          },
+        ],
+      },
+    },
+    "en-US": {
+      privacy: {
+        title: "Privacy Policy",
+        intro: "This policy explains how {{business}} uses information entered in the digital menu to receive, organize, and confirm orders.",
+        sections: [
+          {
+            title: "Order information",
+            paragraphs: [
+              "We may use name, address, reference point, phone, table number, notes, and payment preference only to prepare the requested service.",
+              "This information is sent to the configured service channel, such as WhatsApp, so the business can confirm and prepare the order."
+            ],
+          },
+          {
+            title: "Purpose",
+            paragraphs: [
+              "The information is used to process orders, calculate delivery when applicable, identify pickup or dine-in orders, and keep the service flow organized.",
+              "The digital menu does not request full banking details or customer passwords."
+            ],
+          },
+          {
+            title: "Business responsibility",
+            paragraphs: [
+              "{{business}} is responsible for reviewing, updating, and adapting this text according to its operation, service channels, and applicable rules.",
+              "For questions about data or orders, use the official contact channels of the business."
+            ],
+          },
+        ],
+      },
+      terms: {
+        title: "Terms of Use",
+        intro: "These terms describe the use of the digital menu, cart, and order flow configured by {{business}}.",
+        sections: [
+          {
+            title: "Menu use",
+            paragraphs: [
+              "The menu lets customers view products, build an order, review amounts, and open the final message in the configured service channel.",
+              "Product availability, prices, opening hours, delivery fees, and payment methods may change according to the business operation."
+            ],
+          },
+          {
+            title: "Order confirmation",
+            paragraphs: [
+              "An order should only be considered received after the business confirms it through the service channel.",
+              "Before sending, review items, address, service type, notes, and the displayed total."
+            ],
+          },
+          {
+            title: "Delivery, pickup, and dine-in",
+            paragraphs: [
+              "Delivery, pickup, and dine-in service depend on opening hours, covered areas, team availability, and {{business}} operational rules.",
+              "Fees or timing shown in the menu may require final confirmation by the service team."
+            ],
+          },
+        ],
+      },
+    },
+  };
 
   const DEMO_TAG_TRANSLATIONS = {
     "en-US": {
@@ -716,6 +851,8 @@
     rememberedForm: shared?.loadStorageValue(STORAGE_KEYS?.form, {}, "local"),
     pendingMessage: "",
     viewTracker: new Set(),
+    lastCheckoutMetricKey: "",
+    lastNoResultSearchTerm: "",
     gallerySelection: {},
     observer: null,
     realtimeSocket: null,
@@ -1274,6 +1411,81 @@
     }
   }
 
+  function getLegalConfig() {
+    const brandConfig = getBrandConfig();
+    const legal = brandConfig?.legal && typeof brandConfig?.legal === "object" ? brandConfig.legal : {};
+    return {
+      enabled: legal?.enabled !== false,
+      showPrivacyPolicy: legal?.showPrivacyPolicy !== false,
+      showTermsOfUse: legal?.showTermsOfUse !== false,
+      lastUpdated: String(legal?.lastUpdated || "2026-05-31")?.trim(),
+      businessName: String(legal?.businessName || "")?.trim() || textValue(brandConfig?.brand?.name, "pt-BR") || "Tobia's Lanches",
+      businessNameEn: String(legal?.businessNameEn || "")?.trim() || textValue(brandConfig?.brand?.name, "en-US") || "Tobia's Lanches",
+      contactEmail: String(legal?.contactEmail || "")?.trim(),
+      contactPhone: String(legal?.contactPhone || brandConfig?.business?.whatsappNumber || "")?.trim(),
+      businessAddress: String(legal?.businessAddress || "")?.trim(),
+      privacyPolicyMode: String(legal?.privacyPolicyMode || "internal") === "external" ? "external" : "internal",
+      termsOfUseMode: String(legal?.termsOfUseMode || "internal") === "external" ? "external" : "internal",
+      privacyPolicyUrl: safeExternalUrl(legal?.privacyPolicyUrl),
+      termsOfUseUrl: safeExternalUrl(legal?.termsOfUseUrl),
+    };
+  }
+
+  function currentLegalRoute() {
+    const hash = String(window?.location?.hash || "")?.replace(/^#\/?/, "")?.trim()?.toLowerCase();
+    if (["privacy", "privacy-policy", "politica-de-privacidade", "privacidade"].includes(hash)) {
+      return "privacy";
+    }
+    if (["terms", "terms-of-use", "termos-de-uso", "termos"].includes(hash)) {
+      return "terms";
+    }
+    return "";
+  }
+
+  function legalDocumentVisible(type) {
+    const legal = getLegalConfig();
+    if (legal?.enabled === false) {
+      return false;
+    }
+    return type === "terms" ? legal?.showTermsOfUse !== false : legal?.showPrivacyPolicy !== false;
+  }
+
+  function resolveLegalContent(type) {
+    const locale = currentLocale();
+    const localized = LEGAL_CONTENT[locale] || LEGAL_CONTENT["pt-BR"];
+    return localized?.[type] || null;
+  }
+
+  function interpolateLegalText(value, data) {
+    return String(value || "")?.replace(/\{\{\s*business\s*\}\}/g, data?.business || legalBusinessName(currentLocale()));
+  }
+
+  function legalBusinessName(locale) {
+    const legal = getLegalConfig();
+    const targetLocale = resolveLocale(locale || currentLocale());
+    return (
+      (targetLocale === "en-US" ? legal?.businessNameEn : legal?.businessName) ||
+      textValue(getBrandConfig()?.brand?.name, targetLocale) ||
+      t("businessNameFallback")
+    );
+  }
+
+  function legalBusinessAddress() {
+    const legal = getLegalConfig();
+    const configuredAddress = String(legal?.businessAddress || "")?.trim();
+    if (configuredAddress) {
+      return configuredAddress;
+    }
+
+    const locationLines = businessLocationLines(businessLocation());
+    return locationLines?.join(", ") || t("legalNotProvided");
+  }
+
+  function legalContactValue(key) {
+    const value = String(getLegalConfig()?.[key] || "")?.trim();
+    return value || t("legalNotProvided");
+  }
+
   function coordinateValue(value, min, max) {
     const raw = String(value || "")?.replace(",", ".")?.trim()?.slice(0, 40);
     const number = Number(raw);
@@ -1472,6 +1684,164 @@
     selector.value = currentLocale();
   }
 
+  function updateLegalFooterLinks() {
+    const privacyLink = $("linkPoliticaPrivacidade");
+    const termsLink = $("linkTermosUso");
+    const separator = $("rodapeLegalSeparator");
+    const privacyVisible = legalDocumentVisible("privacy");
+    const termsVisible = legalDocumentVisible("terms");
+    const privacyTarget = resolveLegalLink("privacy");
+    const termsTarget = resolveLegalLink("terms");
+
+    if (privacyLink) {
+      privacyLink.textContent = t("footerPrivacyPolicy");
+      privacyLink.hidden = !privacyVisible;
+      privacyLink.href = privacyTarget.href;
+      if (privacyTarget.external) {
+        privacyLink.target = "_blank";
+        privacyLink.rel = "noopener noreferrer";
+      } else {
+        privacyLink.removeAttribute("target");
+        privacyLink.removeAttribute("rel");
+      }
+    }
+
+    if (termsLink) {
+      termsLink.textContent = t("footerTermsOfUse");
+      termsLink.hidden = !termsVisible;
+      termsLink.href = termsTarget.href;
+      if (termsTarget.external) {
+        termsLink.target = "_blank";
+        termsLink.rel = "noopener noreferrer";
+      } else {
+        termsLink.removeAttribute("target");
+        termsLink.removeAttribute("rel");
+      }
+    }
+
+    if ($("rodapeLinksLegais")) {
+      $("rodapeLinksLegais").hidden = !(privacyVisible || termsVisible);
+    }
+
+    if (separator) {
+      separator.hidden = !(privacyVisible && termsVisible);
+    }
+  }
+
+  function resolveLegalLink(type) {
+    const legal = getLegalConfig();
+    const isTerms = type === "terms";
+    const mode = isTerms ? legal?.termsOfUseMode : legal?.privacyPolicyMode;
+    const url = isTerms ? legal?.termsOfUseUrl : legal?.privacyPolicyUrl;
+    if (mode === "external" && url) {
+      return { href: url, external: true };
+    }
+    return { href: isTerms ? "#/terms" : "#/privacy", external: false };
+  }
+
+  function setPublicMenuHiddenForLegal() {
+    [
+      "topoBlocos",
+      "menuCategorias",
+      "statusCategoria",
+      "catalogTools",
+      "secaoOfertas",
+      "areaProdutos",
+      "secaoLocalizacao",
+    ].forEach(function (id) {
+      const element = $(id);
+      if (!element) {
+        return;
+      }
+      element.hidden = true;
+      element?.classList?.add("oculto");
+    });
+  }
+
+  function restorePublicMenuAfterLegal() {
+    [
+      "topoBlocos",
+      "menuCategorias",
+      "statusCategoria",
+      "catalogTools",
+      "areaProdutos",
+    ].forEach(function (id) {
+      const element = $(id);
+      if (!element) {
+        return;
+      }
+      element.hidden = false;
+      element?.classList?.remove("oculto");
+    });
+  }
+
+  function renderLegalPage() {
+    const page = $("paginaLegal");
+    if (!page) {
+      return;
+    }
+
+    const route = currentLegalRoute();
+    const content = route ? resolveLegalContent(route) : null;
+    const visible = Boolean(route && content && legalDocumentVisible(route));
+
+    document?.body?.classList?.toggle("legal-route-active", visible);
+
+    if (!visible) {
+      page.hidden = true;
+      page?.classList?.add("oculto");
+      page.innerHTML = "";
+      restorePublicMenuAfterLegal();
+      return;
+    }
+
+    const legal = getLegalConfig();
+    const data = {
+      business: legalBusinessName(currentLocale()),
+      contactEmail: legalContactValue("contactEmail"),
+      contactPhone: legalContactValue("contactPhone"),
+      businessAddress: legalBusinessAddress(),
+    };
+
+    setPublicMenuHiddenForLegal();
+    page.hidden = false;
+    page?.classList?.remove("oculto");
+    page.setAttribute("aria-label", content?.title || t("legalUnavailable"));
+    page.innerHTML =
+      '<article class="legal-card">' +
+        '<header class="legal-card-header">' +
+          '<h2 class="legal-card-title">' + escapeHtml(content?.title || t("legalUnavailable")) + "</h2>" +
+          '<p class="legal-card-intro">' + escapeHtml(interpolateLegalText(content?.intro, data)) + "</p>" +
+          '<p class="legal-card-updated">' + escapeHtml(t("legalUpdatedAt", { date: legal?.lastUpdated || "2026-05-31" })) + "</p>" +
+        "</header>" +
+        '<div class="legal-sections">' +
+          content?.sections?.map(function (section) {
+            return (
+              '<section class="legal-section">' +
+                '<h3>' + escapeHtml(section?.title || "") + "</h3>" +
+                section?.paragraphs?.map(function (paragraph) {
+                  return "<p>" + escapeHtml(interpolateLegalText(paragraph, data)) + "</p>";
+                })?.join("") +
+              "</section>"
+            );
+          })?.join("") +
+        "</div>" +
+        '<section class="legal-contact-card">' +
+          '<h3>' + escapeHtml(t("legalContactTitle")) + "</h3>" +
+          '<dl>' +
+            '<div><dt>' + escapeHtml(t("legalContactEmail")) + '</dt><dd>' + escapeHtml(data.contactEmail) + "</dd></div>" +
+            '<div><dt>' + escapeHtml(t("legalContactPhone")) + '</dt><dd>' + escapeHtml(data.contactPhone) + "</dd></div>" +
+            '<div><dt>' + escapeHtml(t("legalBusinessAddress")) + '</dt><dd>' + escapeHtml(data.businessAddress) + "</dd></div>" +
+          "</dl>" +
+        "</section>" +
+        '<div class="legal-actions">' +
+          '<a class="botao botao-secundario legal-back-link" href="#topo">' + escapeHtml(t("legalBackToMenu")) + "</a>" +
+        "</div>" +
+      "</article>";
+
+    scrollWindowToTop();
+  }
+
   function renderStaticTexts() {
     document.title = textValue(getBrandConfig()?.brand?.name, currentLocale()) || t("publicMenuTitle");
     $("rotuloIdioma").textContent = t("languageLabel");
@@ -1499,11 +1869,20 @@
     $("menuCategorias")?.setAttribute("aria-label", t("categoriesAria"));
     $("rodapeUtilitarios")?.setAttribute("aria-label", t("footerAria"));
     $("rodapeLinks")?.setAttribute("aria-label", t("footerNavAria"));
+    $("rodapeLinksLegais")?.setAttribute("aria-label", t("footerNavAria"));
     $("linkTopo").textContent = t("footerBackToTop");
     $("linkCardapio").textContent = t("footerViewMenu");
     if ($("linkPainelAdmin")) {
       $("linkPainelAdmin").textContent = t("footerAdmin");
     }
+    if ($("rodapeCopyright")) {
+      $("rodapeCopyright").textContent =
+        "© 2026 " +
+        legalBusinessName(currentLocale()) +
+        ". " +
+        (currentLocale() === "en-US" ? "All rights reserved." : "Todos os direitos reservados.");
+    }
+    updateLegalFooterLinks();
     $("creditoAutoria")?.setAttribute("aria-label", t("authorCreditAria"));
     $("creditoAutoriaPrefixo").textContent = t("authorCreditPrefix");
     $("creditoAutoriaLink").textContent = AUTHOR_NAME;
@@ -2292,6 +2671,7 @@
     $("statusCategoria").textContent = $("catalogSummary")?.textContent;
     area?.classList?.toggle("grade-produtos--compact", state?.ui?.visualMode === "compact");
     area?.classList?.toggle("grade-produtos--simple", state?.ui?.catalogMode === "simplified");
+    trackSearchNoResult(products);
 
     if (!products?.length) {
       area.innerHTML =
@@ -3341,6 +3721,7 @@
 
   function openCart() {
     openOverlay($("caixaCarrinho"));
+    trackCheckoutOpened();
     syncPublicFeedbackPlacement($("publicActionFeedback"));
     $("botaoCarrinho")?.setAttribute("aria-expanded", "true");
     $("botaoAbrirCarrinhoMobile")?.setAttribute("aria-expanded", "true");
@@ -3366,6 +3747,20 @@
 
   function closeConfirmation() {
     closeOverlay($("modalConfirmacao"));
+  }
+
+  function handleFinishOrderReview() {
+    clearStatus();
+    const form = collectForm();
+    const validation = validateCheckout(form);
+    if (validation?.message) {
+      showCheckoutValidationError(validation);
+      return;
+    }
+    state.pendingMessage = buildOrderMessage();
+    trackOrderPrepared(form);
+    closeCart();
+    openConfirmation(state?.pendingMessage);
   }
 
   function checkoutValidation(message, targetId) {
@@ -3427,6 +3822,43 @@
 
   function validateForm(form) {
     return validateCheckout(form)?.message || "";
+  }
+
+  function cartMetricKey() {
+    return getResolvedCartItems()
+      ?.map(function (item) {
+        return String(item?.key || item?.product?.id || item?.combo?.id || "") + ":" + String(item?.quantity || 1);
+      })
+      ?.filter(Boolean)
+      ?.join("|");
+  }
+
+  function trackCheckoutOpened() {
+    const key = cartMetricKey();
+    if (!key || state?.lastCheckoutMetricKey === key) {
+      return;
+    }
+
+    state.lastCheckoutMetricKey = key;
+    system?.trackCheckoutOpened?.();
+  }
+
+  function trackOrderPrepared(form) {
+    system?.trackOrderPrepared?.({
+      payment: form?.payment,
+      serviceMode: form?.serviceMode,
+      deliveryType: form?.deliveryType,
+    });
+  }
+
+  function trackSearchNoResult(products) {
+    const term = String(state?.filters?.query || "")?.trim()?.toLowerCase();
+    if (products?.length || !term || term?.length < 3 || term === state?.lastNoResultSearchTerm) {
+      return;
+    }
+
+    state.lastNoResultSearchTerm = term;
+    system?.trackSearchNoResult?.(term);
   }
 
   function clearCheckoutFieldErrors() {
@@ -3724,11 +4156,20 @@
     updatePaymentPanels();
     updateCheckoutMode();
     renderCart();
+    renderLegalPage();
   }
 
   function isMetricStateChange(detail) {
     const type = String(detail?.type || "");
-    return type === "track-view" || type === "track-add" || type === "metrics" || type === "clear-metrics";
+    return [
+      "track-view",
+      "track-add",
+      "track-checkout-opened",
+      "track-order-prepared",
+      "track-search-no-result",
+      "metrics",
+      "clear-metrics",
+    ].includes(type);
   }
 
   function clearPixCopyFeedback() {
@@ -3998,15 +4439,7 @@
       }
 
       if (button?.id === "botaoFinalizar") {
-        clearStatus();
-        const validation = validateCheckout(collectForm());
-        if (validation?.message) {
-          showCheckoutValidationError(validation);
-          return;
-        }
-        state.pendingMessage = buildOrderMessage();
-        closeCart();
-        openConfirmation(state?.pendingMessage);
+        handleFinishOrderReview();
         return;
       }
 
@@ -4049,6 +4482,12 @@
       $("botaoFinalizar")?.click();
     });
 
+    $("botaoFinalizar")?.addEventListener("click", function (event) {
+      event?.preventDefault();
+      event?.stopPropagation();
+      handleFinishOrderReview();
+    });
+
     $("caixaCarrinho")?.addEventListener("click", function (event) {
       if (event?.target === $("caixaCarrinho")) {
         closeCart();
@@ -4084,6 +4523,11 @@
         state.ignoreRealtimeUntil = Date.now() + 1500;
       }
       startRealtimeSubscription();
+    });
+
+    window?.addEventListener("hashchange", function () {
+      clearStatus();
+      syncFromSystem();
     });
 
     window?.addEventListener("storage", function (event) {

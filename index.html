@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="./dist/styles.css?v=2.0.16">
+  <link rel="stylesheet" href="./dist/styles.css?v=2.0.17">
 </head>
 
 <body>
@@ -127,6 +127,8 @@
 
   <main id="areaProdutos" class="grade-produtos layout-shell" aria-live="polite"></main>
 
+  <main id="paginaLegal" class="legal-page layout-shell oculto" hidden aria-live="polite"></main>
+
   <footer id="rodapeUtilitarios" class="rodape-utilitarios layout-shell" aria-label="Informações do cardápio">
     <p id="rodapeNota" class="rodape-nota">Atendimento direto do Tobia's Lanches.</p>
     <nav id="rodapeLinks" class="rodape-links" aria-label="Links do site">
@@ -139,6 +141,14 @@
       <a id="creditoAutoriaLink" href="https://www.instagram.com/kayronmagl/" target="_blank"
         rel="noopener noreferrer">Kayron Magalhães</a>
     </p>
+    <div class="rodape-legal-area">
+      <p id="rodapeCopyright" class="rodape-copyright">© 2026 Tobia's Lanches. Todos os direitos reservados.</p>
+      <nav id="rodapeLinksLegais" class="rodape-links rodape-links-legais" aria-label="Links legais">
+        <a id="linkPoliticaPrivacidade" class="rodape-link" href="#/privacy">Política de Privacidade</a>
+        <span id="rodapeLegalSeparator" class="rodape-legal-separator" aria-hidden="true">·</span>
+        <a id="linkTermosUso" class="rodape-link" href="#/terms">Termos de Uso</a>
+      </nav>
+    </div>
   </footer>
 
   <section id="caixaCarrinho" class="fundo-escuro oculto" tabindex="-1" hidden inert aria-hidden="true">
@@ -366,8 +376,8 @@
 
   <script src="./config.js?v=1.0.0"></script>
   <script src="./dist/core/shared-utils.js?v=2.1.2"></script>
-  <script src="./dist/core/state-manager.js?v=2.0.3"></script>
-  <script src="./dist/app.js?v=2.0.5"></script>
+  <script src="./dist/core/state-manager.js?v=2.0.4"></script>
+  <script src="./dist/app.js?v=2.0.6"></script>
 </body>
 
 </html>

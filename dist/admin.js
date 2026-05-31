@@ -192,8 +192,11 @@
       comboProductSearch: "Buscar produto",
       comboProductSearchPlaceholder: "Digite o nome do produto",
       comboProductCategory: "Categoria",
+      comboProductView: "Ver produtos",
+      comboProductViewAll: "Todos",
+      comboProductViewSelected: "Selecionados",
       comboProductSelectedOnly: "Selecionados",
-      comboProductAvailableOnly: "Disponíveis",
+      comboProductAvailableOnly: "Somente ativos",
       comboSelectedCountOne: "{{count}} produto selecionado",
       comboSelectedCountOther: "{{count}} produtos selecionados",
       comboSelectedGroup: "Produtos selecionados",
@@ -203,7 +206,7 @@
       comboClearSelection: "Limpar seleção",
       comboShowSelected: "Mostrar selecionados",
       comboShowAllProducts: "Mostrar todos",
-      comboSelectCategory: "Selecionar categoria",
+      comboSelectCategory: "Adicionar categoria ao combo",
       comboUncategorized: "Sem categoria",
       comboActive: "Mostrar combo no cardápio",
       saveCombo: "Salvar combo",
@@ -404,18 +407,47 @@
       cloudDisabled: "Desativado",
       cloudError: "Erro",
       reportsTitle: "Relatórios",
-      reportsSubtitle: "Resumo do catálogo e possíveis pontos de atenção.",
-      totalProducts: "Total de produtos",
-      totalCategories: "Total de categorias",
-      totalAddOns: "Total de adicionais",
+      reportsSubtitle: "Acompanhe ações confirmadas no cardápio: visualizações, carrinho, finalização e escolhas do cliente.",
+      reportsOnlineLoading: "Carregando métricas online...",
+      reportsOnlineActive: "Dados online carregados do Supabase.",
+      reportsOnlineFallback: "Não foi possível carregar as métricas online. Mostrando dados locais deste navegador.",
+      reportsLocalOnly: "Modo local: mostrando dados deste navegador.",
+      reportClearOnlineWarning: "Dados locais limpos. Não foi possível limpar as métricas online.",
+      totalProducts: "Produtos cadastrados",
+      totalCategories: "Categorias cadastradas",
+      totalAddOns: "Adicionais cadastrados",
       systemHealth: "Conferência dos dados",
       healthy: "Sem problemas",
       corrupted: "Com inconsistência",
+      productsSeen: "Produtos vistos",
+      productsSeenHelp: "vezes que produtos apareceram",
+      productsAdded: "Adicionados ao carrinho",
+      productsAddedHelp: "cliques confirmados em adicionar",
+      checkoutOpened: "Checkouts abertos",
+      checkoutOpenedHelp: "carrinhos com item abertos para finalizar",
+      ordersPrepared: "Pedidos preparados",
+      ordersPreparedHelp: "pedidos revisados antes do envio",
       topAdded: "Produtos mais adicionados ao carrinho",
       topViewed: "Produtos mais visualizados",
-      noMetrics: "Nenhuma métrica registrada ainda.",
-      exportReport: "Baixar relatório",
-      clearMetrics: "Limpar métricas",
+      paymentChoices: "Pagamento escolhido",
+      serviceChoices: "Atendimento escolhido",
+      searchNoResults: "Buscas sem resultado",
+      reportSetupTitle: "Ajustes necessários",
+      noMetrics: "Nada registrado ainda.",
+      noSetupIssues: "Nenhum ajuste essencial encontrado.",
+      noSearchNoResults: "Nenhuma busca sem resultado registrada.",
+      reportCountOne: "{{count}} vez",
+      reportCountOther: "{{count}} vezes",
+      serviceChoiceDelivery: "Entrega",
+      serviceChoicePickup: "Retirada",
+      serviceChoiceDineIn: "No local",
+      paymentMethodPix: "Pix",
+      paymentMethodCard: "Cartão",
+      paymentMethodCash: "Dinheiro",
+      reportIssueNoActiveProducts: "Não há produto ativo para o cliente escolher.",
+      reportIssueProductNoPrice: "Há produto ativo sem preço válido.",
+      exportReport: "Baixar dados do relatório",
+      clearMetrics: "Limpar dados do relatório",
       issuesDetected: "Problemas detectados",
       noIssues: "Nenhuma inconsistência crítica detectada.",
       systemTitle: "Ações do sistema",
@@ -638,8 +670,11 @@
       comboProductSearch: "Search product",
       comboProductSearchPlaceholder: "Type the product name",
       comboProductCategory: "Category",
+      comboProductView: "View products",
+      comboProductViewAll: "All",
+      comboProductViewSelected: "Selected",
       comboProductSelectedOnly: "Selected",
-      comboProductAvailableOnly: "Available",
+      comboProductAvailableOnly: "Active only",
       comboSelectedCountOne: "{{count}} product selected",
       comboSelectedCountOther: "{{count}} products selected",
       comboSelectedGroup: "Selected products",
@@ -649,7 +684,7 @@
       comboClearSelection: "Clear selection",
       comboShowSelected: "Show selected",
       comboShowAllProducts: "Show all",
-      comboSelectCategory: "Select category",
+      comboSelectCategory: "Add category to combo",
       comboUncategorized: "Uncategorized",
       comboActive: "Show combo on the menu",
       saveCombo: "Save combo",
@@ -862,18 +897,47 @@
       cloudDisabled: "Disabled",
       cloudError: "Error",
       reportsTitle: "Reports",
-      reportsSubtitle: "Menu summary and possible points of attention.",
-      totalProducts: "Total products",
-      totalCategories: "Total categories",
-      totalAddOns: "Total add-ons",
+      reportsSubtitle: "Track confirmed menu actions: views, cart, checkout, and customer choices.",
+      reportsOnlineLoading: "Loading online metrics...",
+      reportsOnlineActive: "Online data loaded from Supabase.",
+      reportsOnlineFallback: "Could not load online metrics. Showing local data from this browser.",
+      reportsLocalOnly: "Local mode: showing data from this browser.",
+      reportClearOnlineWarning: "Local data cleared. Online metrics could not be cleared.",
+      totalProducts: "Products registered",
+      totalCategories: "Categories registered",
+      totalAddOns: "Add-ons registered",
       systemHealth: "Data check",
       healthy: "No problems",
       corrupted: "With inconsistency",
+      productsSeen: "Products viewed",
+      productsSeenHelp: "times products appeared",
+      productsAdded: "Added to cart",
+      productsAddedHelp: "confirmed add-to-cart clicks",
+      checkoutOpened: "Checkouts opened",
+      checkoutOpenedHelp: "carts with items opened to finish",
+      ordersPrepared: "Orders prepared",
+      ordersPreparedHelp: "orders reviewed before sending",
       topAdded: "Products most added to cart",
       topViewed: "Most viewed products",
-      noMetrics: "No metrics recorded yet.",
-      exportReport: "Download report",
-      clearMetrics: "Clear metrics",
+      paymentChoices: "Payment chosen",
+      serviceChoices: "Service chosen",
+      searchNoResults: "Searches with no result",
+      reportSetupTitle: "Required adjustments",
+      noMetrics: "Nothing recorded yet.",
+      noSetupIssues: "No essential adjustment found.",
+      noSearchNoResults: "No search without result recorded.",
+      reportCountOne: "{{count}} time",
+      reportCountOther: "{{count}} times",
+      serviceChoiceDelivery: "Delivery",
+      serviceChoicePickup: "Pickup",
+      serviceChoiceDineIn: "Dine in",
+      paymentMethodPix: "Pix",
+      paymentMethodCard: "Card",
+      paymentMethodCash: "Cash",
+      reportIssueNoActiveProducts: "There is no active product for customers to choose.",
+      reportIssueProductNoPrice: "There is an active product without a valid price.",
+      exportReport: "Download report data",
+      clearMetrics: "Clear report data",
       issuesDetected: "Issues detected",
       noIssues: "No critical inconsistencies detected.",
       systemTitle: "System actions",
@@ -955,10 +1019,11 @@
     onlineRequired: "Entre com o e-mail e a senha do Supabase Auth para usar o modo online.",
     cloudSubtitle: "Área técnica para conectar, republicar e testar o modo online. Use apenas se você configurou o Supabase.",
     cloudOperationalHelp: "Realtime e checagem periódica são opcionais. Se a atualização automática falhar, recarregar a página continua sendo o fallback.",
-    cloudCheckAuth: "Validar login do Admin online",
-    cloudCheckStorage: "Verificar envio de imagens",
-    cloudSettingsTable: "Tabela dos ajustes online",
-    cloudStorageBucket: "Pasta de imagens do produto",
+      cloudCheckAuth: "Validar login do Admin online",
+      cloudCheckStorage: "Verificar envio de imagens",
+      cloudSettingsTable: "Tabela dos ajustes online",
+      cloudMetricEventsTable: "Tabela de métricas online",
+      cloudStorageBucket: "Pasta de imagens do produto",
     cloudTechnicalTitle: "Configuração técnica inicial",
     cloudTechnicalHelp: "O navegador não altera o config.js hospedado. Use esta referência apenas para conferir projeto, tabelas e bucket da instalação técnica.",
     cloudTechnicalManaged: "Referência técnica atual",
@@ -979,10 +1044,11 @@
     onlineRequired: "Sign in with the Supabase Auth email and password to use online mode.",
     cloudSubtitle: "Technical area for connecting, republishing, and testing online mode. Use it only if Supabase has been configured.",
     cloudOperationalHelp: "Realtime and periodic checks are optional. If automatic updates fail, reloading the page remains the fallback.",
-    cloudCheckAuth: "Validate online Admin login",
-    cloudCheckStorage: "Check image upload",
-    cloudSettingsTable: "Online settings table",
-    cloudStorageBucket: "Product image folder",
+      cloudCheckAuth: "Validate online Admin login",
+      cloudCheckStorage: "Check image upload",
+      cloudSettingsTable: "Online settings table",
+      cloudMetricEventsTable: "Online metrics table",
+      cloudStorageBucket: "Product image folder",
     cloudTechnicalHelp: "The browser does not change the hosted config.js. Use this reference only to confirm the project, tables, and technical installation bucket.",
     cloudRealtime: "Automatic menu updates (Realtime)",
     autoReconnect: "Periodic connection check",
@@ -1026,11 +1092,30 @@
     addOnId: "Código do adicional (opcional)",
     addOnEnabled: "Adicional ativo: aparece nos produtos vinculados",
     settingsTitle: "Configurações do cardápio",
-    settingsSubtitle: "Ajuste dados do estabelecimento, atendimento, entrega, Pix, aparência e horários.",
-    settingsSaveBarClean: "Revise os campos e salve quando terminar.",
-    sectionOperationHelp: "WhatsApp, entrega, Pix e idioma padrão usados no pedido do cliente.",
-    sectionLocationHelp: "Endereço e rota do estabelecimento. Use link do Google Maps ou coordenadas opcionais.",
-    sectionAppearanceHelp: "Teste a aparência no painel. Salve para aplicar no cardápio público.",
+      settingsSubtitle: "Ajuste dados do estabelecimento, atendimento, entrega, Pix, políticas, aparência e horários.",
+      settingsSaveBarClean: "Revise os campos e salve quando terminar.",
+      settingsQuickPolicies: "Políticas",
+      sectionOperationHelp: "WhatsApp, entrega, Pix e idioma padrão usados no pedido do cliente.",
+      sectionLocationHelp: "Endereço e rota do estabelecimento. Use link do Google Maps ou coordenadas opcionais.",
+      sectionAppearanceHelp: "Teste a aparência no painel. Salve para aplicar no cardápio público.",
+      sectionPolicies: "Políticas",
+      sectionPoliciesHelp: "Controle os links legais do rodapé e os dados exibidos nas páginas públicas. Use link externo se o estabelecimento já tiver uma política própria.",
+      legalShowPrivacyPolicy: "Mostrar Política de Privacidade no rodapé",
+      legalShowTermsOfUse: "Mostrar Termos de Uso no rodapé",
+      legalBusinessName: "Nome legal do negócio",
+      legalBusinessNameEn: "Nome legal do negócio — EN",
+      legalContactEmail: "E-mail de contato legal",
+      legalContactPhone: "Telefone de contato legal",
+      legalBusinessAddress: "Endereço legal do negócio",
+      legalLastUpdated: "Data de atualização",
+      legalPrivacyMode: "Política de Privacidade",
+      legalTermsMode: "Termos de Uso",
+      legalModeInternal: "Usar página interna",
+      legalModeExternal: "Usar link externo",
+      legalPrivacyUrl: "URL externa da Política",
+      legalTermsUrl: "URL externa dos Termos",
+      legalExternalUrlHelp: "Se o modo externo estiver ativo e a URL estiver vazia ou inválida, o cardápio usa automaticamente a página interna.",
+      legalChanged: "Políticas alteradas. Salve para aplicar no cardápio público.",
     whatsappNumber: "WhatsApp que receberá os pedidos",
     brandImageHelp: "A imagem aparece no topo do cardápio e no painel.",
     waitingTimePt: "Tempo médio do pedido",
@@ -1083,19 +1168,49 @@
     cloudSettingsSavedOnline: "Ajustes online salvos no Supabase.",
     cloudAuthOk: "Login online validado.",
     cloudStorageOk: "Envio de imagens verificado.",
-    cloudLocalOnly: "Modo local ativo. Use a área online apenas quando o Supabase estiver configurado.",
+    cloudLocalOnly: "Modo local ativo. As alterações ficam apenas neste navegador até o modo online estar disponível.",
+    cloudModeOnline: "Modo online ativo: ao salvar, o painel tenta publicar as alterações no cardápio online.",
+    cloudModeOffline: "Modo local: nada é publicado para todos enquanto o Supabase não estiver ativo.",
+    cloudActionUnavailable: "Esta ação online não está disponível no modo local.",
+    cloudActionLoginRequired: "Entre novamente no Admin online para publicar ou carregar dados.",
     cloudStatus: "Status da conexão online",
     lastCheck: "Última verificação",
     lastError: "Último erro registrado",
     pixOwnerEn: "Titular do Pix — EN",
     pixBankEn: "Banco — EN",
-    reportsSubtitle: "Resumo do catálogo e possíveis pontos de atenção.",
+    reportsSubtitle: "Acompanhe ações confirmadas no cardápio: visualizações, carrinho, finalização e escolhas do cliente.",
     systemHealth: "Conferência dos dados",
     healthy: "Sem problemas",
     corrupted: "Com inconsistência",
+    productsSeen: "Produtos vistos",
+    productsSeenHelp: "vezes que produtos apareceram",
+    productsAdded: "Adicionados ao carrinho",
+    productsAddedHelp: "cliques confirmados em adicionar",
+    checkoutOpened: "Checkouts abertos",
+    checkoutOpenedHelp: "carrinhos com item abertos para finalizar",
+    ordersPrepared: "Pedidos preparados",
+    ordersPreparedHelp: "pedidos revisados antes do envio",
     topAdded: "Produtos mais adicionados ao carrinho",
     topViewed: "Produtos mais visualizados",
-    exportReport: "Baixar relatório",
+    paymentChoices: "Pagamento escolhido",
+    serviceChoices: "Atendimento escolhido",
+    searchNoResults: "Buscas sem resultado",
+    reportSetupTitle: "Ajustes necessários",
+    noMetrics: "Nada registrado ainda.",
+    noSetupIssues: "Nenhum ajuste essencial encontrado.",
+    noSearchNoResults: "Nenhuma busca sem resultado registrada.",
+    reportCountOne: "{{count}} vez",
+    reportCountOther: "{{count}} vezes",
+    serviceChoiceDelivery: "Entrega",
+    serviceChoicePickup: "Retirada",
+    serviceChoiceDineIn: "No local",
+    paymentMethodPix: "Pix",
+    paymentMethodCard: "Cartão",
+    paymentMethodCash: "Dinheiro",
+    reportIssueNoActiveProducts: "Não há produto ativo para o cliente escolher.",
+    reportIssueProductNoPrice: "Há produto ativo sem preço válido.",
+    exportReport: "Baixar dados do relatório",
+    clearMetrics: "Limpar dados do relatório",
     systemTitle: "Backup e manutenção",
     systemSubtitle: "Baixe backup, restaure dados ou limpe este aparelho com segurança.",
     resetSystem: "Limpar dados deste aparelho",
@@ -1122,8 +1237,8 @@
     cloudSyncDone: "Dados online carregados no painel.",
     cloudMigrationDone: "Alterações publicadas no cardápio online.",
     cloudMigrationRealtimeDone: "Alterações publicadas no cardápio online.",
-    savedAndPublishedOnline: "Alterações salvas e publicadas online.",
-    savedLocallyPublishFailed: "Alterações salvas no painel, mas não publicadas online.",
+    savedAndPublishedOnline: "Alterações salvas neste navegador e publicadas no cardápio online.",
+    savedLocallyPublishFailed: "Alterações salvas neste navegador, mas não publicadas para todos.",
     requiredField: "Preencha os campos obrigatórios.",
     invalidBackup: "Não foi possível ler o backup. Escolha um arquivo válido.",
     invalidCloudInterval: "Informe um intervalo de checagem válido.",
@@ -1190,11 +1305,30 @@
     addOnId: "Add-on code (optional)",
     addOnEnabled: "Active add-on: appears in linked products",
     settingsTitle: "Menu settings",
-    settingsSubtitle: "Adjust business details, service, delivery, Pix, appearance, and opening hours.",
-    settingsSaveBarClean: "Review the fields and save when finished.",
-    sectionOperationHelp: "WhatsApp, delivery, Pix, and default language used in the customer order.",
-    sectionLocationHelp: "Store address and route. Use a Google Maps link or optional coordinates.",
-    sectionAppearanceHelp: "Preview the appearance in the panel. Save to apply it to the public menu.",
+      settingsSubtitle: "Adjust business details, service, delivery, Pix, policies, appearance, and opening hours.",
+      settingsSaveBarClean: "Review the fields and save when finished.",
+      settingsQuickPolicies: "Policies",
+      sectionOperationHelp: "WhatsApp, delivery, Pix, and default language used in the customer order.",
+      sectionLocationHelp: "Store address and route. Use a Google Maps link or optional coordinates.",
+      sectionAppearanceHelp: "Preview the appearance in the panel. Save to apply it to the public menu.",
+      sectionPolicies: "Policies",
+      sectionPoliciesHelp: "Control the legal footer links and the details shown on the public pages. Use an external link if the business already has its own policy.",
+      legalShowPrivacyPolicy: "Show Privacy Policy in the footer",
+      legalShowTermsOfUse: "Show Terms of Use in the footer",
+      legalBusinessName: "Legal business name",
+      legalBusinessNameEn: "Legal business name",
+      legalContactEmail: "Legal contact email",
+      legalContactPhone: "Legal contact phone",
+      legalBusinessAddress: "Legal business address",
+      legalLastUpdated: "Last updated date",
+      legalPrivacyMode: "Privacy Policy",
+      legalTermsMode: "Terms of Use",
+      legalModeInternal: "Use internal page",
+      legalModeExternal: "Use external link",
+      legalPrivacyUrl: "External Privacy URL",
+      legalTermsUrl: "External Terms URL",
+      legalExternalUrlHelp: "If external mode is enabled and the URL is empty or invalid, the menu automatically uses the internal page.",
+      legalChanged: "Policies changed. Save to apply them to the public menu.",
     whatsappNumber: "WhatsApp that receives orders",
     brandImageHelp: "The image appears at the top of the menu and in the panel.",
     waitingTimePt: "Average order time in PT-BR",
@@ -1247,19 +1381,49 @@
     cloudSettingsSavedOnline: "Online settings saved to Supabase.",
     cloudAuthOk: "Online login verified.",
     cloudStorageOk: "Image upload checked.",
-    cloudLocalOnly: "Local mode active. Use the online area only when Supabase is configured.",
+    cloudLocalOnly: "Local mode active. Changes stay only in this browser until online mode is available.",
+    cloudModeOnline: "Online mode active: when saving, the panel tries to publish changes to the online menu.",
+    cloudModeOffline: "Local mode: nothing is published to everyone while Supabase is not active.",
+    cloudActionUnavailable: "This online action is not available in local mode.",
+    cloudActionLoginRequired: "Sign in again to the online Admin to publish or load data.",
     cloudStatus: "Online connection status",
     lastCheck: "Last check",
     lastError: "Last recorded error",
     pixOwnerEn: "Pix owner",
     pixBankEn: "Bank",
-    reportsSubtitle: "Menu summary and possible points of attention.",
+    reportsSubtitle: "Track confirmed menu actions: views, cart, checkout, and customer choices.",
     systemHealth: "Data check",
     healthy: "No problems",
     corrupted: "With inconsistency",
+    productsSeen: "Products viewed",
+    productsSeenHelp: "times products appeared",
+    productsAdded: "Added to cart",
+    productsAddedHelp: "confirmed add-to-cart clicks",
+    checkoutOpened: "Checkouts opened",
+    checkoutOpenedHelp: "carts with items opened to finish",
+    ordersPrepared: "Orders prepared",
+    ordersPreparedHelp: "orders reviewed before sending",
     topAdded: "Products most added to cart",
     topViewed: "Most viewed products",
-    exportReport: "Download report",
+    paymentChoices: "Payment chosen",
+    serviceChoices: "Service chosen",
+    searchNoResults: "Searches with no result",
+    reportSetupTitle: "Required adjustments",
+    noMetrics: "Nothing recorded yet.",
+    noSetupIssues: "No essential adjustment found.",
+    noSearchNoResults: "No search without result recorded.",
+    reportCountOne: "{{count}} time",
+    reportCountOther: "{{count}} times",
+    serviceChoiceDelivery: "Delivery",
+    serviceChoicePickup: "Pickup",
+    serviceChoiceDineIn: "Dine in",
+    paymentMethodPix: "Pix",
+    paymentMethodCard: "Card",
+    paymentMethodCash: "Cash",
+    reportIssueNoActiveProducts: "There is no active product for customers to choose.",
+    reportIssueProductNoPrice: "There is an active product without a valid price.",
+    exportReport: "Download report data",
+    clearMetrics: "Clear report data",
     systemTitle: "Backup and maintenance",
     systemSubtitle: "Download a backup, restore data, or clean this device safely.",
     resetSystem: "Clear this device data",
@@ -1286,8 +1450,8 @@
     cloudSyncDone: "Online data loaded into the panel.",
     cloudMigrationDone: "Changes published to the online menu.",
     cloudMigrationRealtimeDone: "Changes published to the online menu.",
-    savedAndPublishedOnline: "Changes saved and published online.",
-    savedLocallyPublishFailed: "Changes were saved in the panel, but not published online.",
+    savedAndPublishedOnline: "Changes were saved in this browser and published to the online menu.",
+    savedLocallyPublishFailed: "Changes were saved in this browser, but not published to everyone.",
     requiredField: "Fill in the required fields.",
     invalidBackup: "The backup could not be read. Choose a valid file.",
     invalidCloudInterval: "Enter a valid check interval.",
@@ -1355,6 +1519,9 @@
       selectedOnly: false,
       availableOnly: false,
     },
+    onlineReportData: null,
+    onlineReportsLoading: false,
+    onlineReportsError: "",
     cloudMonitorId: null,
     adminStatusTimer: null,
     adminStatusSignature: "",
@@ -1673,6 +1840,117 @@
   function isOnlineAdminMode() {
     const cloud = getCloudConfig();
     return Boolean(cloud?.enabled && system?.isSupabaseConfigured(cloud));
+  }
+
+  function ensureCloudActionReady() {
+    if (!isOnlineAdminMode()) {
+      showStatus(t("cloudActionUnavailable"), "warn");
+      return false;
+    }
+
+    if (!isAdminAuthenticated()) {
+      stopCloudMonitor();
+      renderAuth();
+      showStatus(t("cloudActionLoginRequired"), "warn");
+      return false;
+    }
+
+    return true;
+  }
+
+  function canUseOnlineReports() {
+    return Boolean(
+      isOnlineAdminMode()
+      && isAdminAuthenticated()
+      && typeof system?.loadOnlineReportData === "function"
+    );
+  }
+
+  function reportSourceMessage() {
+    if (!canUseOnlineReports()) {
+      return t("reportsLocalOnly");
+    }
+    if (state?.onlineReportsLoading) {
+      return t("reportsOnlineLoading");
+    }
+    if (state?.onlineReportData) {
+      return t("reportsOnlineActive");
+    }
+    if (state?.onlineReportsError) {
+      return t("reportsOnlineFallback");
+    }
+    return t("reportsOnlineLoading");
+  }
+
+  function currentReportData(limit) {
+    const status = system?.getSystemStatus();
+    const online = state?.onlineReportData;
+    const topLimit = limit || 5;
+
+    if (online) {
+      return {
+        source: "online",
+        status,
+        summary: online?.summary || {},
+        topAdded: (online?.topAdded || []).slice(0, topLimit),
+        topViewed: (online?.topViewed || []).slice(0, topLimit),
+        topPayments: (online?.paymentChoices || []).slice(0, topLimit),
+        topServices: (online?.serviceChoices || []).slice(0, topLimit),
+        topSearchNoResults: (online?.searchesWithNoResult || []).slice(0, topLimit),
+      };
+    }
+
+    return {
+      source: "local",
+      status,
+      summary: system?.getReportSummary?.() || {},
+      topAdded: system?.getTopAdded(topLimit) || [],
+      topViewed: system?.getTopViewed(topLimit) || [],
+      topPayments: system?.getTopPaymentChoices?.(topLimit) || [],
+      topServices: system?.getTopServiceChoices?.(topLimit) || [],
+      topSearchNoResults: system?.getTopSearchNoResults?.(topLimit) || [],
+    };
+  }
+
+  function loadOnlineReportsForActiveTab(force) {
+    if (state?.activeTab !== "reports") {
+      return;
+    }
+
+    if (!canUseOnlineReports()) {
+      state.onlineReportData = null;
+      state.onlineReportsLoading = false;
+      state.onlineReportsError = "";
+      return;
+    }
+
+    if (state?.onlineReportsLoading) {
+      return;
+    }
+
+    if (!force && (state?.onlineReportData || state?.onlineReportsError)) {
+      return;
+    }
+
+    state.onlineReportsLoading = true;
+    state.onlineReportsError = "";
+
+    system?.loadOnlineReportData?.(2000)
+      ?.then(function (data) {
+        state.onlineReportData = data || null;
+        state.onlineReportsError = "";
+      })
+      ?.catch(function (error) {
+        state.onlineReportData = null;
+        state.onlineReportsError = error?.message || String(error);
+        console.warn("Falha ao carregar métricas online; usando fallback local.", error);
+      })
+      ?.finally(function () {
+        state.onlineReportsLoading = false;
+        if (state?.activeTab === "reports") {
+          renderDashboard();
+        }
+      });
   }
 
   function isAdminAuthenticated() {
@@ -2999,6 +3277,7 @@
     updateProductSyncNotice();
     restartCloudMonitor();
     keepActiveTabVisible(previousTabsScrollLeft);
+    loadOnlineReportsForActiveTab(false);
   }
 
   function renderPanel(id, content) {
@@ -3549,7 +3828,7 @@
         id: "productMobileSaveBar",
         formId: "productForm",
         topHref: "#admin-products-top",
-        submitLabel: isEditingExisting ? t("saveProduct") : t("createProduct"),
+        submitLabel: t("saveProduct"),
       })
     );
   }
@@ -3911,7 +4190,6 @@
       '<span class="admin-combo-products-counter">' + escapeHtml(comboSelectedCountText(selectedCount)) + "</span>" +
       '<div class="admin-combo-products-actions">' +
       '<button type="button" class="botao botao-secundario admin-combo-products-action" data-combo-product-action="clear-selection"' + (selectedCount ? "" : " disabled") + ">" + escapeHtml(t("comboClearSelection")) + "</button>" +
-      '<button type="button" class="botao botao-secundario admin-combo-products-action" data-combo-product-action="toggle-selected">' + escapeHtml(selectedOnly ? t("comboShowAllProducts") : t("comboShowSelected")) + "</button>" +
       '<button type="button" class="botao botao-secundario admin-combo-products-action" data-combo-product-action="select-category"' + (categorySelected ? "" : " disabled") + ">" + escapeHtml(t("comboSelectCategory")) + "</button>" +
       "</div>" +
       "</div>" +
@@ -3924,9 +4202,12 @@
       "<span>" + escapeHtml(t("comboProductCategory")) + "</span>" +
       '<select id="comboProductCategory">' + renderComboProductCategoryOptions(products) + "</select>" +
       "</label>" +
-      '<label class="checkbox-linha admin-check admin-combo-filter-check">' +
-      '<input type="checkbox" id="comboProductSelectedOnly"' + (selectedOnly ? " checked" : "") + ">" +
-      "<span>" + escapeHtml(t("comboProductSelectedOnly")) + "</span>" +
+      '<label class="admin-combo-product-filter admin-combo-product-view" for="comboProductView">' +
+      "<span>" + escapeHtml(t("comboProductView")) + "</span>" +
+      '<select id="comboProductView">' +
+      '<option value="all"' + (selectedOnly ? "" : " selected") + ">" + escapeHtml(t("comboProductViewAll")) + "</option>" +
+      '<option value="selected"' + (selectedOnly ? " selected" : "") + ">" + escapeHtml(t("comboProductViewSelected")) + "</option>" +
+      "</select>" +
       "</label>" +
       '<label class="checkbox-linha admin-check admin-combo-filter-check">' +
       '<input type="checkbox" id="comboProductAvailableOnly"' + (availableOnly ? " checked" : "") + ">" +
@@ -4128,11 +4409,6 @@
   function handleComboProductAction(action) {
     const products = getMenuState()?.products || [];
 
-    if (action === "toggle-selected") {
-      updateComboProductFilter("selectedOnly", !Boolean(state?.comboProductFilters?.selectedOnly));
-      return;
-    }
-
     if (action === "clear-selection") {
       const draft = getComboFormDraftForMutation();
       products.forEach(function (product) {
@@ -4152,7 +4428,7 @@
       const draft = getComboFormDraftForMutation();
       products
         .filter(function (product) {
-          return product?.category === category && comboProductIsAvailable(product);
+          return (product?.category || "__uncategorized") === category && comboProductIsAvailable(product);
         })
         .forEach(function (product) {
           setComboProductDraftChecked(draft, product, true);
@@ -4525,6 +4801,7 @@
     const pix = config?.pix || {};
     const delivery = config?.delivery || {};
     const appearance = config?.appearance || {};
+    const legal = config?.legal || {};
     const schedule = Array.isArray(config?.schedule) ? config?.schedule : [];
 
     return renderPanel(
@@ -4626,6 +4903,40 @@
           }), config?.i18n?.defaultLocale || "pt-BR")
         ),
         "settings-operation"
+      ) +
+      settingsSection(
+        t("sectionPolicies"),
+        t("sectionPoliciesHelp"),
+        '<div class="admin-split">' +
+        settingsCheckbox("legalShowPrivacyPolicy", t("legalShowPrivacyPolicy"), legal?.showPrivacyPolicy !== false) +
+        settingsCheckbox("legalShowTermsOfUse", t("legalShowTermsOfUse"), legal?.showTermsOfUse !== false) +
+        "</div>" +
+        '<div class="admin-split">' +
+        settingsInput("legalBusinessName", t("legalBusinessName"), legal?.businessName || "", "text", null, null, textValue(brand?.name, "pt-BR")) +
+        settingsInput("legalBusinessNameEn", t("legalBusinessNameEn"), legal?.businessNameEn || "", "text", null, null, textValue(brand?.name, "en-US")) +
+        "</div>" +
+        '<div class="admin-split">' +
+        settingsInput("legalContactEmail", t("legalContactEmail"), legal?.contactEmail || "", "email") +
+        settingsInput("legalContactPhone", t("legalContactPhone"), legal?.contactPhone || "", "tel") +
+        "</div>" +
+        settingsInput("legalBusinessAddress", t("legalBusinessAddress"), legal?.businessAddress || "", "text", null, null, location?.address || business.pickupAddress || "") +
+        '<div class="admin-split">' +
+        settingsInput("legalLastUpdated", t("legalLastUpdated"), legal?.lastUpdated || "", "date") +
+        settingsSelect("legalPrivacyMode", t("legalPrivacyMode"), [
+          { value: "internal", label: t("legalModeInternal") },
+          { value: "external", label: t("legalModeExternal") },
+        ], legal?.privacyPolicyMode || "internal") +
+        "</div>" +
+        settingsInput("legalPrivacyUrl", t("legalPrivacyUrl"), settingsExternalUrlValue(legal?.privacyPolicyUrl), "text", null, null, "https://...") +
+        '<div class="admin-split">' +
+        settingsSelect("legalTermsMode", t("legalTermsMode"), [
+          { value: "internal", label: t("legalModeInternal") },
+          { value: "external", label: t("legalModeExternal") },
+        ], legal?.termsOfUseMode || "internal") +
+        settingsInput("legalTermsUrl", t("legalTermsUrl"), settingsExternalUrlValue(legal?.termsOfUseUrl), "text", null, null, "https://...") +
+        "</div>" +
+        '<p class="admin-field-note">' + escapeHtml(t("legalExternalUrlHelp")) + "</p>",
+        "settings-policies"
       ) +
       settingsSection(
         t("deliveryLocationsTitle"),
@@ -4740,6 +5051,7 @@
     const links = [
       { href: "#settings-business", label: t("settingsQuickBrand") },
       { href: "#settings-operation", label: t("settingsQuickOperation") },
+      { href: "#settings-policies", label: t("settingsQuickPolicies") },
       { href: "#settings-delivery-locations", label: t("settingsQuickDeliveryLocations") },
       { href: "#settings-location", label: t("settingsQuickLocation") },
       { href: "#settings-appearance", label: t("settingsQuickAppearance") },
@@ -4962,6 +5274,10 @@
       return { target: "#settings-operation", message: t("pixChanged") };
     }
 
+    if (/^legal/.test(name)) {
+      return { target: "#settings-policies", message: t("legalChanged") };
+    }
+
     if (/^deliveryLocationActive-/.test(name)) {
       return {
         target: field?.closest?.("[data-delivery-location-row]") || "#settings-delivery-locations",
@@ -5038,6 +5354,21 @@
       '<textarea name="' + escapeHtml(name) + '"' + (placeholder ? ' placeholder="' + escapeHtml(placeholder) + '"' : "") + '>' + escapeHtml(resolvedValue || "") + "</textarea>" +
       "</label>"
     );
+  }
+
+  function settingsCheckbox(name, label, checked) {
+    const resolvedChecked = currentDraftFieldChecked(name, Boolean(checked));
+    return (
+      '<label class="checkbox-linha admin-check admin-policy-check">' +
+      '<input type="checkbox" name="' + escapeHtml(name) + '" ' + (resolvedChecked ? "checked" : "") + '>' +
+      "<span>" + escapeHtml(label) + "</span>" +
+      "</label>"
+    );
+  }
+
+  function settingsExternalUrlValue(value) {
+    const url = String(value || "")?.trim();
+    return url?.startsWith("#") ? "" : url;
   }
 
   function settingsSection(title, help, content, id) {
@@ -5162,11 +5493,14 @@
     const cloud = state?.states?.cloudConfig || {};
     const cloudRealtime = currentDraftFieldChecked("cloudRealtime", Boolean(cloud?.realtime));
     const autoReconnect = currentDraftFieldChecked("autoReconnect", cloud?.autoReconnect !== false);
+    const cloudActionsAvailable = isOnlineAdminMode();
+    const cloudModeClass = cloudActionsAvailable ? " admin-cloud-mode-notice--online" : " admin-cloud-mode-notice--offline";
     return renderPanel(
       "cloud",
       '<article class="admin-card admin-card-wide">' +
       '<h2>' + escapeHtml(t("cloudTitle")) + '</h2>' +
       '<p class="admin-note">' + escapeHtml(t("cloudSubtitle")) + '</p>' +
+      '<p class="admin-cloud-mode-notice' + cloudModeClass + '">' + escapeHtml(t(cloudActionsAvailable ? "cloudModeOnline" : "cloudModeOffline")) + '</p>' +
       '<div class="admin-grid admin-cloud-grid">' +
       '<div class="admin-card admin-cloud-card admin-cloud-card--status">' +
       '<h2>' + escapeHtml(t("cloudStatus")) + '</h2>' +
@@ -5175,11 +5509,11 @@
       '</div>' +
       '<div class="admin-card admin-card-wide admin-cloud-card admin-cloud-card--actions">' +
       '<div class="admin-cloud-primary-grid">' +
-      cloudActionCard("adminMigrateCloudBtn", t("migrateToCloud"), t("cloudPublishHelp"), true) +
-      cloudActionCard("adminSyncCloudBtn", t("syncToLocal"), t("cloudLoadHelp"), false) +
-      cloudActionCard("adminCheckCloudBtn", t("checkConnection"), t("cloudCheckHelp"), false) +
-      cloudActionCard("adminCheckAuthBtn", t("cloudCheckAuth"), t("authOnlineDescription"), false) +
-      cloudActionCard("adminCheckStorageBtn", t("cloudCheckStorage"), t("imageUploadPublishError"), false) +
+      cloudActionCard("adminMigrateCloudBtn", t("migrateToCloud"), t("cloudPublishHelp"), true, { disabled: !cloudActionsAvailable }) +
+      cloudActionCard("adminSyncCloudBtn", t("syncToLocal"), t("cloudLoadHelp"), false, { disabled: !cloudActionsAvailable }) +
+      cloudActionCard("adminCheckCloudBtn", t("checkConnection"), t("cloudCheckHelp"), false, { disabled: !cloudActionsAvailable }) +
+      cloudActionCard("adminCheckAuthBtn", t("cloudCheckAuth"), t("authOnlineDescription"), false, { disabled: !cloudActionsAvailable }) +
+      cloudActionCard("adminCheckStorageBtn", t("cloudCheckStorage"), t("imageUploadPublishError"), false, { disabled: !cloudActionsAvailable }) +
       '</div>' +
       '<form id="cloudForm" class="admin-form admin-cloud-form">' +
       '<p class="admin-note">' + escapeHtml(t("cloudOperationalHelp")) + '</p>' +
@@ -5212,12 +5546,14 @@
     }
   }
 
-  function cloudActionCard(buttonId, title, help, primary) {
+  function cloudActionCard(buttonId, title, help, primary, options) {
+    const disabled = Boolean(options?.disabled);
     return (
-      '<article class="admin-cloud-action-item' + (primary ? " admin-cloud-action-item--primary" : "") + '">' +
+      '<article class="admin-cloud-action-item' + (primary ? " admin-cloud-action-item--primary" : "") + (disabled ? " admin-cloud-action-item--disabled" : "") + '">' +
       "<h3>" + escapeHtml(title) + "</h3>" +
       '<p class="admin-note">' + escapeHtml(help) + "</p>" +
-      '<button type="button" id="' + escapeHtml(buttonId) + '" class="botao ' + (primary ? "botao-principal" : "botao-secundario") + '">' +
+      (disabled ? '<p class="admin-cloud-action-disabled-note">' + escapeHtml(t("cloudActionUnavailable")) + "</p>" : "") +
+      '<button type="button" id="' + escapeHtml(buttonId) + '" class="botao ' + (primary ? "botao-principal" : "botao-secundario") + '"' + (disabled ? ' disabled aria-disabled="true"' : "") + '>' +
       escapeHtml(title) +
       "</button>" +
       "</article>"
@@ -5247,6 +5583,7 @@
       cloudSummaryRow(t("cloudAddOns"), cloud?.tables?.addOns || "-", { mono: true }) +
       cloudSummaryRow(t("cloudProductAddOns"), cloud?.tables?.productAddOns || "-", { mono: true }) +
       cloudSummaryRow(t("cloudSettingsTable"), cloud?.tables?.settings || "-", { mono: true }) +
+      cloudSummaryRow(t("cloudMetricEventsTable"), cloud?.tables?.metricEvents || "menu_metric_events", { mono: true }) +
       cloudSummaryRow(t("cloudStorageBucket"), cloud?.storage?.bucket || "-", { mono: true }) +
       '</div>' +
       '</div>'
@@ -5266,21 +5603,28 @@
   }
 
   function renderReportsPanel() {
-    const status = system?.getSystemStatus();
-    const topAdded = system?.getTopAdded(5);
-    const topViewed = system?.getTopViewed(5);
+    const reportData = currentReportData(5);
+    const status = reportData?.status;
+    const summary = reportData?.summary || {};
+    const topAdded = reportData?.topAdded || [];
+    const topViewed = reportData?.topViewed || [];
+    const topPayments = reportData?.topPayments || [];
+    const topServices = reportData?.topServices || [];
+    const topSearchNoResults = reportData?.topSearchNoResults || [];
+    const setupIssues = buildReportSetupIssues(status);
 
     return renderPanel(
       "reports",
-      '<div class="admin-panels-grid">' +
-      '<article class="admin-card">' +
+      '<div class="admin-panels-grid admin-reports-grid">' +
+      '<article class="admin-card admin-card-wide admin-reports-overview">' +
       "<h2>" + escapeHtml(t("reportsTitle")) + "</h2>" +
       '<p class="admin-note">' + escapeHtml(t("reportsSubtitle")) + "</p>" +
+      '<p class="admin-note">' + escapeHtml(reportSourceMessage()) + "</p>" +
       '<div class="admin-metric-grid">' +
-      metricCard(t("totalProducts"), String(status?.counts?.products || 0)) +
-      metricCard(t("totalCategories"), String(status?.counts?.categories || 0)) +
-      metricCard(t("totalAddOns"), String(status?.counts?.addOns || 0)) +
-      metricCard(t("systemHealth"), status?.health === "healthy" ? t("healthy") : t("corrupted")) +
+      metricCard(t("productsSeen"), String(summary?.productsViewed || 0), t("productsSeenHelp")) +
+      metricCard(t("productsAdded"), String(summary?.productsAdded || 0), t("productsAddedHelp")) +
+      metricCard(t("checkoutOpened"), String(summary?.checkoutOpened || 0), t("checkoutOpenedHelp")) +
+      metricCard(t("ordersPrepared"), String(summary?.orderPrepared || 0), t("ordersPreparedHelp")) +
       "</div>" +
       '<div class="admin-actions-row">' +
       '<button type="button" id="adminExportReportBtn" class="botao botao-principal">' + escapeHtml(t("exportReport")) + "</button>" +
@@ -5295,21 +5639,47 @@
       "<h2>" + escapeHtml(t("topViewed")) + "</h2>" +
       renderMetricList(topViewed) +
       "</article>" +
+      '<article class="admin-card">' +
+      "<h2>" + escapeHtml(t("serviceChoices")) + "</h2>" +
+      renderChoiceMetricList(topServices, reportServiceChoiceLabel, "noMetrics") +
+      "</article>" +
+      '<article class="admin-card">' +
+      "<h2>" + escapeHtml(t("paymentChoices")) + "</h2>" +
+      renderChoiceMetricList(topPayments, reportPaymentChoiceLabel, "noMetrics") +
+      "</article>" +
+      '<article class="admin-card">' +
+      "<h2>" + escapeHtml(t("searchNoResults")) + "</h2>" +
+      renderChoiceMetricList(topSearchNoResults, reportSearchLabel, "noSearchNoResults") +
+      "</article>" +
+      '<article class="admin-card">' +
+      "<h2>" + escapeHtml(t("systemHealth")) + "</h2>" +
+      '<div class="admin-metric-grid admin-metric-grid--compact">' +
+      metricCard(t("totalProducts"), String(status?.counts?.products || 0)) +
+      metricCard(t("totalCategories"), String(status?.counts?.categories || 0)) +
+      metricCard(t("totalAddOns"), String(status?.counts?.addOns || 0)) +
+      "</div>" +
+      "</article>" +
       '<article class="admin-card admin-card-wide">' +
-      "<h2>" + escapeHtml(t("issuesDetected")) + "</h2>" +
-      renderIssueList(status?.issues || []) +
+      "<h2>" + escapeHtml(t("reportSetupTitle")) + "</h2>" +
+      renderIssueList(setupIssues) +
       "</article>" +
       "</div>"
     );
   }
 
-  function metricCard(label, value) {
+  function metricCard(label, value, note) {
     return (
       '<article class="admin-metric-card">' +
       '<p class="admin-note">' + escapeHtml(label) + "</p>" +
       "<strong>" + escapeHtml(value) + "</strong>" +
+      (note ? '<span class="admin-metric-help">' + escapeHtml(note) + "</span>" : "") +
       "</article>"
     );
+  }
+
+  function reportCount(count) {
+    const value = Number(count || 0);
+    return t(value === 1 ? "reportCountOne" : "reportCountOther", { count: value });
   }
 
   function renderMetricList(items) {
@@ -5321,16 +5691,83 @@
       '<ul class="admin-simple-list">' +
       items
         ?.map(function (item) {
-          return '<li><strong>' + escapeHtml(productName(item?.product) || item?.productId || "-") + "</strong><span>" + escapeHtml(String(item?.count)) + "</span></li>";
+          return '<li><strong>' + escapeHtml(productName(item?.product) || item?.productId || "-") + "</strong><span>" + escapeHtml(reportCount(item?.count)) + "</span></li>";
         })
         ?.join("") +
       "</ul>"
     );
   }
 
+  function renderChoiceMetricList(items, labeler, emptyKey) {
+    if (!items?.length) {
+      return '<p class="admin-note">' + escapeHtml(t(emptyKey || "noMetrics")) + "</p>";
+    }
+
+    return (
+      '<ul class="admin-simple-list">' +
+      items
+        ?.map(function (item) {
+          return '<li><strong>' + escapeHtml(labeler(item?.value)) + "</strong><span>" + escapeHtml(reportCount(item?.count)) + "</span></li>";
+        })
+        ?.join("") +
+      "</ul>"
+    );
+  }
+
+  function reportPaymentChoiceLabel(value) {
+    if (value === "pix") {
+      return t("paymentMethodPix");
+    }
+    if (value === "card") {
+      return t("paymentMethodCard");
+    }
+    if (value === "cash") {
+      return t("paymentMethodCash");
+    }
+    return value || "-";
+  }
+
+  function reportServiceChoiceLabel(value) {
+    if (value === "delivery") {
+      return t("serviceChoiceDelivery");
+    }
+    if (value === "pickup") {
+      return t("serviceChoicePickup");
+    }
+    if (value === "dine_in") {
+      return t("serviceChoiceDineIn");
+    }
+    return value || "-";
+  }
+
+  function reportSearchLabel(value) {
+    return value || "-";
+  }
+
+  function buildReportSetupIssues(status) {
+    const menu = getMenuState();
+    const products = Array.isArray(menu?.products) ? menu.products : [];
+    const activeProducts = products?.filter(function (product) {
+      return normalizeProductStatus(product) === "active" && product?.available !== false;
+    });
+    const issues = [];
+
+    if (!activeProducts?.length) {
+      issues?.push(t("reportIssueNoActiveProducts"));
+    }
+
+    if (activeProducts?.some(function (product) {
+      return !Number.isFinite(Number(product?.price)) || Number(product?.price) <= 0;
+    })) {
+      issues?.push(t("reportIssueProductNoPrice"));
+    }
+
+    return issues?.concat(status?.issues || []);
+  }
+
   function renderIssueList(issues) {
     if (!issues?.length) {
-      return '<p class="admin-note">' + escapeHtml(t("noIssues")) + "</p>";
+      return '<p class="admin-note">' + escapeHtml(t("noSetupIssues")) + "</p>";
     }
 
     return (
@@ -5872,6 +6309,22 @@
         footerNote: serializeTranslations(formData?.get("footerNotePt"), formData?.get("footerNoteEn")),
         logoUrl: brandImage?.primaryImage || "",
       },
+      legal: {
+        ...(current?.legal || {}),
+        enabled: true,
+        businessName: String(formData?.get("legalBusinessName") || "")?.trim(),
+        businessNameEn: String(formData?.get("legalBusinessNameEn") || "")?.trim(),
+        contactEmail: String(formData?.get("legalContactEmail") || "")?.trim(),
+        contactPhone: String(formData?.get("legalContactPhone") || "")?.trim(),
+        businessAddress: String(formData?.get("legalBusinessAddress") || "")?.trim(),
+        lastUpdated: String(formData?.get("legalLastUpdated") || current?.legal?.lastUpdated || "")?.trim(),
+        showPrivacyPolicy: formData?.get("legalShowPrivacyPolicy") === "on",
+        showTermsOfUse: formData?.get("legalShowTermsOfUse") === "on",
+        privacyPolicyMode: String(formData?.get("legalPrivacyMode") || "internal") === "external" ? "external" : "internal",
+        termsOfUseMode: String(formData?.get("legalTermsMode") || "internal") === "external" ? "external" : "internal",
+        privacyPolicyUrl: String(formData?.get("legalPrivacyUrl") || "")?.trim(),
+        termsOfUseUrl: String(formData?.get("legalTermsUrl") || "")?.trim(),
+      },
       destaqueInicial: {
         ...(current?.destaqueInicial || current?.hero || {}),
         kicker: serializeTranslations(formData?.get("destaqueChamadaPt"), formData?.get("destaqueChamadaEn")),
@@ -5938,14 +6391,32 @@
     };
   }
 
-  function exportReport() {
+  async function exportReport() {
+    if (canUseOnlineReports() && !state?.onlineReportData) {
+      try {
+        state.onlineReportData = await system?.loadOnlineReportData?.(2000);
+        state.onlineReportsError = "";
+      } catch (error) {
+        state.onlineReportData = null;
+        state.onlineReportsError = error?.message || String(error);
+        console.warn("Falha ao carregar métricas online para exportação; exportando fallback local.", error);
+      }
+    }
+
+    const reportData = currentReportData(10);
+    const status = reportData?.status;
     const report = {
       exportedAt: new Date()?.toISOString(),
-      systemStatus: system?.getSystemStatus(),
-      cloudConfig: state?.states?.cloudConfig,
-      topAdded: system?.getTopAdded(10),
-      topViewed: system?.getTopViewed(10),
-      metrics: system?.getMetrics(),
+      source: reportData?.source || "local",
+      summary: reportData?.summary || {},
+      catalog: status?.counts,
+      setupIssues: buildReportSetupIssues(status),
+      topAdded: reportData?.topAdded || [],
+      topViewed: reportData?.topViewed || [],
+      paymentChoices: reportData?.topPayments || [],
+      serviceChoices: reportData?.topServices || [],
+      searchesWithNoResult: reportData?.topSearchNoResults || [],
+      metrics: reportData?.source === "online" ? null : system?.getMetrics(),
     };
     system?.downloadJsonFile("relatorio-cardapio-" + Date?.now() + ".json", report);
     showStatus(t("reportExported"), "ok");
@@ -6193,6 +6664,9 @@
             clearAdminFormEditing("cloudForm");
             system?.setCloudConfig(nextCloud, { type: "cloud-update" });
             if (isOnlineAdminMode()) {
+              if (!isAdminAuthenticated()) {
+                throw new Error(t("cloudActionLoginRequired"));
+              }
               await system?.saveCloudOperationalSettings?.(nextCloud);
               await system?.syncCloudToLocal?.();
               refreshStates();
@@ -6332,8 +6806,8 @@
         return;
       }
 
-      if (event?.target?.id === "comboProductSelectedOnly") {
-        updateComboProductFilter("selectedOnly", Boolean(event?.target?.checked));
+      if (event?.target?.id === "comboProductView") {
+        updateComboProductFilter("selectedOnly", String(event?.target?.value || "all") === "selected");
         return;
       }
 
@@ -6490,6 +6964,10 @@
       if (button?.dataset?.adminTab) {
         const tabsScrollLeft = getTabsScrollLeft();
         state.activeTab = button?.dataset?.adminTab;
+        if (state?.activeTab === "reports") {
+          state.onlineReportData = null;
+          state.onlineReportsError = "";
+        }
         clearStatus();
         renderDashboard({ tabsScrollLeft: tabsScrollLeft });
         return;
@@ -6703,6 +7181,9 @@
       }
 
       if (button?.id === "adminCheckCloudBtn") {
+        if (!ensureCloudActionReady()) {
+          return;
+        }
         handleAsyncButton(button, t("actionInProgress"), function () {
           return system?.checkCloudConnection()?.then(function (result) {
             refreshAndRenderAfterRemote({ type: "cloud-status" });
@@ -6717,6 +7198,9 @@
       }
 
       if (button?.id === "adminCheckAuthBtn") {
+        if (!ensureCloudActionReady()) {
+          return;
+        }
         handleAsyncButton(button, t("actionInProgress"), function () {
           return auth?.verifySupabaseSession?.(getCloudConfig())?.then(function () {
             showStatus(t("cloudAuthOk"), "ok");
@@ -6726,6 +7210,9 @@
       }
 
       if (button?.id === "adminCheckStorageBtn") {
+        if (!ensureCloudActionReady()) {
+          return;
+        }
         handleAsyncButton(button, t("actionInProgress"), function () {
           return system?.checkCloudStorage?.()?.then(function () {
             showStatus(t("cloudStorageOk"), "ok");
@@ -6735,6 +7222,9 @@
       }
 
       if (button?.id === "adminMigrateCloudBtn") {
+        if (!ensureCloudActionReady()) {
+          return;
+        }
         if (guardCloudActionWhileEditing()) {
           return;
         }
@@ -6760,6 +7250,9 @@
       }
 
       if (button?.id === "adminSyncCloudBtn") {
+        if (!ensureCloudActionReady()) {
+          return;
+        }
         if (guardCloudActionWhileEditing({ deferOperation: "sync-cloud-to-local" })) {
           return;
         }
@@ -6781,14 +7274,34 @@
       }
 
       if (button?.id === "adminExportReportBtn") {
-        exportReport();
+        handleAsyncButton(button, t("actionInProgress"), function () {
+          return exportReport();
+        });
         return;
       }
 
       if (button?.id === "adminClearMetricsBtn") {
-        system?.clearMetrics();
-        renderDashboard();
-        showStatus(t("metricsCleared"), "ok");
+        handleAsyncButton(button, t("actionInProgress"), async function () {
+          let onlineWarning = false;
+          system?.clearMetrics();
+
+          if (canUseOnlineReports() && typeof system?.clearOnlineMetrics === "function") {
+            try {
+              await system?.clearOnlineMetrics?.();
+            } catch (error) {
+              onlineWarning = true;
+              state.onlineReportsError = error?.message || String(error);
+              console.warn("Falha ao limpar métricas online.", error);
+            }
+          }
+
+          state.onlineReportData = null;
+          if (!onlineWarning) {
+            state.onlineReportsError = "";
+          }
+          renderDashboard();
+          showStatus(onlineWarning ? t("reportClearOnlineWarning") : t("metricsCleared"), onlineWarning ? "warn" : "ok");
+        });
         return;
       }
 
