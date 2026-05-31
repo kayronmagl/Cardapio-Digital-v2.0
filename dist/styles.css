@@ -16767,8 +16767,7 @@ body.admin-page .admin-mobile-form-save-bar {
 
   body.admin-page [data-admin-tab-panel="products"] .admin-products-form-card,
   body.admin-page [data-admin-tab-panel="categories"] #admin-categories-top,
-  body.admin-page [data-admin-tab-panel="addOns"] #admin-add-ons-top,
-  body.admin-page [data-admin-tab-panel="offers"] #admin-offers-top {
+  body.admin-page [data-admin-tab-panel="addOns"] #admin-add-ons-top {
     padding-bottom: calc(5.8rem + env(safe-area-inset-bottom));
   }
 }
