@@ -3361,6 +3361,14 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 }
 
 .admin-page {
+  --admin-mobile-save-bottom-gap: 0.5rem;
+  --admin-mobile-save-content-gap: 0.5rem;
+  --admin-mobile-save-bar-height: 54px;
+  --admin-mobile-save-clearance: calc(
+    var(--admin-mobile-save-bar-height) +
+    var(--admin-mobile-save-bottom-gap) +
+    var(--admin-mobile-save-content-gap)
+  );
   min-height: 100vh;
 }
 
@@ -4061,14 +4069,6 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 .admin-settings-save-bar {
   --admin-settings-save-radius: 14px;
   --admin-settings-save-action-radius: 10px;
-  --admin-mobile-save-bottom-gap: 0.5rem;
-  --admin-mobile-save-content-gap: 0.5rem;
-  --admin-mobile-save-bar-height: 54px;
-  --admin-mobile-save-clearance: calc(
-    var(--admin-mobile-save-bar-height) +
-    var(--admin-mobile-save-bottom-gap) +
-    var(--admin-mobile-save-content-gap)
-  );
   position: fixed;
   z-index: 30;
   left: 50%;
@@ -14736,6 +14736,10 @@ body.admin-page .admin-form .admin-hours-time input {
 
 /* Admin v2.0 premium mobile settings save footer */
 @media (max-width: 768px) {
+  body.admin-page .admin-shell {
+    padding-bottom: calc(var(--admin-mobile-save-clearance) + env(safe-area-inset-bottom, 0px));
+  }
+
   body.admin-page [data-admin-tab-panel="settings"] .admin-settings-form {
     padding-bottom: calc(var(--admin-mobile-save-clearance) + env(safe-area-inset-bottom, 0px));
   }
