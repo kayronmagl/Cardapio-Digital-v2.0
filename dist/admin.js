@@ -3824,14 +3824,13 @@
       '<button type="button" id="cancelProductEdit" class="botao botao-secundario"' + (canCancelDraft ? "" : " hidden") + ">" + escapeHtml(t("cancelEdit")) + "</button>" +
       "</div>" +
       "</form>" +
-      (isEditingExisting
-        ? renderAdminMobileSaveBar({
-          id: "productMobileSaveBar",
-          formId: "productForm",
-          topHref: "#admin-products-top",
-          submitLabel: t("saveProduct"),
-        })
-        : "")
+      renderAdminMobileSaveBar({
+        id: "productMobileSaveBar",
+        formId: "productForm",
+        topHref: "#admin-products-top",
+        submitLabel: t("saveProduct"),
+        disabled: !isEditingExisting,
+      })
     );
   }
 
@@ -3933,14 +3932,13 @@
       '<button type="button" id="cancelCategoryEdit" class="botao botao-secundario"' + (canCancel ? "" : " hidden") + ">" + escapeHtml(t("cancelEdit")) + "</button>" +
       "</div>" +
       "</form>" +
-      (category
-        ? renderAdminMobileSaveBar({
-          id: "categoryMobileSaveBar",
-          formId: "categoryForm",
-          topHref: "#admin-categories-top",
-          submitLabel: t("saveCategory"),
-        })
-        : "")
+      renderAdminMobileSaveBar({
+        id: "categoryMobileSaveBar",
+        formId: "categoryForm",
+        topHref: "#admin-categories-top",
+        submitLabel: t("saveCategory"),
+        disabled: !category,
+      })
     );
   }
 
@@ -4024,14 +4022,13 @@
       '<button type="button" id="cancelAddOnEdit" class="botao botao-secundario"' + (canCancel ? "" : " hidden") + ">" + escapeHtml(t("cancelEdit")) + "</button>" +
       "</div>" +
       "</form>" +
-      (addOn
-        ? renderAdminMobileSaveBar({
-          id: "addOnMobileSaveBar",
-          formId: "addOnForm",
-          topHref: "#admin-add-ons-top",
-          submitLabel: t("saveAddOn"),
-        })
-        : "")
+      renderAdminMobileSaveBar({
+        id: "addOnMobileSaveBar",
+        formId: "addOnForm",
+        topHref: "#admin-add-ons-top",
+        submitLabel: t("saveAddOn"),
+        disabled: !addOn,
+      })
     );
   }
 
@@ -4525,14 +4522,13 @@
       '<button type="button" id="cancelComboEdit" class="botao botao-secundario"' + (canCancel ? "" : " hidden") + ">" + escapeHtml(t("cancelEdit")) + "</button>" +
       "</div>" +
       "</form>" +
-      (combo
-        ? renderAdminMobileSaveBar({
-          id: "comboMobileSaveBar",
-          formId: "comboForm",
-          topHref: "#admin-offers-top",
-          submitLabel: t("saveCombo"),
-        })
-        : "")
+      renderAdminMobileSaveBar({
+        id: "comboMobileSaveBar",
+        formId: "comboForm",
+        topHref: "#admin-offers-top",
+        submitLabel: t("saveCombo"),
+        disabled: !combo,
+      })
     );
   }
 
@@ -5031,6 +5027,7 @@
   function renderAdminMobileSaveBar(options) {
     const formId = String(options?.formId || "");
     const dirty = isMobileFormSaveBarDirty(formId);
+    const disabled = Boolean(options?.disabled);
     return (
       '<div id="' + escapeHtml(options?.id || "") + '" class="admin-settings-save-bar admin-mobile-form-save-bar' +
       (dirty ? " admin-settings-save-bar--dirty" : "") +
@@ -5040,7 +5037,7 @@
       "</span>" +
       '<div class="admin-settings-save-bar__actions">' +
       '<a class="admin-section-top-link" href="' + escapeHtml(options?.topHref || "#adminDashboard") + '">' + escapeHtml(t("backToSettingsTop")) + "</a>" +
-      '<button type="submit" form="' + escapeHtml(formId) + '" class="botao botao-principal">' + escapeHtml(options?.submitLabel || t("saveSettings")) + "</button>" +
+      '<button type="submit" form="' + escapeHtml(formId) + '" class="botao botao-principal"' + (disabled ? ' disabled aria-disabled="true"' : "") + ">" + escapeHtml(options?.submitLabel || t("saveSettings")) + "</button>" +
       "</div>" +
       "</div>"
     );
