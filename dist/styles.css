@@ -4062,6 +4062,13 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   --admin-settings-save-radius: 14px;
   --admin-settings-save-action-radius: 10px;
   --admin-mobile-save-bottom-gap: 0.5rem;
+  --admin-mobile-save-content-gap: 0.5rem;
+  --admin-mobile-save-bar-height: 54px;
+  --admin-mobile-save-clearance: calc(
+    var(--admin-mobile-save-bar-height) +
+    var(--admin-mobile-save-bottom-gap) +
+    var(--admin-mobile-save-content-gap)
+  );
   position: fixed;
   z-index: 30;
   left: 50%;
@@ -12717,6 +12724,17 @@ body.admin-page .admin-auth-form {
   gap: 0.72rem;
 }
 
+body.admin-page {
+  --admin-mobile-save-bottom-gap: 0.5rem;
+  --admin-mobile-save-content-gap: 0.5rem;
+  --admin-mobile-save-bar-height: 54px;
+  --admin-mobile-save-clearance: calc(
+    var(--admin-mobile-save-bar-height) +
+    var(--admin-mobile-save-bottom-gap) +
+    var(--admin-mobile-save-content-gap)
+  );
+}
+
 @media (min-width: 1024px) {
   body.admin-page [data-admin-tab-panel="settings"] .admin-settings-nav {
     max-width: 42rem;
@@ -14719,7 +14737,31 @@ body.admin-page .admin-form .admin-hours-time input {
 /* Admin v2.0 premium mobile settings save footer */
 @media (max-width: 768px) {
   body.admin-page [data-admin-tab-panel="settings"] .admin-settings-form {
-    padding-bottom: calc(6.35rem + env(safe-area-inset-bottom));
+    padding-bottom: calc(var(--admin-mobile-save-clearance) + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.admin-page [data-admin-tab-panel="products"] .admin-products-workspace {
+    padding-bottom: calc(var(--admin-mobile-save-clearance) + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.admin-page [data-admin-tab-panel="categories"] .admin-workspace-grid {
+    padding-bottom: calc(var(--admin-mobile-save-clearance) + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.admin-page [data-admin-tab-panel="addOns"] .admin-workspace-grid {
+    padding-bottom: calc(var(--admin-mobile-save-clearance) + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.admin-page [data-admin-tab-panel="offers"] .admin-offers-panel {
+    padding-bottom: calc(var(--admin-mobile-save-clearance) + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.admin-page [data-admin-tab-panel="products"].admin-tab-panel:not(.oculto),
+  body.admin-page [data-admin-tab-panel="categories"].admin-tab-panel:not(.oculto),
+  body.admin-page [data-admin-tab-panel="addOns"].admin-tab-panel:not(.oculto),
+  body.admin-page [data-admin-tab-panel="offers"].admin-tab-panel:not(.oculto),
+  body.admin-page [data-admin-tab-panel="settings"].admin-tab-panel:not(.oculto) {
+    padding-bottom: 0;
   }
 
   body.admin-page .admin-settings-save-bar {
@@ -14806,6 +14848,10 @@ body.admin-page .admin-form .admin-hours-time input {
 }
 
 @media (max-width: 380px) {
+  body.admin-page {
+    --admin-mobile-save-bar-height: 48px;
+  }
+
   body.admin-page .admin-settings-save-bar {
     width: min(calc(100% - 0.72rem), 25rem);
     padding: 0.3rem;
@@ -16769,7 +16815,7 @@ body.admin-page .admin-mobile-form-save-bar {
   body.admin-page [data-admin-tab-panel="products"] .admin-products-form-card,
   body.admin-page [data-admin-tab-panel="categories"] #admin-categories-top,
   body.admin-page [data-admin-tab-panel="addOns"] #admin-add-ons-top {
-    padding-bottom: calc(5.8rem + env(safe-area-inset-bottom));
+    padding-bottom: clamp(0.76rem, 2.6vw, 0.98rem);
   }
 }
 
