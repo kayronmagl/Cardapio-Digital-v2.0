@@ -3935,7 +3935,7 @@
         id: "categoryMobileSaveBar",
         formId: "categoryForm",
         topHref: "#admin-categories-top",
-        submitLabel: category ? t("saveCategory") : t("createCategory"),
+        submitLabel: t("saveCategory"),
       })
     );
   }
@@ -4024,7 +4024,7 @@
         id: "addOnMobileSaveBar",
         formId: "addOnForm",
         topHref: "#admin-add-ons-top",
-        submitLabel: addOn ? t("saveAddOn") : t("createAddOn"),
+        submitLabel: t("saveAddOn"),
       })
     );
   }
