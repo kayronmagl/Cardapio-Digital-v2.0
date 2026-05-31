@@ -3824,12 +3824,14 @@
       '<button type="button" id="cancelProductEdit" class="botao botao-secundario"' + (canCancelDraft ? "" : " hidden") + ">" + escapeHtml(t("cancelEdit")) + "</button>" +
       "</div>" +
       "</form>" +
-      renderAdminMobileSaveBar({
-        id: "productMobileSaveBar",
-        formId: "productForm",
-        topHref: "#admin-products-top",
-        submitLabel: t("saveProduct"),
-      })
+      (isEditingExisting
+        ? renderAdminMobileSaveBar({
+          id: "productMobileSaveBar",
+          formId: "productForm",
+          topHref: "#admin-products-top",
+          submitLabel: t("saveProduct"),
+        })
+        : "")
     );
   }
 
@@ -3931,12 +3933,14 @@
       '<button type="button" id="cancelCategoryEdit" class="botao botao-secundario"' + (canCancel ? "" : " hidden") + ">" + escapeHtml(t("cancelEdit")) + "</button>" +
       "</div>" +
       "</form>" +
-      renderAdminMobileSaveBar({
-        id: "categoryMobileSaveBar",
-        formId: "categoryForm",
-        topHref: "#admin-categories-top",
-        submitLabel: t("saveCategory"),
-      })
+      (category
+        ? renderAdminMobileSaveBar({
+          id: "categoryMobileSaveBar",
+          formId: "categoryForm",
+          topHref: "#admin-categories-top",
+          submitLabel: t("saveCategory"),
+        })
+        : "")
     );
   }
 
@@ -4020,12 +4024,14 @@
       '<button type="button" id="cancelAddOnEdit" class="botao botao-secundario"' + (canCancel ? "" : " hidden") + ">" + escapeHtml(t("cancelEdit")) + "</button>" +
       "</div>" +
       "</form>" +
-      renderAdminMobileSaveBar({
-        id: "addOnMobileSaveBar",
-        formId: "addOnForm",
-        topHref: "#admin-add-ons-top",
-        submitLabel: t("saveAddOn"),
-      })
+      (addOn
+        ? renderAdminMobileSaveBar({
+          id: "addOnMobileSaveBar",
+          formId: "addOnForm",
+          topHref: "#admin-add-ons-top",
+          submitLabel: t("saveAddOn"),
+        })
+        : "")
     );
   }
 
@@ -4519,12 +4525,14 @@
       '<button type="button" id="cancelComboEdit" class="botao botao-secundario"' + (canCancel ? "" : " hidden") + ">" + escapeHtml(t("cancelEdit")) + "</button>" +
       "</div>" +
       "</form>" +
-      renderAdminMobileSaveBar({
-        id: "comboMobileSaveBar",
-        formId: "comboForm",
-        topHref: "#admin-offers-top",
-        submitLabel: t("saveCombo"),
-      })
+      (combo
+        ? renderAdminMobileSaveBar({
+          id: "comboMobileSaveBar",
+          formId: "comboForm",
+          topHref: "#admin-offers-top",
+          submitLabel: t("saveCombo"),
+        })
+        : "")
     );
   }
 
