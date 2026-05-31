@@ -4061,10 +4061,11 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 .admin-settings-save-bar {
   --admin-settings-save-radius: 14px;
   --admin-settings-save-action-radius: 10px;
+  --admin-mobile-save-bottom-gap: 0.5rem;
   position: fixed;
   z-index: 30;
   left: 50%;
-  bottom: max(0.55rem, env(safe-area-inset-bottom));
+  bottom: calc(env(safe-area-inset-bottom, 0px) + var(--admin-mobile-save-bottom-gap));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14725,7 +14726,7 @@ body.admin-page .admin-form .admin-hours-time input {
     --admin-settings-save-radius: 18px;
     --admin-settings-save-action-radius: 13px;
     isolation: isolate;
-    bottom: max(0.86rem, calc(env(safe-area-inset-bottom) + 0.22rem));
+    bottom: calc(env(safe-area-inset-bottom, 0px) + var(--admin-mobile-save-bottom-gap));
     width: min(calc(100% - 1rem), 26rem);
     max-width: calc(100% - 1rem);
     min-height: 54px;
