@@ -14801,6 +14801,10 @@ body.admin-page .admin-form .admin-hours-time input {
       0 0 0 3px color-mix(in srgb, var(--color-focus) 28%, transparent),
       inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 18%, transparent);
   }
+
+  body.admin-page [data-admin-tab-panel="offers"] #comboForm > .admin-actions-row {
+    display: none !important;
+  }
 }
 
 @media (max-width: 380px) {

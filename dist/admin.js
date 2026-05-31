@@ -4523,7 +4523,7 @@
         id: "comboMobileSaveBar",
         formId: "comboForm",
         topHref: "#admin-offers-top",
-        submitLabel: combo ? t("saveCombo") : t("createCombo"),
+        submitLabel: t("saveCombo"),
       })
     );
   }
