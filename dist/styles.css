@@ -14725,7 +14725,7 @@ body.admin-page .admin-form .admin-hours-time input {
     --admin-settings-save-radius: 18px;
     --admin-settings-save-action-radius: 13px;
     isolation: isolate;
-    bottom: max(0.64rem, env(safe-area-inset-bottom));
+    bottom: max(0.86rem, calc(env(safe-area-inset-bottom) + 0.22rem));
     width: min(calc(100% - 1rem), 26rem);
     max-width: calc(100% - 1rem);
     min-height: 54px;
