@@ -3508,6 +3508,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 
 .admin-tab-panel:not(.oculto) {
   animation: admin-fade-in 0.2s ease-out;
+  padding-bottom: clamp(0.8rem, 1.4vw, 1.15rem);
 }
 
 @keyframes admin-fade-in {
@@ -12444,6 +12445,18 @@ body.admin-page .admin-tab[aria-selected="true"] {
   box-shadow:
     0 8px 16px color-mix(in srgb, var(--color-shadow) 12%, transparent),
     inset 0 0 0 1px color-mix(in srgb, var(--color-accent-contrast) 16%, transparent);
+}
+
+@media (min-width: 901px) {
+  body.admin-page .admin-tabs {
+    gap: 0.42rem;
+    padding-block: 0.3rem 0.46rem;
+  }
+
+  body.admin-page .admin-tab {
+    min-height: 42px;
+    padding-bottom: 0.48rem;
+  }
 }
 
 body.admin-page .admin-fieldset {
