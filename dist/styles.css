@@ -14741,7 +14741,7 @@ body.admin-page .admin-form .admin-hours-time input {
   }
 
   body.admin-page [data-admin-tab-panel="settings"] .admin-settings-form {
-    padding-bottom: calc(var(--admin-mobile-save-clearance) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: 0;
   }
 
   body.admin-page [data-admin-tab-panel="products"] .admin-products-workspace {
@@ -17914,8 +17914,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
     padding-bottom: clamp(0.76rem, 2.6vw, 0.98rem);
   }
 
-  body.admin-page [data-admin-tab-panel="settings"] .admin-settings-section,
-  body.admin-page [data-admin-tab-panel="settings"] .admin-hours-fieldset {
+  body.admin-page [data-admin-tab-panel="settings"] .admin-settings-section {
     padding-bottom: clamp(0.76rem, 2.6vw, 0.98rem);
   }
 }
