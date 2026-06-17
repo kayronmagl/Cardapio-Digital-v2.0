@@ -18342,12 +18342,17 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
 
 @media (max-width: 600px) {
   .catalog-tools,
-  .menu-categorias,
   .grade-produtos,
   .produto-card {
     max-width: 100%;
     min-width: 0;
     overflow-x: clip;
+  }
+
+  .menu-categorias {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
   }
 
   .produto-card {
