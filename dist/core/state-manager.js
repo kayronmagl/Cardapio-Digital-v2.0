@@ -39,6 +39,7 @@
 
   const IMAGE_SOURCE_MAX_LENGTH = 2 * 1024 * 1024;
   const PRODUCT_IMAGE_BUCKET = "product-images";
+  const CURRENT_LOGO_URL = "./assets/NovaLogoTobias.png";
 
   const DEFAULT_BRAND = {
       "i18n": {
@@ -67,7 +68,7 @@
               "pt-BR": "Lanches, bebidas e sobremesas",
               "en-US": "Snacks, drinks, and desserts"
           },
-          "logoUrl": "./assets/logo-tobias-lanches-web.png",
+          "logoUrl": CURRENT_LOGO_URL,
           "footerNote": {
               "pt-BR": "",
               "en-US": ""
@@ -1904,6 +1905,15 @@
 
     return "";
   }
+  function normalizeBrandLogoUrl(value) {
+    const sanitized = sanitizeImageSource(value);
+    if (/^\.\/assets\/[^/]+\.png(?:[?#].*)?$/i.test(sanitized)
+      && sanitized !== CURRENT_LOGO_URL
+      && !/\/(?:favicon|apple-touch-icon)\.png(?:[?#].*)?$/i.test(sanitized)) {
+      return CURRENT_LOGO_URL;
+    }
+    return sanitized;
+  }
  // PRODUTOS | produto ativo marcador separa uma regra de produtos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveProductActiveFlag(product) {
     if (!product || typeof product !== "object") {
@@ -1946,7 +1956,7 @@
     next.brand = {
       name: ensureTranslations(source?.brand?.name, DEFAULT_BRAND?.brand?.name["pt-BR"]),
       subtitle: ensureTranslations(source?.brand?.subtitle, DEFAULT_BRAND?.brand?.subtitle["pt-BR"]),
-      logoUrl: sanitizeImageSource(source?.brand?.logoUrl),
+      logoUrl: normalizeBrandLogoUrl(source?.brand?.logoUrl),
       footerNote: ensureTranslations(source?.brand?.footerNote, ""),
     };
     const destaqueInicialSource = input?.destaqueInicial || input?.hero || source?.destaqueInicial || {};

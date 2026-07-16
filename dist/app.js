@@ -2055,7 +2055,7 @@
     const delivery = getBrandConfig()?.delivery || {};
     const pix = getBrandConfig()?.pix || {};
     const logoSite = $("logoSite");
-    const defaultLogoUrl = "./assets/logo-tobias-lanches-web.png";
+    const defaultLogoUrl = "./assets/NovaLogoTobias.png";
     const logoUrl = String(brand?.logoUrl || "")?.trim() || defaultLogoUrl;
     const brandName = textValue(brand?.name, currentLocale()) || t("businessNameFallback");
     const menuSubtitle = textValue(brand?.subtitle, currentLocale()) || t("menuSubtitleFallback");
