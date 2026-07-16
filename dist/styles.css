@@ -1,4 +1,5 @@
-﻿:root {
+/* BASE | Guarda cores, fontes, bordas e tamanhos principais. Quando uma variavel muda aqui, cardapio publico e Admin acompanham a mesma identidade visual. A logica base centraliza cores, fontes, limites e respiros para o resto do CSS reaproveitar o mesmo padrao sem repetir tudo. */
+:root {
   color-scheme: light;
   --color-primary: #d97706;
   --color-primary-hover: #b45309;
@@ -79,6 +80,7 @@
   --font-display: "Bebas Neue", sans-serif;
 }
 
+/* TEMA | Troca as variaveis para o modo escuro. A estrutura continua igual, mas fundo, texto, bordas e sombras mudam para leitura em fundo escuro. A logica do tema usa variaveis para trocar cores e contraste sem reescrever cada componente da interface. */
 [data-theme="dark"] {
   color-scheme: dark;
   --color-bg: #120f0d;
@@ -123,6 +125,7 @@
   --modal-shell-end: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg) 12%);
 }
 
+/* TEMA | Paletas rapidas mudam a cor principal sem redesenhar o layout. Isso permite adaptar o cardapio a marcas diferentes pelo Admin. A logica do tema usa variaveis para trocar cores e contraste sem reescrever cada componente da interface. */
 [data-palette="blue"] {
   --color-primary: #2563eb;
   --color-primary-hover: #1d4ed8;
@@ -179,6 +182,7 @@
   --color-accent-contrast: #17212d;
 }
 
+/* TEMA | Preset completo do Tobias Lanches. Ele combina fundo escuro, amarelo forte e contraste alto para deixar o cardapio publico pronto para essa marca. A logica do tema usa variaveis para trocar cores e contraste sem reescrever cada componente da interface. */
 [data-theme-preset="tobias-lanches"] {
   --color-primary: #ffc400;
   --color-primary-hover: #ffdc3d;
@@ -222,6 +226,7 @@
   --aviso-texto: #ffdc3d;
 }
 
+/* TEMA | Preset escuro premium. Ele muda a sensacao visual para algo mais elegante, mantendo textos, cards e botoes legiveis. A logica do tema usa variaveis para trocar cores e contraste sem reescrever cada componente da interface. */
 [data-theme-preset="dark-premium"] {
   --color-primary: #d4ad54;
   --color-primary-hover: #e1bf72;
@@ -254,6 +259,7 @@
   --aviso-texto: #d3a764;
 }
 
+/* TEMA | Preset claro e limpo. Ele deixa o cardapio mais leve para lojas que preferem fundo claro e cores menos pesadas. A logica do tema usa variaveis para trocar cores e contraste sem reescrever cada componente da interface. */
 [data-theme-preset="light-clean"] {
   --color-primary: #4f7892;
   --color-primary-hover: #3f647a;
@@ -808,12 +814,14 @@
 }
 
 
+/* BASE | Zera margens padrao do navegador e faz borda e padding entrarem no calculo do tamanho. Isso evita espacamentos estranhos entre navegadores diferentes. A logica base centraliza cores, fontes, limites e respiros para o resto do CSS reaproveitar o mesmo padrao sem repetir tudo. */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* BASE | Quando o HTML marca algo como hidden, essa regra forca o bloco a sumir de verdade da tela. A logica base centraliza cores, fontes, limites e respiros para o resto do CSS reaproveitar o mesmo padrao sem repetir tudo. */
 [hidden] {
   display: none !important;
 }
@@ -838,6 +846,7 @@ body {
   line-height: 1.65;
 }
 
+/* BASE | Cria o brilho de fundo da pagina sem atrapalhar cliques. Ele fica atras de tudo e acompanha o tema escolhido. A logica base centraliza cores, fontes, limites e respiros para o resto do CSS reaproveitar o mesmo padrao sem repetir tudo. */
 body::before {
   content: "";
   position: fixed;
@@ -850,10 +859,12 @@ body::before {
     linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 36%, var(--color-bg-alt) 100%);
 }
 
+/* MODAL | Trava a rolagem do fundo quando carrinho ou confirmacao estao abertos. Assim o usuario nao perde a posicao da pagina por acidente. A logica do modal cria uma camada por cima da pagina para focar em uma decisao, imagem ou aviso sem perder o contexto. */
 body.overlay-scroll-lock {
   overflow: hidden;
 }
 
+/* ACESSIBILIDADE | Se o usuario prefere menos movimento no sistema, as animacoes ficam quase instantaneas para deixar a navegacao mais confortavel. A logica de acessibilidade respeita foco, contraste e menos movimento para o usuario navegar com mais conforto. */
 @media (prefers-reduced-motion: reduce) {
 
   *,
@@ -897,6 +908,7 @@ img {
   max-width: 100%;
 }
 
+/* ACESSIBILIDADE | Link escondido para teclado. Ele aparece no foco e permite pular direto para o conteudo principal sem passar por todos os controles. A logica de acessibilidade respeita foco, contraste e menos movimento para o usuario navegar com mais conforto. */
 .skip-link {
   position: absolute;
   top: -48px;
@@ -922,6 +934,7 @@ img {
   outline-offset: 3px;
 }
 
+/* BASE | Camada visual de fundo. Ela cria profundidade no layout sem virar conteudo clicavel. A logica base centraliza cores, fontes, limites e respiros para o resto do CSS reaproveitar o mesmo padrao sem repetir tudo. */
 .fundo-animado {
   position: fixed;
   inset: 0;
@@ -932,6 +945,7 @@ img {
   pointer-events: none;
 }
 
+/* BASE | Limita a largura util da pagina e centraliza o conteudo. Assim o cardapio nao fica largo demais em telas grandes. A logica base centraliza cores, fontes, limites e respiros para o resto do CSS reaproveitar o mesmo padrao sem repetir tudo. */
 .layout-shell {
   width: min(calc(100% - clamp(1.2rem, 4vw, 3rem)), var(--layout-max));
   margin-inline: auto;
@@ -946,10 +960,12 @@ img {
     opacity: 0.55;
   }
 
+  /* CABECALHO | Organiza o topo publico com logo, nome da loja, idioma, acessibilidade e carrinho. E a primeira area que o usuario ve ao abrir o cardapio. A logica do cabecalho organiza marca, chamada e acoes principais para o usuario entender onde esta logo no topo. */
   .topo {
     padding: 1.8rem 0 1.25rem;
   }
 
+  /* CABECALHO | Agrupa os botoes do topo para eles ficarem alinhados e faceis de acessar em computador e celular. A logica do cabecalho organiza marca, chamada e acoes principais para o usuario entender onde esta logo no topo. */
   .topo-acoes {
     gap: 1rem;
   }
@@ -958,16 +974,19 @@ img {
     gap: 0.5rem;
   }
 
+  /* CATEGORIAS | Fila horizontal de categorias. Ela permite trocar o filtro do cardapio sem ocupar muita altura da tela. A logica das categorias cria filtros claros para o usuario trocar de grupo sem perder a referencia da lista. */
   .menu-categorias {
     margin-top: 0.9rem;
   }
 
+/* DESTAQUE | Junta chamada inicial e horarios em uma area forte do topo. Assim o usuario entende o status do estabelecimento antes de chegar aos produtos. A logica do destaque mostra status, chamada e informacoes rapidas antes da lista de produtos, preparando a decisao do usuario. */
   .topo-blocos {
     grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
     gap: 1.25rem;
     align-items: stretch;
   }
 
+  /* DESTAQUE | Cards grandes do inicio da pagina. Eles mostram promessa do atendimento, horarios e status da loja com visual de destaque. A logica do destaque mostra status, chamada e informacoes rapidas antes da lista de produtos, preparando a decisao do usuario. */
   .destaque-inicial,
   .painel-horario {
     background: linear-gradient(180deg, var(--superficie-elevada), var(--cinza-escuro));
@@ -1041,12 +1060,14 @@ img {
     margin-top: 0.75rem;
   }
 
+  /* PRODUTOS | Grade principal dos produtos. Ela encaixa os cards em colunas responsivas para aproveitar computador, tablet e celular. A logica dos produtos junta imagem, nome, preco, status e botao para cada item ser entendido antes de entrar no carrinho. */
   .grade-produtos {
     gap: 1.1rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     padding-bottom: 4.5rem;
   }
 
+  /* PRODUTOS | Card de produto visto no cardapio publico. Ele reune imagem, nome, descricao, preco, adicionais e botao de compra em um bloco so. A logica dos produtos junta imagem, nome, preco, status e botao para cada item ser entendido antes de entrar no carrinho. */
   .produto-card {
     padding: 1.35rem;
   }
@@ -1060,6 +1081,7 @@ img {
     font-size: 1.65rem;
   }
 
+  /* MODAL | Caixa central usada por carrinho e confirmacao. Ela limita largura, aplica fundo do tema e mantem o conteudo dentro da tela. A logica do modal cria uma camada por cima da pagina para focar em uma decisao, imagem ou aviso sem perder o contexto. */
   .caixa-centro {
     width: min(100%, 860px);
   }
@@ -1079,6 +1101,7 @@ img {
   }
 }
 
+/* ACESSIBILIDADE | Texto so para leitores de tela. Ele explica controles sem aparecer visualmente para quem esta olhando a interface. A logica de acessibilidade respeita foco, contraste e menos movimento para o usuario navegar com mais conforto. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1132,6 +1155,7 @@ img {
   border: 0;
 }
 
+/* CABECALHO | Moldura da logo da loja. Ela segura a imagem em tamanho previsivel para nao quebrar o alinhamento do topo. A logica do cabecalho organiza marca, chamada e acoes principais para o usuario entender onde esta logo no topo. */
 .caixa-logo {
   display: flex;
   align-items: center;
@@ -1198,6 +1222,7 @@ img {
   margin-top: 0.12rem;
 }
 
+/* IDIOMA | Area do seletor de idioma. Ela mantem rotulo e campo juntos para o usuario trocar portugues ou ingles sem procurar. A logica de idioma deixa seletor, textos e espacamentos preparados para PT e EN sem quebrar o layout. */
 .idioma-box {
   display: flex;
   flex-direction: column;
@@ -1238,6 +1263,7 @@ img {
   outline-offset: 2px;
 }
 
+/* ACESSIBILIDADE | Area do botao de leitura reforcada. Ela deixa o controle visivel sem misturar com o conteudo do cardapio. A logica de acessibilidade respeita foco, contraste e menos movimento para o usuario navegar com mais conforto. */
 .accessibility-box {
   display: flex;
   align-items: center;
@@ -1306,6 +1332,7 @@ img {
   border: 0;
 }
 
+/* CARRINHO | Botao principal do carrinho no topo. Ele da acesso rapido ao pedido e precisa continuar facil de clicar. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 #botaoCarrinho {
   min-height: 42px;
   padding: 0.62rem 1rem;
@@ -1331,6 +1358,7 @@ img {
   outline-offset: 3px;
 }
 
+/* ACESSIBILIDADE | Modo de leitura reforcada. Ele aumenta contraste, melhora bordas e deixa textos importantes mais faceis de enxergar. A logica de acessibilidade respeita foco, contraste e menos movimento para o usuario navegar com mais conforto. */
 html[data-accessibility="enhanced"] {
   --color-text-muted: color-mix(in srgb, var(--color-text) 82%, var(--color-bg) 18%);
   --texto-secundario: color-mix(in srgb, var(--color-text) 78%, var(--color-bg) 22%);
@@ -1714,6 +1742,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   border-radius: 999px;
 }
 
+/* CATEGORIAS | Cada categoria vira um botao em formato de card. Hover e estado ativo mostram qual grupo esta selecionado. A logica das categorias cria filtros claros para o usuario trocar de grupo sem perder a referencia da lista. */
 .categoria {
   flex: 0 0 auto;
   min-width: 138px;
@@ -1821,6 +1850,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   outline-offset: 3px;
 }
 
+/* PRODUTOS | Moldura da imagem do produto. Ela corta excessos e mantem todas as fotos com proporcao parecida na grade. A logica dos produtos junta imagem, nome, preco, status e botao para cada item ser entendido antes de entrar no carrinho. */
 .produto-imagem-box {
   position: relative;
   overflow: hidden;
@@ -1892,6 +1922,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   white-space: nowrap;
 }
 
+/* PRODUTOS | Area de personalizacao do item. Ela abre adicionais e observacao sem deixar o card gigante o tempo todo. A logica dos produtos junta imagem, nome, preco, status e botao para cada item ser entendido antes de entrar no carrinho. */
 .personalizacao {
   margin-top: 0.85rem;
   border: 1px solid var(--borda-suave);
@@ -1999,6 +2030,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   color: var(--amarelo);
 }
 
+/* BOTOES | Base visual dos botoes. Ela padroniza tamanho, fonte e interacao para acoes do cardapio e do carrinho parecerem do mesmo sistema. A logica dos botoes padroniza tamanho, cor, foco e estados para toda acao clicavel parecer consistente. */
 .botao,
 .btn-mini,
 .btn-remover {
@@ -2100,6 +2132,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   cursor: not-allowed;
 }
 
+/* RODAPE | Organiza links e avisos do fim da pagina. O usuario encontra creditos, Admin e atalhos sem poluir o cardapio. A logica do rodape fecha a pagina com contatos, creditos e links secundarios sem competir com o pedido. */
 .rodape-utilitarios {
   display: flex;
   flex-direction: column;
@@ -2119,6 +2152,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   align-self: center;
 }
 
+/* MODAL | Fundo escuro das janelas sobrepostas. Ele destaca carrinho e confirmacao, cobrindo o resto da pagina enquanto o usuario decide o pedido. A logica do modal cria uma camada por cima da pagina para focar em uma decisao, imagem ou aviso sem perder o contexto. */
 .fundo-escuro {
   position: fixed;
   inset: 0;
@@ -2143,6 +2177,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   box-shadow: var(--sombra-forte);
 }
 
+/* CARRINHO | Janelas do carrinho e da confirmacao. Elas rolam por dentro para o fundo da pagina nao se mexer junto. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 .caixa-carrinho,
 .caixa-confirmacao {
   max-height: min(92vh, 960px);
@@ -2253,6 +2288,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   list-style: none;
 }
 
+/* CARRINHO | Linha de item dentro do pedido. Ela separa nome, detalhes, preco e controles de quantidade para revisao rapida. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 .item-carrinho {
   display: grid;
   gap: 0.8rem;
@@ -2289,6 +2325,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   flex-wrap: wrap;
 }
 
+/* CARRINHO | Controles de quantidade do item. Eles agrupam menos, quantidade atual, mais e remover no mesmo ponto. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 .cart-controls {
   justify-content: space-between;
 }
@@ -2422,6 +2459,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   margin-top: 1rem;
 }
 
+/* CHECKOUT | Titulos dos blocos do formulario. Eles dividem atendimento, entrega, usuario, pagamento e observacoes em etapas mais faceis. A logica do checkout organiza dados finais, entrega, pagamento e confirmacao antes do envio do pedido. */
 .bloco-form legend {
   margin-bottom: 0.85rem;
   font-family: var(--font-display);
@@ -2498,6 +2536,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   outline-offset: 2px;
 }
 
+/* CHECKOUT | Controle segmentado para escolhas curtas. Ele deixa opcoes como entrega ou consumo local mais claras que um texto solto. A logica do checkout organiza dados finais, entrega, pagamento e confirmacao antes do envio do pedido. */
 .segmented {
   display: flex;
   gap: 0.75rem;
@@ -2540,6 +2579,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   color: var(--texto-quente);
 }
 
+/* PAGAMENTO | Card com dados do Pix. Ele destaca chave, titular e banco quando o usuario escolhe Pix no pedido. A logica do pagamento separa opcoes e avisos para o usuario escolher sem misturar com os dados de entrega. */
 .pix-card {
   padding: 1rem;
   border: 1px solid var(--borda-suave);
@@ -2828,6 +2868,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   width: min(calc(100% - 1.2rem), 360px);
 }
 
+/* RESPONSIVO | Barra fixa do carrinho no celular. Ela mantem total e botao de abrir pedido sempre acessiveis sem ocupar o topo. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 .barra-mobile {
   position: fixed;
   left: 50%;
@@ -3360,6 +3401,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   background: linear-gradient(180deg, var(--superficie-elevada), var(--cinza-escuro));
 }
 
+/* ADMIN | Base da pagina do painel. Ela separa o visual do Admin do cardapio publico e prepara a tela para edicao. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 .admin-page {
   --admin-mobile-save-bottom-gap: 0.5rem;
   --admin-mobile-save-content-gap: 0.5rem;
@@ -3372,6 +3414,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   min-height: 100vh;
 }
 
+/* ADMIN | Estrutura principal do painel. Ela limita largura e organiza topo, abas e conteudo editavel. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 .admin-shell {
   width: min(calc(100% - 1.4rem), 1180px);
   margin: 0 auto;
@@ -3454,12 +3497,14 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   }
 }
 
+/* ADMIN | Area que contem as abas e os paineis do sistema. E onde o dono gerencia produtos, categorias, nuvem e configuracoes. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 .admin-dashboard {
   display: flex;
   flex-direction: column;
   gap: 1.08rem;
 }
 
+/* ADMIN | Navegacao por abas do painel. Ela deixa cada grupo de edicao separado para o Admin nao se perder. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 .admin-tabs {
   --admin-tabs-radius: 18px;
   --admin-tab-indicator-radius: 12px;
@@ -3756,6 +3801,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
+/* ADMIN | Card base do painel. Ele agrupa formularios, listas e acoes com borda e fundo consistentes. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 .admin-card {
   padding: 1.1rem;
   border: 1px solid var(--borda-suave);
@@ -3850,6 +3896,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   color: var(--cinza-sec);
 }
 
+/* ADMIN | Formularios do painel. Eles alinham campos e botoes para cadastro e edicao ficarem previsiveis. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 .admin-form {
   display: grid;
   gap: 0.8rem;
@@ -3861,6 +3908,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   padding-bottom: calc(4.6rem + env(safe-area-inset-bottom));
 }
 
+/* ADMIN | Atalhos das configuracoes. Eles levam o Admin direto para loja, horarios, entrega, tema e outras areas longas. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 .admin-settings-nav {
   display: flex;
   flex-wrap: wrap;
@@ -4066,6 +4114,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   gap: 0.72rem;
 }
 
+/* ADMIN | Barra de salvar configuracoes. Ela aparece quando ha alteracoes e mantem a acao de salvar perto do Admin. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 .admin-settings-save-bar {
   --admin-settings-save-radius: 14px;
   --admin-settings-save-action-radius: 10px;
@@ -4300,6 +4349,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   gap: 0.85rem;
 }
 
+/* TEMA | Grade de temas no Admin. Ela mostra opcoes visuais como cards para comparar antes de aplicar. A logica do tema usa variaveis para trocar cores e contraste sem reescrever cada componente da interface. */
 .admin-theme-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -5709,7 +5759,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   }
 }
 
-/* Visual refinement pass: public menu + admin */
+/* ADMIN | Refina partes do painel. Formularios, listas, abas e avisos ficam mais organizados durante a edicao. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 
 .topo-blocos--without-hero-image {
   grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.88fr);
@@ -8517,7 +8567,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   }
 }
 
-/* Public top alignment guard */
+/* CABECALHO | Protege alinhamento e leitura do topo para logo, status, idioma, acessibilidade e carrinho nao quebrarem a composicao. A logica do cabecalho organiza marca, chamada e acoes principais para o usuario entender onde esta logo no topo. */
 .topo-blocos {
   --topo-card-space-x: clamp(1.1rem, 2.2vw, 1.5rem);
   --topo-card-space-y: clamp(1.05rem, 2vw, 1.45rem);
@@ -8654,7 +8704,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   }
 }
 
-/* Public top service tags */
+/* CABECALHO | Refina o topo publico para manter logo, status e acoes no mesmo ritmo visual. A logica do cabecalho organiza marca, chamada e acoes principais para o usuario entender onde esta logo no topo. */
 .topo-blocos .destaque-informacoes {
   gap: 0.48rem;
   align-items: stretch;
@@ -8791,7 +8841,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   }
 }
 
-/* Public main highlight refinement */
+/* AJUSTE VISUAL | Ajuste fino de acabamento visual. Esse bloco melhora espacamento, alinhamento ou hierarquia sem mudar a logica do sistema. */
 .topo-blocos .destaque-inicial-conteudo,
 .topo-blocos .destaque-inicial--without-image .destaque-inicial-conteudo {
   gap: 0;
@@ -8895,7 +8945,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   }
 }
 
-/* Public purchase flow UX pass */
+/* CHECKOUT | Melhora o fluxo de pedido para campos, botoes e avisos guiarem o usuario ate a revisao final. A logica do checkout organiza dados finais, entrega, pagamento e confirmacao antes do envio do pedido. */
 .menu-categorias {
   gap: clamp(0.5rem, 1vw, 0.72rem);
   padding-block: clamp(0.55rem, 1.2vw, 0.8rem) 0.38rem;
@@ -9328,7 +9378,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   }
 }
 
-/* Public opening hours refinement */
+/* HORARIOS | Ajusta a area de horarios para status aberto ou fechado e agenda ficarem faceis de escanear. A logica dos horarios separa aberto, fechado e ajuda visual para o usuario saber se pode pedir naquele momento. */
 .topo-blocos .painel-horario-topo,
 .topo-blocos--without-hero-image .painel-horario-topo {
   padding-bottom: 0.68rem;
@@ -9581,7 +9631,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   }
 }
 
-/* Public unified top panel */
+/* CABECALHO | Ajusta a area inicial para o usuario entender atendimento antes de chegar aos produtos. A logica do cabecalho organiza marca, chamada e acoes principais para o usuario entender onde esta logo no topo. */
 .topo-blocos {
   position: relative;
   overflow: hidden;
@@ -9827,7 +9877,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   }
 }
 
-/* Discreet destructive actions */
+/* AJUSTE VISUAL | Refinamento visual do bloco atual. Ele melhora leitura e respiro sem mudar comportamento do cardapio. A logica do ajuste visual corrige um detalhe especifico de alinhamento, contraste ou respiro sem mudar o fluxo principal. */
 .botao-perigo-discreto,
 .cart-btn--danger,
 .btn-remover,
@@ -9876,7 +9926,7 @@ button[data-media-remove]:disabled {
   filter: saturate(0.78);
 }
 
-/* Public header utility alignment guard */
+/* CABECALHO | Mantem idioma, acessibilidade e carrinho alinhados sem quebrar a leitura do topo. A logica do cabecalho organiza marca, chamada e acoes principais para o usuario entender onde esta logo no topo. */
 .topo-utilitarios {
   --topo-utility-radius: 15px;
   --topo-utility-control-radius: 11px;
@@ -9970,7 +10020,7 @@ button[data-media-remove]:disabled {
   }
 }
 
-/* Public cart refinement */
+/* CARRINHO | Ajusta leitura e espacamento do carrinho. O usuario consegue revisar itens, totais e formulario com menos confusao. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 #botaoCarrinho.cart-header-button {
   display: inline-flex;
   align-items: center;
@@ -10362,7 +10412,7 @@ button[data-media-remove]:disabled {
   }
 }
 
-/* Public cart visual correction */
+/* CARRINHO | Refina o cabecalho do carrinho para titulo, total e acoes ficarem claros. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 .resumo-topo-carrinho {
   padding: 0.72rem 0.78rem;
   border-radius: 12px;
@@ -10488,7 +10538,7 @@ button[data-media-remove]:disabled {
   }
 }
 
-/* Category sizing guard */
+/* CATEGORIAS | Protege tamanho e alinhamento das categorias para nomes maiores continuarem clicaveis e legiveis. A logica das categorias cria filtros claros para o usuario trocar de grupo sem perder a referencia da lista. */
 @media (min-width: 900px) {
   .menu-categorias {
     display: flex;
@@ -10506,7 +10556,7 @@ button[data-media-remove]:disabled {
   }
 }
 
-/* Empty product state responsive alignment */
+/* RESPONSIVO | Ajusta esta area em telas menores. O objetivo e manter toque, leitura e alinhamento confortaveis no celular. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 .produto-card--empty {
   justify-self: stretch;
   width: 100%;
@@ -10552,7 +10602,7 @@ button[data-media-remove]:disabled {
   }
 }
 
-/* Cart QA overflow correction */
+/* CARRINHO | Separa melhor itens, totais e formulario para o usuario revisar o pedido sem confusao. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 .resumo-topo-carrinho {
   flex-direction: row;
   min-height: 42px;
@@ -10586,7 +10636,7 @@ button[data-media-remove]:disabled {
   }
 }
 
-/* Cart header visual refinement */
+/* CARRINHO | Ajusta a leitura dos itens para quantidade, nome e preco nao competirem entre si. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 .carrinho-cabecalho {
   display: block;
   position: static;
@@ -10675,7 +10725,7 @@ button[data-media-remove]:disabled {
   }
 }
 
-/* Mobile cart header and actions visibility */
+/* CARRINHO | Melhora a area de confirmacao para o usuario conferir o pedido antes do WhatsApp. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 @media (max-width: 768px) {
   .carrinho-cabecalho {
     min-height: 4.9rem;
@@ -10762,7 +10812,7 @@ button[data-media-remove]:disabled {
   }
 }
 
-/* Admin tab border refinement */
+/* ADMIN | Refina o painel para formulario, lista e aviso ficarem mais faceis de acompanhar. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 .admin-tabs {
   --admin-tabs-radius: 16px;
   --admin-tab-indicator-radius: 11px;
@@ -10818,7 +10868,7 @@ button[data-media-remove]:disabled {
   }
 }
 
-/* Cart final responsive QA */
+/* CARRINHO | Mantem botoes do carrinho faceis de tocar sem criar rolagem lateral. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 #botaoCarrinho.cart-header-button {
   border-radius: 12px;
   gap: 0.38rem;
@@ -11220,7 +11270,7 @@ button[data-media-remove]:disabled {
   }
 }
 
-/* Visual hierarchy and UI/UX correction pass */
+/* AJUSTE VISUAL | Ajuste de acabamento em uma area especifica. Ele deixa o layout mais consistente sem alterar a logica. */
 body:not(.cart-has-items) .barra-mobile {
   display: none !important;
 }
@@ -11538,7 +11588,7 @@ body:not(.cart-has-items) .barra-mobile {
   }
 }
 
-/* Mobile unified top panel line refinement */
+/* RESPONSIVO | Ajusta a tela pequena para manter toque, leitura e espacamento confortaveis. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 @media (max-width: 768px) {
   .topo-blocos,
   .topo-blocos--without-hero-image {
@@ -11694,7 +11744,7 @@ body:not(.cart-has-items) .barra-mobile {
   }
 }
 
-/* Catalog premium visual refinement */
+/* AJUSTE VISUAL | Polimento visual localizado. Ele corrige ritmo e hierarquia sem criar nova funcionalidade. A logica do ajuste visual corrige um detalhe especifico de alinhamento, contraste ou respiro sem mudar o fluxo principal. */
 .menu-categorias {
   gap: clamp(0.48rem, 0.9vw, 0.68rem);
   padding-block: clamp(0.42rem, 0.9vw, 0.62rem) 0.34rem;
@@ -11952,7 +12002,7 @@ body:not(.cart-has-items) .barra-mobile {
   }
 }
 
-/* Top panel premium visual refinement */
+/* CABECALHO | Organiza informacoes do topo para a primeira dobra nao parecer carregada demais. A logica do cabecalho organiza marca, chamada e acoes principais para o usuario entender onde esta logo no topo. */
 .topo-blocos {
   border-color: color-mix(in srgb, var(--color-border-medium) 82%, transparent);
   background-color: var(--color-panel-shell-mid);
@@ -12046,7 +12096,7 @@ body:not(.cart-has-items) .barra-mobile {
   }
 }
 
-/* Header and footer premium visual refinement */
+/* CABECALHO | Protege a composicao do cabecalho quando textos, logo ou botoes mudam de tamanho. A logica do cabecalho organiza marca, chamada e acoes principais para o usuario entender onde esta logo no topo. */
 .topo-utilitarios {
   border-color: color-mix(in srgb, var(--borda-media) 58%, transparent);
   background-color: color-mix(in srgb, var(--superficie-elevada) 82%, transparent);
@@ -12249,7 +12299,7 @@ body:not(.cart-has-items) .barra-mobile {
   }
 }
 
-/* Public header status mobile position fix */
+/* RESPONSIVO | Reduz o aperto visual no celular sem mudar a ordem dos blocos. Assim a tela continua familiar, mas com mais respiro para toque e leitura. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 @media (max-width: 540px) {
   .topo-utilitarios {
     display: grid;
@@ -12317,7 +12367,7 @@ body:not(.cart-has-items) .barra-mobile {
   }
 }
 
-/* Admin premium visual refinement */
+/* ADMIN | Organiza a edicao do Admin para o dono encontrar a acao certa com menos rolagem. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 body.admin-page {
   --admin-premium-radius: 18px;
   --admin-premium-radius-sm: 13px;
@@ -12840,7 +12890,7 @@ body.admin-page {
   }
 }
 
-/* Admin auth access responsive refinement */
+/* RESPONSIVO | Mantem botoes e campos usaveis quando a largura da tela diminui. Assim inputs, menus e acoes continuam faceis de tocar no celular. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 body.admin-page #authPanel.admin-card {
   width: min(100%, 35rem);
   margin-top: clamp(0.6rem, 1.5vw, 1rem);
@@ -12963,7 +13013,7 @@ body.admin-page.admin-auth-screen-active #adminStatus {
   }
 }
 
-/* Cart premium visual refinement */
+/* CARRINHO | Organiza o formulario dentro do carrinho para entrega, pagamento e observacoes ficarem em etapas. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 #caixaCarrinho .caixa-carrinho {
   border-color: color-mix(in srgb, var(--amarelo) 20%, var(--borda-media));
   background:
@@ -13212,7 +13262,7 @@ body.admin-page.admin-auth-screen-active #adminStatus {
     inset 0 1px 0 color-mix(in srgb, #ffffff 16%, transparent);
 }
 
-/* Theme-aware public button refinement */
+/* TEMA | Refina a area de aparencia para comparar, testar e aplicar temas com mais seguranca visual. A logica do tema usa variaveis para trocar cores e contraste sem reescrever cada componente da interface. */
 .botao-secundario {
   border-color: color-mix(in srgb, var(--borda-media) 68%, var(--amarelo) 18%);
   background:
@@ -13270,7 +13320,7 @@ body.admin-page.admin-auth-screen-active #adminStatus {
   color: var(--color-accent-contrast);
 }
 
-/* Premium page transition between public menu and Admin */
+/* ADMIN | Ajusta blocos operacionais do painel para cadastro e publicacao ficarem previsiveis. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 body.page-transition-active {
   cursor: progress;
 }
@@ -13424,7 +13474,7 @@ body.page-transition-arrive {
   }
 }
 
-/* Combos */
+/* COMBOS | Organiza a area de combos. Produtos incluidos, preco final e acoes ficam mais claros para o usuario. A logica dos combos destaca pacote, preco e itens inclusos para o usuario comparar oferta com produto comum. */
 .ofertas-section {
   display: grid;
   gap: 14px;
@@ -13676,7 +13726,7 @@ body.admin-page .admin-offer-card .admin-badge {
   }
 }
 
-/* Combos premium UX polish */
+/* COMBOS | Organiza os combos para o usuario entender itens inclusos, preco final e acao de compra. A logica dos combos destaca pacote, preco e itens inclusos para o usuario comparar oferta com produto comum. */
 .oferta-card--no-image {
   min-height: 0;
 }
@@ -13805,7 +13855,7 @@ body.admin-page .admin-combo-qty input {
   }
 }
 
-/* Admin quick navigation alignment refinement */
+/* ADMIN | Melhora a separacao entre ferramentas do Admin sem alterar o fluxo de salvamento. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 body.admin-page .admin-settings-nav {
   overflow: visible;
 }
@@ -13918,7 +13968,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-toolbar-field {
   }
 }
 
-/* Admin dense layout polish */
+/* ADMIN | Mantem controles do painel alinhados para edicoes repetidas ficarem mais confortaveis. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 body.admin-page .admin-card > h2,
 body.admin-page .admin-products-form-card > h3,
 body.admin-page .admin-workspace-sidebar > h2,
@@ -14076,7 +14126,7 @@ body.admin-page .admin-cloud-advanced .admin-cloud-summary-value {
   }
 }
 
-/* Admin v2.0 operational UX feedback */
+/* ADMIN | Deixa avisos e areas de trabalho do Admin mais claros durante a configuracao. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 body.admin-page .admin-inline-status-warn {
   color: var(--texto-forte);
   background:
@@ -14192,7 +14242,7 @@ body.admin-page .admin-inline-status + .admin-actions-row {
   }
 }
 
-/* Admin v2.0 responsive premium refinement */
+/* RESPONSIVO | Evita rolagem lateral e textos espremidos nas telas menores. Assim o usuario consegue ler e tocar nos controles sem arrastar a pagina para os lados. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 @media (min-width: 900px) {
   body.admin-page [data-admin-tab-panel="products"] .admin-product-card.admin-catalog-product-card {
     grid-template-columns: clamp(60px, 5.2vw, 76px) minmax(0, 1fr) max-content minmax(270px, 310px);
@@ -14560,7 +14610,7 @@ body.admin-page .admin-inline-status + .admin-actions-row {
   }
 }
 
-/* Admin v2.0 fine tuning: compact product labels and hours */
+/* ADMIN | Refina o painel para formulario, lista e aviso ficarem mais faceis de acompanhar nesta revisao 7. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 body.admin-page [data-admin-tab-panel="products"] .admin-catalog-product-card .admin-product-headline {
   column-gap: 0.62rem;
 }
@@ -14734,7 +14784,7 @@ body.admin-page .admin-form .admin-hours-time input {
   }
 }
 
-/* Admin v2.0 premium mobile settings save footer */
+/* RESPONSIVO | Compacta a interface mobile sem esconder a acao principal do usuario. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 @media (max-width: 768px) {
   body.admin-page .admin-shell {
     padding-bottom: calc(var(--admin-mobile-save-clearance) + env(safe-area-inset-bottom, 0px));
@@ -14873,7 +14923,7 @@ body.admin-page .admin-form .admin-hours-time input {
   }
 }
 
-/* Admin v2.0 premium image link field spacing */
+/* ADMIN | Organiza a edicao do Admin para o dono encontrar a acao certa com menos rolagem nesta revisao 8. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 body.admin-page .admin-media-advanced > label {
   display: grid;
   gap: 0.52rem;
@@ -14937,7 +14987,7 @@ body.admin-page #comboForm > label:has(input[name="imageUrl"]) .admin-field-note
   }
 }
 
-/* Admin v2.0 product price placement polish */
+/* ADMIN | Ajusta blocos operacionais do painel para cadastro e publicacao ficarem previsiveis nesta revisao 9. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 @media (min-width: 900px) {
   body.admin-page [data-admin-tab-panel="products"] .admin-product-card.admin-catalog-product-card {
     grid-template-columns: minmax(0, 1fr) minmax(270px, 310px);
@@ -15022,7 +15072,7 @@ body.admin-page #comboForm > label:has(input[name="imageUrl"]) .admin-field-note
   }
 }
 
-/* Public v2.0 action feedback and checkout guidance */
+/* CHECKOUT | Refina a etapa de pedido para campos obrigatorios e avisos guiarem o usuario ate a revisao. A logica do checkout organiza dados finais, entrega, pagamento e confirmacao antes do envio do pedido. */
 .botao-adicionar.botao-add-feedback,
 .oferta-add-btn.botao-add-feedback {
   border-color: color-mix(in srgb, var(--sucesso) 46%, var(--borda-media));
@@ -15099,7 +15149,7 @@ body.admin-page #comboForm > label:has(input[name="imageUrl"]) .admin-field-note
   }
 }
 
-/* v2.0 structural compactness: delivery locations, combo images and loading */
+/* COMBOS | Refina a lista de combos no Admin para selecao e quantidade ficarem mais claras. A logica dos combos destaca pacote, preco e itens inclusos para o usuario comparar oferta com produto comum. */
 body.admin-page .admin-delivery-locations-editor,
 body.admin-page .admin-delivery-locations-list {
   gap: 0.5rem;
@@ -15288,7 +15338,7 @@ body.admin-page .admin-offer-thumb {
   }
 }
 
-/* v2.0 premium responsive motion and public combo refinement */
+/* ANIMACAO | Reduz custo de animacoes pesadas. Cards e imagens continuam com interacao, mas sem efeitos que podem pesar no celular. A logica da animacao usa transicoes leves para dar resposta visual sem pesar em celular ou computador fraco. */
 .ofertas-section {
   gap: clamp(0.72rem, 1.25vw, 0.95rem);
   margin-top: clamp(0.72rem, 1.6vw, 1.25rem);
@@ -15636,7 +15686,7 @@ body.admin-page .admin-tab:active {
   }
 }
 
-/* v2.0 compact mobile Admin theme selector */
+/* RESPONSIVO | Ajusta a tela pequena para manter toque, leitura e espacamento confortaveis nesta revisao 6. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 @media (max-width: 768px) {
   body.admin-page #settings-appearance .admin-theme-fieldset {
     gap: 0.64rem;
@@ -15783,7 +15833,7 @@ body.admin-page .admin-tab:active {
   }
 }
 
-/* v2.0 public combo space usage refinement */
+/* COMBOS | Melhora a leitura das ofertas sem misturar combo com produto comum. A logica dos combos destaca pacote, preco e itens inclusos para o usuario comparar oferta com produto comum. */
 .ofertas-grid {
   align-items: stretch;
 }
@@ -15984,7 +16034,7 @@ body.admin-page .admin-tab:active {
   }
 }
 
-/* v2.0 Admin combos thin-list visual alignment */
+/* COMBOS | Ajusta o espaco dos combos para imagem, descricao e botao respirarem melhor. A logica dos combos destaca pacote, preco e itens inclusos para o usuario comparar oferta com produto comum. */
 body.admin-page [data-admin-tab-panel="offers"] .admin-offers-list {
   gap: 0.56rem;
 }
@@ -16142,7 +16192,7 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-offer-card--combo .admin-
   }
 }
 
-/* v2.0 Admin appearance premium refinement */
+/* ADMIN | Melhora a separacao entre ferramentas do Admin sem alterar o fluxo de salvamento nesta revisao 10. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 body.admin-page #settings-appearance {
   border-color: color-mix(in srgb, var(--borda-media) 42%, transparent);
   background:
@@ -16394,7 +16444,7 @@ body.admin-page #settings-appearance .admin-theme-note {
   }
 }
 
-/* v2.0 Admin offers heading hierarchy alignment */
+/* COMBOS | Deixa o editor de combos mais direto para montar pacotes de produtos. A logica dos combos destaca pacote, preco e itens inclusos para o usuario comparar oferta com produto comum. */
 body.admin-page [data-admin-tab-panel="offers"] .admin-offers-panel {
   grid-template-columns: minmax(0, 1.28fr) minmax(320px, 0.88fr);
   align-items: start;
@@ -16499,7 +16549,7 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-offer-form {
   }
 }
 
-/* v2.0 Admin combos-only heading readability refinement */
+/* COMBOS | Organiza os combos para o usuario entender itens inclusos, preco final e acao de compra nesta revisao 6. A logica dos combos destaca pacote, preco e itens inclusos para o usuario comparar oferta com produto comum. */
 body.admin-page [data-admin-tab-panel="offers"] .admin-offers-form-card > h2,
 body.admin-page [data-admin-tab-panel="offers"] .admin-offers-list-card > h2 {
   margin-bottom: 0.2rem;
@@ -16557,7 +16607,7 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-offers-form-card > .admin
   }
 }
 
-/* Tobias public hero premium balance */
+/* AJUSTE VISUAL | Revisao visual pequena deste ponto. Ela melhora organizacao sem mexer no fluxo do usuario. A logica do ajuste visual corrige um detalhe especifico de alinhamento, contraste ou respiro sem mudar o fluxo principal. */
 html[data-theme-preset="tobias-lanches"] .caixa-logo {
   gap: clamp(0.68rem, 1.1vw, 0.92rem);
 }
@@ -16703,7 +16753,7 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horar
   }
 }
 
-/* Motion performance guard */
+/* ANIMACAO | Limita movimentos pesados para manter a interface leve no celular. A logica da animacao usa transicoes leves para dar resposta visual sem pesar em celular ou computador fraco. */
 .produto-card,
 .oferta-card,
 body.admin-page #settings-appearance .admin-theme-card {
@@ -16789,7 +16839,7 @@ body.admin-page .admin-panels-grid.admin-card--attention {
   }
 }
 
-/* Admin product availability controls */
+/* ADMIN | Mantem controles do painel alinhados para edicoes repetidas ficarem mais confortaveis nesta revisao 11. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 body.admin-page [data-admin-tab-panel="products"] .admin-catalog-product-card .admin-product-actions {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -16806,7 +16856,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-action-btn--availabilit
   color: var(--texto-neutro);
 }
 
-/* Admin mobile form floating save bars */
+/* RESPONSIVO | Reduz aperto visual no celular sem desmontar a ordem dos blocos nesta revisao 7. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 body.admin-page .admin-mobile-form-save-bar {
   display: none;
 }
@@ -16823,7 +16873,7 @@ body.admin-page .admin-mobile-form-save-bar {
   }
 }
 
-/* Public cart spacing review */
+/* CARRINHO | Refina o cabecalho do carrinho para titulo, total e acoes ficarem claros nesta revisao 7. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 #caixaCarrinho.show {
   padding: clamp(0.6rem, 1.8vw, 1rem);
 }
@@ -17232,7 +17282,7 @@ body.admin-page .admin-mobile-form-save-bar {
   }
 }
 
-/* Public cart spacing review - mobile readability correction */
+/* CARRINHO | Separa melhor itens, totais e formulario para o usuario revisar o pedido sem confusao nesta revisao 8. A logica do carrinho deixa quantidade, remocao, subtotal e checkout perto um do outro para revisar o pedido sem confusao. */
 #caixaCarrinho .carrinho-cabecalho {
   display: grid;
   gap: 0.34rem;
@@ -17280,7 +17330,7 @@ body.admin-page .admin-mobile-form-save-bar {
   }
 }
 
-/* Admin combo product picker */
+/* COMBOS | Refina a lista de combos no Admin para selecao e quantidade ficarem mais claras nesta revisao 7. A logica dos combos destaca pacote, preco e itens inclusos para o usuario comparar oferta com produto comum. */
 body.admin-page .admin-combo-products-list {
   display: grid;
   gap: 0.82rem;
@@ -17544,7 +17594,7 @@ body.admin-page .admin-combo-products-empty {
   }
 }
 
-/* Admin compact feedback and combo form balance */
+/* COMBOS | Melhora a leitura das ofertas sem misturar combo com produto comum nesta revisao 8. A logica dos combos destaca pacote, preco e itens inclusos para o usuario comparar oferta com produto comum. */
 @media (max-width: 1024px) {
   #mensagemStatus,
   #mensagemErro,
@@ -17856,7 +17906,7 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
   }
 }
 
-/* Mobile Admin: floating bars already provide the top action */
+/* RESPONSIVO | Mantem botoes e campos usaveis quando a largura da tela diminui nesta revisao 8. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 @media (max-width: 768px) {
   body.admin-page [data-admin-tab-panel] .admin-section-top-actions {
     display: none !important;
@@ -17867,7 +17917,7 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
   }
 }
 
-/* Products Admin: keep the editor attached to the filters instead of row-splitting against the list */
+/* ADMIN | Deixa avisos e areas de trabalho do Admin mais claros durante a configuracao nesta revisao 12. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 body.admin-page [data-admin-tab-panel="products"] .admin-products-workspace {
   grid-template-areas: "sidebar list";
   grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
@@ -17906,7 +17956,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   }
 }
 
-/* Mobile Admin: remove dead bottom space left by replaced top links */
+/* RESPONSIVO | Evita rolagem lateral e textos espremidos nas telas menores nesta revisao 9. A logica responsiva muda colunas, tamanhos e espacamentos conforme a largura para leitura e toque continuarem confortaveis. */
 @media (max-width: 768px) {
   body.admin-page [data-admin-tab-panel="products"] .admin-products-form-card,
   body.admin-page [data-admin-tab-panel="categories"] #admin-categories-top,
@@ -17919,7 +17969,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   }
 }
 
-/* Public feedback, product layout and Admin topbar cleanup */
+/* ADMIN | Refina o painel para formulario, lista e aviso ficarem mais faceis de acompanhar nesta revisao 13. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 .public-action-feedback {
   z-index: 1285;
 }
@@ -17990,7 +18040,8 @@ body.admin-page .admin-topbar-actions {
   }
 }
 
-/* v2.0 client-safe polish port: legal pages, clean selects and focused Admin layout. */
+/* ADMIN | Organiza a edicao do Admin para o dono encontrar a acao certa com menos rolagem nesta revisao 14. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
+/* NUVEM | Aviso do modo online ou offline. Ele mostra se o Admin esta salvando so localmente ou tambem no Supabase. A logica da nuvem diferencia modo online, status e acoes externas para o Admin entender quando algo depende do Supabase. */
 .admin-cloud-mode-notice {
   display: flex;
   align-items: center;
@@ -18107,6 +18158,7 @@ body.admin-page .admin-cloud-action-disabled-note {
   line-height: 1.45;
 }
 
+/* LEGAL | Pagina interna de politica e termos. Ela usa layout focado em leitura e esconde partes do cardapio que nao fazem sentido nesse modo. A logica legal separa politica, termos e links para o usuario acessar informacoes obrigatorias sem sair perdido. */
 .legal-page.layout-shell {
   width: min(calc(100vw - clamp(1.2rem, 4vw, 3rem)), 980px);
   max-width: calc(100vw - 1.2rem);
@@ -18379,7 +18431,7 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
   }
 }
 
-/* Select arrows: one clean chevron across public and Admin fields. */
+/* ADMIN | Ajusta blocos operacionais do painel para cadastro e publicacao ficarem previsiveis nesta revisao 15. A logica do Admin organiza formularios, abas, avisos e botoes para o dono editar o cardapio sem procurar controles espalhados. */
 :root {
   --select-chevron-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23d97706' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }

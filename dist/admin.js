@@ -1558,14 +1558,14 @@
   const $ = shared?.byId;
   const clone = shared?.clone;
   const escapeHtml = shared?.escapeHtml;
-
+ // IDIOMA | aceitos idiomas busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getSupportedLocales() {
     return state?.states?.brandConfig?.i18n?.supportedLocales || {
       "pt-BR": { label: "PT", name: "Português", formatLocale: "pt-BR", htmlLang: "pt-BR" },
       "en-US": { label: "EN", name: "English", formatLocale: "en-US", htmlLang: "en-US" },
     };
   }
-
+ // IDIOMA | padrao idioma busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getDefaultLocale() {
     return state?.states?.brandConfig?.i18n?.defaultLocale || "pt-BR";
   }
@@ -1578,16 +1578,16 @@
       return state?.locale || getDefaultLocale();
     },
   });
-
+ // IDIOMA | idioma separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveLocale(locale) {
     return localeTools?.resolveLocale(locale);
   }
-
+ // IDIOMA | atual idioma busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function currentLocale() {
     state.locale = resolveLocale(state?.locale || getDefaultLocale());
     return state?.locale;
   }
-
+ // IDIOMA | idioma exibicao nome busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function localeDisplayName(localeKey, localeMeta) {
     const fixedNames = {
       "pt-BR": "Português",
@@ -1596,45 +1596,45 @@
 
     return fixedNames[localeKey] || localeMeta?.name || localeMeta?.label || localeKey;
   }
-
+ // ADMIN | painel Admin separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function t(key, params) {
     return localeTools?.translate(key, params);
   }
-
+ // IDIOMA | original mensagem separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function rawMessage(key) {
     return localeTools?.rawMessage(key);
   }
-
+ // IDIOMA | texto regra separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function textValue(value, locale) {
     return localeTools?.textValue(value, locale);
   }
-
+ // IDIOMA | lista regra separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function listValue(value, locale) {
     return localeTools?.listValue(value, locale);
   }
 
   const slugify = shared?.slugify;
-
+ // ADMIN | moeda prepara dados de painel Admin. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function formatCurrency(value) {
     const locale = getSupportedLocales()[currentLocale()]?.formatLocale || currentLocale();
     const currency = state?.states?.brandConfig?.business?.currency || "BRL";
     return shared?.formatCurrency(value, { locale: locale, currency: currency });
   }
-
+ // RESPONSIVO | celular tamanho da tela confere uma condicao de telas menores. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isMobileViewport() {
     return Boolean(window?.matchMedia?.("(max-width: 768px)")?.matches) || Number(window?.innerWidth || 0) <= 768;
   }
-
+ // RESPONSIVO | compacto Admin tamanho da tela confere uma condicao de telas menores. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isCompactAdminViewport() {
     return Boolean(window?.matchMedia?.("(max-width: 1024px)")?.matches) || Number(window?.innerWidth || 0) <= 1024;
   }
-
+ // ACESSO | autenticacao tela ativo confere uma condicao de acesso do Admin. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isAuthScreenActive() {
     const authPanel = $("authPanel");
     const app = $("adminApp");
     return Boolean(authPanel && !authPanel.hidden && (!app || app.hidden));
   }
-
+ // NUVEM | Admin superficie modo conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function syncAdminSurfaceMode() {
     const authScreenActive = isAuthScreenActive();
     document?.body?.classList?.toggle?.("admin-auth-screen-active", authScreenActive);
@@ -1648,7 +1648,7 @@
       status.className = "admin-status";
     }
   }
-
+ // NAVEGACAO | voltar avanco navegacao confere uma condicao de navegacao. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isBackForwardNavigation(event) {
     if (event?.persisted) {
       return true;
@@ -1668,7 +1668,7 @@
       return false;
     }
   }
-
+ // NAVEGACAO | janela topo orienta o usuario em navegacao. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function scrollWindowToTop() {
     const run = function () {
       try {
@@ -1695,7 +1695,7 @@
     });
     window?.setTimeout?.(run, 90);
   }
-
+ // NAVEGACAO | Admin celular voltar topo intencao atualiza navegacao. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function markAdminMobileBackToTopIntent() {
     if (!isMobileViewport()) {
       return;
@@ -1706,7 +1706,7 @@
     } catch (error) {
     }
   }
-
+ // NAVEGACAO | Admin celular voltar topo atualiza navegacao. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setupAdminMobileBackToTop() {
     window?.addEventListener("pagehide", markAdminMobileBackToTopIntent);
     window?.addEventListener("popstate", function () {
@@ -1720,27 +1720,27 @@
       }
     });
   }
-
+ // CATEGORIAS | categoria nome busca um valor de categorias. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function categoryName(category) {
     return textValue(category?.name, currentLocale()) || category?.slug || "";
   }
-
+ // PRODUTOS | produto nome busca um valor de produtos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function productName(product) {
     return textValue(product?.name, currentLocale()) || product?.id || "";
   }
-
+ // ADICIONAIS | nome altera adicionais depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function addOnName(addOn) {
     return textValue(addOn?.name, currentLocale()) || addOn?.id || "";
   }
-
+ // ADMIN | cardapio regra busca um valor de painel Admin. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getMenuState() {
     return state?.states?.menuState || { categories: [], addOns: [], products: [] };
   }
-
+ // ADMIN | marca ajuste busca um valor de painel Admin. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getBrandConfig() {
     return state?.states?.brandConfig || {};
   }
-
+ // NAVEGACAO | pagina navegacao transicao atualiza navegacao. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setupPageNavigationTransition() {
     shared?.setupPageTransition?.({
       selector: '.admin-public-link[href="index.html"]',
@@ -1753,25 +1753,25 @@
       durationMs: 220,
     });
   }
-
+ // PRODUTOS | produto identificador busca um valor de produtos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getProductById(productId) {
     return getMenuState()?.products?.find(function (product) {
       return product?.id === productId;
     }) || null;
   }
-
+ // CATEGORIAS | categoria codigo curto busca um valor de categorias. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getCategoryBySlug(slug) {
     return getMenuState()?.categories?.find(function (category) {
       return category?.slug === slug;
     }) || null;
   }
-
+ // ADICIONAIS | identificador busca um valor de adicionais. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getAddOnById(addOnId) {
     return getMenuState()?.addOns?.find(function (addOn) {
       return addOn?.id === addOnId;
     }) || null;
   }
-
+ // COMBOS | combos regra busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getOffersState() {
     const offers = getMenuState()?.offers || {};
     return {
@@ -1779,17 +1779,17 @@
       discounts: Array.isArray(offers?.discounts) ? offers.discounts : [],
     };
   }
-
+ // COMBOS | combo identificador busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getComboById(comboId) {
     return getOffersState()?.combos?.find(function (combo) {
       return combo?.id === comboId;
     }) || null;
   }
-
+ // COMBOS | combo nome busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function offerName(offer) {
     return textValue(offer?.name, currentLocale()) || offer?.id || "";
   }
-
+ // COMBOS | combo produtos texto busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboProductsText(combo) {
     return (Array.isArray(combo?.items) ? combo.items : [])
       ?.map(function (item) {
@@ -1798,14 +1798,14 @@
       })
       ?.join(", ");
   }
-
+ // COMBOS | combo indisponivel produtos busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboHasUnavailableProducts(combo) {
     return (Array.isArray(combo?.items) ? combo.items : [])?.some(function (item) {
       const product = getProductById(item?.productId);
       return !product || normalizeProductStatus(product) !== "active" || product?.available === false;
     });
   }
-
+ // PRODUTOS | produto status prepara dados de produtos. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeProductStatus(product) {
     if (typeof product?.active === "boolean") {
       return product.active ? "active" : "inactive";
@@ -1815,7 +1815,7 @@
     }
     return "active";
   }
-
+ // ADMIN | atualizacao regra separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function refreshStates() {
     state.states = system?.getStates();
     state.savedThemePreset = resolveSelectedThemePreset(state?.states?.brandConfig?.appearance || {});
@@ -1832,16 +1832,16 @@
   const createSession = auth?.createSession;
   const isAuthenticated = auth?.isAuthenticated;
   const renewSession = auth?.renewSession;
-
+ // NUVEM | nuvem ajuste busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getCloudConfig() {
     return state?.states?.cloudConfig || system?.getStates()?.cloudConfig || {};
   }
-
+ // NUVEM | online Admin modo confere uma condicao de nuvem Supabase. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isOnlineAdminMode() {
     const cloud = getCloudConfig();
     return Boolean(cloud?.enabled && system?.isSupabaseConfigured(cloud));
   }
-
+ // NUVEM | nuvem regra pronto conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function ensureCloudActionReady() {
     if (!isOnlineAdminMode()) {
       showStatus(t("cloudActionUnavailable"), "warn");
@@ -1857,7 +1857,7 @@
 
     return true;
   }
-
+ // NUVEM | uso online relatorios confere uma condicao de nuvem Supabase. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function canUseOnlineReports() {
     return Boolean(
       isOnlineAdminMode()
@@ -1865,7 +1865,7 @@
       && typeof system?.loadOnlineReportData === "function"
     );
   }
-
+ // RELATORIOS | relatorio origem mensagem separa uma regra de relatorios. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function reportSourceMessage() {
     if (!canUseOnlineReports()) {
       return t("reportsLocalOnly");
@@ -1881,7 +1881,7 @@
     }
     return t("reportsOnlineLoading");
   }
-
+ // RELATORIOS | atual relatorio dados busca um valor de relatorios. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function currentReportData(limit) {
     const status = system?.getSystemStatus();
     const online = state?.onlineReportData;
@@ -1911,7 +1911,7 @@
       topSearchNoResults: system?.getTopSearchNoResults?.(topLimit) || [],
     };
   }
-
+ // NUVEM | online relatorios ativo aba conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function loadOnlineReportsForActiveTab(force) {
     if (state?.activeTab !== "reports") {
       return;
@@ -1952,15 +1952,15 @@
         }
       });
   }
-
+ // ACESSO | Admin autenticado confere uma condicao de acesso do Admin. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isAdminAuthenticated() {
     return isOnlineAdminMode() ? auth?.isSupabaseAuthenticated?.() : isAuthenticated();
   }
-
+ // ACESSO | Admin sessao atualiza acesso do Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function renewAdminSession() {
     return isOnlineAdminMode() ? auth?.getSupabaseSession?.() : renewSession();
   }
-
+ // ACESSO | online regra apos login conversa com acesso do Admin. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function syncOnlineStateAfterLogin(notifyError) {
     if (!isOnlineAdminMode()) {
       return Promise.resolve(false);
@@ -1979,12 +1979,12 @@
         return false;
       });
   }
-
+ // ACESSO | saida separa uma regra de acesso do Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function logout() {
     auth?.logout();
     stopCloudMonitor();
   }
-
+ // IDIOMA | status orienta o usuario em idioma. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function showStatus(message, type, options) {
     const status = $("adminStatus");
     const text = String(message || "").trim();
@@ -2064,11 +2064,11 @@
       }, prefersReducedMotion() ? 0 : 180);
     }
   }
-
+ // AVISOS | status limpa avisos da tela. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearStatus() {
     showStatus("", "");
   }
-
+ // IDIOMA | Admin toast orienta o usuario em idioma. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function showAdminToast(message, type) {
     const text = String(message || "").trim();
     if (!text || !document?.body) {
@@ -2107,11 +2107,11 @@
       }, prefersReducedMotion() ? 0 : 180);
     }, prefersReducedMotion() ? 1600 : 3200);
   }
-
+ // AVISOS | retorno visual texto prepara dados de avisos da tela. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeFeedbackText(value) {
     return String(value || "").replace(/\s+/g, " ").trim().toLowerCase();
   }
-
+ // IDIOMA | interno retorno visual mensagem confere uma condicao de idioma. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function hasInlineFeedbackMessage(message) {
     const normalized = normalizeFeedbackText(message);
     if (!normalized || !document?.querySelectorAll) {
@@ -2122,7 +2122,7 @@
       return item?.isConnected && normalizeFeedbackText(item?.textContent) === normalized;
     });
   }
-
+ // IDIOMA | progresso retorno visual mensagem confere uma condicao de idioma. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isProgressFeedbackMessage(message) {
     const normalized = normalizeFeedbackText(message);
     return [
@@ -2133,13 +2133,13 @@
       return normalizeFeedbackText(item) === normalized;
     });
   }
-
+ // IDIOMA | validacao erro separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function validationError(message, fieldName) {
     const error = new Error(message);
     error.fieldName = fieldName;
     return error;
   }
-
+ // IDIOMA | amigavel Admin erro mensagem separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function friendlyAdminErrorMessage(error, fallbackKey) {
     if (error?.userMessage) {
       return String(error.userMessage);
@@ -2174,7 +2174,7 @@
 
     return message || t(fallbackKey || "requiredField");
   }
-
+ // AVISOS | formulario campo erros limpa avisos da tela. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearFormFieldErrors(form) {
     form?.querySelectorAll?.(".admin-field-error")?.forEach(function (error) {
       error?.remove();
@@ -2184,7 +2184,7 @@
       field?.removeAttribute("aria-describedby");
     });
   }
-
+ // AVISOS | campo erro limpa avisos da tela. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearFieldError(field) {
     if (!field || !field?.name) {
       return;
@@ -2194,7 +2194,7 @@
     field?.removeAttribute("aria-describedby");
     field?.closest?.("label")?.querySelector?.(".admin-field-error")?.remove();
   }
-
+ // IDIOMA | campo validacao orienta o usuario em idioma. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function showFieldValidation(form, error, message) {
     if (!form || !error?.fieldName) {
       return false;
@@ -2222,7 +2222,7 @@
     control?.focus?.({ preventScroll: false });
     return true;
   }
-
+ // IDIOMA | contexto status orienta o usuario em idioma. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function showContextStatus(targetSelector, message, type, options) {
     const target = typeof targetSelector === "string"
       ? document?.querySelector(targetSelector)
@@ -2282,7 +2282,7 @@
       }, Number(options?.timeout || 5200));
     }
   }
-
+ // HORARIOS | agenda interface tarefa orienta o usuario em horarios. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function scheduleUiTask(callback) {
     if (typeof callback !== "function") {
       return;
@@ -2296,17 +2296,17 @@
       schedule(callback);
     });
   }
-
+ // ADMIN | preferencia reduzido movimento separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function prefersReducedMotion() {
     return Boolean(window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
   }
-
+ // ADMIN | Admin alvo separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveAdminTarget(target) {
     return typeof target === "string"
       ? document?.querySelector(target)
       : target;
   }
-
+ // NAVEGACAO | primeiro focavel campo busca um valor de navegacao. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function firstFocusableField(target, selector) {
     if (!target) {
       return null;
@@ -2315,7 +2315,7 @@
     const query = selector || 'input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled])';
     return target?.matches?.(query) ? target : target?.querySelector?.(query);
   }
-
+ // ADMIN | Admin alvo orienta o usuario em painel Admin. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function highlightAdminTarget(target, duration) {
     const element = resolveAdminTarget(target);
     if (!element) {
@@ -2329,7 +2329,7 @@
       element?.classList?.remove("admin-card--attention");
     }, Number(duration || 1100));
   }
-
+ // ADMIN | guia do alvo leva o usuario ate uma area do painel. A logica resolve o seletor, rola a tela, destaca o bloco e mostra aviso perto do ponto certo.
   function guideAdminTarget(target, options) {
     const element = resolveAdminTarget(target);
     if (!element) {
@@ -2362,7 +2362,7 @@
       focusTarget?.focus?.({ preventScroll: true });
     }, prefersReducedMotion() ? 0 : Number(options?.focusDelay || 120));
   }
-
+ // NAVEGACAO | Admin formulario orienta o usuario em navegacao. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function focusAdminForm(formSelector, options) {
     const form = resolveAdminTarget(formSelector);
     const target = form?.closest?.(".admin-card") || form;
@@ -2371,7 +2371,7 @@
       statusTarget: form,
     });
   }
-
+ // AVISOS | botao regra atualiza avisos da tela. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setButtonBusy(button, busy, label) {
     if (!(button instanceof HTMLButtonElement)) {
       return;
@@ -2396,7 +2396,7 @@
     }
     delete button.dataset.originalText;
   }
-
+ // IDIOMA | combinacao Admin retorno visual separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function combineAdminFeedback(primaryMessage, detailMessage) {
     const primary = String(primaryMessage || "").trim();
     const detail = String(detailMessage || "").trim();
@@ -2413,7 +2413,7 @@
 
     return primary + " " + detail;
   }
-
+ // NUVEM | automatico publicacao Admin formulario confere uma condicao de nuvem Supabase. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function shouldAutoPublishAdminForm(formId) {
     return [
       "productForm",
@@ -2428,11 +2428,11 @@
     ].includes(String(formId || ""))
       && isOnlineAdminMode();
   }
-
+ // IDIOMA | Admin pendente mensagem busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getAdminSavePendingMessage(formId) {
     return shouldAutoPublishAdminForm(formId) ? t("savingAndPublishing") : t("savingChanges");
   }
-
+ // NUVEM | publicacao Admin regra apos conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function publishAdminChangesAfterSave(options) {
     const localMessage = String(options?.localMessage || t("savingChanges")).trim();
     if (!shouldAutoPublishAdminForm(options?.formId)) {
@@ -2464,7 +2464,7 @@
       };
     }
   }
-
+ // NUVEM | assincrono botao liga nuvem Supabase aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   function handleAsyncButton(button, pendingMessage, task, fallbackKey) {
     if (!(button instanceof HTMLButtonElement) || typeof task !== "function") {
       return Promise.resolve(false);
@@ -2485,7 +2485,7 @@
         setButtonBusy(button, false);
       });
   }
-
+ // ADMIN | Admin edicao protecao busca um valor de painel Admin. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getAdminEditGuard() {
     if (!state.adminEditGuard || typeof state.adminEditGuard !== "object") {
       state.adminEditGuard = {
@@ -2499,11 +2499,11 @@
     state.adminEditGuard.formDrafts = state.adminEditGuard.formDrafts || {};
     return state.adminEditGuard;
   }
-
+ // ADMIN | rastreado Admin formulario identificador confere uma condicao de painel Admin. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isTrackedAdminFormId(formId) {
     return Boolean(ADMIN_FORM_AREAS[formId]);
   }
-
+ // ADMIN | ajustes area campo nome atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function settingsAreaForFieldName(name) {
     const field = String(name || "");
     if (/^(pickupAddress|pickupNote|location)/.test(field)) {
@@ -2517,7 +2517,7 @@
     }
     return "settings";
   }
-
+ // ADMIN | todos Admin areas formulario separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function allAdminAreasForForm(formId) {
     if (formId === "settingsForm") {
       return ["settings", "location", "hours", "appearance"];
@@ -2526,7 +2526,7 @@
     const area = ADMIN_FORM_AREAS[formId];
     return area ? [area] : [];
   }
-
+ // ADMIN | Admin areas formulario alvo separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function adminAreasForFormTarget(formId, target) {
     const baseArea = ADMIN_FORM_AREAS[formId];
     if (!baseArea) {
@@ -2542,7 +2542,7 @@
       ? ["settings", fieldArea]
       : ["settings"];
   }
-
+ // ADMIN | Admin pendente area atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setAdminDirtyArea(area, dirty) {
     if (!area) {
       return;
@@ -2556,13 +2556,13 @@
 
     delete guard.dirtyAreas[area];
   }
-
+ // ADMIN | Admin pendente areas atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setAdminDirtyAreas(areas, dirty) {
     (Array.isArray(areas) ? areas : [areas]).forEach(function (area) {
       setAdminDirtyArea(area, dirty);
     });
   }
-
+ // ADMIN | Admin formulario rascunho le dados preenchidos em painel Admin. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readAdminFormDraft(form) {
     const fields = {};
     Array?.from(form?.elements || [])?.forEach(function (control) {
@@ -2602,7 +2602,7 @@
       capturedAt: new Date()?.toISOString(),
     };
   }
-
+ // ADMIN | captura do rascunho guarda campos editados antes da tela renderizar de novo. A logica compara dados antigos e novos para nao perder mudancas do Admin.
   function captureAdminFormDraft(form) {
     if (!(form instanceof HTMLFormElement) || !isTrackedAdminFormId(form?.id) || form?.id === "productForm") {
       return;
@@ -2623,7 +2623,7 @@
 
     getAdminEditGuard().formDrafts[form.id] = nextDraft;
   }
-
+ // ADMIN | ativo Admin formulario rascunhos le dados preenchidos em painel Admin. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function captureActiveAdminFormDrafts() {
     captureProductFormDraft();
     ["categoryForm", "addOnForm", "comboForm", "settingsForm", "cloudForm"].forEach(function (formId) {
@@ -2633,35 +2633,35 @@
       }
     });
   }
-
+ // ADMIN | Admin formulario rascunho busca um valor de painel Admin. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getAdminFormDraft(formId) {
     return getAdminEditGuard()?.formDrafts?.[formId] || null;
   }
-
+ // ADMIN | Admin rascunho campo regra separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function adminDraftFieldValue(formId, name, fallback) {
     const entry = getAdminFormDraft(formId)?.fields?.[name];
     return entry && Object.prototype.hasOwnProperty.call(entry, "value")
       ? entry.value
       : fallback;
   }
-
+ // ADMIN | Admin rascunho campo marcado separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function adminDraftFieldChecked(formId, name, fallback) {
     const entry = getAdminFormDraft(formId)?.fields?.[name];
     return entry?.kind === "checkbox" ? Boolean(entry?.checked) : fallback;
   }
-
+ // ADMIN | atual rascunho campo regra busca um valor de painel Admin. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function currentDraftFieldValue(name, fallback) {
     return state?.formDraftContext
       ? adminDraftFieldValue(state.formDraftContext, name, fallback)
       : fallback;
   }
-
+ // ADMIN | atual rascunho campo marcado busca um valor de painel Admin. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function currentDraftFieldChecked(name, fallback) {
     return state?.formDraftContext
       ? adminDraftFieldChecked(state.formDraftContext, name, fallback)
       : fallback;
   }
-
+ // ADMIN | Admin formulario cancelamento botoes altera painel Admin depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateAdminFormCancelButtons() {
     const categoryCancel = $("cancelCategoryEdit");
     if (categoryCancel) {
@@ -2679,11 +2679,11 @@
     }
 
   }
-
+ // EVENTOS | ajustes nao salvo regra confere uma condicao de eventos da tela. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function hasSettingsUnsavedChanges() {
     return Boolean(isAdminFormDraftActive("settingsForm") || getPreviewThemePreset());
   }
-
+ // ADMIN | ajustes pendente interface altera painel Admin depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateSettingsDirtyUi() {
     const dirty = hasSettingsUnsavedChanges();
     const notice = $("settingsDirtyNotice");
@@ -2703,14 +2703,14 @@
       saveBarStatus.textContent = dirty ? t("settingsSaveBarDirty") : t("settingsSaveBarClean");
     }
   }
-
+ // RESPONSIVO | celular formulario barra pendente confere uma condicao de telas menores. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isMobileFormSaveBarDirty(formId) {
     if (formId === "productForm") {
       return Boolean(state?.hasUnsavedProductChanges || state?.productFormDraft);
     }
     return isAdminFormDraftActive(formId);
   }
-
+ // RESPONSIVO | Admin celular barras interface altera telas menores depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateAdminMobileSaveBarsUi() {
     document?.querySelectorAll?.("[data-admin-mobile-save-bar-form]")?.forEach(function (saveBar) {
       const formId = String(saveBar?.getAttribute("data-admin-mobile-save-bar-form") || "");
@@ -2722,7 +2722,7 @@
       }
     });
   }
-
+ // ADMIN | Admin formulario pendente atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function markAdminFormDirty(target, options) {
     const form = target instanceof HTMLFormElement ? target : target?.closest?.("form");
     const formId = form?.id || "";
@@ -2736,7 +2736,7 @@
     updateSettingsDirtyUi();
     updateAdminMobileSaveBarsUi();
   }
-
+ // ADMIN | Admin formulario pendente identificador atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function markAdminFormDirtyById(formId, areas) {
     const form = $(formId);
     if (!(form instanceof HTMLFormElement) || !isTrackedAdminFormId(formId) || formId === "productForm") {
@@ -2749,7 +2749,7 @@
     updateSettingsDirtyUi();
     updateAdminMobileSaveBarsUi();
   }
-
+ // ADMIN | Admin formulario edicao limpa painel Admin. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearAdminFormEditing(formId) {
     const guard = getAdminEditGuard();
     delete guard.formDrafts[formId];
@@ -2772,7 +2772,7 @@
     updateSettingsDirtyUi();
     updateAdminMobileSaveBarsUi();
   }
-
+ // ADMIN | todos Admin edicao regra limpa painel Admin. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearAllAdminEditingState() {
     clearProductEditingState();
     state.editingProductId = "";
@@ -2787,14 +2787,14 @@
     };
     clearThemePreviewState();
   }
-
+ // ADMIN | Admin pendente areas confere uma condicao de painel Admin. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function hasAdminDirtyAreas() {
     const dirtyAreas = getAdminEditGuard()?.dirtyAreas || {};
     return Object.keys(dirtyAreas).some(function (area) {
       return Boolean(dirtyAreas[area]);
     });
   }
-
+ // ADMIN | Admin formulario rascunho ativo confere uma condicao de painel Admin. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isAdminFormDraftActive(formId) {
     const guard = getAdminEditGuard();
     if (guard?.formDrafts?.[formId]) {
@@ -2805,11 +2805,11 @@
       return Boolean(guard?.dirtyAreas?.[area]);
     });
   }
-
+ // ADMIN | Admin formulario pendente confere uma condicao de painel Admin. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isAdminFormDirty() {
     return hasAdminDirtyAreas();
   }
-
+ // ADMIN | ativo Admin rascunho confere uma condicao de painel Admin. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function hasActiveAdminDraft() {
     return Boolean(isProductEditingActive())
       || Boolean(state?.editingCategorySlug)
@@ -2822,15 +2822,15 @@
       || isAdminFormDraftActive("cloudForm")
       || Boolean(getPreviewThemePreset());
   }
-
+ // EVENTOS | sensivel Admin regra regra confere uma condicao de eventos da tela. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isDestructiveAdminStateChange(detail) {
     return ADMIN_DESTRUCTIVE_STATE_EVENTS.has(String(detail?.type || ""));
   }
-
+ // EVENTOS | adiamento Admin regra regra confere uma condicao de eventos da tela. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function shouldDeferAdminStateChange(detail) {
     return Boolean(hasActiveAdminDraft() && isDestructiveAdminStateChange(detail));
   }
-
+ // NUVEM | adiamento remoto Admin conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function deferRemoteAdminUpdate(detail, options) {
     const guard = getAdminEditGuard();
     const pendingType = String(detail?.type || options?.type || "cloud-sync-to-local");
@@ -2856,7 +2856,7 @@
       showStatus(isProductEditingActive() ? t("productSyncPending") : t("adminSyncPending"), "warn");
     }
   }
-
+ // NUVEM | protecao nuvem regra enquanto edicao conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function guardCloudActionWhileEditing(options) {
     if (!hasActiveAdminDraft()) {
       return false;
@@ -2872,7 +2872,7 @@
     }
     return true;
   }
-
+ // NUVEM | atualizacao apos remoto conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function refreshAndRenderAfterRemote(detail) {
     if (shouldDeferAdminStateChange(detail)) {
       deferRemoteAdminUpdate(detail);
@@ -2883,7 +2883,7 @@
     renderDashboard();
     return true;
   }
-
+ // ADMIN | pendente Admin atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function applyPendingAdminUpdate(options) {
     const guard = getAdminEditGuard();
     const pending = guard?.pendingRemoteUpdate;
@@ -2913,7 +2913,7 @@
 
     if (pending?.snapshot) {
       const currentSnapshot = system?.getStates?.() || {};
-      // A stale remote snapshot must not undo the form the admin just saved.
+ // ADMIN | proximo cardapio regra separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
       const nextMenuState = options?.preserveMenuState
         ? currentSnapshot?.menuState
         : pending.snapshot.menuState;
@@ -2934,24 +2934,25 @@
     showStatus(t("adminSyncApplied"), "ok");
     return Promise.resolve(true);
   }
-
+ // ADMIN | liberacao pendente Admin atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function flushPendingAdminUpdate(options) {
     applyPendingAdminUpdate(options)?.catch(function (error) {
       console.error("Falha ao liberar atualização pendente.", error);
       showStatus(t("cloudLoadError"), "error");
     });
   }
+ // PRODUTOS | produto formulario alvo confere uma condicao de produtos. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isProductFormTarget(target) {
     return Boolean(target?.closest?.("#productForm"));
   }
-
+ // PRODUTOS | produto edicao ativo confere uma condicao de produtos. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isProductEditingActive() {
     return Boolean(state?.editingProductId)
       || Boolean(state?.isProductEditing)
       || Boolean(state?.hasUnsavedProductChanges)
       || Boolean(state?.productFormDraft);
   }
-
+ // IDIOMA | produto edicao aviso mensagem busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function productEditingNoticeMessage() {
     if (state?.pendingRemoteProductUpdate || getAdminEditGuard()?.pendingRemoteUpdate) {
       return isProductEditingActive() ? t("productSyncPending") : t("adminSyncPending");
@@ -2971,7 +2972,7 @@
     }
     return "";
   }
-
+ // NUVEM | produto aviso altera nuvem Supabase depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateProductSyncNotice() {
     const notice = $("productSyncNotice");
     if (!notice) {
@@ -2982,7 +2983,7 @@
     notice.textContent = message;
     notice.hidden = !message;
   }
-
+ // PRODUTOS | produto cancelamento botao altera produtos depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateProductCancelButton() {
     const button = $("cancelProductEdit");
     if (!button) {
@@ -2991,7 +2992,7 @@
 
     button.hidden = !isProductEditingActive();
   }
-
+ // PRODUTOS | produto edicao atualiza produtos. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function markProductEditing(options) {
     state.isProductEditing = options?.editing !== false;
     if (options?.editing !== false) {
@@ -3007,11 +3008,11 @@
     updateProductCancelButton();
     updateAdminMobileSaveBarsUi();
   }
-
+ // PRODUTOS | produto rascunho limpa produtos. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearProductDraft() {
     state.productFormDraft = null;
   }
-
+ // PRODUTOS | produto edicao regra limpa produtos. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearProductEditingState() {
     state.isProductEditing = false;
     state.hasUnsavedProductChanges = false;
@@ -3024,7 +3025,7 @@
     updateProductCancelButton();
     updateAdminMobileSaveBarsUi();
   }
-
+ // NUVEM | adiamento remoto produto conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function deferRemoteProductSync(detail) {
     const wasPending = Boolean(state?.pendingRemoteProductUpdate);
     state.pendingRemoteProductUpdate = {
@@ -3036,13 +3037,13 @@
       showStatus(t("productSyncPending"), "warn");
     }
   }
-
+ // PRODUTOS | conclusao produto edicao atualiza produtos. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function completeProductEditing() {
     state.editingProductId = "";
     clearProductEditingState();
     renderDashboard({ preserveProductDraft: false });
   }
-
+ // NUVEM | remoto produto modo conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function remoteProductUpdateMode(detail) {
     if (!isProductEditingActive()) {
       return "";
@@ -3057,7 +3058,7 @@
     }
     return "";
   }
-
+ // IDIOMA | idioma cabecalho atualiza idioma. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function applyLocaleToHeader() {
     const selector = $("adminLocaleSelector");
     const supported = getSupportedLocales();
@@ -3070,7 +3071,7 @@
     $("adminLocaleLabel").textContent = t("languageLabel");
     document.documentElement.lang = supported[currentLocale()]?.htmlLang || currentLocale();
   }
-
+ // TEMA | tema atualiza tema visual. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function applyTheme() {
     const appearance = getAdminAppliedAppearance();
     const appliedAppearance = shared?.resolveAppliedAppearance?.(appearance) || {
@@ -3086,7 +3087,7 @@
       delete document.documentElement.dataset.themePreset;
     }
   }
-
+ // ADMIN | cabecalho textos atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function applyHeaderTexts() {
     const kicker = document?.querySelector(".admin-kicker");
     const title = document?.querySelector(".admin-title");
@@ -3105,7 +3106,7 @@
     document.title = pageTitle;
     if (metaDescription) metaDescription.setAttribute("content", `${t("panelSubtitle")} ${brandName}.`);
   }
-
+ // ACESSO | autenticacao monta a parte visual de acesso do Admin. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderAuth() {
     const authPanel = $("authPanel");
     const app = $("adminApp");
@@ -3162,7 +3163,7 @@
       '</form>' +
       '</div>';
   }
-
+ // NAVEGACAO | aba botao monta uma estrutura de navegacao. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildTabButton(id, label) {
     const active = state?.activeTab === id;
     return (
@@ -3177,21 +3178,21 @@
       "</button>"
     );
   }
-
+ // NAVEGACAO | abas container busca um valor de navegacao. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getTabsContainer() {
     return document?.querySelector(".admin-tabs");
   }
-
+ // NAVEGACAO | abas esquerda busca um valor de navegacao. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getTabsScrollLeft() {
     const tabs = getTabsContainer();
     return Number(tabs?.scrollLeft || 0);
   }
-
+ // NAVEGACAO | limite esquerda separa uma regra de navegacao. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function clampScrollLeft(tabs, value) {
     const maxScrollLeft = Math?.max(Number(tabs?.scrollWidth || 0) - Number(tabs?.clientWidth || 0), 0);
     return Math?.min(Math?.max(Number(value || 0), 0), maxScrollLeft);
   }
-
+ // NAVEGACAO | manter ativo aba visivel separa uma regra de navegacao. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function keepActiveTabVisible(previousScrollLeft) {
     const schedule = typeof window?.requestAnimationFrame === "function"
       ? window.requestAnimationFrame.bind(window)
@@ -3224,7 +3225,7 @@
       state.tabsScrollLeft = Number(tabs?.scrollLeft || 0);
     });
   }
-
+ // ADMIN | painel monta a parte visual de painel Admin. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderDashboard(options) {
     if (options?.preserveProductDraft !== false && options?.preserveAdminDrafts !== false) {
       captureActiveAdminFormDrafts();
@@ -3279,7 +3280,7 @@
     keepActiveTabVisible(previousTabsScrollLeft);
     loadOnlineReportsForActiveTab(false);
   }
-
+ // ADMIN | painel individual monta uma aba do Admin com visibilidade correta. A logica marca qual aba esta ativa e esconde as outras sem apagar o conteudo.
   function renderPanel(id, content) {
     const hidden = state?.activeTab !== id;
     return (
@@ -3294,7 +3295,7 @@
       "</section>"
     );
   }
-
+ // PRODUTOS | produto filtros limpa produtos. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function resetProductFilters() {
     state.productFilters = {
       search: "",
@@ -3303,7 +3304,7 @@
       sort: "menu",
     };
   }
-
+ // PRODUTOS | filtrado produtos busca um valor de produtos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getFilteredProducts() {
     const filters = state?.productFilters;
     const products = clone(getMenuState()?.products || []);
@@ -3370,7 +3371,7 @@
         return compareMenuOrder(left?.sortOrder, right?.sortOrder, productName(left), productName(right));
       });
   }
-
+ // PRODUTOS | produtos painel monta a parte visual de produtos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderProductsPanel() {
     const products = getFilteredProducts();
     const categories = getMenuState()?.categories || [];
@@ -3410,7 +3411,7 @@
       "</div>"
     );
   }
-
+ // PRODUTOS | produtos atalho navegacao monta a parte visual de produtos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderProductsShortcutNav() {
     return (
       '<nav class="admin-settings-nav admin-products-nav" aria-label="' + escapeHtml(t("productsQuickNav")) + '">' +
@@ -3419,7 +3420,7 @@
       "</nav>"
     );
   }
-
+ // PRODUTOS | produtos barra de ferramentas monta a parte visual de produtos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderProductsToolbar(categories) {
     return (
       '<div class="admin-toolbar">' +
@@ -3465,7 +3466,7 @@
       "</div>"
     );
   }
-
+ // PRODUTOS | produto formulario orienta o usuario em produtos. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function focusProductForm(options) {
     const section = document?.querySelector(".admin-products-form-card");
     const form = $("productForm");
@@ -3478,7 +3479,7 @@
       scroll: options?.scroll !== false,
     });
   }
-
+ // PRODUTOS | produto busca orienta o usuario em produtos. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function focusProductSearch() {
     const searchField = $("adminProductSearch");
     const target = document?.querySelector(".admin-products-list-card") || searchField;
@@ -3489,7 +3490,7 @@
       statusTarget: target,
     });
   }
-
+ // PRODUTOS | novo produto fluxo separa uma regra de produtos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function startNewProductFlow() {
     clearAdminFormEditing("productForm");
     state.editingProductId = "";
@@ -3501,18 +3502,18 @@
       focusProductForm({ highlight: true, message: t("newProductReady") });
     });
   }
-
+ // ADMIN | opcao HTML separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function optionHtml(value, label, selected) {
     return '<option value="' + escapeHtml(value) + '"' + (value === selected ? " selected" : "") + ">" + escapeHtml(label) + "</option>";
   }
-
+ // IMAGEM | imagem regra prepara dados de imagens. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeImageValue(value) {
     if (typeof system?.sanitizeImageSource === "function") {
       return system?.sanitizeImageSource(value);
     }
     return String(value || "").trim();
   }
-
+ // IMAGEM | imagem entradas prepara dados de imagens. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeImageEntries(value) {
     const items = Array.isArray(value) ? value : [value];
     return Array?.from(
@@ -3525,11 +3526,11 @@
       )
     );
   }
-
+ // IMAGEM | interno imagem regra confere uma condicao de imagens. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isInlineImageValue(value) {
     return /^data:image\//i.test(String(value || "").trim());
   }
-
+ // IMAGEM | imagem campo ajuste separa uma regra de imagens. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function imageFieldConfig(fieldKey) {
     if (fieldKey === "productImage") {
       return {
@@ -3584,7 +3585,7 @@
 
     return null;
   }
-
+ // IMAGEM | imagem campo elementos separa uma regra de imagens. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function imageFieldElements(fieldKey) {
     const config = imageFieldConfig(fieldKey);
     if (!config) {
@@ -3602,7 +3603,7 @@
       removeButton: document?.querySelector('[data-media-remove="' + fieldKey + '"]'),
     };
   }
-
+ // TEMA | imagem previsualizacao monta a parte visual de tema visual. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderImagePreview(imageValue, label) {
     if (!imageValue) {
       return (
@@ -3623,7 +3624,7 @@
       "</div>"
     );
   }
-
+ // IMAGEM | Admin imagem erro liga imagens aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   function handleAdminImageError(event) {
     const image = event?.target;
     if (!(image instanceof HTMLImageElement) || !image?.matches?.("[data-admin-media-preview-image]")) {
@@ -3633,7 +3634,7 @@
     image?.closest?.(".admin-media-preview-card")?.classList?.add("admin-media-preview-card--empty");
     image?.remove();
   }
-
+ // IMAGEM | imagem campo monta a parte visual de imagens. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderImageField(fieldKey, images, primaryImage) {
     const config = imageFieldConfig(fieldKey);
     const normalizedImages = normalizeImageEntries(images);
@@ -3667,7 +3668,7 @@
       "</div>"
     );
   }
-
+ // IMAGEM | imagem campo regra atualiza imagens. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setImageFieldValue(fieldKey, images, primaryImage) {
     const refs = imageFieldElements(fieldKey);
     if (!refs) {
@@ -3699,7 +3700,7 @@
       refs.fileInput.value = "";
     }
   }
-
+ // IMAGEM | imagem arquivo dados link le dados preenchidos em imagens. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readImageFileAsDataUrl(file) {
     return new Promise(function (resolve, reject) {
       const reader = new FileReader();
@@ -3712,7 +3713,7 @@
       reader.readAsDataURL(file);
     });
   }
-
+ // IMAGEM | aceito imagem arquivo confere uma condicao de imagens. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isAcceptedImageFile(file) {
     if (!file) {
       return false;
@@ -3721,7 +3722,7 @@
     return IMAGE_ALLOWED_TYPES?.has(String(file?.type || "").toLowerCase())
       || /\.(jpe?g|png|webp)$/i.test(String(file?.name || ""));
   }
-
+ // PRODUTOS | produto formulario monta a parte visual de produtos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderProductForm(product, options) {
     const isEditingExisting = Boolean(options?.isEditingExisting);
     const canCancelDraft = Boolean(options?.hasActiveDraft) || Boolean(state?.isProductEditing) || isEditingExisting;
@@ -3833,7 +3834,7 @@
       })
     );
   }
-
+ // PRODUTOS | produto card monta a parte visual de produtos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderProductCard(product) {
     const category = getCategoryBySlug(product?.category);
     const image = product?.primaryImage || product?.imageUrl || "";
@@ -3873,7 +3874,7 @@
       "</article>"
     );
   }
-
+ // ADMIN | categorias painel monta a parte visual de painel Admin. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderCategoriesPanel() {
     const categories = getMenuState()?.categories || [];
     const editingCategory = state?.editingCategorySlug ? getCategoryBySlug(state?.editingCategorySlug) : null;
@@ -3898,7 +3899,7 @@
       "</div>"
     );
   }
-
+ // CATEGORIAS | categoria formulario monta a parte visual de categorias. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderCategoryForm(category) {
     const formId = "categoryForm";
     const slugOriginal = adminDraftFieldValue(formId, "slugOriginal", category?.slug || "");
@@ -3941,7 +3942,7 @@
       })
     );
   }
-
+ // CATEGORIAS | categoria card monta a parte visual de categorias. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderCategoryCard(category) {
     const count = getMenuState()?.products?.filter(function (product) {
       return product?.category === category?.slug;
@@ -3962,7 +3963,7 @@
       "</article>"
     );
   }
-
+ // ADICIONAIS | adicionais painel monta a parte visual de adicionais. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderAddOnsPanel() {
     const addOns = getMenuState()?.addOns || [];
     const editingAddOn = state?.editingAddOnId ? getAddOnById(state?.editingAddOnId) : null;
@@ -3986,7 +3987,7 @@
       "</div>"
     );
   }
-
+ // ADICIONAIS | formulario monta a parte visual de adicionais. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderAddOnForm(addOn) {
     const formId = "addOnForm";
     const addOnIdOriginal = adminDraftFieldValue(formId, "addOnIdOriginal", addOn?.id || "");
@@ -4031,7 +4032,7 @@
       })
     );
   }
-
+ // ADICIONAIS | card monta a parte visual de adicionais. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderAddOnCard(addOn) {
     const active = addOn?.active !== false;
 
@@ -4050,7 +4051,7 @@
       "</article>"
     );
   }
-
+ // COMBOS | combos painel monta a parte visual de combos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderOffersPanel() {
     const offers = getOffersState();
     const editingCombo = state?.editingComboId ? getComboById(state?.editingComboId) : null;
@@ -4079,30 +4080,30 @@
       "</div>"
     );
   }
-
+ // COMBOS | combo produto caixa marcada nome busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboProductCheckboxName(product) {
     return "comboProduct-" + product?.id;
   }
-
+ // COMBOS | combo produto quantidade nome busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboProductQuantityName(product) {
     return "comboQty-" + product?.id;
   }
-
+ // COMBOS | combo produto disponivel busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboProductIsAvailable(product) {
     return normalizeProductStatus(product) === "active" && product?.available !== false;
   }
-
+ // COMBOS | combo produto categoria rotulo busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboProductCategoryLabel(product) {
     const category = getCategoryBySlug(product?.category);
     return category ? categoryName(category) : t("comboUncategorized");
   }
-
+ // COMBOS | combo selecionado contador texto busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboSelectedCountText(count) {
     return count === 1
       ? t("comboSelectedCountOne", { count: count })
       : t("comboSelectedCountOther", { count: count });
   }
-
+ // LOCALIZACAO | combo produto selecao busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboProductSelection(product, selectedMap, formId) {
     const selected = selectedMap.has(product?.id);
     const quantity = selectedMap.get(product?.id) || 1;
@@ -4116,7 +4117,7 @@
       quantity: adminDraftFieldValue(formId, quantityName, String(quantity)),
     };
   }
-
+ // LOCALIZACAO | combo produto entradas busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getComboProductEntries(products, selectedMap, formId) {
     return (Array.isArray(products) ? products : []).map(function (product) {
       const selection = comboProductSelection(product, selectedMap, formId);
@@ -4129,7 +4130,7 @@
       };
     });
   }
-
+ // COMBOS | combo produto comparacao filtros busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboProductMatchesFilters(entry) {
     const filters = state?.comboProductFilters || {};
     const query = String(filters?.search || "")?.trim()?.toLowerCase();
@@ -4155,7 +4156,7 @@
     }
     return true;
   }
-
+ // COMBOS | combo produto categoria opcoes monta a parte visual de combos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderComboProductCategoryOptions(products) {
     const filters = state?.comboProductFilters || {};
     const productCategorySlugs = new Set((Array.isArray(products) ? products : [])
@@ -4180,7 +4181,7 @@
 
     return html;
   }
-
+ // COMBOS | combo produtos barra de ferramentas monta a parte visual de combos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderComboProductsToolbar(products, selectedCount) {
     const filters = state?.comboProductFilters || {};
     const selectedOnly = Boolean(filters?.selectedOnly);
@@ -4220,7 +4221,7 @@
       "</div>"
     );
   }
-
+ // LOCALIZACAO | combo produto escolha monta a parte visual de localizacao e entrega. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderComboProductChoice(product, selectedMap, formId) {
     const selection = comboProductSelection(product, selectedMap, formId);
     const active = comboProductIsAvailable(product);
@@ -4245,13 +4246,13 @@
       "</article>"
     );
   }
-
+ // LOCALIZACAO | combo produto entradas monta a parte visual de localizacao e entrega. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderComboProductEntries(entries, selectedMap, formId) {
     return (Array.isArray(entries) ? entries : []).map(function (entry) {
       return renderComboProductChoice(entry?.product, selectedMap, formId);
     }).join("");
   }
-
+ // COMBOS | grupo combo produto entradas separa uma regra de combos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function groupComboProductEntries(entries) {
     const groups = [];
     const groupMap = {};
@@ -4269,7 +4270,7 @@
     });
     return groups;
   }
-
+ // LOCALIZACAO | combo disponivel produtos monta a parte visual de localizacao e entrega. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderComboAvailableProducts(entries, selectedMap, formId) {
     const groups = groupComboProductEntries(entries);
     if (groups.length <= 1) {
@@ -4285,7 +4286,7 @@
       );
     }).join("");
   }
-
+ // LOCALIZACAO | combo produto grupos monta a parte visual de localizacao e entrega. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderComboProductGroups(products, selectedMap, formId) {
     const entries = getComboProductEntries(products, selectedMap, formId);
     const selectedEntries = entries.filter(function (entry) { return entry?.checked; });
@@ -4321,7 +4322,7 @@
 
     return '<div class="admin-combo-products-groups">' + html + "</div>";
   }
-
+ // LOCALIZACAO | combo produtos seletor monta a parte visual de localizacao e entrega. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderComboProductsPicker(products, selectedMap, formId) {
     const entries = getComboProductEntries(products, selectedMap, formId);
     const selectedCount = entries.filter(function (entry) { return entry?.checked; }).length;
@@ -4331,14 +4332,14 @@
       renderComboProductGroups(products, selectedMap, formId)
     );
   }
-
+ // COMBOS | combo formulario rascunho ativo le dados preenchidos em combos. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function captureComboFormDraftIfActive() {
     const form = $("comboForm");
     if (form instanceof HTMLFormElement && isAdminFormDraftActive("comboForm")) {
       captureAdminFormDraft(form);
     }
   }
-
+ // COMBOS | combo produto busca orienta o usuario em combos. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function focusComboProductSearch(cursor) {
     const searchField = $("comboProductSearch");
     if (!searchField) {
@@ -4350,7 +4351,7 @@
     searchField?.focus();
     searchField?.setSelectionRange(nextCursor, nextCursor);
   }
-
+ // COMBOS | combo produto filtro altera combos depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateComboProductFilter(key, value, options) {
     state.comboProductFilters = state?.comboProductFilters || {
       search: "",
@@ -4365,7 +4366,7 @@
       focusComboProductSearch(options?.cursor);
     }
   }
-
+ // COMBOS | combo formulario rascunho alteracao busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getComboFormDraftForMutation() {
     const form = $("comboForm");
     if (form instanceof HTMLFormElement) {
@@ -4380,7 +4381,7 @@
     guard.formDrafts.comboForm.fields = guard?.formDrafts?.comboForm?.fields || {};
     return guard.formDrafts.comboForm;
   }
-
+ // COMBOS | confirmacao combo formulario rascunho alteracao separa uma regra de combos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function commitComboFormDraftMutation(draft) {
     getAdminEditGuard().formDrafts.comboForm = {
       ...(draft || {}),
@@ -4392,7 +4393,7 @@
     updateSettingsDirtyUi();
     updateAdminMobileSaveBarsUi();
   }
-
+ // COMBOS | combo produto rascunho marcado atualiza combos. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setComboProductDraftChecked(draft, product, checked) {
     const checkboxName = comboProductCheckboxName(product);
     const quantityName = comboProductQuantityName(product);
@@ -4408,7 +4409,7 @@
       };
     }
   }
-
+ // COMBOS | combo produto regra liga combos aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   function handleComboProductAction(action) {
     const products = getMenuState()?.products || [];
 
@@ -4440,7 +4441,7 @@
       renderDashboard();
     }
   }
-
+ // COMBOS | combo produto card altera combos depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function toggleComboProductCard(card) {
     const checkbox = card?.querySelector?.("[data-combo-product-checkbox]");
     if (!checkbox || checkbox?.disabled) {
@@ -4452,7 +4453,7 @@
     renderDashboard();
     return true;
   }
-
+ // COMBOS | combo formulario monta a parte visual de combos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderComboForm(combo) {
     const formId = "comboForm";
     const selectedMap = new Map((Array.isArray(combo?.items) ? combo.items : []).map(function (item) {
@@ -4531,7 +4532,7 @@
       })
     );
   }
-
+ // COMBOS | combo card monta a parte visual de combos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderComboCard(combo) {
     const warning = comboHasUnavailableProducts(combo);
     const image = combo?.primaryImage || combo?.imageUrl || "";
@@ -4557,32 +4558,32 @@
       "</article>"
     );
   }
-
+ // TEMA | selecionado tema preset separa uma regra de tema visual. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveSelectedThemePreset(appearance) {
     return shared?.suggestThemePreset?.(appearance || {}) || "tobias-lanches";
   }
-
+ // TEMA | salvo tema aparencia busca um valor de tema visual. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getSavedThemeAppearance() {
     return state?.states?.brandConfig?.appearance || {};
   }
-
+ // TEMA | salvo tema preset busca um valor de tema visual. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getSavedThemePreset() {
     return state?.savedThemePreset || resolveSelectedThemePreset(getSavedThemeAppearance());
   }
-
+ // TEMA | pendente tema preset busca um valor de tema visual. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getPendingThemePreset() {
     return shared?.normalizeThemePreset?.(state?.pendingThemePreset) || getSavedThemePreset();
   }
-
+ // TEMA | previsualizacao tema preset busca um valor de tema visual. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getPreviewThemePreset() {
     return shared?.normalizeThemePreset?.(state?.previewThemePreset) || "";
   }
-
+ // TEMA | tema previsualizacao regra limpa tema visual. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearThemePreviewState() {
     state.pendingThemePreset = "";
     state.previewThemePreset = "";
   }
-
+ // ADMIN | Admin aplicado aparencia busca um valor de painel Admin. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getAdminAppliedAppearance() {
     const savedAppearance = getSavedThemeAppearance();
     const previewPreset = getPreviewThemePreset();
@@ -4593,7 +4594,7 @@
 
     return resolveThemeAppearanceForSave(previewPreset, savedAppearance);
   }
-
+ // TEMA | tema aparencia separa uma regra de tema visual. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveThemeAppearanceForSave(selectedPreset, currentAppearance) {
     const appearance = currentAppearance && typeof currentAppearance === "object" ? currentAppearance : {};
     const explicitPreset = shared?.normalizeThemePreset?.(appearance?.preset) || "";
@@ -4617,7 +4618,7 @@
       palette: presetConfig?.palette || "gold",
     };
   }
-
+ // TEMA | tema card regra busca um valor de tema visual. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getThemeCardState(presetKey) {
     const previewPreset = getPreviewThemePreset();
     if (previewPreset && previewPreset === presetKey) {
@@ -4626,7 +4627,7 @@
 
     return getSavedThemePreset() === presetKey ? "applied" : "normal";
   }
-
+ // TEMA | tema card etiqueta rotulo busca um valor de tema visual. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getThemeCardBadgeLabel(cardState) {
     if (cardState === "preview") {
       return t("themePreview");
@@ -4638,7 +4639,7 @@
 
     return "";
   }
-
+ // TEMA | tema previsualizacao tokens busca um valor de tema visual. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getThemePreviewTokens(preset) {
     const swatches = Array.isArray(preset?.swatches) && preset?.swatches?.length
       ? preset.swatches
@@ -4656,7 +4657,7 @@
       border: darkTheme ? "rgba(248,250,252,0.08)" : "rgba(15,23,42,0.08)",
     };
   }
-
+ // TEMA | tema previsualizacao card monta a parte visual de tema visual. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderThemePreviewCard(preset) {
     const preview = getThemePreviewTokens(preset);
     const previewStyle = [
@@ -4681,7 +4682,7 @@
       "</span>"
     );
   }
-
+ // NUVEM | tema preset seletor interface conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function syncThemePresetPickerUI(root) {
     const scope = root?.querySelector ? root : document;
     const picker = scope?.querySelector?.(".admin-theme-fieldset");
@@ -4730,7 +4731,7 @@
       previewNotice.hidden = !previewActive;
     }
   }
-
+ // TEMA | ativacao tema previsualizacao atualiza tema visual. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function activateThemePreview(selectedPreset, root) {
     const normalizedPreset = shared?.normalizeThemePreset?.(selectedPreset) || getSavedThemePreset();
     const savedPreset = getSavedThemePreset();
@@ -4742,7 +4743,7 @@
     applyTheme();
     syncThemePresetPickerUI(root || document);
   }
-
+ // TEMA | tema preset seletor monta a parte visual de tema visual. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderThemePresetPicker(appearance) {
     const savedPreset = getSavedThemePreset();
     const selectedPreset = currentDraftFieldValue("themePreset", getPendingThemePreset());
@@ -4792,7 +4793,7 @@
       "</fieldset>"
     );
   }
-
+ // ADMIN | ajustes painel monta a parte visual de painel Admin. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderSettingsPanel() {
     const previousDraftContext = state.formDraftContext;
     state.formDraftContext = "settingsForm";
@@ -4995,7 +4996,7 @@
       state.formDraftContext = previousDraftContext;
     }
   }
-
+ // AVISOS | ajustes pendente aviso monta a parte visual de avisos da tela. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderSettingsDirtyNotice() {
     const dirty = hasSettingsUnsavedChanges();
     return (
@@ -5006,7 +5007,7 @@
       "</p>"
     );
   }
-
+ // ADMIN | ajustes barra monta a parte visual de painel Admin. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderSettingsSaveBar() {
     const dirty = hasSettingsUnsavedChanges();
     return (
@@ -5023,7 +5024,7 @@
       "</div>"
     );
   }
-
+ // RESPONSIVO | Admin celular barra monta a parte visual de telas menores. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderAdminMobileSaveBar(options) {
     const formId = String(options?.formId || "");
     const dirty = isMobileFormSaveBarDirty(formId);
@@ -5042,7 +5043,7 @@
       "</div>"
     );
   }
-
+ // ADMIN | ajustes subgrupo atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function settingsSubgroup(title, content) {
     return (
       '<section class="admin-settings-subgroup">' +
@@ -5051,7 +5052,7 @@
       "</section>"
     );
   }
-
+ // NAVEGACAO | ajustes atalho navegacao monta a parte visual de navegacao. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderSettingsShortcutNav() {
     const links = [
       { href: "#settings-business", label: t("settingsQuickBrand") },
@@ -5073,7 +5074,7 @@
       "</nav>"
     );
   }
-
+ // LOCALIZACAO | entrega locais Admin busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function deliveryLocationsForAdmin(delivery) {
     const source = Array.isArray(delivery?.locations)
       ? delivery.locations
@@ -5096,7 +5097,7 @@
       };
     });
   }
-
+ // LOCALIZACAO | entrega localizacao resumo busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function deliveryLocationSummary(location, feeMode, active) {
     const name = textValue(location?.name, "pt-BR") || textValue(location?.name, "en-US") || t("addDeliveryLocation");
     const feeLabel = feeMode === "custom"
@@ -5109,7 +5110,7 @@
       statusLabel,
     };
   }
-
+ // LOCALIZACAO | entrega localizacao linha monta a parte visual de localizacao e entrega. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderDeliveryLocationRow(rowKey, location, options) {
     const key = String(rowKey || "localidade-" + Date.now());
     const feeMode = currentDraftFieldValue("deliveryLocationFeeMode-" + key, location?.feeMode || "fixed");
@@ -5165,7 +5166,7 @@
       "</details>"
     );
   }
-
+ // LOCALIZACAO | entrega locais editor monta a parte visual de localizacao e entrega. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderDeliveryLocationsEditor(delivery) {
     const locations = deliveryLocationsForAdmin(delivery);
     return (
@@ -5186,7 +5187,7 @@
       "</div>"
     );
   }
-
+ // LOCALIZACAO | entrega locais vazio regra altera localizacao e entrega depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateDeliveryLocationsEmptyState() {
     const list = $("deliveryLocationsList");
     const empty = $("deliveryLocationsEmpty");
@@ -5194,7 +5195,7 @@
       empty.hidden = Boolean(list?.querySelector("[data-delivery-location-row]"));
     }
   }
-
+ // LOCALIZACAO | entrega localizacao linha altera localizacao e entrega depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function addDeliveryLocationRow() {
     const list = $("deliveryLocationsList");
     if (!list) {
@@ -5220,7 +5221,7 @@
       focusSelector: 'input[name^="deliveryLocationNamePt"]',
     });
   }
-
+ // LOCALIZACAO | remocao da linha de entrega tira um bairro do formulario. A logica remove o bloco visual, atualiza o estado vazio e marca ajustes como pendentes.
   function removeDeliveryLocationRow(button) {
     const editor = button?.closest?.(".admin-delivery-locations-editor");
     button?.closest?.("[data-delivery-location-row]")?.remove();
@@ -5234,7 +5235,7 @@
       scroll: false,
     });
   }
-
+ // LOCALIZACAO | cancelamento entrega localizacao edicao confere uma condicao de localizacao e entrega. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function cancelDeliveryLocationEdit(button) {
     const row = button?.closest?.("[data-delivery-location-row]");
     const editor = button?.closest?.(".admin-delivery-locations-editor");
@@ -5264,7 +5265,7 @@
       scroll: false,
     });
   }
-
+ // AVISOS | ajustes retorno visual campo atualiza avisos da tela. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function settingsFeedbackForField(field) {
     const name = String(field?.name || "");
     if (!name || !field?.closest?.("#settingsForm")) {
@@ -5321,7 +5322,7 @@
 
     return null;
   }
-
+ // EVENTOS | ajustes campo regra orienta o usuario em eventos da tela. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function announceSettingsFieldChange(field) {
     const feedback = settingsFeedbackForField(field);
     if (!feedback) {
@@ -5330,7 +5331,7 @@
 
     highlightAdminTarget(feedback?.target);
   }
-
+ // EVENTOS | ajustes campo de entrada atualiza eventos da tela. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function settingsInput(name, label, value, type, min, step, placeholder) {
     const resolvedValue = currentDraftFieldValue(name, value);
     return (
@@ -5350,7 +5351,7 @@
       "</label>"
     );
   }
-
+ // ADMIN | ajustes campo de texto atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function settingsTextarea(name, label, value, placeholder) {
     const resolvedValue = currentDraftFieldValue(name, value);
     return (
@@ -5360,7 +5361,7 @@
       "</label>"
     );
   }
-
+ // ADMIN | ajustes caixa marcada atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function settingsCheckbox(name, label, checked) {
     const resolvedChecked = currentDraftFieldChecked(name, Boolean(checked));
     return (
@@ -5370,12 +5371,12 @@
       "</label>"
     );
   }
-
+ // ADMIN | ajustes externo link regra atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function settingsExternalUrlValue(value) {
     const url = String(value || "")?.trim();
     return url?.startsWith("#") ? "" : url;
   }
-
+ // ADMIN | ajustes secao atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function settingsSection(title, help, content, id) {
     return (
       '<fieldset' + (id ? ' id="' + escapeHtml(id) + '"' : "") + ' class="admin-fieldset admin-settings-section">' +
@@ -5388,7 +5389,7 @@
       "</fieldset>"
     );
   }
-
+ // HORARIOS | agenda entrada dia orienta o usuario em horarios. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function scheduleEntryForDay(schedule, dayIndex, fallbackOpen, fallbackClose) {
     const entry = Array.isArray(schedule)
       ? schedule?.find(function (item) {
@@ -5403,7 +5404,7 @@
       close: String(entry?.close || fallbackClose || "23:00")?.slice(0, 5),
     };
   }
-
+ // HORARIOS | agenda editor monta a parte visual de horarios. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderScheduleEditor(schedule, business) {
     const rows = Array.isArray(schedule) ? schedule : [];
     const firstTimedEntry = rows?.find(function (item) {
@@ -5470,11 +5471,11 @@
       "</fieldset>"
     );
   }
-
+ // IMAGEM | ajustes midia campo monta a parte visual de imagens. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderSettingsMediaField(prefix, label, help, images, primaryImage) {
     return renderImageField(prefix, images || [], primaryImage || "");
   }
-
+ // ADMIN | ajustes selecao atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function settingsSelect(name, label, options, selected) {
     const resolvedSelected = currentDraftFieldValue(name, selected);
     return (
@@ -5490,7 +5491,7 @@
       "</label>"
     );
   }
-
+ // NUVEM | nuvem painel monta a parte visual de nuvem Supabase. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderCloudPanel() {
     const previousDraftContext = state.formDraftContext;
     state.formDraftContext = "cloudForm";
@@ -5550,7 +5551,7 @@
       state.formDraftContext = previousDraftContext;
     }
   }
-
+ // NUVEM | nuvem regra card conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function cloudActionCard(buttonId, title, help, primary, options) {
     const disabled = Boolean(options?.disabled);
     return (
@@ -5564,7 +5565,7 @@
       "</article>"
     );
   }
-
+ // NUVEM | nuvem resumo linha conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function cloudSummaryRow(label, value, options) {
     const rowOptions = options && typeof options === "object" ? options : {};
     return (
@@ -5574,7 +5575,7 @@
       "</div>"
     );
   }
-
+ // NUVEM | nuvem tecnico resumo monta a parte visual de nuvem Supabase. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderCloudTechnicalSummary(cloud) {
     return (
       '<div class="admin-cloud-status-card">' +
@@ -5594,7 +5595,7 @@
       '</div>'
     );
   }
-
+ // NUVEM | nuvem status card monta a parte visual de nuvem Supabase. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderCloudStatusCard(cloud) {
     const status = cloud?.status === "connected" ? t("cloudConnected") : cloud?.status === "error" ? t("cloudError") : t("cloudDisabled");
     const pillClass = cloud?.status === "connected" ? "admin-pill admin-pill--ok" : "admin-pill admin-pill--off";
@@ -5606,7 +5607,7 @@
       '</div>'
     );
   }
-
+ // RELATORIOS | relatorios painel monta a parte visual de relatorios. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderReportsPanel() {
     const reportData = currentReportData(5);
     const status = reportData?.status;
@@ -5671,7 +5672,7 @@
       "</div>"
     );
   }
-
+ // RELATORIOS | metrica card busca um valor de relatorios. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function metricCard(label, value, note) {
     return (
       '<article class="admin-metric-card">' +
@@ -5681,12 +5682,12 @@
       "</article>"
     );
   }
-
+ // RELATORIOS | relatorio contador separa uma regra de relatorios. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function reportCount(count) {
     const value = Number(count || 0);
     return t(value === 1 ? "reportCountOne" : "reportCountOther", { count: value });
   }
-
+ // RELATORIOS | metrica lista monta a parte visual de relatorios. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderMetricList(items) {
     if (!items?.length) {
       return '<p class="admin-note">' + escapeHtml(t("noMetrics")) + "</p>";
@@ -5702,7 +5703,7 @@
       "</ul>"
     );
   }
-
+ // RELATORIOS | escolha metrica lista monta a parte visual de relatorios. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderChoiceMetricList(items, labeler, emptyKey) {
     if (!items?.length) {
       return '<p class="admin-note">' + escapeHtml(t(emptyKey || "noMetrics")) + "</p>";
@@ -5718,7 +5719,7 @@
       "</ul>"
     );
   }
-
+ // RELATORIOS | relatorio pagamento escolha rotulo separa uma regra de relatorios. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function reportPaymentChoiceLabel(value) {
     if (value === "pix") {
       return t("paymentMethodPix");
@@ -5731,7 +5732,7 @@
     }
     return value || "-";
   }
-
+ // RELATORIOS | relatorio atendimento escolha rotulo separa uma regra de relatorios. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function reportServiceChoiceLabel(value) {
     if (value === "delivery") {
       return t("serviceChoiceDelivery");
@@ -5744,11 +5745,11 @@
     }
     return value || "-";
   }
-
+ // RELATORIOS | relatorio busca rotulo separa uma regra de relatorios. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function reportSearchLabel(value) {
     return value || "-";
   }
-
+ // RELATORIOS | relatorio problemas monta uma estrutura de relatorios. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildReportSetupIssues(status) {
     const menu = getMenuState();
     const products = Array.isArray(menu?.products) ? menu.products : [];
@@ -5769,7 +5770,7 @@
 
     return issues?.concat(status?.issues || []);
   }
-
+ // ADMIN | problema lista monta a parte visual de painel Admin. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderIssueList(issues) {
     if (!issues?.length) {
       return '<p class="admin-note">' + escapeHtml(t("noSetupIssues")) + "</p>";
@@ -5785,7 +5786,7 @@
       "</ul>"
     );
   }
-
+ // ADMIN | sistema painel monta a parte visual de painel Admin. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderSystemPanel() {
     return renderPanel(
       "system",
@@ -5810,7 +5811,7 @@
       "</article>"
     );
   }
-
+ // ADMIN | sistema regra card monta a parte visual de painel Admin. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderSystemActionCard(buttonId, title, help, tone) {
     const primary = tone === "primary";
     const danger = tone === "danger";
@@ -5824,7 +5825,7 @@
       "</article>"
     );
   }
-
+ // IMAGEM | imagens texto prepara dados de imagens. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function parseImagesText(value) {
     return normalizeImageEntries(
       String(value || "")
@@ -5835,7 +5836,7 @@
         ?.filter(Boolean)
     );
   }
-
+ // IMAGEM | imagem campo regra le dados preenchidos em imagens. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readImageFieldValue(formData, imagesFieldName, primaryFieldName) {
     const images = parseImagesText(formData?.get(imagesFieldName));
     const primaryImage = sanitizeImageValue(formData?.get(primaryFieldName) || images[0] || "");
@@ -5844,7 +5845,7 @@
       primaryImage,
     };
   }
-
+ // PRODUTOS | produto rascunho le dados preenchidos em produtos. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readProductDraft(form) {
     const formData = new FormData(form);
     const imageField = readImageFieldValue(formData, "imagesText", "primaryImage");
@@ -5883,7 +5884,7 @@
       }),
     };
   }
-
+ // PRODUTOS | produto formulario rascunho le dados preenchidos em produtos. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function captureProductFormDraft() {
     const form = $("productForm");
     if (!(form instanceof HTMLFormElement) || !isProductEditingActive()) {
@@ -5892,7 +5893,7 @@
 
     state.productFormDraft = readProductDraft(form);
   }
-
+ // PRODUTOS | ativo produto rascunho busca um valor de produtos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getActiveProductDraft() {
     const draft = state?.productFormDraft;
     if (!draft) {
@@ -5907,20 +5908,20 @@
 
     return draftId ? null : draft;
   }
-
+ // IDIOMA | serializacao traducoes separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function serializeTranslations(pt, en) {
     const ptValue = String(pt || "")?.trim();
     const enValue = String(en || "")?.trim() || ptValue;
     return { "pt-BR": ptValue, "en-US": enValue };
   }
-
+ // ADMIN | comparavel texto prepara dados de painel Admin. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeComparableText(value) {
     return String(value || "")
       .trim()
       .replace(/\s+/g, " ")
       .toLowerCase();
   }
-
+ // ADMIN | remocao de repetidos longo descricao separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function dedupeLongDescription(description, longDescription) {
     const descriptionValue = description && typeof description === "object" ? description : {};
     const longDescriptionValue = longDescription && typeof longDescription === "object" ? longDescription : {};
@@ -5934,7 +5935,7 @@
         : String(longDescriptionValue["en-US"] || "").trim(),
     };
   }
-
+ // PRODUTOS | produto disponibilidade formulario le dados preenchidos em produtos. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readProductAvailabilityFromForm(formData) {
     if (typeof formData?.has === "function" && formData.has("available")) {
       return formData?.get("available") === "on";
@@ -5944,12 +5945,12 @@
     const existingProduct = productId ? getProductById(productId) : null;
     return existingProduct ? existingProduct?.available !== false : true;
   }
-
+ // IDIOMA | lista texto regra separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function arrayTextValue(value, locale) {
     const source = value && typeof value === "object" ? value[locale] : value;
     return Array.isArray(source) ? source?.join("\n") : "";
   }
-
+ // IDIOMA | serializacao linha traducoes separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function serializeLineTranslations(pt, en, fallback) {
     const fallbackValue = fallback && typeof fallback === "object" ? fallback : {};
     const ptValues = shared?.uniqueLines(pt);
@@ -5962,7 +5963,7 @@
       "en-US": enValues?.length ? enValues : (ptValues?.length ? clone(ptValues) : fallbackEn),
     };
   }
-
+ // PRODUTOS | produto formulario le dados preenchidos em produtos. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readProductForm(form) {
     const formData = new FormData(form);
     const namePt = String(formData?.get("namePt") || "")?.trim();
@@ -6015,7 +6016,7 @@
       updatedAt: now,
     };
   }
-
+ // PRODUTOS | confirmacao produto separa uma regra de produtos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function commitProduct(payload) {
     const menuState = clone(getMenuState());
     const nextProduct = clone(payload);
@@ -6044,7 +6045,7 @@
     system?.setMenuState(menuState, { type: "product-create" });
     return "created";
   }
-
+ // CATEGORIAS | categoria formulario le dados preenchidos em categorias. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readCategoryForm(form) {
     const formData = new FormData(form);
     const namePt = String(formData?.get("namePt") || "")?.trim();
@@ -6060,7 +6061,7 @@
       description: serializeTranslations(formData?.get("descriptionPt"), formData?.get("descriptionEn")),
     };
   }
-
+ // CATEGORIAS | confirmacao categoria separa uma regra de categorias. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function commitCategory(payload) {
     const menuState = clone(getMenuState());
     const existingIndex = menuState?.categories?.findIndex(function (category) {
@@ -6091,7 +6092,7 @@
     system?.setMenuState(menuState, { type: "category-create" });
     return "created";
   }
-
+ // ADICIONAIS | formulario le dados preenchidos em adicionais. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readAddOnForm(form) {
     const formData = new FormData(form);
     const namePt = String(formData?.get("namePt") || "")?.trim();
@@ -6113,7 +6114,7 @@
       updatedAt: new Date()?.toISOString(),
     };
   }
-
+ // ADICIONAIS | confirmacao separa uma regra de adicionais. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function commitAddOn(payload) {
     const menuState = clone(getMenuState());
     const existingIndex = menuState?.addOns?.findIndex(function (addOn) {
@@ -6156,7 +6157,7 @@
     system?.setMenuState(menuState, { type: "add-on-create" });
     return "created";
   }
-
+ // COMBOS | combos container separa uma regra de combos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function ensureOffersContainer(menuState) {
     menuState.offers = menuState?.offers && typeof menuState.offers === "object"
       ? menuState.offers
@@ -6165,7 +6166,7 @@
     menuState.offers.discounts = Array.isArray(menuState?.offers?.discounts) ? menuState.offers.discounts : [];
     return menuState.offers;
   }
-
+ // COMBOS | combo formulario le dados preenchidos em combos. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readComboForm(form) {
     const formData = new FormData(form);
     const namePt = String(formData?.get("namePt") || "")?.trim();
@@ -6210,7 +6211,7 @@
       updatedAt: now,
     };
   }
-
+ // COMBOS | confirmacao combo separa uma regra de combos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function commitCombo(payload) {
     const menuState = clone(getMenuState());
     const offers = ensureOffersContainer(menuState);
@@ -6240,14 +6241,14 @@
     system?.setMenuState(menuState, { type: "combo-create" });
     return "created";
   }
-
+ // LOCALIZACAO | entrega localizacao controle busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function deliveryLocationControl(row, key, field) {
     const name = "deliveryLocation" + field + "-" + key;
     return Array.from(row?.querySelectorAll("[name]") || []).find(function (control) {
       return control?.name === name;
     }) || null;
   }
-
+ // LOCALIZACAO | entrega locais formulario le dados preenchidos em localizacao e entrega. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readDeliveryLocationsFromForm(form) {
     return Array.from(form?.querySelectorAll("[data-delivery-location-row]") || [])
       .map(function (row, index) {
@@ -6279,7 +6280,7 @@
         };
       });
   }
-
+ // ADMIN | ajustes formulario le dados preenchidos em painel Admin. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readSettingsForm(form) {
     const formData = new FormData(form);
     const current = clone(state?.states?.brandConfig);
@@ -6380,7 +6381,7 @@
       },
     };
   }
-
+ // NUVEM | nuvem formulario le dados preenchidos em nuvem Supabase. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readCloudForm(form) {
     const formData = new FormData(form);
     const interval = Number(formData?.get("reconnectIntervalMs"));
@@ -6395,7 +6396,7 @@
       reconnectIntervalMs: interval,
     };
   }
-
+ // NUVEM | relatorio separa uma regra de nuvem Supabase. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   async function exportReport() {
     if (canUseOnlineReports() && !state?.onlineReportData) {
       try {
@@ -6426,19 +6427,19 @@
     system?.downloadJsonFile("relatorio-cardapio-" + Date?.now() + ".json", report);
     showStatus(t("reportExported"), "ok");
   }
-
+ // IMAGEM | copia de seguranca separa uma regra de imagens. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function downloadBackup(filename) {
     system?.downloadJsonFile(filename, system?.exportBackup());
     showStatus(t("backupDownloaded"), "ok");
   }
-
+ // NUVEM | nuvem monitoramento limpa nuvem Supabase. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function stopCloudMonitor() {
     if (state?.cloudMonitorId) {
       window?.clearInterval(state?.cloudMonitorId);
       state.cloudMonitorId = null;
     }
   }
-
+ // NUVEM | reinicio nuvem monitoramento conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function restartCloudMonitor() {
     stopCloudMonitor();
     const cloud = state?.states?.cloudConfig || {};
@@ -6462,7 +6463,7 @@
       });
     }, Number(cloud?.reconnectIntervalMs || 30000));
   }
-
+ // ACESSO | autenticacao envio liga acesso do Admin aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   async function handleAuthSubmit(form) {
     const formData = new FormData(form);
     const password = String(formData?.get("password") || "");
@@ -6501,7 +6502,7 @@
     createSession();
     renderDashboard();
   }
-
+ // EVENTOS | eventos liga eventos da tela aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   function bindEvents() {
     document?.addEventListener("error", handleAdminImageError, true);
 
@@ -7351,7 +7352,7 @@
       }
     });
   }
-
+ // NUVEM | produto regra liga nuvem Supabase aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   async function handleProductAction(action, productId) {
     const product = getProductById(productId);
     if (!product) {
@@ -7456,7 +7457,7 @@
       });
     }
   }
-
+ // NUVEM | categoria regra liga nuvem Supabase aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   async function handleCategoryAction(action, categorySlug) {
     const category = getCategoryBySlug(categorySlug);
     if (!category) {
@@ -7518,7 +7519,7 @@
       });
     }
   }
-
+ // NUVEM | regra liga nuvem Supabase aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   async function handleAddOnAction(action, addOnId) {
     const addOn = getAddOnById(addOnId);
     if (!addOn) {
@@ -7579,7 +7580,7 @@
       });
     }
   }
-
+ // NUVEM | combo regra liga nuvem Supabase aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   async function handleComboAction(action, comboId) {
     const combo = getComboById(comboId);
     if (!combo) {
@@ -7658,7 +7659,7 @@
       });
     }
   }
-
+ // ADMIN | painel Admin liga painel Admin aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   function init() {
     refreshStates();
     state.locale = resolveLocale(state?.locale || getDefaultLocale());

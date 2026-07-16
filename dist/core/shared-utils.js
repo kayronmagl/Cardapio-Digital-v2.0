@@ -1,4 +1,5 @@
 (function () {
+ // ESTADO | armazenamento busca um valor de estado salvo. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getStorage(mode) {
     try {
       return mode === "session" ? window.sessionStorage : window.localStorage;
@@ -6,14 +7,14 @@
       return null;
     }
   }
-
+ // TRATAMENTO | regra prepara dados de tratamento de dados. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function clone(value) {
     if (value === undefined) {
       return undefined;
     }
     return JSON.parse(JSON.stringify(value));
   }
-
+ // ESTADO | armazenamento regra conversa com estado salvo. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function loadStorageValue(key, fallback, mode) {
     try {
       const raw = getStorage(mode)?.getItem(key);
@@ -30,7 +31,7 @@
       return clone(fallback);
     }
   }
-
+ // ESTADO | armazenamento regra atualiza estado salvo. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function saveStorageValue(key, value, mode) {
     try {
       const raw = typeof value === "string" ? value : JSON.stringify(value);
@@ -40,7 +41,7 @@
       return false;
     }
   }
-
+ // ESTADO | remocao de valor salvo apaga uma chave do armazenamento escolhido. A logica tenta sessionStorage ou localStorage e devolve falha sem quebrar a tela.
   function removeStorageValue(key, mode) {
     try {
       getStorage(mode)?.removeItem(key);
@@ -49,7 +50,7 @@
       return false;
     }
   }
-
+ // TRATAMENTO | protecao de texto HTML prepara dados de tratamento de dados. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function escapeHtml(value) {
     return String(value == null ? "" : value)
       .replaceAll("&", "&amp;")
@@ -58,15 +59,15 @@
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#39;");
   }
-
+ // BASE | identificador separa uma regra de base do sistema. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function byId(id) {
     return document.getElementById(id);
   }
-
+ // TRATAMENTO | telefone prepara dados de tratamento de dados. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizePhone(phone) {
     return String(phone || "").replace(/\D/g, "");
   }
-
+ // TRATAMENTO | codigo curto transforma texto em identificador de URL ou categoria. A logica remove acentos, limpa simbolos e usa fallback se faltar nome.
   function slugify(value, fallback) {
     const source = String(value || fallback || "")
       .normalize("NFD")
@@ -77,7 +78,7 @@
 
     return source || String(fallback || "item");
   }
-
+ // TRATAMENTO | unico linhas prepara dados de tratamento de dados. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function uniqueLines(value) {
     return Array.from(
       new Set(
@@ -90,7 +91,7 @@
       )
     );
   }
-
+ // NUVEM | hash da senha separa uma regra de nuvem Supabase. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   async function sha256(value) {
     const subtle = globalThis.crypto?.subtle;
     if (!subtle || typeof subtle.digest !== "function") {
@@ -107,7 +108,7 @@
       })
       .join("");
   }
-
+ // ADMIN | moeda prepara dados de painel Admin. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function formatCurrency(value, options) {
     const locale = options?.locale || "pt-BR";
     const currency = options?.currency || "BRL";
@@ -118,11 +119,11 @@
   }
 
   const PAGE_TRANSITION_KEY = "template-cardapio-page-transition-v1";
-
+ // BASE | preferencia reduzido movimento separa uma regra de base do sistema. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function prefersReducedMotion() {
     return Boolean(window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
   }
-
+ // TRATAMENTO | opcao texto separa uma regra de tratamento de dados. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function optionText(value, fallback) {
     try {
       const resolved = typeof value === "function" ? value() : value;
@@ -131,7 +132,7 @@
       return String(fallback || "").trim();
     }
   }
-
+ // EVENTOS | transicao link confere uma condicao de eventos da tela. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function canTransitionLink(event, anchor) {
     if (!anchor || event?.defaultPrevented) {
       return false;
@@ -172,7 +173,7 @@
       return false;
     }
   }
-
+ // MODAL | pagina transicao camada busca um valor de modal. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getPageTransitionOverlay() {
     let overlay = document?.getElementById("templatePageTransition");
     if (overlay) {
@@ -192,7 +193,7 @@
     document?.body?.appendChild(overlay);
     return overlay;
   }
-
+ // MODAL | pagina transicao camada orienta o usuario em modal. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function hidePageTransitionOverlay() {
     document?.body?.classList?.remove("page-transition-active");
     const overlay = document?.getElementById("templatePageTransition");
@@ -202,7 +203,7 @@
     overlay.setAttribute("aria-hidden", "true");
     overlay?.classList?.remove("page-transition-overlay--show");
   }
-
+ // BASE | pagina transicao chegada atualiza base do sistema. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function markPageTransitionArrival() {
     let pending = false;
 
@@ -229,7 +230,7 @@
 
     window?.setTimeout(clearArrival, 260);
   }
-
+ // BASE | pagina transicao atualiza base do sistema. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setupPageTransition(options) {
     const selector = String(options?.selector || "").trim();
     if (!selector || !document?.body) {
@@ -266,7 +267,6 @@
       try {
         getStorage("session")?.setItem(PAGE_TRANSITION_KEY, "1");
       } catch (error) {
-        // The transition is decorative; navigation must keep working without storage.
       }
 
       document?.body?.classList?.add("page-transition-active");
@@ -396,12 +396,12 @@
       return preset.key;
     })
   );
-
+ // TEMA | tema preset prepara dados de tema visual. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeThemePreset(value) {
     const candidate = String(value || "").trim().toLowerCase();
     return THEME_PRESET_KEYS.has(candidate) ? candidate : "";
   }
-
+ // TEMA | tema preset ajuste busca um valor de tema visual. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getThemePresetConfig(value) {
     const key = normalizeThemePreset(value);
     return (
@@ -410,7 +410,7 @@
       }) || null
     );
   }
-
+ // TEMA | sugestao tema preset separa uma regra de tema visual. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function suggestThemePreset(appearance) {
     const explicitPreset = normalizeThemePreset(appearance?.preset);
     if (explicitPreset) {
@@ -446,7 +446,7 @@
 
     return "tobias-lanches";
   }
-
+ // BASE | aplicado aparencia separa uma regra de base do sistema. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveAppliedAppearance(appearance) {
     const explicitPreset = getThemePresetConfig(appearance?.preset);
     if (explicitPreset) {
@@ -474,13 +474,13 @@
       palette,
     };
   }
-
+ // IDIOMA | idioma ferramentas monta uma estrutura de idioma. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function createLocaleTools(config) {
     const messages = config?.messages || {};
     const getSupportedLocales = config?.getSupportedLocales || function () { return {}; };
     const getDefaultLocale = config?.getDefaultLocale || function () { return "pt-BR"; };
     const getCurrentLocale = config?.getCurrentLocale || getDefaultLocale;
-
+ // IDIOMA | idioma separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
     function resolveLocale(locale) {
       const supported = getSupportedLocales();
       const candidate = String(locale || "").trim();
@@ -495,7 +495,7 @@
         }) || getDefaultLocale()
       );
     }
-
+ // IDIOMA | original mensagem separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
     function rawMessage(key) {
       const locale = resolveLocale(getCurrentLocale());
       return (
@@ -505,7 +505,7 @@
         key
       );
     }
-
+ // IDIOMA | traducao separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
     function translate(key, params) {
       const template = rawMessage(key);
       if (Array.isArray(template)) {
@@ -516,7 +516,7 @@
         return params && params[token] != null ? String(params[token]) : "";
       });
     }
-
+ // IDIOMA | texto regra separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
     function textValue(value, locale) {
       if (value == null) {
         return "";
@@ -544,7 +544,7 @@
 
       return String(Object.values(value)[0] || "");
     }
-
+ // IDIOMA | lista regra separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
     function listValue(value, locale) {
       if (Array.isArray(value)) {
         return value.map(function (item) {

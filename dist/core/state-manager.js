@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   const STORAGE_KEYS = {
     legacyCatalog: "template-cardapio-catalog-v2",
     legacySettings: "template-cardapio-settings-v2",
@@ -1177,7 +1177,7 @@
       "QUEIJO COALHO FATIADO, PRESUNTO FATIADO, CARNE MOÍDA, CALABRESA, CEBOLA, MILHO, CHEDDAR E ORÉGANO.": "Sliced coalho cheese, sliced ham, ground beef, calabrese sausage, onion, corn, cheddar, and oregano.",
       "MISTO RALADO, FRANGO, CARNE MOÍDA, CALABRESA, CEBOLA, CHEIRO VERDE, MILHO, CHEDDAR E CATUPIRY": "Grated mixed cheese, chicken, ground beef, calabrese sausage, onion, fresh herbs, corn, cheddar, and Catupiry"
   };
-
+ // IDIOMA | traducao consulta prepara dados de idioma. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeTranslationLookup(text) {
     return sanitizeText(text, "", 300)
       .replace(/\s+/g, " ")
@@ -1207,11 +1207,11 @@
     catalogMode: "default",
     highlightMode: false,
   };
-
+ // TRATAMENTO | regra prepara dados de tratamento de dados. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function clone(value) {
     return JSON?.parse(JSON?.stringify(value));
   }
-
+ // TRATAMENTO | JSON prepara dados de tratamento de dados. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function safeJsonParse(raw, fallback) {
     if (!raw) {
       return clone(fallback);
@@ -1223,7 +1223,7 @@
       return clone(fallback);
     }
   }
-
+ // ESTADO | armazenamento le dados preenchidos em estado salvo. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readStorage(key, fallback) {
     try {
       return safeJsonParse(window?.localStorage?.getItem(key), fallback);
@@ -1231,7 +1231,7 @@
       return clone(fallback);
     }
   }
-
+ // ESTADO | armazenamento conversa com estado salvo. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function writeStorage(key, value) {
     try {
       window?.localStorage?.setItem(key, JSON?.stringify(value));
@@ -1240,7 +1240,7 @@
       return false;
     }
   }
-
+ // ESTADO | remocao do armazenamento apaga uma chave local com seguranca. A logica tenta limpar o localStorage e devolve sucesso ou falha sem interromper o sistema.
   function removeStorage(key) {
     try {
       window?.localStorage?.removeItem(key);
@@ -1249,7 +1249,7 @@
       return false;
     }
   }
-
+ // TRATAMENTO | texto prepara dados de tratamento de dados. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeText(value, fallback, maxLength) {
     const resolved = String(value == null ? fallback || "" : value)
       ?.replace(/[<>"]/g, "")
@@ -1257,7 +1257,7 @@
 
     return Number.isFinite(maxLength) ? resolved?.slice(0, maxLength) : resolved;
   }
-
+ // LOCALIZACAO | mapas link prepara dados de localizacao e entrega. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeMapsUrl(value) {
     const raw = sanitizeText(value, "", 600);
     if (!raw) {
@@ -1271,11 +1271,11 @@
       return "";
     }
   }
-
+ // LEGAL | legal modo prepara dados de textos legais. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeLegalMode(value) {
     return sanitizeText(value, "internal", 20)?.toLowerCase() === "external" ? "external" : "internal";
   }
-
+ // LEGAL | legal link prepara dados de textos legais. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeLegalUrl(value) {
     const raw = sanitizeText(value, "", 600);
     if (!raw) {
@@ -1289,7 +1289,7 @@
       return "";
     }
   }
-
+ // LEGAL | legal ajuste prepara dados de textos legais. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeLegalConfig(rawLegal) {
     const input = rawLegal && typeof rawLegal === "object" ? rawLegal : {};
     const source = { ...(DEFAULT_BRAND?.legal || {}), ...clone(input) };
@@ -1310,7 +1310,7 @@
       termsOfUseUrl: sanitizeLegalUrl(source?.termsOfUseUrl),
     };
   }
-
+ // LOCALIZACAO | coordenada prepara dados de localizacao e entrega. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeCoordinate(value, min, max) {
     const raw = sanitizeText(value, "", 40)?.replace(",", ".");
     if (!raw) {
@@ -1324,7 +1324,7 @@
 
     return String(number);
   }
-
+ // LOCALIZACAO | estabelecimento localizacao prepara dados de localizacao e entrega. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeBusinessLocation(rawLocation, rawBusiness) {
     const source = rawLocation && typeof rawLocation === "object" ? rawLocation : {};
     const business = rawBusiness && typeof rawBusiness === "object" ? rawBusiness : {};
@@ -1340,7 +1340,7 @@
       pickupNote: sanitizeText(source?.pickupNote || source?.note, "", 220),
     };
   }
-
+ // NUVEM | ajustado nuvem credenciais confere uma condicao de nuvem Supabase. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function hasConfiguredCloudCredentials(cloudConfig) {
     const combined = String(cloudConfig?.url || "") + String(cloudConfig?.anonKey || "");
     return Boolean(
@@ -1349,7 +1349,7 @@
       !/YOUR_PROJECT|YOUR-PROJECT|YOUR_SUPABASE_ANON_KEY|YOUR_ANON_PUBLIC_KEY|SEU-PROJETO|SUA_ANON_PUBLIC_KEY/i.test(combined)
     );
   }
-
+ // NUVEM | publico nuvem ajuste prepara dados de nuvem Supabase. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizePublicCloudConfig(rawConfig) {
     const input = rawConfig && typeof rawConfig === "object" ? rawConfig : {};
     const tables = input?.tables && typeof input?.tables === "object" ? input?.tables : {};
@@ -1382,7 +1382,7 @@
       lastError: sanitizeText(input?.lastError, "", 300),
     };
   }
-
+ // NUVEM | antigo Supabase ajuste prepara dados de nuvem Supabase. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeLegacySupabaseConfig(rawConfig) {
     const normalized = normalizePublicCloudConfig(rawConfig);
     if (rawConfig?.enabled == null) {
@@ -1390,7 +1390,7 @@
     }
     return normalized;
   }
-
+ // NUVEM | original nuvem ajuste regra confere uma condicao de nuvem Supabase. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function hasRawCloudConfigValue(rawConfig) {
     return Boolean(
       rawConfig &&
@@ -1398,7 +1398,7 @@
       Object?.keys(rawConfig)?.length > 0
     );
   }
-
+ // NUVEM | mescla operacional nuvem ajuste conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function mergeOperationalCloudConfig(baseConfig, operationalSource) {
     const source = operationalSource && typeof operationalSource === "object" ? operationalSource : {};
     return sanitizeCloudConfig({
@@ -1413,7 +1413,7 @@
       lastError: sanitizeText(source?.lastError, baseConfig?.lastError || "", 300),
     });
   }
-
+ // NUVEM | nuvem ajuste conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function resolveCloudConfig(options) {
     const publicCloudConfig = sanitizeCloudConfig(options?.publicCloudConfig);
     const storedCloudConfig = sanitizeCloudConfig(options?.storedCloudConfig);
@@ -1452,7 +1452,7 @@
 
     return mergeOperationalCloudConfig(attachStatus(defaultCloudConfig), storedCloudConfig);
   }
-
+ // TRATAMENTO | codigo curto prepara nomes para virar identificador. A logica remove acentos, troca espacos por hifen e usa fallback quando o texto fica vazio.
   function slugify(value, fallback) {
     const source = sanitizeText(value, fallback || "", 120)
       ?.normalize("NFD")
@@ -1463,7 +1463,7 @@
 
     return source || sanitizeText(fallback || "item", "item", 80)?.toLowerCase()?.replace(/\s+/g, "-");
   }
-
+ // BASE | unico identificador prepara dados de base do sistema. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function uniqueId(baseId, usedIds) {
     let nextId = baseId || "item";
     let counter = 1;
@@ -1476,7 +1476,7 @@
     usedIds?.add(nextId);
     return nextId;
   }
-
+ // TRATAMENTO | primeiro objeto texto busca um valor de tratamento de dados. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function firstObjectText(value) {
     if (!value || typeof value !== "object" || Array.isArray(value)) {
       return "";
@@ -1492,7 +1492,7 @@
 
     return "";
   }
-
+ // IDIOMA | conhecido ingles traducao separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveKnownEnglishTranslation(text) {
     const source = sanitizeText(text, "", 300);
     if (!source) {
@@ -1511,7 +1511,7 @@
     });
     return sanitizeText(normalizedMatch?.[1], "", 300);
   }
-
+ // IDIOMA | traducoes separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function ensureTranslations(value, fallback) {
     if (value && typeof value === "object" && !Array.isArray(value)) {
       const fallbackText = sanitizeText(fallback, "", 300) || firstObjectText(value);
@@ -1536,7 +1536,7 @@
     const translatedEn = resolveKnownEnglishTranslation(text);
     return { "pt-BR": text, "en-US": translatedEn || text };
   }
-
+ // LOCALIZACAO | entrega locais prepara dados de localizacao e entrega. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeDeliveryLocations(deliverySource) {
     const source = deliverySource && typeof deliverySource === "object" ? deliverySource : {};
     const legacySource = Array.isArray(source?.locations)
@@ -1569,7 +1569,7 @@
       })
       .filter((location) => Boolean(location?.id && (location?.name?.["pt-BR"] || location?.name?.["en-US"])));
   }
-
+ // LOCALIZACAO | entrega locais antigo bairros busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function deliveryLocationsToLegacyNeighborhoods(locations) {
     return (Array.isArray(locations) ? locations : []).map((location) => ({
       name: clone(location?.name),
@@ -1577,7 +1577,7 @@
       available: location?.active !== false,
     }));
   }
-
+ // TRATAMENTO | texto lista separa uma regra de tratamento de dados. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function ensureStringArray(value) {
     if (!Array.isArray(value)) {
       return [];
@@ -1591,7 +1591,7 @@
       )
     );
   }
-
+ // IDIOMA | idioma lista traducoes separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function ensureLocaleArrayTranslations(value, fallback) {
     const fallbackSource = fallback && typeof fallback === "object" ? fallback : {};
     const fallbackPt = ensureStringArray(fallbackSource["pt-BR"]);
@@ -1612,7 +1612,7 @@
       "en-US": source?.length ? source : fallbackEn,
     };
   }
-
+ // IMAGEM | imagem lista separa uma regra de imagens. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function ensureImageList(product) {
     const images = Array.isArray(product?.images)
       ? product?.images
@@ -1629,7 +1629,7 @@
 
     return normalized;
   }
-
+ // ADMIN | cardapio antigo catalogo monta uma estrutura de painel Admin. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildMenuFromLegacyCatalog(legacyCatalog, legacySettings) {
     const catalog = legacyCatalog && typeof legacyCatalog === "object" ? legacyCatalog : {};
     const settings = legacySettings && typeof legacySettings === "object" ? legacySettings : {};
@@ -1649,17 +1649,17 @@
       locale: sanitizeText(settings?.i18n?.defaultLocale, "pt-BR", 12),
     };
   }
-
+ // COMBOS | combo desconto tipo prepara dados de combos. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeOfferDiscountType(value) {
     const type = sanitizeText(value, "", 20)?.toLowerCase();
     return type === "fixed" || type === "amount" || type === "valor" ? "fixed" : "percent";
   }
-
+ // COMBOS | combo data prepara dados de combos. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeOfferDate(value) {
     const text = sanitizeText(value, "", 20);
     return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : "";
   }
-
+ // COMBOS | combo itens prepara dados de combos. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeOfferItems(items) {
     return (Array.isArray(items) ? items : [])
       .map((item) => ({
@@ -1668,7 +1668,7 @@
       }))
       .filter((item) => item.productId);
   }
-
+ // COMBOS | combos prepara dados de combos. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeOffers(rawOffers) {
     const source = rawOffers && typeof rawOffers === "object" ? rawOffers : {};
     const rawCombos = Array.isArray(source?.combos)
@@ -1745,7 +1745,7 @@
       discounts,
     };
   }
-
+ // ESTADO | cardapio regra prepara dados de estado salvo. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeMenuState(rawMenuState) {
     const issues = [];
     const input = rawMenuState && typeof rawMenuState === "object" ? rawMenuState : {};
@@ -1862,11 +1862,11 @@
       issues,
     };
   }
-
+ // IMAGEM | interno imagem dados link confere uma condicao de imagens. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isInlineImageDataUrl(value) {
     return /^data:image\//i.test(String(value || "").trim());
   }
-
+ // IMAGEM | imagem origem prepara dados de imagens. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeImageSource(value) {
     if (value == null) {
       return "";
@@ -1904,7 +1904,7 @@
 
     return "";
   }
-
+ // PRODUTOS | produto ativo marcador separa uma regra de produtos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveProductActiveFlag(product) {
     if (!product || typeof product !== "object") {
       return false;
@@ -1916,15 +1916,15 @@
 
     return product?.status !== "inactive";
   }
-
+ // PRODUTOS | produto disponibilidade marcador separa uma regra de produtos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveProductAvailabilityFlag(product) {
     return product?.available !== false;
   }
-
+ // PRODUTOS | produto status separa uma regra de produtos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveProductStatus(product) {
     return resolveProductActiveFlag(product) ? "active" : "inactive";
   }
-
+ // IMAGEM | lista de imagens garante que imagem unica e galeria sigam o mesmo formato. A logica transforma valor solto em lista, remove repetidos e ignora entradas vazias.
   function ensureImageArray(value) {
     const items = Array.isArray(value) ? value : [value];
     return Array?.from(
@@ -1935,7 +1935,7 @@
       )
     );
   }
-
+ // ESTADO | marca ajuste prepara dados de estado salvo. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeBrandConfig(rawBrandConfig) {
     const input = rawBrandConfig && typeof rawBrandConfig === "object" ? rawBrandConfig : {};
     const next = clone(DEFAULT_BRAND);
@@ -2030,7 +2030,7 @@
 
     return next;
   }
-
+ // NUVEM | nuvem ajuste prepara dados de nuvem Supabase. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeCloudConfig(rawCloudConfig) {
     const input = rawCloudConfig && typeof rawCloudConfig === "object" ? rawCloudConfig : {};
     const source = { ...clone(SUPABASE_DEFAULTS), ...clone(input) };
@@ -2078,14 +2078,14 @@
       lastError: sanitizeText(source?.lastError, "", 300),
     };
   }
-
+ // IDIOMA | traducao rotulo separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function translationSortLabel(value, fallback) {
     if (value && typeof value === "object") {
       return sanitizeText(value?.["pt-BR"] || value?.["en-US"], fallback || "", 120);
     }
     return sanitizeText(value, fallback || "", 120);
   }
-
+ // PEDIDO | pedido ordena dados de pedido. A logica compara ordem manual, nome e fallback para a lista aparecer sempre previsivel.
   function compareSortOrder(leftOrder, rightOrder, leftLabel, rightLabel) {
     const leftSort = Number.isFinite(Number(leftOrder)) ? Number(leftOrder) : Number.MAX_SAFE_INTEGER;
     const rightSort = Number.isFinite(Number(rightOrder)) ? Number(rightOrder) : Number.MAX_SAFE_INTEGER;
@@ -2096,7 +2096,7 @@
 
     return String(leftLabel || "").localeCompare(String(rightLabel || ""), "pt-BR");
   }
-
+ // CATEGORIAS | categoria pedido ordena dados de categorias. A logica compara ordem manual, nome e fallback para a lista aparecer sempre previsivel.
   function compareCategoryOrder(left, right) {
     return compareSortOrder(
       left?.sortOrder,
@@ -2105,7 +2105,7 @@
       translationSortLabel(right?.name, right?.slug)
     );
   }
-
+ // ADICIONAIS | pedido ordena dados de adicionais. A logica compara ordem manual, nome e fallback para a lista aparecer sempre previsivel.
   function compareAddOnOrder(left, right) {
     return compareSortOrder(
       left?.sortOrder,
@@ -2114,7 +2114,7 @@
       translationSortLabel(right?.name, right?.id)
     );
   }
-
+ // PRODUTOS | produto pedido ordena dados de produtos. A logica compara ordem manual, nome e fallback para a lista aparecer sempre previsivel.
   function compareProductOrder(left, right) {
     return compareSortOrder(
       left?.sortOrder,
@@ -2123,7 +2123,7 @@
       translationSortLabel(right?.name, right?.id)
     );
   }
-
+ // ESTADO | padrao oficial regra monta uma estrutura de estado salvo. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildCanonicalStates() {
     const legacyCatalog = readStorage(STORAGE_KEYS?.legacyCatalog, {});
     const legacySettings = readStorage(STORAGE_KEYS?.legacySettings, {});
@@ -2150,7 +2150,7 @@
       issues,
     };
   }
-
+ // ESTADO | antigo catalogo regra separa uma regra de estado salvo. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function legacyCatalogFromState(menuState) {
     return {
       categories: menuState.categories.map((category) => ({
@@ -2189,7 +2189,7 @@
       offers: clone(menuState?.offers || { combos: [], discounts: [] }),
     };
   }
-
+ // NUVEM | antigo ajustes regra separa uma regra de nuvem Supabase. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function legacySettingsFromState(brandConfig, cloudConfig) {
     return {
       i18n: clone(brandConfig?.i18n),
@@ -2213,7 +2213,7 @@
       },
     };
   }
-
+ // EVENTOS | disparo regra regra altera eventos da tela depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function emitStateChange(detail) {
     window?.dispatchEvent(
       new CustomEvent("template:state-change", {
@@ -2221,7 +2221,7 @@
       })
     );
   }
-
+ // ESTADO | padrao oficial regra separa uma regra de estado salvo. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function writeCanonicalStates(nextStates, meta) {
     writeStorage(STORAGE_KEYS?.menuState, nextStates?.menuState);
     writeStorage(STORAGE_KEYS?.brandConfig, nextStates?.brandConfig);
@@ -2233,16 +2233,16 @@
     );
     emitStateChange(meta || { type: "sync" });
   }
-
+ // NUVEM | metrica bucket busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function metricBucket(value) {
     return value && typeof value === "object" && !Array.isArray(value) ? { ...value } : {};
   }
-
+ // RELATORIOS | metrica contador busca um valor de relatorios. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function metricCount(value) {
     const count = Number(value || 0);
     return Number.isFinite(count) && count > 0 ? count : 0;
   }
-
+ // RELATORIOS | metricas prepara dados de relatorios. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeMetrics(metrics) {
     const source = metrics && typeof metrics === "object" ? metrics : {};
     return {
@@ -2262,11 +2262,11 @@
       lastSearchNoResultAt: metricBucket(source?.lastSearchNoResultAt),
     };
   }
-
+ // RELATORIOS | metricas busca um valor de relatorios. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getMetrics() {
     return normalizeMetrics(readStorage(STORAGE_KEYS?.metrics, DEFAULT_METRICS));
   }
-
+ // RELATORIOS | metricas atualiza relatorios. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function saveMetrics(metrics, meta) {
     writeStorage(STORAGE_KEYS?.metrics, metrics);
     emitStateChange(meta || { type: "metrics" });
@@ -2281,7 +2281,7 @@
     "service_selected",
     "search_no_result",
   ]);
-
+ // NUVEM | metrica evento tabela nome busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function metricEventTableName(cloudConfig) {
     return sanitizeText(
       cloudConfig?.tables?.metricEvents,
@@ -2289,7 +2289,7 @@
       80
     );
   }
-
+ // ACESSO | metrica sessao identificador busca um valor de acesso do Admin. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getMetricSessionId() {
     const current = sanitizeText(readStorage(STORAGE_KEYS?.metricSession, ""), "", 80);
     if (current) {
@@ -2304,20 +2304,20 @@
     writeStorage(STORAGE_KEYS?.metricSession, generated);
     return generated;
   }
-
+ // RELATORIOS | metrica evento tipo prepara dados de relatorios. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeMetricEventType(value) {
     const eventType = sanitizeText(value, "", 40);
     return ONLINE_METRIC_EVENTS.has(eventType) ? eventType : "";
   }
-
+ // RELATORIOS | metrica produto identificador prepara dados de relatorios. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeMetricProductId(value) {
     return sanitizeText(value, "", 80);
   }
-
+ // RELATORIOS | metrica regra prepara dados de relatorios. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeMetricValue(value, maxLength) {
     return sanitizeText(value, "", maxLength || 120);
   }
-
+ // RELATORIOS | metrica busca termo prepara dados de relatorios. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeMetricSearchTerm(value) {
     const term = sanitizeMetricValue(value, 80)?.trim()?.toLowerCase();
     if (!term || term.length < 3) {
@@ -2330,7 +2330,7 @@
 
     return term;
   }
-
+ // RELATORIOS | metrica evento pacote de dados monta uma estrutura de relatorios. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildMetricEventPayload(eventType, details) {
     const type = sanitizeMetricEventType(eventType);
     if (!type) {
@@ -2349,7 +2349,7 @@
       metadata: {},
     };
   }
-
+ // NUVEM | metrica evento online registra uso em nuvem Supabase. A logica soma o evento localmente e, se a nuvem estiver ativa, tenta enviar online sem travar a tela.
   function recordMetricEventOnline(eventType, details) {
     const cloudConfig = getStates()?.cloudConfig;
     if (!isSupabaseConfigured(cloudConfig)) {
@@ -2390,20 +2390,20 @@
         return { ok: false };
       });
   }
-
+ // NUVEM | metrica evento online silencioso registra uso em nuvem Supabase. A logica soma o evento localmente e, se a nuvem estiver ativa, tenta enviar online sem travar a tela.
   function recordMetricEventOnlineSilently(eventType, details) {
     recordMetricEventOnline(eventType, details || {});
   }
-
+ // FAVORITOS | favoritos busca um valor de favoritos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getFavorites() {
     return ensureStringArray(readStorage(STORAGE_KEYS?.favorites, []));
   }
-
+ // FAVORITOS | favoritos atualiza favoritos. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function saveFavorites(favorites) {
     writeStorage(STORAGE_KEYS?.favorites, ensureStringArray(favorites));
     emitStateChange({ type: "favorites" });
   }
-
+ // ESTADO | usuario interface regra busca um valor de estado salvo. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getClientUiState() {
     const ui = readStorage(STORAGE_KEYS?.clientUi, DEFAULT_CLIENT_UI);
     return {
@@ -2412,7 +2412,7 @@
       highlightMode: Boolean(ui?.highlightMode),
     };
   }
-
+ // ESTADO | usuario interface regra atualiza estado salvo. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function saveClientUiState(nextUi) {
     const current = getClientUiState();
     const ui = {
@@ -2424,20 +2424,18 @@
     emitStateChange({ type: "client-ui" });
     return ui;
   }
-
+ // ESTADO | regra conversa com estado salvo. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function loadStates() {
     const states = buildCanonicalStates();
-    // Bootstrap must stay read-only: opening Admin or expanding passive panels
-    // should not publish offline changes to the public menu through localStorage.
     return clone(states);
   }
 
   let currentStates = loadStates();
-
+ // ESTADO | regra busca um valor de estado salvo. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getStates() {
     return clone(currentStates);
   }
-
+ // ESTADO | regra altera estado salvo depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateStates(updater, meta) {
     const draft = getStates();
     const next = typeof updater === "function" ? updater(draft) || draft : draft;
@@ -2457,7 +2455,7 @@
     writeCanonicalStates(sanitized, meta);
     return getStates();
   }
-
+ // ESTADO | cardapio regra atualiza estado salvo. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setMenuState(menuState, meta) {
     return updateStates(
       (draft) => {
@@ -2467,7 +2465,7 @@
       meta || { type: "menu" }
     );
   }
-
+ // ESTADO | marca ajuste atualiza estado salvo. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setBrandConfig(brandConfig, meta) {
     return updateStates(
       (draft) => {
@@ -2477,7 +2475,7 @@
       meta || { type: "brand" }
     );
   }
-
+ // NUVEM | nuvem ajuste atualiza nuvem Supabase. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setCloudConfig(cloudConfig, meta) {
     return updateStates(
       (draft) => {
@@ -2487,14 +2485,14 @@
       meta || { type: "cloud" }
     );
   }
-
+ // ESTADO | sistema dados prepara dados de estado salvo. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeSystemData() {
     const next = buildCanonicalStates();
     currentStates = next;
     writeCanonicalStates(next, { type: "sanitize", issues: next?.issues });
     return getStates();
   }
-
+ // ESTADO | sistema limpa estado salvo. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function resetSystem() {
     removeStorage(STORAGE_KEYS?.menuState);
     removeStorage(STORAGE_KEYS?.brandConfig);
@@ -2512,7 +2510,7 @@
     saveClientUiState(clone(DEFAULT_CLIENT_UI));
     return getStates();
   }
-
+ // ESTADO | copia de seguranca separa uma regra de estado salvo. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function exportBackup() {
     return {
       version: 2,
@@ -2525,7 +2523,7 @@
       clientUi: getClientUiState(),
     };
   }
-
+ // ESTADO | restauracao da copia aplica dados importados ao sistema. A logica valida o arquivo, normaliza cardapio, marca, nuvem e metricas, depois salva tudo no estado oficial.
   function restoreBackup(backup) {
     if (!backup || typeof backup !== "object") {
       throw new Error("Backup inválido.");
@@ -2552,7 +2550,7 @@
     saveClientUiState(backup?.clientUi || clone(DEFAULT_CLIENT_UI));
     return getStates();
   }
-
+ // NUVEM | metrica registra uso em nuvem Supabase. A logica soma o evento localmente e, se a nuvem estiver ativa, tenta enviar online sem travar a tela.
   function trackMetric(bucketKey, productId) {
     if (!productId) {
       return;
@@ -2572,13 +2570,13 @@
       productId,
     });
   }
-
+ // NUVEM | metrica bucket total busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function metricBucketTotal(bucket) {
     return Object?.values(bucket || {})?.reduce(function (total, count) {
       return total + metricCount(count);
     }, 0);
   }
-
+ // NUVEM | metrica escolha altera nuvem Supabase depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function addMetricChoice(metrics, bucketKey, lastBucketKey, value, now) {
     const key = sanitizeText(value, "", 80);
     if (!key) {
@@ -2590,7 +2588,7 @@
     metrics[bucketKey][key] = metricCount(metrics[bucketKey][key]) + 1;
     metrics[lastBucketKey][key] = now;
   }
-
+ // HORARIOS | checkout aberto registra uso em horarios. A logica soma o evento localmente e, se a nuvem estiver ativa, tenta enviar online sem travar a tela.
   function trackCheckoutOpened() {
     const metrics = getMetrics();
     metrics.checkoutOpened = metricCount(metrics?.checkoutOpened) + 1;
@@ -2598,7 +2596,7 @@
     saveMetrics(metrics, { type: "track-checkout-opened" });
     recordMetricEventOnlineSilently("checkout_opened");
   }
-
+ // PEDIDO | atendimento escolha chave busca um valor de pedido. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function serviceChoiceKey(details) {
     if (details?.service === "dine_in" || details?.service === "pickup" || details?.service === "delivery") {
       return details?.service;
@@ -2614,7 +2612,7 @@
     }
     return "";
   }
-
+ // PEDIDO | pedido preparado registra uso em pedido. A logica soma o evento localmente e, se a nuvem estiver ativa, tenta enviar online sem travar a tela.
   function trackOrderPrepared(details) {
     const metrics = getMetrics();
     const now = new Date()?.toISOString();
@@ -2632,7 +2630,7 @@
       recordMetricEventOnlineSilently("service_selected", { value: serviceChoice });
     }
   }
-
+ // BUSCA | busca sem resultado registra uso em busca e filtros. A logica soma o evento localmente e, se a nuvem estiver ativa, tenta enviar online sem travar a tela.
   function trackSearchNoResult(query) {
     const term = sanitizeMetricSearchTerm(query);
     if (!term || term?.length < 3) {
@@ -2645,7 +2643,7 @@
     saveMetrics(metrics, { type: "track-search-no-result", query: term });
     recordMetricEventOnlineSilently("search_no_result", { value: term });
   }
-
+ // NUVEM | topo metricas busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getTopMetrics(bucketKey, limit) {
     const metrics = getMetrics();
     const source = metrics[bucketKey] || {};
@@ -2661,7 +2659,7 @@
         product: byId?.get(productId) || null,
       }));
   }
-
+ // NUVEM | topo escolha metricas busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getTopChoiceMetrics(bucketKey, limit) {
     const metrics = getMetrics();
     const source = metrics[bucketKey] || {};
@@ -2673,7 +2671,7 @@
         count: metricCount(count),
       }));
   }
-
+ // RELATORIOS | relatorio resumo busca um valor de relatorios. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getReportSummary() {
     const metrics = getMetrics();
     return {
@@ -2683,12 +2681,12 @@
       orderPrepared: metricCount(metrics?.orderPrepared),
     };
   }
-
+ // PRODUTOS | produto consulta identificador busca um valor de produtos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function productLookupById() {
     const products = getStates()?.menuState?.products || [];
     return new Map(products.map((product) => [product?.id, product]));
   }
-
+ // RELATORIOS | topo produto metrica linhas separa uma regra de relatorios. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function topProductMetricRows(source, limit) {
     const byId = productLookupById();
     return Object?.entries(source || {})
@@ -2700,7 +2698,7 @@
         product: byId?.get(productId) || null,
       }));
   }
-
+ // RELATORIOS | topo escolha metrica linhas separa uma regra de relatorios. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function topChoiceMetricRows(source, limit) {
     return Object?.entries(source || {})
       .sort((left, right) => metricCount(right[1]) - metricCount(left[1]))
@@ -2710,7 +2708,7 @@
         count: metricCount(count),
       }));
   }
-
+ // NUVEM | online relatorio dados monta uma estrutura de nuvem Supabase. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildOnlineReportData(rows, limit) {
     const viewed = {};
     const added = {};
@@ -2759,7 +2757,7 @@
       searchesWithNoResult: topChoiceMetricRows(searchNoResults, limit || 5),
     };
   }
-
+ // AVISOS | sistema status busca um valor de avisos da tela. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getSystemStatus() {
     const states = getStates();
     const issues = buildCanonicalStates()?.issues;
@@ -2775,7 +2773,7 @@
       },
     };
   }
-
+ // PRODUTOS | favorito altera produtos depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function toggleFavorite(productId) {
     const favorites = new Set(getFavorites());
 
@@ -2788,27 +2786,27 @@
     saveFavorites(Array?.from(favorites));
     return getFavorites();
   }
-
+ // NUVEM | Supabase ajustado confere uma condicao de nuvem Supabase. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isSupabaseConfigured(cloudConfig) {
     return hasConfiguredCloudCredentials(cloudConfig);
   }
-
+ // NUVEM | Supabase acesso token busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getSupabaseAccessToken() {
     return String(window?.TemplateAdminAuth?.getSupabaseAccessToken?.() || "");
   }
-
+ // NUVEM | Supabase usuario identificador busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getSupabaseUserId() {
     return sanitizeText(window?.TemplateAdminAuth?.getSupabaseUser?.()?.id, "", 80);
   }
-
+ // NUVEM | Supabase token de acesso conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function resolveSupabaseBearer(cloudConfig) {
     return getSupabaseAccessToken() || String(cloudConfig?.anonKey || "");
   }
-
+ // NUVEM | produto imagem bucket separa uma regra de nuvem Supabase. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveProductImageBucket(cloudConfig) {
     return sanitizeText(cloudConfig?.storage?.bucket, PRODUCT_IMAGE_BUCKET, 120) || PRODUCT_IMAGE_BUCKET;
   }
-
+ // NUVEM | Supabase cabecalhos conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function supabaseHeaders(cloudConfig, extras) {
     return {
       apikey: cloudConfig?.anonKey,
@@ -2819,16 +2817,16 @@
       ...extras,
     };
   }
-
+ // NUVEM | nuvem base link monta uma estrutura de nuvem Supabase. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildCloudBaseUrl(cloudConfig) {
     return String(cloudConfig?.url || "")?.replace(/\/+$/, "");
   }
-
+ // NUVEM | nuvem REST link monta uma estrutura de nuvem Supabase. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildCloudRestUrl(cloudConfig, path) {
     const normalizedPath = String(path || "")?.replace(/^\/+/, "");
     return new URL(`/rest/v1/${normalizedPath}`, buildCloudBaseUrl(cloudConfig) + "/")?.toString();
   }
-
+ // NUVEM | nuvem armazenamento objeto link monta uma estrutura de nuvem Supabase. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildCloudStorageObjectUrl(cloudConfig, bucketId, objectPath, isPublic) {
     const bucket = encodeURIComponent(String(bucketId || "").trim());
     const normalizedPath = String(objectPath || "")
@@ -2838,7 +2836,7 @@
     const prefix = isPublic ? "public/" : "";
     return new URL(`/storage/v1/object/${prefix}${bucket}/${normalizedPath}`, buildCloudBaseUrl(cloudConfig) + "/")?.toString();
   }
-
+ // NUVEM | armazenamento cabecalhos busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function storageHeaders(cloudConfig, extras) {
     return {
       apikey: cloudConfig?.anonKey,
@@ -2846,7 +2844,7 @@
       ...extras,
     };
   }
-
+ // IDIOMA | armazenamento erro mensagem busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function storageUploadErrorMessage(status, details) {
     const normalized = String(details || "").toLowerCase();
 
@@ -2880,7 +2878,7 @@
 
     return "Não foi possível enviar a imagem do produto. Verifique a configuração do Storage do Supabase.";
   }
-
+ // IMAGEM | armazenamento erro monta uma estrutura de imagens. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function createStorageUploadError(status, details) {
     const error = new Error("Falha ao enviar imagem do produto.");
     error.status = status;
@@ -2888,7 +2886,7 @@
     error.userMessage = storageUploadErrorMessage(status, details);
     return error;
   }
-
+ // NUVEM | nuvem erro mensagem conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function cloudRequestErrorMessage(status, details, context) {
     const normalized = String(details || "").toLowerCase();
     const target = sanitizeText(context?.target || context?.path || "online", "online", 120);
@@ -2930,7 +2928,7 @@
 
     return "Não foi possível concluir a ação online. Verifique a conexão com o Supabase e tente novamente.";
   }
-
+ // NUVEM | nuvem erro monta uma estrutura de nuvem Supabase. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function createCloudRequestError(status, details, context) {
     const error = new Error(`Falha na nuvem (${status || "sem status"}).`);
     error.status = status;
@@ -2939,7 +2937,7 @@
     error.userMessage = cloudRequestErrorMessage(status, details, context);
     return error;
   }
-
+ // IMAGEM | extensao tipo de arquivo tipo separa uma regra de imagens. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function extensionFromMimeType(mimeType) {
     const normalized = String(mimeType || "").trim().toLowerCase();
     if (normalized === "image/png") {
@@ -2950,7 +2948,7 @@
     }
     return "jpg";
   }
-
+ // IMAGEM | decodificacao base64 pedaco prepara dados de imagens. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function decodeBase64Chunk(value) {
     const binary = window?.atob?.(value);
     const bytes = new Uint8Array(binary.length);
@@ -2959,7 +2957,7 @@
     }
     return bytes;
   }
-
+ // IMAGEM | dados link arquivo em memoria separa uma regra de imagens. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function dataUrlToBlob(dataUrl) {
     const match = String(dataUrl || "").match(/^data:(image\/[a-z0-9.+-]+);base64,(.+)$/i);
     if (!match) {
@@ -2972,17 +2970,17 @@
       return null;
     }
   }
-
+ // BASE | aleatorio token separa uma regra de base do sistema. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function randomToken() {
     return Math.random().toString(36).slice(2, 10);
   }
-
+ // IMAGEM | produto imagem objeto caminho monta uma estrutura de imagens. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildProductImageObjectPath(productId, mimeType) {
     const productKey = slugify(productId, "produto");
     const extension = extensionFromMimeType(mimeType);
     return `products/${productKey}/${Date.now()}-${randomToken()}.${extension}`;
   }
-
+ // NUVEM | produto imagem origem conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function uploadProductImageSource(cloudConfig, productId, imageSource, uploadCache) {
     const sanitized = sanitizeImageSource(imageSource);
     if (!sanitized || !isInlineImageDataUrl(sanitized)) {
@@ -3028,7 +3026,7 @@
     uploadCache?.set(sanitized, publicUrl);
     return publicUrl;
   }
-
+ // NUVEM | produto imagem origem publicacao conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function uploadProductImageSourceForPublish(cloudConfig, productId, imageSource, uploadCache, imageUploadWarnings) {
     const sanitized = sanitizeImageSource(imageSource);
     if (!sanitized || !isInlineImageDataUrl(sanitized)) {
@@ -3052,7 +3050,7 @@
       return "";
     }
   }
-
+ // NUVEM | cardapio regra nuvem publicacao monta uma estrutura de nuvem Supabase. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   async function prepareMenuStateForCloudPublish(menuState, cloudConfig) {
     const nextMenuState = sanitizeMenuState(menuState)?.state || {
       categories: [],
@@ -3161,7 +3159,7 @@
       imageUploadWarnings,
     };
   }
-
+ // NUVEM | regra nuvem conexao conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function checkCloudConnection() {
     const cloudConfig = getStates()?.cloudConfig;
 
@@ -3208,7 +3206,7 @@
       return updated;
     }
   }
-
+ // NUVEM | nuvem recurso conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function fetchCloudResource(tableName, selectFields) {
     const cloudConfig = getStates()?.cloudConfig;
     if (!isSupabaseConfigured(cloudConfig)) {
@@ -3236,13 +3234,13 @@
 
     return response?.json();
   }
-
+ // NUVEM | alerta nuvem conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function warnCloudSync(message, details) {
     if (typeof console?.warn === "function") {
       console.warn(message, details || {});
     }
   }
-
+ // NUVEM | nuvem catalogo copia do estado monta uma estrutura de nuvem Supabase. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildCloudCatalogSnapshot(sourceStates) {
     const states = sourceStates || getStates();
     const menuState = sanitizeMenuState(states?.menuState)?.state || {
@@ -3334,14 +3332,14 @@
       },
     };
   }
-
+ // NUVEM | cardapio ajustes linhas monta uma estrutura de nuvem Supabase. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildMenuSettingsRows(brandConfig, cloudConfig, menuState) {
     const brand = sanitizeBrandConfig(brandConfig);
     const cloud = sanitizeCloudConfig(cloudConfig);
     const menu = sanitizeMenuState(menuState || getStates()?.menuState)?.state;
     const updatedAt = new Date()?.toISOString();
     const updatedBy = getSupabaseUserId();
-
+ // TRATAMENTO | linha monta uma estrutura de tratamento de dados. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
     function makeRow(key, value) {
       const row = {
         key,
@@ -3391,7 +3389,7 @@
       }),
     ];
   }
-
+ // LOCALIZACAO | regra cardapio ajustes linhas monta uma estrutura de localizacao e entrega. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function mapMenuSettingsRows(rows) {
     const map = new Map();
     (Array.isArray(rows) ? rows : []).forEach((entry) => {
@@ -3403,7 +3401,7 @@
     });
     return map;
   }
-
+ // ADMIN | cardapio ajustes marca ajuste atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function applyMenuSettingsToBrandConfig(baseBrandConfig, rows) {
     const next = clone(baseBrandConfig && typeof baseBrandConfig === "object" ? baseBrandConfig : DEFAULT_BRAND);
     const settingsMap = mapMenuSettingsRows(rows);
@@ -3486,12 +3484,12 @@
 
     return sanitizeBrandConfig(next);
   }
-
+ // NUVEM | cardapio ajustes nuvem ajuste atualiza nuvem Supabase. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function applyMenuSettingsToCloudConfig(baseCloudConfig, rows) {
     const settingsMap = mapMenuSettingsRows(rows);
     return mergeOperationalCloudConfig(baseCloudConfig, settingsMap.get("cloud"));
   }
-
+ // ADMIN | cardapio ajustes cardapio regra atualiza painel Admin. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function applyMenuSettingsToMenuState(baseMenuState, rows, fallbackMenuState) {
     const next = sanitizeMenuState(baseMenuState)?.state || clone(DEFAULT_MENU);
     const settingsMap = mapMenuSettingsRows(rows);
@@ -3503,7 +3501,7 @@
     }
     return sanitizeMenuState(next)?.state;
   }
-
+ // NUVEM | nuvem cardapio ajustes conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function fetchCloudMenuSettings() {
     const tableName = getStates()?.cloudConfig?.tables?.settings;
     if (!tableName) {
@@ -3519,7 +3517,7 @@
       return [];
     }
   }
-
+ // NUVEM | nuvem local conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function syncCloudToLocal() {
     const states = getStates();
     const cloudConfig = states?.cloudConfig;
@@ -3662,7 +3660,7 @@
       { type: "cloud-sync-to-local" }
     );
   }
-
+ // NUVEM | nuvem catalogo conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function loadCloudCatalog() {
     if (!isSupabaseConfigured(getStates()?.cloudConfig)) {
       throw new Error("Supabase não configurado.");
@@ -3670,7 +3668,7 @@
 
     return syncCloudToLocal();
   }
-
+ // NUVEM | nuvem conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function requestCloud(path, options) {
     const cloudConfig = getStates()?.cloudConfig;
     if (!isSupabaseConfigured(cloudConfig)) {
@@ -3697,7 +3695,7 @@
 
     return response;
   }
-
+ // NUVEM | salvar ou atualizar nuvem linhas conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function upsertCloudRows(table, rows, conflictColumns) {
     if (!Array.isArray(rows) || !rows.length) {
       return;
@@ -3715,7 +3713,7 @@
       body: JSON?.stringify(rows),
     });
   }
-
+ // NUVEM | exclusao nuvem linhas conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function deleteCloudRows(table, field, mode, values) {
     const params = new URLSearchParams();
 
@@ -3734,7 +3732,7 @@
       headers: { Prefer: "return=minimal" },
     });
   }
-
+ // NUVEM | exclusao nuvem linhas com seguranca conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function deleteCloudRowsSafely(table, field, mode, values) {
     try {
       await deleteCloudRows(table, field, mode, values);
@@ -3749,7 +3747,7 @@
       return false;
     }
   }
-
+ // NUVEM | online relatorio dados conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function loadOnlineReportData(limit) {
     const cloudConfig = getStates()?.cloudConfig;
     if (!isSupabaseConfigured(cloudConfig)) {
@@ -3772,7 +3770,7 @@
     const rows = await response?.json();
     return buildOnlineReportData(rows, 10);
   }
-
+ // NUVEM | online metricas limpa nuvem Supabase. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   async function clearOnlineMetrics() {
     const cloudConfig = getStates()?.cloudConfig;
     if (!isSupabaseConfigured(cloudConfig)) {
@@ -3787,7 +3785,7 @@
     await deleteCloudRows(tableName, "created_at", "all");
     return true;
   }
-
+ // NUVEM | cardapio ajustes online atualiza nuvem Supabase. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   async function saveMenuSettingsOnline(brandConfig, cloudConfig, menuState) {
     const resolvedCloud = sanitizeCloudConfig(cloudConfig || getStates()?.cloudConfig);
     const settingsTable = resolvedCloud?.tables?.settings;
@@ -3799,7 +3797,7 @@
     await upsertCloudRows(settingsTable, rows, ["key"]);
     return rows;
   }
-
+ // NUVEM | nuvem operacional ajustes atualiza nuvem Supabase. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   async function saveCloudOperationalSettings(nextCloudConfig) {
     const states = getStates();
     const mergedCloud = sanitizeCloudConfig(nextCloudConfig || states?.cloudConfig);
@@ -3814,7 +3812,7 @@
     await upsertCloudRows(mergedCloud.tables.settings, [cloudRow], ["key"]);
     return setCloudConfig(applyMenuSettingsToCloudConfig(mergedCloud, [cloudRow]), { type: "cloud-settings-online" });
   }
-
+ // NUVEM | regra nuvem armazenamento conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function checkCloudStorage() {
     const cloudConfig = getStates()?.cloudConfig;
     if (!isSupabaseConfigured(cloudConfig)) {
@@ -3856,7 +3854,7 @@
       ok: true,
     };
   }
-
+ // NUVEM | substituicao nuvem catalogo conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   async function replaceCloudCatalog(options) {
     const states = getStates();
     const cloudConfig = states?.cloudConfig;
@@ -3930,7 +3928,7 @@
       imageUploadWarnings,
     };
   }
-
+ // IMAGEM | JSON arquivo separa uma regra de imagens. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function downloadJsonFile(filename, data) {
     const blob = new Blob([JSON?.stringify(data, null, 2)], { type: "application/json;charset=utf-8" });
     const link = document?.createElement("a");
