@@ -9848,7 +9848,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 
   .topo-blocos .destaque-titulo,
   .topo-blocos .destaque-inicial--without-image .destaque-titulo {
-    font-size: clamp(1.5rem, 5.2vw, 1.55rem);
+    font-size: clamp(1.6rem, 5.2vw, 1.55rem);
   }
 }
 
