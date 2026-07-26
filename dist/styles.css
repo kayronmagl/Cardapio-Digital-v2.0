@@ -8860,7 +8860,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 
 .topo-blocos .destaque-titulo,
 .topo-blocos .destaque-inicial--without-image .destaque-titulo {
-  margin-top: 0.42rem;
+  margin-top: 0;
 }
 
 .topo-blocos .destaque-informacoes {
@@ -8891,7 +8891,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 
   .topo-blocos .destaque-titulo,
   .topo-blocos .destaque-inicial--without-image .destaque-titulo {
-    margin-top: 0.34rem;
+    margin-top: 0;
   }
 
   .topo-blocos .destaque-subtitulo,
@@ -8912,14 +8912,14 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 @media (min-width: 641px) and (max-width: 1024px) {
   .topo-blocos .destaque-titulo,
   .topo-blocos .destaque-inicial--without-image .destaque-titulo {
-    margin-top: 0.4rem;
+    margin-top: 0;
   }
 }
 
 @media (max-width: 430px) {
   .topo-blocos .destaque-titulo,
   .topo-blocos .destaque-inicial--without-image .destaque-titulo {
-    margin-top: 0.36rem;
+    margin-top: 0;
   }
 }
 
@@ -16719,7 +16719,8 @@ body.admin-page #settings-appearance .admin-theme-card {
   box-shadow: none;
 }
 
-.page-transition-loader {
+.page-transition-loader,
+.page-transition-loader span {
   animation-duration: 1080ms;
 }
 
