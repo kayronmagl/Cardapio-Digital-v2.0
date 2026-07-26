@@ -5709,6 +5709,62 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   margin-bottom: 1rem;
 }
 
+/* NUVEM | Aviso do modo online ou offline. Ele mostra se o Admin esta salvando so localmente ou tambem no Supabase. */
+.admin-cloud-mode-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.58rem;
+  margin: 0.86rem 0 0;
+  padding: 0.78rem 0.92rem;
+  border: 1px solid color-mix(in srgb, var(--borda-media) 74%, transparent);
+  border-radius: var(--raio-encaixe);
+  background: color-mix(in srgb, var(--superficie-elevada) 88%, transparent);
+  font-weight: var(--peso-negrito);
+  line-height: 1.35;
+}
+
+.admin-cloud-mode-notice::before {
+  content: "";
+  width: 0.72rem;
+  height: 0.72rem;
+  flex: 0 0 auto;
+  border-radius: var(--raio-pilula);
+  background: var(--texto-secundario);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--texto-secundario) 12%, transparent);
+}
+
+.admin-cloud-mode-notice--online {
+  border-color: color-mix(in srgb, var(--sucesso) 34%, var(--borda-media));
+  background: color-mix(in srgb, var(--sucesso) 10%, var(--superficie-elevada));
+}
+
+.admin-cloud-mode-notice--online::before {
+  background: var(--sucesso);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--sucesso) 16%, transparent);
+}
+
+.admin-cloud-mode-notice--offline {
+  border-color: color-mix(in srgb, var(--aviso-texto) 34%, var(--borda-media));
+  background: color-mix(in srgb, var(--aviso-texto) 10%, var(--superficie-elevada));
+}
+
+.admin-cloud-mode-notice--offline::before {
+  background: var(--aviso-texto);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--aviso-texto) 16%, transparent);
+}
+
+body.admin-page .admin-cloud-action-item--disabled {
+  opacity: 0.78;
+}
+
+body.admin-page .admin-cloud-action-disabled-note {
+  margin: -0.15rem 0 0.15rem;
+  color: var(--texto-secundario);
+  font-size: 0.86rem;
+  font-weight: var(--peso-negrito);
+  line-height: 1.35;
+}
+
 .admin-metric-grid {
   display: grid;
   gap: 0.85rem;
@@ -17997,62 +18053,6 @@ body.admin-page .admin-topbar-actions {
   #caixaCarrinho .acoes-checkout {
     padding-top: 0.62rem;
   }
-}
-
-/* NUVEM | Aviso do modo online ou offline. Ele mostra se o Admin esta salvando so localmente ou tambem no Supabase. */
-.admin-cloud-mode-notice {
-  display: flex;
-  align-items: center;
-  gap: 0.58rem;
-  margin: 0.86rem 0 0;
-  padding: 0.78rem 0.92rem;
-  border: 1px solid color-mix(in srgb, var(--borda-media) 74%, transparent);
-  border-radius: var(--raio-encaixe);
-  background: color-mix(in srgb, var(--superficie-elevada) 88%, transparent);
-  font-weight: var(--peso-negrito);
-  line-height: 1.35;
-}
-
-.admin-cloud-mode-notice::before {
-  content: "";
-  width: 0.72rem;
-  height: 0.72rem;
-  flex: 0 0 auto;
-  border-radius: var(--raio-pilula);
-  background: var(--texto-secundario);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--texto-secundario) 12%, transparent);
-}
-
-.admin-cloud-mode-notice--online {
-  border-color: color-mix(in srgb, var(--sucesso) 34%, var(--borda-media));
-  background: color-mix(in srgb, var(--sucesso) 10%, var(--superficie-elevada));
-}
-
-.admin-cloud-mode-notice--online::before {
-  background: var(--sucesso);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--sucesso) 16%, transparent);
-}
-
-.admin-cloud-mode-notice--offline {
-  border-color: color-mix(in srgb, var(--aviso-texto) 34%, var(--borda-media));
-  background: color-mix(in srgb, var(--aviso-texto) 10%, var(--superficie-elevada));
-}
-
-.admin-cloud-mode-notice--offline::before {
-  background: var(--aviso-texto);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--aviso-texto) 16%, transparent);
-}
-
-body.admin-page .admin-cloud-action-item--disabled {
-  opacity: 0.78;
-}
-
-body.admin-page .admin-cloud-action-disabled-note {
-  margin: -0.15rem 0 0.15rem;
-  color: var(--texto-secundario);
-  font-size: 0.86rem;
-  font-weight: var(--peso-negrito);
-  line-height: 1.35;
 }
 
 .rodape-legal-area {
