@@ -7098,6 +7098,10 @@ body.admin-page .admin-cloud-action-disabled-note {
   letter-spacing: 0.015em;
 }
 
+body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block-grid {
+  grid-template-columns: 1fr;
+}
+
 [data-admin-tab-panel="products"] .admin-catalog-product-card .admin-product-category {
   margin: 0;
   font-size: 0.74rem;
@@ -18408,10 +18412,6 @@ body.legal-route-active .rodape-legal-area {
 
 body.legal-route-active {
   overflow-x: hidden;
-}
-
-body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block-grid {
-  grid-template-columns: 1fr;
 }
 
 @media (min-width: 769px) {
