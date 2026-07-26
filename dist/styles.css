@@ -32,17 +32,17 @@
   --color-panel-block-bg: color-mix(in srgb, var(--color-surface-strong) 52%, transparent);
   --color-panel-block-border: color-mix(in srgb, var(--color-border-medium) 60%, transparent);
   --color-barra-mobile-bg: color-mix(in srgb, var(--color-surface-strong) 88%, transparent);
-  --color-feedback-ok-bg: color-mix(in srgb, var(--sucesso) 14%, var(--color-surface));
-  --color-feedback-err-bg: color-mix(in srgb, var(--erro) 12%, var(--color-surface));
-  --color-ok-bg: color-mix(in srgb, var(--sucesso) 24%, var(--color-surface));
-  --color-ok-border: color-mix(in srgb, var(--sucesso) 44%, var(--color-border-medium));
-  --color-ok-text: color-mix(in srgb, var(--sucesso) 78%, #052e16 22%);
-  --color-error-bg: color-mix(in srgb, var(--erro) 22%, var(--color-surface));
-  --color-error-border: color-mix(in srgb, var(--erro) 40%, var(--color-border-medium));
-  --color-error-text: color-mix(in srgb, var(--erro) 78%, #450a0a 22%);
-  --color-warning-bg: color-mix(in srgb, var(--aviso-texto) 16%, var(--color-surface));
-  --color-warning-border: color-mix(in srgb, var(--aviso-texto) 32%, var(--color-border-medium));
-  --color-warning-text: color-mix(in srgb, var(--aviso-texto) 82%, #4a1d0c 18%);
+  --cor-feedback-ok-fundo: color-mix(in srgb, var(--sucesso) 14%, var(--color-surface));
+  --cor-feedback-erro-fundo: color-mix(in srgb, var(--erro) 12%, var(--color-surface));
+  --cor-ok-fundo: color-mix(in srgb, var(--sucesso) 24%, var(--color-surface));
+  --cor-ok-borda: color-mix(in srgb, var(--sucesso) 44%, var(--color-border-medium));
+  --cor-ok-texto: color-mix(in srgb, var(--sucesso) 78%, #052e16 22%);
+  --cor-erro-fundo: color-mix(in srgb, var(--erro) 22%, var(--color-surface));
+  --cor-erro-borda: color-mix(in srgb, var(--erro) 40%, var(--color-border-medium));
+  --cor-erro-texto: color-mix(in srgb, var(--erro) 78%, #450a0a 22%);
+  --cor-aviso-fundo: color-mix(in srgb, var(--aviso-texto) 16%, var(--color-surface));
+  --cor-aviso-borda: color-mix(in srgb, var(--aviso-texto) 32%, var(--color-border-medium));
+  --cor-aviso-texto: color-mix(in srgb, var(--aviso-texto) 82%, #4a1d0c 18%);
   --amarelo: var(--color-primary);
   --amarelo-hover: var(--color-primary-hover);
   --preto: var(--color-bg);
@@ -158,10 +158,10 @@
   --color-panel-block-bg: color-mix(in srgb, var(--color-surface) 64%, transparent);
   --color-panel-block-border: color-mix(in srgb, var(--color-border-medium) 62%, transparent);
   --color-barra-mobile-bg: color-mix(in srgb, var(--color-surface-strong) 94%, var(--color-bg) 6%);
-  --color-feedback-ok-bg: color-mix(in srgb, var(--sucesso) 18%, var(--color-surface));
-  --color-feedback-err-bg: color-mix(in srgb, var(--erro) 16%, var(--color-surface));
-  --color-ok-text: color-mix(in srgb, var(--sucesso) 82%, white 18%);
-  --color-error-text: color-mix(in srgb, var(--erro) 88%, white 12%);
+  --cor-feedback-ok-fundo: color-mix(in srgb, var(--sucesso) 18%, var(--color-surface));
+  --cor-feedback-erro-fundo: color-mix(in srgb, var(--erro) 16%, var(--color-surface));
+  --cor-ok-texto: color-mix(in srgb, var(--sucesso) 82%, white 18%);
+  --cor-erro-texto: color-mix(in srgb, var(--erro) 88%, white 12%);
   --superficie-brilho: rgba(255, 255, 255, 0.04);
   --superficie-suave: color-mix(in srgb, var(--color-surface) 86%, var(--color-bg) 14%);
   --superficie-suave-hover: color-mix(in srgb, var(--color-surface-strong) 74%, var(--color-bg) 26%);
@@ -798,12 +798,12 @@
   --erro: #d78e55;
   --sucesso: #6aa7c8;
   --aviso-texto: #d09a45;
-  --color-ok-bg: color-mix(in srgb, #6aa7c8 14%, var(--color-surface));
-  --color-ok-border: color-mix(in srgb, #6aa7c8 34%, var(--color-border-medium));
-  --color-ok-text: #c0def0;
-  --color-error-bg: color-mix(in srgb, #d78e55 14%, var(--color-surface));
-  --color-error-border: color-mix(in srgb, #d78e55 34%, var(--color-border-medium));
-  --color-error-text: #e9c29e;
+  --cor-ok-fundo: color-mix(in srgb, #6aa7c8 14%, var(--color-surface));
+  --cor-ok-borda: color-mix(in srgb, #6aa7c8 34%, var(--color-border-medium));
+  --cor-ok-texto: #c0def0;
+  --cor-erro-fundo: color-mix(in srgb, #d78e55 14%, var(--color-surface));
+  --cor-erro-borda: color-mix(in srgb, #d78e55 34%, var(--color-border-medium));
+  --cor-erro-texto: #e9c29e;
 }
 
 [data-theme-preset="high-contrast"] {
@@ -847,15 +847,15 @@
   --erro: #fb923c;
   --sucesso: #38bdf8;
   --aviso-texto: #facc15;
-  --color-ok-bg: #111111;
-  --color-ok-border: #38bdf8;
-  --color-ok-text: #38bdf8;
-  --color-error-bg: #111111;
-  --color-error-border: #fb923c;
-  --color-error-text: #fb923c;
-  --color-warning-bg: #111111;
-  --color-warning-border: #facc15;
-  --color-warning-text: #ffffff;
+  --cor-ok-fundo: #111111;
+  --cor-ok-borda: #38bdf8;
+  --cor-ok-texto: #38bdf8;
+  --cor-erro-fundo: #111111;
+  --cor-erro-borda: #fb923c;
+  --cor-erro-texto: #fb923c;
+  --cor-aviso-fundo: #111111;
+  --cor-aviso-borda: #facc15;
+  --cor-aviso-texto: #ffffff;
 }
 
 
@@ -1469,9 +1469,9 @@ html[data-accessibility="enhanced"] #botaoFinalizar {
 }
 
 html[data-accessibility="enhanced"] .produto-card--unavailable {
-  border-color: var(--color-warning-border);
+  border-color: var(--cor-aviso-borda);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--color-warning-bg) 56%, transparent), transparent 100%),
+    linear-gradient(180deg, color-mix(in srgb, var(--cor-aviso-fundo) 56%, transparent), transparent 100%),
     var(--superficie-elevada);
 }
 
@@ -1695,15 +1695,15 @@ html[data-accessibility="enhanced"] .pix-valor {
 }
 
 .status-aberta {
-  color: var(--color-ok-text);
-  background: color-mix(in srgb, var(--color-ok-bg) 72%, transparent);
-  border-color: var(--color-ok-border);
+  color: var(--cor-ok-texto);
+  background: color-mix(in srgb, var(--cor-ok-fundo) 72%, transparent);
+  border-color: var(--cor-ok-borda);
 }
 
 .status-fechado {
-  color: var(--color-error-text);
-  background: color-mix(in srgb, var(--color-error-bg) 72%, transparent);
-  border-color: var(--color-error-border);
+  color: var(--cor-erro-texto);
+  background: color-mix(in srgb, var(--cor-erro-fundo) 72%, transparent);
+  border-color: var(--cor-erro-borda);
 }
 
 .painel-horario-grade {
@@ -1971,7 +1971,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   padding: 0.3rem 0.55rem;
   border-radius: var(--raio-pilula);
   background: rgba(255, 143, 143, 0.12);
-  color: var(--color-error-text);
+  color: var(--cor-erro-texto);
   font-size: 0.75rem;
   font-weight: var(--peso-negrito);
   white-space: nowrap;
@@ -2860,12 +2860,12 @@ html[data-accessibility="enhanced"] .pix-valor {
 
 #mensagemErro {
   color: var(--erro);
-  background: var(--color-feedback-err-bg);
+  background: var(--cor-feedback-erro-fundo);
 }
 
 #mensagemStatus {
   color: var(--sucesso);
-  background: var(--color-feedback-ok-bg);
+  background: var(--cor-feedback-ok-fundo);
 }
 
 .public-action-feedback {
@@ -4638,13 +4638,13 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 
 .admin-inline-status-ok {
   color: var(--sucesso);
-  background: var(--color-feedback-ok-bg);
+  background: var(--cor-feedback-ok-fundo);
   border-color: color-mix(in srgb, var(--sucesso) 28%, var(--borda-suave));
 }
 
 .admin-inline-status-error {
   color: var(--erro);
-  background: var(--color-feedback-err-bg);
+  background: var(--cor-feedback-erro-fundo);
   border-color: color-mix(in srgb, var(--erro) 28%, var(--borda-suave));
 }
 
@@ -5362,9 +5362,9 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 }
 
 .produto-chip--inactive {
-  border-color: var(--color-error-border);
-  background: var(--color-error-bg);
-  color: var(--color-error-text);
+  border-color: var(--cor-erro-borda);
+  background: var(--cor-erro-fundo);
+  color: var(--cor-erro-texto);
 }
 
 .produto-chip--unavailable {
@@ -6199,9 +6199,9 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 
 .produto-chip--inactive,
 .badge-esgotado {
-  border-color: var(--color-error-border);
-  background: var(--color-error-bg);
-  color: var(--color-error-text);
+  border-color: var(--cor-erro-borda);
+  background: var(--cor-erro-fundo);
+  color: var(--cor-erro-texto);
 }
 
 .personalizacao {
@@ -7278,9 +7278,9 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 .admin-note--pending {
   padding: 0.85rem 0.95rem;
   border-radius: var(--raio-encaixe);
-  border: 1px solid var(--color-warning-border);
-  background: var(--color-warning-bg);
-  color: var(--color-warning-text);
+  border: 1px solid var(--cor-aviso-borda);
+  background: var(--cor-aviso-fundo);
+  color: var(--cor-aviso-texto);
   font-weight: var(--peso-forte);
 }
 
@@ -15121,7 +15121,7 @@ body.admin-page #comboForm > label:has(input[name="imageUrl"]) .admin-field-note
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 10%, transparent), transparent 100%),
     color-mix(in srgb, var(--erro) 10%, var(--superficie-elevada));
-  color: var(--color-error-text);
+  color: var(--cor-erro-texto);
   font-size: 0.84rem;
   font-weight: var(--peso-negrito-reforcado);
   line-height: 1.32;
