@@ -14194,6 +14194,18 @@ body.admin-page [data-admin-tab-panel="products"] .admin-toolbar-field {
   }
 }
 
+@media (min-width: 769px) {
+  body.admin-page [data-admin-tab-panel="products"] #adminFocusProductSearchBtn {
+    display: none;
+  }
+
+  body.admin-page [data-admin-tab-panel="products"] .admin-products-nav {
+    grid-template-columns: minmax(0, 13rem);
+    width: fit-content;
+    margin-inline: auto;
+  }
+}
+
 /* ADMIN | Define hierarquia de titulos e leitura dos cards do painel. */
 body.admin-page .admin-card > h2,
 body.admin-page .admin-products-tools-card > h2,
@@ -18412,24 +18424,6 @@ body.legal-route-active .rodape-legal-area {
 
 body.legal-route-active {
   overflow-x: hidden;
-}
-
-@media (min-width: 769px) {
-  body.admin-page [data-admin-tab-panel="products"] #adminFocusProductSearchBtn {
-    display: none;
-  }
-
-  body.admin-page [data-admin-tab-panel="products"] .admin-products-nav {
-    grid-template-columns: minmax(0, 13rem);
-    width: fit-content;
-    margin-inline: auto;
-  }
-
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check {
-    min-height: 44px;
-    padding: 0.58rem 0.72rem;
-    border-radius: var(--raio-entre-medio);
-  }
 }
 
 @media (max-width: 820px) {
