@@ -9600,6 +9600,21 @@ body.admin-page .admin-cloud-action-disabled-note {
   }
 }
 
+.produto-topo > div {
+  display: grid;
+  gap: 0.34rem;
+  align-items: start;
+}
+
+.produto-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.36rem;
+}
+
 /* HORARIOS | Ajusta a area de horarios para status aberto ou fechado e agenda ficarem faceis de escanear. */
 .topo-blocos .painel-horario-topo,
 .topo-blocos--without-hero-image .painel-horario-topo {
@@ -18113,21 +18128,6 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
   body.admin-page [data-admin-tab-panel="settings"] .admin-settings-section {
     padding-bottom: clamp(0.76rem, 2.6vw, 0.98rem);
   }
-}
-
-.produto-topo > div {
-  display: grid;
-  gap: 0.34rem;
-  align-items: start;
-}
-
-.produto-meta-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  gap: 0.36rem;
 }
 
 body.admin-page .admin-topbar-actions {
