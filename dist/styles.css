@@ -3924,6 +3924,45 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   align-self: stretch;
 }
 
+/* PRODUTOS ADMIN | Workspace de formulario, ferramentas e lista. */
+body.admin-page [data-admin-tab-panel="products"] .admin-products-workspace {
+  grid-template-areas: "sidebar list";
+  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  align-items: start;
+}
+
+body.admin-page [data-admin-tab-panel="products"] .admin-products-sidebar {
+  grid-area: sidebar;
+  display: grid;
+  gap: clamp(0.78rem, 1.25vw, 1rem);
+  min-width: 0;
+  align-content: start;
+}
+
+body.admin-page [data-admin-tab-panel="products"] .admin-products-sidebar .admin-products-tools-card,
+body.admin-page [data-admin-tab-panel="products"] .admin-products-sidebar .admin-products-form-card {
+  grid-area: auto;
+}
+
+body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
+  grid-area: list;
+}
+
+@media (max-width: 1024px) {
+  body.admin-page [data-admin-tab-panel="products"] .admin-products-workspace {
+    grid-template-areas:
+      "sidebar"
+      "list";
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  body.admin-page [data-admin-tab-panel="products"] .admin-products-sidebar {
+    gap: 0.72rem;
+  }
+}
+
 .admin-fieldset {
   margin: 0;
   padding: 0.85rem 1rem 1rem;
@@ -15088,7 +15127,7 @@ body.admin-page #comboForm > label:has(input[name="imageUrl"]) .admin-field-note
   }
 }
 
-/* CHECKOUT | Refina a etapa de pedido para campos obrigatorios e avisos guiarem o usuario ate a revisao. */
+/* CHECKOUT | Validacao visual de campos e retorno de acao. */
 .botao-adicionar.botao-add-feedback,
 .oferta-add-btn.botao-add-feedback {
   border-color: color-mix(in srgb, var(--sucesso) 46%, var(--borda-media));
@@ -15702,7 +15741,7 @@ body.admin-page .admin-tab:active {
   }
 }
 
-/* RESPONSIVO | Compacta os cards de tema do Admin em telas menores. */
+/* TEMA ADMIN MOBILE | Cards de tema em telas menores. */
 @media (max-width: 768px) {
   body.admin-page #settings-appearance .admin-theme-fieldset {
     gap: 0.64rem;
@@ -16050,7 +16089,7 @@ body.admin-page .admin-tab:active {
   }
 }
 
-/* COMBOS | Ajusta o espaco dos combos para imagem, descricao e botao respirarem melhor. */
+/* COMBOS | Espaco de imagem, descricao e botao. */
 body.admin-page [data-admin-tab-panel="offers"] .admin-offers-list {
   gap: 0.56rem;
 }
@@ -16208,7 +16247,7 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-offer-card--combo .admin-
   }
 }
 
-/* TEMA ADMIN | Refina a area de aparencia e os cards de tema. */
+/* TEMA ADMIN | Aparencia e cards de tema. */
 body.admin-page #settings-appearance {
   border-color: color-mix(in srgb, var(--borda-media) 42%, transparent);
   background:
@@ -16694,7 +16733,7 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horar
   }
 }
 
-/* HIERARQUIA | Ajusta tamanhos do topo e das configuracoes para leitura clara em celular, tablet e desktop. */
+/* HIERARQUIA | Escala de leitura do topo publico e das configuracoes. */
 .topo-blocos .destaque-titulo,
 .topo-blocos .destaque-inicial--without-image .destaque-titulo {
   max-width: min(100%, 19ch);
@@ -16756,7 +16795,7 @@ body.admin-page [data-admin-tab-panel="settings"] .admin-settings-subgroup h3 {
   }
 }
 
-/* ANIMACAO | Limita movimentos pesados para manter a interface leve no celular. */
+/* ANIMACAO | Movimento leve para publico e Admin. */
 .produto-card,
 .oferta-card,
 body.admin-page #settings-appearance .admin-theme-card {
@@ -16843,7 +16882,7 @@ body.admin-page .admin-panels-grid.admin-card--attention {
   }
 }
 
-/* ADMIN | Ajusta acoes de disponibilidade na lista de produtos. */
+/* PRODUTOS ADMIN | Acoes de disponibilidade na lista. */
 body.admin-page [data-admin-tab-panel="products"] .admin-catalog-product-card .admin-product-actions {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -16860,7 +16899,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-action-btn--availabilit
   color: var(--texto-neutro);
 }
 
-/* RESPONSIVO | Reduz aperto visual no celular sem desmontar a ordem dos blocos. */
+/* ADMIN MOBILE | Barra de salvar do formulario. */
 body.admin-page .admin-mobile-form-save-bar {
   display: none;
 }
@@ -17904,7 +17943,7 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
   }
 }
 
-/* RESPONSIVO | Mantem botoes e campos usaveis quando a largura da tela diminui. */
+/* ADMIN MOBILE | Acoes de topo dos paineis. */
 @media (max-width: 768px) {
   body.admin-page [data-admin-tab-panel] .admin-section-top-actions {
     display: none !important;
@@ -17915,46 +17954,7 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
   }
 }
 
-/* PRODUTOS ADMIN | Define a grade principal de formulario e lista. */
-body.admin-page [data-admin-tab-panel="products"] .admin-products-workspace {
-  grid-template-areas: "sidebar list";
-  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
-  align-items: start;
-}
-
-body.admin-page [data-admin-tab-panel="products"] .admin-products-sidebar {
-  grid-area: sidebar;
-  display: grid;
-  gap: clamp(0.78rem, 1.25vw, 1rem);
-  min-width: 0;
-  align-content: start;
-}
-
-body.admin-page [data-admin-tab-panel="products"] .admin-products-sidebar .admin-products-tools-card,
-body.admin-page [data-admin-tab-panel="products"] .admin-products-sidebar .admin-products-form-card {
-  grid-area: auto;
-}
-
-body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
-  grid-area: list;
-}
-
-@media (max-width: 1024px) {
-  body.admin-page [data-admin-tab-panel="products"] .admin-products-workspace {
-    grid-template-areas:
-      "sidebar"
-      "list";
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  body.admin-page [data-admin-tab-panel="products"] .admin-products-sidebar {
-    gap: 0.72rem;
-  }
-}
-
-/* RESPONSIVO | Evita rolagem lateral e textos espremidos nas telas menores. */
+/* ADMIN MOBILE | Respiro inferior dos formularios. */
 @media (max-width: 768px) {
   body.admin-page [data-admin-tab-panel="products"] .admin-products-form-card,
   body.admin-page [data-admin-tab-panel="categories"] #admin-categories-top,
