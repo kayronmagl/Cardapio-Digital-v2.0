@@ -4657,14 +4657,14 @@
   function renderThemePreviewCard(preset) {
     const preview = getThemePreviewTokens(preset);
     const previewStyle = [
-      "--theme-preview-bg:" + preview?.background,
-      "--theme-preview-surface:" + preview?.surface,
-      "--theme-preview-muted:" + preview?.muted,
-      "--theme-preview-accent:" + preview?.accent,
-      "--theme-preview-text:" + preview?.text,
-      "--theme-preview-secondary:" + preview?.secondaryText,
-      "--theme-preview-accent-text:" + preview?.accentText,
-      "--theme-preview-border:" + preview?.border,
+      "--tema-previa-fundo:" + preview?.background,
+      "--tema-previa-superficie:" + preview?.surface,
+      "--tema-previa-suave:" + preview?.muted,
+      "--tema-previa-destaque:" + preview?.accent,
+      "--tema-previa-texto:" + preview?.text,
+      "--tema-previa-texto-secundario:" + preview?.secondaryText,
+      "--tema-previa-texto-destaque:" + preview?.accentText,
+      "--tema-previa-borda:" + preview?.border,
     ]?.join(";");
 
     return (
