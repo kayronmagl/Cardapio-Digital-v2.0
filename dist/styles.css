@@ -18425,11 +18425,6 @@ body.legal-route-active {
     margin-inline: auto;
   }
 
-  body.admin-page [data-admin-tab-panel="settings"] .admin-settings-nav {
-    grid-template-columns: repeat(auto-fit, minmax(8.8rem, 1fr));
-    max-width: none;
-  }
-
   body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check {
     min-height: 44px;
     padding: 0.58rem 0.72rem;
