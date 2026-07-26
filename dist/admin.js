@@ -1610,6 +1610,29 @@
   }
 
   const slugify = shared?.slugify;
+  function makeUniqueIdentifier(value, fallback, existingValues, currentValue) {
+    const base = slugify(value, fallback);
+    const current = String(currentValue || "");
+    const used = new Set(
+      (Array.isArray(existingValues) ? existingValues : [])
+        .map(function (item) {
+          return String(item || "");
+        })
+        .filter(function (item) {
+          return item && item !== current;
+        })
+    );
+
+    if (!used.has(base)) {
+      return base;
+    }
+
+    let index = 2;
+    while (used.has(base + "-" + index)) {
+      index += 1;
+    }
+    return base + "-" + index;
+  }
  // ADMIN | moeda prepara dados de painel Admin. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function formatCurrency(value) {
     const locale = getSupportedLocales()[currentLocale()]?.formatLocale || currentLocale();
@@ -6029,7 +6052,13 @@
       return "updated";
     }
 
-    nextProduct.id = payload?.id || slugify(textValue(payload?.name, "pt-BR"), "produto");
+    nextProduct.id = makeUniqueIdentifier(
+      payload?.id || textValue(payload?.name, "pt-BR"),
+      "produto",
+      menuState?.products?.map(function (product) {
+        return product?.id;
+      })
+    );
     nextProduct.sortOrder = menuState?.products?.length;
     nextProduct.active = nextProduct?.status !== "inactive";
     nextProduct.available = nextProduct?.available !== false;
@@ -6059,24 +6088,32 @@
     const existingIndex = menuState?.categories?.findIndex(function (category) {
       return category?.slug === payload?.slugOriginal;
     });
+    const nextSlug = makeUniqueIdentifier(
+      payload?.slug,
+      "categoria",
+      menuState?.categories?.map(function (category) {
+        return category?.slug;
+      }),
+      payload?.slugOriginal
+    );
 
     if (existingIndex >= 0) {
       const previousSlug = menuState?.categories[existingIndex]?.slug;
       menuState.categories[existingIndex] = {
         ...menuState?.categories[existingIndex],
-        slug: payload?.slug,
+        slug: nextSlug,
         name: payload?.name,
         description: payload?.description,
       };
       menuState.products = menuState?.products?.map(function (product) {
-        return product?.category === previousSlug ? { ...product, category: payload?.slug } : product;
+        return product?.category === previousSlug ? { ...product, category: nextSlug } : product;
       });
       system?.setMenuState(menuState, { type: "category-update" });
       return "updated";
     }
 
     menuState?.categories?.push({
-      slug: payload?.slug,
+      slug: nextSlug,
       name: payload?.name,
       description: payload?.description,
       sortOrder: menuState?.categories?.length,
@@ -6112,12 +6149,20 @@
     const existingIndex = menuState?.addOns?.findIndex(function (addOn) {
       return addOn?.id === payload?.idOriginal;
     });
+    const nextId = makeUniqueIdentifier(
+      payload?.id,
+      "adicional",
+      menuState?.addOns?.map(function (addOn) {
+        return addOn?.id;
+      }),
+      payload?.idOriginal
+    );
 
     if (existingIndex >= 0) {
       const previousId = menuState?.addOns[existingIndex]?.id;
       menuState.addOns[existingIndex] = {
         ...menuState?.addOns[existingIndex],
-        id: payload?.id,
+        id: nextId,
         name: payload?.name,
         price: payload?.price,
         active: payload?.active,
@@ -6128,7 +6173,7 @@
           ...product,
           addOns: Array.isArray(product?.addOns)
             ? product?.addOns?.map(function (item) {
-              return item === previousId ? payload?.id : item;
+              return item === previousId ? nextId : item;
             })
             : [],
         };
@@ -6138,7 +6183,7 @@
     }
 
     menuState?.addOns?.push({
-      id: payload?.id,
+      id: nextId,
       name: payload?.name,
       price: payload?.price,
       active: payload?.active,
@@ -6210,11 +6255,20 @@
     const existingIndex = offers.combos.findIndex(function (combo) {
       return combo?.id === payload?.idOriginal;
     });
+    const nextId = makeUniqueIdentifier(
+      payload?.id,
+      "combo",
+      offers?.combos?.map(function (combo) {
+        return combo?.id;
+      }),
+      payload?.idOriginal
+    );
 
     if (existingIndex >= 0) {
       offers.combos[existingIndex] = {
         ...offers.combos[existingIndex],
         ...payload,
+        id: nextId,
         createdAt: offers.combos[existingIndex]?.createdAt || payload?.updatedAt,
         sortOrder: offers.combos[existingIndex]?.sortOrder ?? existingIndex,
       };
@@ -6225,6 +6279,7 @@
 
     const nextCombo = {
       ...payload,
+      id: nextId,
       createdAt: payload?.updatedAt,
       sortOrder: offers.combos.length,
     };
