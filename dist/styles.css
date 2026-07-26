@@ -18716,3 +18716,47 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check input[
     font-size: 0.76rem;
   }
 }
+
+/* HIERARQUIA ADMIN | Fecha a escala de titulos em todas as abas do painel. A logica iguala os niveis principais depois dos ajustes especificos de cada secao, sem aumentar nomes de itens dentro das listas. */
+body.admin-page [data-admin-tab-panel] .admin-card > h2,
+body.admin-page [data-admin-tab-panel] .admin-products-tools-card > h2,
+body.admin-page [data-admin-tab-panel] .admin-products-list-card > h2,
+body.admin-page [data-admin-tab-panel] .admin-workspace-sidebar > h2,
+body.admin-page [data-admin-tab-panel] .admin-workspace-main > h2,
+body.admin-page [data-admin-tab-panel="offers"] .admin-offers-form-card > h2,
+body.admin-page [data-admin-tab-panel="offers"] .admin-offers-list-card > h2,
+body.admin-page [data-admin-tab-panel="reports"] .admin-card > h2,
+body.admin-page [data-admin-tab-panel="system"] .admin-card > h2 {
+  font-size: clamp(1.24rem, 1.04rem + 0.72vw, 1.54rem);
+  line-height: 1.14;
+  letter-spacing: 0.015em;
+}
+
+body.admin-page [data-admin-tab-panel] .admin-products-form-card > h3,
+body.admin-page [data-admin-tab-panel] .admin-system-action-card > h3,
+body.admin-page [data-admin-tab-panel] .admin-cloud-card > h3,
+body.admin-page [data-admin-tab-panel="offers"] .admin-offers-form-card > h3 {
+  font-size: clamp(1.08rem, 0.98rem + 0.36vw, 1.24rem);
+  line-height: 1.18;
+}
+
+body.admin-page [data-admin-tab-panel] .admin-fieldset legend,
+body.admin-page [data-admin-tab-panel="products"] #productForm .admin-fieldset legend,
+body.admin-page [data-admin-tab-panel="offers"] #comboForm .admin-fieldset legend {
+  max-width: min(100%, 24rem);
+  padding-inline: 0.4rem;
+  font-size: clamp(1.06rem, 0.94rem + 0.45vw, 1.28rem);
+  line-height: 1.16;
+  letter-spacing: 0.015em;
+}
+
+body.admin-page [data-admin-tab-panel="settings"] #settings-top > h2 {
+  font-size: clamp(1.45rem, 1.08rem + 1.2vw, 1.9rem);
+  line-height: 1.14;
+}
+
+body.admin-page [data-admin-tab-panel="settings"] .admin-settings-section > legend,
+body.admin-page [data-admin-tab-panel="settings"] .admin-hours-fieldset > legend {
+  font-size: clamp(1.18rem, 0.98rem + 0.7vw, 1.42rem);
+  line-height: 1.16;
+}
