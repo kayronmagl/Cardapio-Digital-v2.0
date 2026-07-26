@@ -1676,6 +1676,22 @@ html[data-accessibility="enhanced"] .pix-valor {
   margin: 0;
 }
 
+.destaque-titulo--pedido-rapido {
+  max-width: 11.5ch;
+  line-height: 0.92;
+}
+
+.destaque-titulo-linha {
+  display: block;
+}
+
+.destaque-titulo-enfase {
+  color: var(--cor-painel-destaque);
+  text-shadow:
+    0 1px 0 color-mix(in srgb, var(--cor-contraste-destaque) 42%, transparent),
+    0 0 18px color-mix(in srgb, var(--cor-primaria) 28%, transparent);
+}
+
 .destaque-subtitulo {
   max-width: 48ch;
   color: var(--cor-sobre-escuro-suave);

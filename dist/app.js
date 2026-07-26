@@ -1953,6 +1953,27 @@
       '<span class="destaque-info-value">' + escapeHtml(value || rawText) + "</span>"
     );
   }
+  function renderHighlightTitleMarkup(text) {
+    const rawText = String(text || "")?.trim();
+    if (!rawText) {
+      return "";
+    }
+
+    const comparable = rawText
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+
+    if (comparable === "peca rapido e sem complicacao.") {
+      return (
+        '<span class="destaque-titulo-linha">Peça <span class="destaque-titulo-enfase">rápido</span></span>' +
+        " " +
+        '<span class="destaque-titulo-linha">e sem complicação.</span>'
+      );
+    }
+
+    return escapeHtml(rawText);
+  }
   function syncPublicMetadata(brandName, menuSubtitle, highlightMessage) {
     document.title = brandName || t("publicMenuTitle");
     const description = [brandName, menuSubtitle, highlightMessage]
@@ -2004,7 +2025,16 @@
       enderecoTopo.textContent = "";
       enderecoTopo.hidden = true;
     }
-    $("destaqueTitulo").textContent = textValue(destaqueInicial?.title, currentLocale());
+    const destaqueTitulo = $("destaqueTitulo");
+    const destaqueTituloTexto = textValue(destaqueInicial?.title, currentLocale());
+    destaqueTitulo.classList.toggle(
+      "destaque-titulo--pedido-rapido",
+      destaqueTituloTexto
+        ?.normalize("NFD")
+        ?.replace(/[\u0300-\u036f]/g, "")
+        ?.toLowerCase() === "peca rapido e sem complicacao."
+    );
+    destaqueTitulo.innerHTML = renderHighlightTitleMarkup(destaqueTituloTexto);
     $("destaqueSubtitulo").textContent = highlightMessage;
     $("destaqueTempo").innerHTML = renderHighlightInfoMarkup(textValue(destaqueInicial?.waitingTimeLabel, currentLocale()));
     $("destaquePagamento").innerHTML = renderHighlightInfoMarkup(textValue(destaqueInicial?.paymentLabel, currentLocale()));
