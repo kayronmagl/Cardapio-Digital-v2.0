@@ -49,7 +49,7 @@
       directionsTitle: "Como chegar",
       publicMenuTitle: "Cardápio digital",
       businessNameFallback: "Nome do seu negócio",
-      menuSubtitleFallback: "Lanches, bebidas e sobremesas",
+      menuSubtitleFallback: "Lanches e bebidas",
       addressServiceAreaFallback: "Confirme o endereço com o estabelecimento.",
       highlightMessageFallback: "Escolha os produtos, revise o carrinho e envie a mensagem para o estabelecimento.",
       openNow: "Aberto agora",
@@ -145,7 +145,7 @@
       referenceHelp: "Opcional, mas ajuda o entregador a localizar você mais rápido.",
       customerMapLinkLabel: "Link da sua localização no Google Maps (opcional)",
       customerMapLinkPlaceholder: "https://maps.app.goo.gl/...",
-      customerMapLinkHelp: "Abra o Google Maps, escolha sua localização, toque em Compartilhar e cole o link aqui para facilitar a entrega.",
+      customerMapLinkHelp: "Abra o Google Maps, procure sua localização, toque em Compartilhar e cole o link aqui para facilitar a entrega.",
       customerAddressEnoughHelp: "O link do Google Maps é opcional. Use apenas se quiser facilitar a localização da entrega.",
       customerCoordinatesLabel: "Coordenadas (opcional)",
       customerCoordinatesHelp: "Use apenas se você souber sua latitude e longitude. Exemplo: -6.025839, -38.348820",
@@ -302,7 +302,7 @@
       directionsTitle: "How to get there",
       publicMenuTitle: "Digital menu",
       businessNameFallback: "Your business name",
-      menuSubtitleFallback: "Snacks, drinks and desserts",
+      menuSubtitleFallback: "Snacks and drinks",
       addressServiceAreaFallback: "Confirm the address with the business.",
       highlightMessageFallback: "Choose your items, review the cart, and send the message to the business.",
       openNow: "Open now",
@@ -2086,7 +2086,6 @@
       enderecoTopo.textContent = "";
       enderecoTopo.hidden = true;
     }
-    $("destaqueChamada").textContent = textValue(destaqueInicial?.kicker, currentLocale());
     $("destaqueTitulo").textContent = textValue(destaqueInicial?.title, currentLocale());
     $("destaqueSubtitulo").textContent = highlightMessage;
     $("destaqueTempo").innerHTML = renderHighlightInfoMarkup(textValue(destaqueInicial?.waitingTimeLabel, currentLocale()));

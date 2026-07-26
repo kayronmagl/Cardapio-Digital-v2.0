@@ -76,8 +76,8 @@
       },
       "destaqueInicial": {
           "kicker": {
-              "pt-BR": "Cardápio digital do Tobia's Lanches",
-              "en-US": "Cardápio digital do Tobia's Lanches"
+              "pt-BR": "",
+              "en-US": ""
           },
           "title": {
               "pt-BR": "Peça rápido e sem complicação.",
@@ -1117,7 +1117,6 @@
   };
 
   const KNOWN_EN_TRANSLATIONS = {
-      "Cardápio digital do Tobia's Lanches": "Tobia's Lanches digital menu",
       "Peça rápido e sem complicação.": "Order quickly and easily.",
       "Delivery, retirada e pedido no local com confirmação no WhatsApp.": "Delivery, pickup, and dine-in orders with WhatsApp confirmation.",
       "Pastéis": "Pastries",

@@ -997,8 +997,6 @@ img {
   .painel-horario::before {
     opacity: 0.22;
   }
-
-  .destaque-chamada,
   .titulo-horario,
   .rotulo-horario {
     color: var(--texto-quente);
@@ -1506,8 +1504,6 @@ html[data-accessibility="enhanced"] .pix-valor {
 .painel-horario>* {
   position: relative;
 }
-
-.destaque-chamada,
 .titulo-horario,
 .rotulo-horario,
 .cart-section-title,
@@ -1516,11 +1512,6 @@ html[data-accessibility="enhanced"] .pix-valor {
   letter-spacing: 0.08em;
 }
 
-.destaque-chamada {
-  color: var(--color-panel-accent);
-  font-size: 0.8rem;
-  margin: 0;
-}
 
 .destaque-titulo {
   max-width: 14ch;
@@ -1705,6 +1696,15 @@ html[data-accessibility="enhanced"] .pix-valor {
   padding: 0;
 }
 
+/* HORARIOS | Guarda espaco para a agenda antes do horario ser calculado. Isso evita que o painel cresca e empurre categorias e produtos logo apos a primeira pintura. */
+.detalhe-horario:empty {
+  min-height: 1.35em;
+}
+
+.agenda-horario:empty {
+  min-height: 6.6rem;
+}
+
 .agenda-horario li {
   display: flex;
   justify-content: space-between;
@@ -1731,6 +1731,11 @@ html[data-accessibility="enhanced"] .pix-valor {
   padding: 0.8rem 0 0.45rem;
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--color-primary) 55%, transparent) transparent;
+}
+
+/* CATEGORIAS | Reserva a altura da faixa antes dos botoes de filtro serem montados. Assim busca, produtos e rodape nao sobem e descem durante o carregamento. */
+.menu-categorias:empty {
+  min-height: 80px;
 }
 
 .menu-categorias::-webkit-scrollbar {
@@ -1810,6 +1815,11 @@ html[data-accessibility="enhanced"] .pix-valor {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 360px));
   justify-content: center;
   align-items: stretch;
+}
+
+/* PRODUTOS | Reserva a dobra do catalogo enquanto o JavaScript monta os cards. Assim o rodape nao aparece cedo demais e depois some quando os produtos entram, evitando troca brusca de layout. */
+.grade-produtos:empty {
+  min-height: min(34rem, 72vh);
 }
 
 .cabecalho-categoria {
@@ -8032,10 +8042,6 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
     padding: 0.82rem;
   }
 
-  .destaque-chamada {
-    display: none;
-  }
-
   .destaque-titulo {
     font-size: clamp(1.6rem, 9.8vw, 2.25rem);
   }
@@ -8226,10 +8232,6 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   .destaque-inicial--without-image .destaque-inicial-conteudo {
     gap: 0.32rem;
     max-width: none;
-  }
-
-  .destaque-chamada {
-    display: none;
   }
 
   .destaque-titulo,
@@ -8644,7 +8646,6 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   width: 100%;
 }
 
-.topo-blocos .destaque-chamada,
 .topo-blocos .destaque-titulo,
 .topo-blocos .destaque-subtitulo,
 .topo-blocos .destaque-informacoes,
@@ -8847,20 +8848,6 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   gap: 0;
 }
 
-.topo-blocos .destaque-chamada {
-  display: inline-flex;
-  align-items: center;
-  transform: translateY(-0.14rem);
-  width: fit-content;
-  max-width: 100%;
-  min-height: 0;
-  padding: 0.2rem 0.52rem 0.07rem;
-  border: 1px solid color-mix(in srgb, var(--color-panel-accent) 24%, transparent);
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--color-panel-accent) 9%, transparent);
-  line-height: 0.9;
-  white-space: nowrap;
-}
 
 .topo-blocos .destaque-subtitulo,
 .topo-blocos .destaque-inicial--without-image .destaque-subtitulo {
@@ -8900,15 +8887,6 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   .topo-blocos .destaque-inicial-conteudo,
   .topo-blocos .destaque-inicial--without-image .destaque-inicial-conteudo {
     gap: 0;
-  }
-
-  .topo-blocos .destaque-chamada {
-    min-height: 0;
-    padding: 0.16rem 0.4rem 0.05rem;
-    border-radius: 7px;
-    font-size: 0.68rem;
-    letter-spacing: 0.07em;
-    line-height: 0.88;
   }
 
   .topo-blocos .destaque-titulo,
@@ -9703,9 +9681,6 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   max-width: min(100%, 44rem);
 }
 
-.topo-blocos .destaque-chamada {
-  transform: translateY(-0.08rem);
-}
 
 .topo-blocos .destaque-titulo,
 .topo-blocos .destaque-inicial--without-image .destaque-titulo {
@@ -12021,12 +11996,6 @@ body:not(.cart-has-items) .barra-mobile {
     radial-gradient(circle at top right, rgba(255, 255, 255, 0.035), transparent 34%);
 }
 
-.topo-blocos .destaque-chamada {
-  border-color: color-mix(in srgb, var(--color-panel-block-border) 52%, transparent);
-  background-color: color-mix(in srgb, var(--color-panel-chip-bg) 62%, transparent);
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 115%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
 
 .topo-blocos .destaque-info,
 .topo-blocos .chip {
@@ -16646,24 +16615,6 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos::before {
     radial-gradient(circle at 16% 18%, rgba(255, 196, 0, 0.08), transparent 30%);
 }
 
-html[data-theme-preset="tobias-lanches"] .topo-blocos .destaque-chamada {
-  max-width: min(100%, 34rem);
-  padding: 0.28rem 0.62rem 0.16rem;
-  border-color: rgba(255, 196, 0, 0.36);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 120%),
-    rgba(0, 0, 0, 0.44);
-  color: #ffd84a;
-  font-size: clamp(0.72rem, 0.22vw + 0.68rem, 0.82rem);
-  line-height: 1.02;
-  letter-spacing: 0.06em;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.58);
-  white-space: normal;
-  text-wrap: balance;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 8px 18px rgba(0, 0, 0, 0.16);
-}
 
 html[data-theme-preset="tobias-lanches"] .topo-blocos .destaque-titulo,
 html[data-theme-preset="tobias-lanches"] .topo-blocos .destaque-inicial--without-image .destaque-titulo {
@@ -16733,12 +16684,6 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horar
 
   html[data-theme-preset="tobias-lanches"] .titulo-site {
     font-size: clamp(1.94rem, 6.5vw, 2.2rem);
-  }
-
-  html[data-theme-preset="tobias-lanches"] .topo-blocos .destaque-chamada {
-    padding: 0.22rem 0.48rem 0.11rem;
-    font-size: clamp(0.66rem, 2.2vw, 0.74rem);
-    letter-spacing: 0.05em;
   }
 }
 

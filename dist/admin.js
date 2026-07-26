@@ -257,8 +257,6 @@
       footerNoteEnPlaceholder: "Thanks for choosing us.",
       brandImage: "Imagem da marca",
       brandImageHelp: "A imagem será exibida no painel e no cardápio deste aparelho.",
-      destaqueChamadaPt: "Chamada curta do topo",
-      destaqueChamadaEn: "Chamada curta do topo em inglês",
       destaqueTituloPt: "Título principal do topo",
       destaqueTituloEn: "Título do topo em inglês",
       destaqueSubtituloPt: "Mensagem de destaque",
@@ -735,8 +733,6 @@
       footerNoteEnPlaceholder: "Thanks for choosing us.",
       brandImage: "Brand image",
       brandImageHelp: "The image appears at the top of the menu and in the panel.",
-      destaqueChamadaPt: "Top short label",
-      destaqueChamadaEn: "Top short label in English",
       destaqueTituloPt: "Main top title",
       destaqueTituloEn: "Top title in English",
       destaqueSubtituloPt: "Highlight message — PT-BR",
@@ -4845,10 +4841,6 @@
         t("sectionDestaqueInicial"),
         t("sectionDestaqueInicialHelp"),
         '<div class="admin-split">' +
-        settingsInput("destaqueChamadaPt", t("destaqueChamadaPt"), textValue(destaqueInicial?.kicker, "pt-BR")) +
-        settingsInput("destaqueChamadaEn", t("destaqueChamadaEn"), textValue(destaqueInicial?.kicker, "en-US")) +
-        "</div>" +
-        '<div class="admin-split">' +
         settingsInput("destaqueTituloPt", t("destaqueTituloPt"), textValue(destaqueInicial?.title, "pt-BR")) +
         settingsInput("destaqueTituloEn", t("destaqueTituloEn"), textValue(destaqueInicial?.title, "en-US")) +
         "</div>" +
@@ -6333,7 +6325,7 @@
       },
       destaqueInicial: {
         ...(current?.destaqueInicial || current?.hero || {}),
-        kicker: serializeTranslations(formData?.get("destaqueChamadaPt"), formData?.get("destaqueChamadaEn")),
+        kicker: serializeTranslations("", ""),
         title: serializeTranslations(formData?.get("destaqueTituloPt"), formData?.get("destaqueTituloEn")),
         subtitle: serializeTranslations(formData?.get("destaqueSubtituloPt"), formData?.get("destaqueSubtituloEn")),
         imageUrl: "",

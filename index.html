@@ -16,9 +16,9 @@
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=optional"
     rel="stylesheet">
-  <link rel="stylesheet" href="./dist/styles.css?v=2.0.17">
+  <link rel="stylesheet" href="./dist/styles.css?v=2.0.18">
 </head>
 
 <body>
@@ -26,7 +26,8 @@
 
   <header class="topo layout-shell" id="topo">
     <div class="caixa-logo">
-      <img id="logoSite" src="./assets/NovaLogoTobias.png" alt="Logo Tobia's Lanches" class="logo-site">
+      <img id="logoSite" src="./assets/NovaLogoTobias.png" alt="Logo Tobia's Lanches" class="logo-site" width="500"
+        height="500" decoding="async" fetchpriority="high">
       <div class="marca-topo">
         <h1 id="tituloSite" class="titulo-site">Tobia's Lanches</h1>
         <p id="subtituloTopo" class="subtitulo-topo">Pastéis, hambúrgueres, combos e bebidas</p>
@@ -56,25 +57,29 @@
     </div>
   </header>
 
-  <section id="topoBlocos" class="topo-blocos layout-shell" aria-label="Resumo inicial">
-    <section id="secaoDestaqueInicial" class="destaque-inicial" aria-label="Destaques do atendimento">
+  <section id="topoBlocos" class="topo-blocos layout-shell topo-blocos--without-hero-image" aria-label="Resumo inicial">
+    <section id="secaoDestaqueInicial" class="destaque-inicial destaque-inicial--without-image"
+      aria-label="Destaques do atendimento">
       <div class="destaque-inicial-grade">
         <div class="destaque-inicial-conteudo">
-          <p id="destaqueChamada" class="destaque-chamada">Cardápio digital oficial</p>
-          <h2 id="destaqueTitulo" class="destaque-titulo">Peça pelo WhatsApp com atendimento direto.</h2>
-          <p id="destaqueSubtitulo" class="destaque-subtitulo">Escolha os produtos, revise o carrinho e envie o pedido
+          <h2 id="destaqueTitulo" class="destaque-titulo">Faça seu pedido com praticidade.</h2>
+          <p id="destaqueSubtitulo" class="destaque-subtitulo">Escolha os produtos, confira o carrinho e envie o pedido
             para o Tobia's Lanches.</p>
           <div id="destaqueInformacoes" class="destaque-informacoes" aria-label="Informações rápidas">
             <span id="destaqueTempo" class="destaque-info">
               <span class="destaque-info-label">Tempo médio</span>
-              <span class="destaque-info-value">20 a 35 min</span>
+              <span class="destaque-info-value">20 a 40 min</span>
             </span>
             <span id="destaquePagamento" class="destaque-info">
               <span class="destaque-info-label">Pagamento</span>
               <span class="destaque-info-value">Pix, cartão e dinheiro</span>
             </span>
           </div>
-          <ul id="destaqueSelos" class="destaque-selos destaque-selos--hero"></ul>
+          <ul id="destaqueSelos" class="destaque-selos destaque-selos--hero">
+            <li class="chip">Delivery</li>
+            <li class="chip">Retirada</li>
+            <li class="chip">No local</li>
+          </ul>
         </div>
         <div id="destaqueImagem" class="destaque-imagem oculto">
           <img id="destaqueImagemArquivo" src="" alt="" loading="lazy" decoding="async">
