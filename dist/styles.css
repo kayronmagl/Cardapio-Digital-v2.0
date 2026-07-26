@@ -16698,6 +16698,68 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horar
   }
 }
 
+/* HIERARQUIA | Ajusta tamanhos do topo e das configuracoes para leitura clara em celular, tablet e desktop. A logica mantem o titulo como foco, subtitulo como apoio e dados rapidos em escala menor, sem depender de animacao ou efeito pesado. */
+.topo-blocos .destaque-titulo,
+.topo-blocos .destaque-inicial--without-image .destaque-titulo {
+  max-width: min(100%, 19ch);
+  font-size: clamp(1.95rem, 4.8vw, 3.05rem);
+  line-height: 1.1;
+}
+
+.topo-blocos .destaque-subtitulo,
+.topo-blocos .destaque-inicial--without-image .destaque-subtitulo {
+  font-size: clamp(0.94rem, 0.82rem + 0.45vw, 1.06rem);
+  line-height: 1.38;
+}
+
+.topo-blocos .destaque-info {
+  min-height: clamp(2.75rem, 2.45rem + 0.8vw, 3.1rem);
+  padding: clamp(0.46rem, 0.38rem + 0.25vw, 0.62rem) var(--topo-info-card-space-x);
+}
+
+.topo-blocos .destaque-info-label {
+  font-size: clamp(0.68rem, 0.62rem + 0.25vw, 0.78rem);
+  line-height: 1.2;
+}
+
+.topo-blocos .destaque-info-value {
+  font-size: clamp(0.86rem, 0.76rem + 0.36vw, 1rem);
+  line-height: 1.24;
+}
+
+.topo-blocos .chip {
+  min-height: clamp(2.125rem, 1.95rem + 0.5vw, 2.4rem);
+  padding-block: clamp(0.4rem, 0.32rem + 0.18vw, 0.5rem);
+  font-size: clamp(0.76rem, 0.68rem + 0.24vw, 0.88rem);
+  line-height: 1.16;
+}
+
+body.admin-page [data-admin-tab-panel="settings"] #settings-top > h2 {
+  font-size: clamp(1.45rem, 1.08rem + 1.2vw, 1.9rem);
+  line-height: 1.14;
+}
+
+body.admin-page [data-admin-tab-panel="settings"] .admin-settings-section > legend,
+body.admin-page [data-admin-tab-panel="settings"] .admin-hours-fieldset > legend {
+  max-width: min(100%, 24rem);
+  padding-inline: 0.42rem;
+  font-size: clamp(1.18rem, 0.98rem + 0.7vw, 1.42rem);
+  line-height: 1.16;
+  letter-spacing: 0.015em;
+}
+
+body.admin-page [data-admin-tab-panel="settings"] .admin-settings-subgroup h3 {
+  font-size: clamp(1rem, 0.92rem + 0.28vw, 1.12rem);
+  line-height: 1.16;
+}
+
+@media (max-width: 430px) {
+  .topo-blocos .destaque-titulo,
+  .topo-blocos .destaque-inicial--without-image .destaque-titulo {
+    font-size: clamp(1.9rem, 8vw, 2.05rem);
+  }
+}
+
 /* ANIMACAO | Limita movimentos pesados para manter a interface leve no celular. A logica da animacao usa transicoes leves para dar resposta visual sem pesar em celular ou computador fraco. */
 .produto-card,
 .oferta-card,
