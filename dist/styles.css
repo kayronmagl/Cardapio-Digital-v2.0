@@ -18279,6 +18279,42 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check input[
   }
 }
 
+/* CAMPOS SELECT | Centraliza a seta visual dos menus para checkout, catalogo, carrinho e Admin usarem o mesmo desenho. */
+.idioma-seletor,
+.bloco-form select,
+#camposEntrega select,
+#caixaCarrinho .bloco-form select,
+.catalog-field select,
+body.admin-page .admin-form select,
+body.admin-page .admin-toolbar-field select,
+body.admin-page .admin-combo-product-filter select {
+  appearance: none;
+  padding-right: 2.65rem;
+  background-image: var(--icone-seta-select);
+  background-position: right 0.92rem center;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+}
+
+.idioma-seletor {
+  padding-right: 2rem;
+  background-position: right 0.72rem center;
+}
+
+.topo-utilitarios .idioma-seletor,
+.idioma-box-admin .idioma-seletor,
+body.admin-page .admin-topbar-actions .idioma-seletor {
+  background-image: var(--icone-seta-select);
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+}
+
+body.admin-page .admin-form select,
+body.admin-page .admin-toolbar-field select,
+body.admin-page .admin-combo-product-filter select {
+  background-color: color-mix(in srgb, var(--superficie-elevada) 86%, transparent);
+}
+
 .rodape-legal-area {
   display: grid;
   gap: 0.36rem;
@@ -18611,39 +18647,4 @@ body.legal-route-active {
     max-width: 28ch;
     font-size: 0.95rem;
   }
-}
-
-.idioma-seletor,
-.bloco-form select,
-#camposEntrega select,
-#caixaCarrinho .bloco-form select,
-.catalog-field select,
-body.admin-page .admin-form select,
-body.admin-page .admin-toolbar-field select,
-body.admin-page .admin-combo-product-filter select {
-  appearance: none;
-  padding-right: 2.65rem;
-  background-image: var(--icone-seta-select);
-  background-position: right 0.92rem center;
-  background-repeat: no-repeat;
-  background-size: 16px 16px;
-}
-
-.idioma-seletor {
-  padding-right: 2rem;
-  background-position: right 0.72rem center;
-}
-
-.topo-utilitarios .idioma-seletor,
-.idioma-box-admin .idioma-seletor,
-body.admin-page .admin-topbar-actions .idioma-seletor {
-  background-image: var(--icone-seta-select);
-  background-repeat: no-repeat;
-  background-size: 16px 16px;
-}
-
-body.admin-page .admin-form select,
-body.admin-page .admin-toolbar-field select,
-body.admin-page .admin-combo-product-filter select {
-  background-color: color-mix(in srgb, var(--superficie-elevada) 86%, transparent);
 }
