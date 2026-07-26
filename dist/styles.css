@@ -18315,6 +18315,26 @@ body.admin-page .admin-combo-product-filter select {
   background-color: color-mix(in srgb, var(--superficie-elevada) 86%, transparent);
 }
 
+@media (max-width: 600px) {
+  .catalog-tools,
+  .grade-produtos,
+  .produto-card {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .menu-categorias {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+  }
+
+  .produto-card {
+    width: 100%;
+  }
+}
+
 .rodape-legal-area {
   display: grid;
   gap: 0.36rem;
@@ -18611,24 +18631,6 @@ body.legal-route-active {
 }
 
 @media (max-width: 600px) {
-  .catalog-tools,
-  .grade-produtos,
-  .produto-card {
-    max-width: 100%;
-    min-width: 0;
-    overflow-x: clip;
-  }
-
-  .menu-categorias {
-    max-width: 100%;
-    min-width: 0;
-    overflow-x: auto;
-  }
-
-  .produto-card {
-    width: 100%;
-  }
-
   .legal-page.layout-shell {
     width: calc(100vw - 2rem);
     max-width: calc(100vw - 2rem);
