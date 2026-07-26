@@ -18148,6 +18148,106 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
   }
 }
 
+body.admin-page .admin-combo-products-actions {
+  gap: 0.5rem;
+}
+
+body.admin-page .admin-combo-products-action {
+  padding-inline: 0.76rem;
+}
+
+body.admin-page .admin-combo-products-controls,
+body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-controls {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr));
+  align-items: end;
+  gap: 0.56rem;
+}
+
+body.admin-page .admin-combo-product-search input,
+body.admin-page .admin-combo-product-filter select {
+  width: 100%;
+}
+
+body.admin-page .admin-combo-filter-check,
+body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check {
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0.46rem 0.58rem;
+  border-radius: var(--raio-entre-pequeno);
+}
+
+body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check input[type="checkbox"] {
+  margin-top: 0;
+}
+
+@media (min-width: 769px) {
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check {
+    min-height: 44px;
+    height: 44px;
+    gap: 0.46rem;
+    padding: 0.38rem 0.68rem;
+    font-size: 0.88rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 22rem);
+    margin-inline: auto;
+    justify-items: center;
+  }
+
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-action:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.48rem;
+    width: min(100%, 22rem);
+    margin-inline: auto;
+    justify-items: stretch;
+  }
+
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-toolbar,
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-toolbar-head,
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-counter {
+    text-align: center;
+  }
+
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-toolbar {
+    justify-items: center;
+  }
+
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-toolbar-head {
+    align-items: center;
+    width: 100%;
+  }
+
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-action,
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product-search,
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product-filter,
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check {
+    width: 100%;
+  }
+
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product-search,
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product-filter:not(.admin-combo-product-view) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 430px) {
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-actions,
+  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-controls {
+    grid-template-columns: 1fr;
+    width: min(100%, 20rem);
+  }
+}
+
 /* ADMIN MOBILE | Acoes de topo dos paineis. */
 @media (max-width: 768px) {
   body.admin-page [data-admin-tab-panel] .admin-section-top-actions {
@@ -18541,107 +18641,9 @@ body.admin-page .admin-combo-product-filter select {
   background-color: color-mix(in srgb, var(--superficie-elevada) 86%, transparent);
 }
 
-body.admin-page .admin-combo-products-actions {
-  gap: 0.5rem;
-}
-
-body.admin-page .admin-combo-products-action {
-  padding-inline: 0.76rem;
-}
-
-body.admin-page .admin-combo-products-controls,
-body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-controls {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr));
-  align-items: end;
-  gap: 0.56rem;
-}
-
-body.admin-page .admin-combo-product-search input,
-body.admin-page .admin-combo-product-filter select {
-  width: 100%;
-}
-
-body.admin-page .admin-combo-filter-check,
-body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check {
-  align-items: center;
-  justify-content: center;
-  min-height: 40px;
-  padding: 0.46rem 0.58rem;
-  border-radius: var(--raio-entre-pequeno);
-}
-
-body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check input[type="checkbox"] {
-  margin-top: 0;
-}
-
 @media (min-width: 769px) {
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check {
-    min-height: 44px;
-    height: 44px;
-    gap: 0.46rem;
-    padding: 0.38rem 0.68rem;
-    font-size: 0.88rem;
-    white-space: nowrap;
-  }
-
   body.admin-page [data-admin-tab-panel="settings"] .admin-settings-nav {
     grid-template-columns: repeat(auto-fit, minmax(8.8rem, 1fr));
     max-width: none;
-  }
-}
-
-@media (max-width: 768px) {
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: min(100%, 22rem);
-    margin-inline: auto;
-    justify-items: center;
-  }
-
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-action:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-  }
-
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-controls {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.48rem;
-    width: min(100%, 22rem);
-    margin-inline: auto;
-    justify-items: stretch;
-  }
-
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-toolbar,
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-toolbar-head,
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-counter {
-    text-align: center;
-  }
-
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-toolbar {
-    justify-items: center;
-  }
-
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-toolbar-head {
-    align-items: center;
-    width: 100%;
-  }
-
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-action,
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product-search,
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product-filter,
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check {
-    width: 100%;
-  }
-
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product-search,
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product-filter:not(.admin-combo-product-view) {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 430px) {
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-actions,
-  body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-controls {
-    grid-template-columns: 1fr;
-    width: min(100%, 20rem);
   }
 }
