@@ -10042,6 +10042,19 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
     padding-left: clamp(0.9rem, 1.75vw, 1.25rem);
     border-left: 1px solid color-mix(in srgb, var(--cor-painel-bloco-borda) 34%, transparent);
   }
+
+  .topo-blocos .painel-horario,
+  .topo-blocos--without-hero-image .painel-horario {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .topo-blocos .painel-horario-grade,
+  .topo-blocos--without-hero-image .painel-horario-grade {
+    align-self: stretch;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+  }
 }
 
 @media (max-width: 1024px) {
