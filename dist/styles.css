@@ -18232,6 +18232,31 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
   line-height: 1.45;
 }
 
+@media (max-width: 540px) {
+  .rodape-copyright,
+  .rodape-links-legais .rodape-link,
+  .rodape-legal-separator {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .rodape-links-legais {
+    display: inline-flex;
+    grid-template-columns: none;
+    width: auto;
+    gap: 0.36rem;
+    padding-inline: 0;
+  }
+
+  .rodape-links-legais .rodape-link {
+    width: auto;
+    min-height: auto;
+    padding: 0;
+    font-size: 0.76rem;
+  }
+}
+
 /* LEGAL | Pagina interna de politica e termos. Ela usa layout focado em leitura e esconde partes do cardapio que nao fazem sentido nesse modo. */
 .legal-page.layout-shell {
   width: min(calc(100vw - clamp(1.2rem, 4vw, 3rem)), 980px);
@@ -18380,6 +18405,12 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
 .legal-back-link::before,
 .legal-back-link::after {
   display: none;
+}
+
+@media (max-width: 768px) {
+  .legal-back-link {
+    width: 100%;
+  }
 }
 
 body.legal-route-active #botaoCarrinho,
@@ -18560,10 +18591,6 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check input[
 }
 
 @media (max-width: 768px) {
-  .legal-back-link {
-    width: 100%;
-  }
-
   body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     width: min(100%, 22rem);
@@ -18611,35 +18638,10 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-filter-check input[
   }
 }
 
-@media (max-width: 540px) {
-  .rodape-copyright,
-  .rodape-links-legais .rodape-link,
-  .rodape-legal-separator {
-    font-size: 0.78rem;
-  }
-}
-
 @media (max-width: 430px) {
   body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-actions,
   body.admin-page [data-admin-tab-panel="offers"] .admin-combo-products-controls {
     grid-template-columns: 1fr;
     width: min(100%, 20rem);
-  }
-}
-
-@media (max-width: 380px) {
-  .rodape-links-legais {
-    display: inline-flex;
-    grid-template-columns: none;
-    width: auto;
-    gap: 0.36rem;
-    padding-inline: 0;
-  }
-
-  .rodape-links-legais .rodape-link {
-    width: auto;
-    min-height: auto;
-    padding: 0;
-    font-size: 0.76rem;
   }
 }
