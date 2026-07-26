@@ -22,16 +22,16 @@
   --color-accent-contrast: #17212d;
   --color-body-glow-a: color-mix(in srgb, var(--color-primary) 14%, transparent);
   --color-body-glow-b: rgba(245, 158, 11, 0.1);
-  --color-panel-accent: color-mix(in srgb, var(--color-primary) 74%, #fff7e6 26%);
-  --color-panel-shell-start: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface) 90%);
-  --color-panel-shell-mid: color-mix(in srgb, var(--color-primary) 8%, var(--color-bg-alt) 92%);
-  --color-panel-shell-end: color-mix(in srgb, var(--color-bg) 74%, var(--color-bg-alt) 26%);
-  --color-panel-overlay: color-mix(in srgb, var(--color-primary) 12%, transparent);
-  --color-panel-chip-bg: color-mix(in srgb, var(--color-surface) 80%, transparent);
-  --color-panel-chip-border: color-mix(in srgb, var(--color-border-medium) 78%, transparent);
-  --color-panel-block-bg: color-mix(in srgb, var(--color-surface-strong) 52%, transparent);
-  --color-panel-block-border: color-mix(in srgb, var(--color-border-medium) 60%, transparent);
-  --color-barra-mobile-bg: color-mix(in srgb, var(--color-surface-strong) 88%, transparent);
+  --cor-painel-destaque: color-mix(in srgb, var(--color-primary) 74%, #fff7e6 26%);
+  --cor-painel-fundo-inicio: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface) 90%);
+  --cor-painel-fundo-meio: color-mix(in srgb, var(--color-primary) 8%, var(--color-bg-alt) 92%);
+  --cor-painel-fundo-fim: color-mix(in srgb, var(--color-bg) 74%, var(--color-bg-alt) 26%);
+  --cor-painel-sobreposicao: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  --cor-painel-chip-fundo: color-mix(in srgb, var(--color-surface) 80%, transparent);
+  --cor-painel-chip-borda: color-mix(in srgb, var(--color-border-medium) 78%, transparent);
+  --cor-painel-bloco-fundo: color-mix(in srgb, var(--color-surface-strong) 52%, transparent);
+  --cor-painel-bloco-borda: color-mix(in srgb, var(--color-border-medium) 60%, transparent);
+  --cor-barra-mobile-fundo: color-mix(in srgb, var(--color-surface-strong) 88%, transparent);
   --cor-feedback-ok-fundo: color-mix(in srgb, var(--sucesso) 14%, var(--color-surface));
   --cor-feedback-erro-fundo: color-mix(in srgb, var(--erro) 12%, var(--color-surface));
   --cor-ok-fundo: color-mix(in srgb, var(--sucesso) 24%, var(--color-surface));
@@ -148,16 +148,16 @@
   --color-focus-ring: rgba(250, 204, 21, 0.34);
   --color-body-glow-a: color-mix(in srgb, var(--color-primary) 18%, transparent);
   --color-body-glow-b: color-mix(in srgb, var(--color-surface-strong) 32%, transparent);
-  --color-panel-accent: color-mix(in srgb, var(--color-primary) 56%, #fff1c2 44%);
-  --color-panel-shell-start: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface-strong) 88%);
-  --color-panel-shell-mid: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface) 92%);
-  --color-panel-shell-end: color-mix(in srgb, var(--color-bg) 88%, black 12%);
-  --color-panel-overlay: color-mix(in srgb, var(--color-primary) 14%, transparent);
-  --color-panel-chip-bg: color-mix(in srgb, var(--color-surface-strong) 76%, transparent);
-  --color-panel-chip-border: color-mix(in srgb, var(--color-border-medium) 78%, transparent);
-  --color-panel-block-bg: color-mix(in srgb, var(--color-surface) 64%, transparent);
-  --color-panel-block-border: color-mix(in srgb, var(--color-border-medium) 62%, transparent);
-  --color-barra-mobile-bg: color-mix(in srgb, var(--color-surface-strong) 94%, var(--color-bg) 6%);
+  --cor-painel-destaque: color-mix(in srgb, var(--color-primary) 56%, #fff1c2 44%);
+  --cor-painel-fundo-inicio: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface-strong) 88%);
+  --cor-painel-fundo-meio: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface) 92%);
+  --cor-painel-fundo-fim: color-mix(in srgb, var(--color-bg) 88%, black 12%);
+  --cor-painel-sobreposicao: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  --cor-painel-chip-fundo: color-mix(in srgb, var(--color-surface-strong) 76%, transparent);
+  --cor-painel-chip-borda: color-mix(in srgb, var(--color-border-medium) 78%, transparent);
+  --cor-painel-bloco-fundo: color-mix(in srgb, var(--color-surface) 64%, transparent);
+  --cor-painel-bloco-borda: color-mix(in srgb, var(--color-border-medium) 62%, transparent);
+  --cor-barra-mobile-fundo: color-mix(in srgb, var(--color-surface-strong) 94%, var(--color-bg) 6%);
   --cor-feedback-ok-fundo: color-mix(in srgb, var(--sucesso) 18%, var(--color-surface));
   --cor-feedback-erro-fundo: color-mix(in srgb, var(--erro) 16%, var(--color-surface));
   --cor-ok-texto: color-mix(in srgb, var(--sucesso) 82%, white 18%);
@@ -250,16 +250,16 @@
   --color-accent-contrast: #080805;
   --color-body-glow-a: rgba(255, 196, 0, 0.13);
   --color-body-glow-b: rgba(255, 224, 92, 0.07);
-  --color-panel-accent: #ffd21a;
-  --color-panel-shell-start: color-mix(in srgb, #ffc400 10%, #1d1708 90%);
-  --color-panel-shell-mid: color-mix(in srgb, #ffc400 6%, #12100a 94%);
-  --color-panel-shell-end: #050505;
-  --color-panel-overlay: rgba(255, 196, 0, 0.11);
-  --color-panel-chip-bg: rgba(29, 23, 8, 0.78);
-  --color-panel-chip-border: rgba(255, 196, 0, 0.26);
-  --color-panel-block-bg: rgba(18, 16, 10, 0.76);
-  --color-panel-block-border: rgba(255, 196, 0, 0.2);
-  --color-barra-mobile-bg: color-mix(in srgb, #12100a 94%, #050505 6%);
+  --cor-painel-destaque: #ffd21a;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #ffc400 10%, #1d1708 90%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #ffc400 6%, #12100a 94%);
+  --cor-painel-fundo-fim: #050505;
+  --cor-painel-sobreposicao: rgba(255, 196, 0, 0.11);
+  --cor-painel-chip-fundo: rgba(29, 23, 8, 0.78);
+  --cor-painel-chip-borda: rgba(255, 196, 0, 0.26);
+  --cor-painel-bloco-fundo: rgba(18, 16, 10, 0.76);
+  --cor-painel-bloco-borda: rgba(255, 196, 0, 0.2);
+  --cor-barra-mobile-fundo: color-mix(in srgb, #12100a 94%, #050505 6%);
   --superficie-brilho: rgba(255, 255, 255, 0.055);
   --superficie-suave: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg) 12%);
   --superficie-suave-hover: color-mix(in srgb, var(--color-surface-strong) 76%, var(--color-bg) 24%);
@@ -294,11 +294,11 @@
   --color-accent-contrast: #111827;
   --color-body-glow-a: rgba(212, 173, 84, 0.1);
   --color-body-glow-b: rgba(71, 85, 105, 0.08);
-  --color-panel-accent: #d8c188;
-  --color-panel-shell-start: color-mix(in srgb, var(--color-primary) 10%, #1e2a3c 90%);
-  --color-panel-shell-mid: color-mix(in srgb, var(--color-primary) 7%, #172131 93%);
-  --color-panel-shell-end: #0c1320;
-  --color-panel-overlay: rgba(212, 173, 84, 0.1);
+  --cor-painel-destaque: #d8c188;
+  --cor-painel-fundo-inicio: color-mix(in srgb, var(--color-primary) 10%, #1e2a3c 90%);
+  --cor-painel-fundo-meio: color-mix(in srgb, var(--color-primary) 7%, #172131 93%);
+  --cor-painel-fundo-fim: #0c1320;
+  --cor-painel-sobreposicao: rgba(212, 173, 84, 0.1);
   --erro: #e8a0ab;
   --sucesso: #76c8ad;
   --aviso-texto: #d3a764;
@@ -326,15 +326,15 @@
   --color-shadow: 0 20px 44px rgba(15, 23, 42, 0.08);
   --color-body-glow-a: rgba(79, 120, 146, 0.1);
   --color-body-glow-b: rgba(148, 163, 184, 0.08);
-  --color-panel-accent: #4f7892;
-  --color-panel-shell-start: color-mix(in srgb, var(--color-primary) 7%, #ffffff 93%);
-  --color-panel-shell-mid: color-mix(in srgb, var(--color-primary) 5%, #f7f8f6 95%);
-  --color-panel-shell-end: #edf1ef;
-  --color-panel-overlay: rgba(79, 120, 146, 0.06);
-  --color-panel-chip-bg: rgba(255, 255, 255, 0.72);
-  --color-panel-chip-border: rgba(23, 33, 45, 0.08);
-  --color-panel-block-bg: rgba(255, 255, 255, 0.76);
-  --color-panel-block-border: rgba(23, 33, 45, 0.08);
+  --cor-painel-destaque: #4f7892;
+  --cor-painel-fundo-inicio: color-mix(in srgb, var(--color-primary) 7%, #ffffff 93%);
+  --cor-painel-fundo-meio: color-mix(in srgb, var(--color-primary) 5%, #f7f8f6 95%);
+  --cor-painel-fundo-fim: #edf1ef;
+  --cor-painel-sobreposicao: rgba(79, 120, 146, 0.06);
+  --cor-painel-chip-fundo: rgba(255, 255, 255, 0.72);
+  --cor-painel-chip-borda: rgba(23, 33, 45, 0.08);
+  --cor-painel-bloco-fundo: rgba(255, 255, 255, 0.76);
+  --cor-painel-bloco-borda: rgba(23, 33, 45, 0.08);
   --erro: #9d5b58;
   --sucesso: #2f7668;
   --aviso-texto: #6e7f4f;
@@ -362,11 +362,11 @@
   --color-shadow: 0 24px 56px rgba(18, 6, 6, 0.44);
   --color-body-glow-a: rgba(145, 63, 55, 0.12);
   --color-body-glow-b: rgba(199, 109, 72, 0.08);
-  --color-panel-accent: #d8ab93;
-  --color-panel-shell-start: color-mix(in srgb, #8f453f 10%, #271715 90%);
-  --color-panel-shell-mid: color-mix(in srgb, #c76d48 8%, #34201d 92%);
-  --color-panel-shell-end: #1b1110;
-  --color-panel-overlay: rgba(199, 109, 72, 0.1);
+  --cor-painel-destaque: #d8ab93;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #8f453f 10%, #271715 90%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #c76d48 8%, #34201d 92%);
+  --cor-painel-fundo-fim: #1b1110;
+  --cor-painel-sobreposicao: rgba(199, 109, 72, 0.1);
   --erro: #d99992;
   --sucesso: #7eb99c;
   --aviso-texto: #cf8a64;
@@ -394,11 +394,11 @@
   --color-accent-contrast: #032314;
   --color-body-glow-a: rgba(90, 126, 86, 0.1);
   --color-body-glow-b: rgba(118, 143, 70, 0.08);
-  --color-panel-accent: #bcc8ab;
-  --color-panel-shell-start: color-mix(in srgb, #5f7a57 10%, #20382a 90%);
-  --color-panel-shell-mid: color-mix(in srgb, #768f46 8%, #162c21 92%);
-  --color-panel-shell-end: #0d1f17;
-  --color-panel-overlay: rgba(118, 143, 70, 0.1);
+  --cor-painel-destaque: #bcc8ab;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #5f7a57 10%, #20382a 90%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #768f46 8%, #162c21 92%);
+  --cor-painel-fundo-fim: #0d1f17;
+  --cor-painel-sobreposicao: rgba(118, 143, 70, 0.1);
   --erro: #d79ba4;
   --sucesso: #8eb59c;
   --aviso-texto: #b3c48a;
@@ -426,11 +426,11 @@
   --color-shadow: 0 24px 56px rgba(20, 8, 31, 0.44);
   --color-body-glow-a: rgba(141, 97, 120, 0.1);
   --color-body-glow-b: rgba(79, 53, 72, 0.08);
-  --color-panel-accent: #d4bcc8;
-  --color-panel-shell-start: color-mix(in srgb, #8d6178 10%, #36212d 90%);
-  --color-panel-shell-mid: color-mix(in srgb, #6a4557 8%, #281a23 92%);
-  --color-panel-shell-end: #1a1218;
-  --color-panel-overlay: rgba(141, 97, 120, 0.1);
+  --cor-painel-destaque: #d4bcc8;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #8d6178 10%, #36212d 90%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #6a4557 8%, #281a23 92%);
+  --cor-painel-fundo-fim: #1a1218;
+  --cor-painel-sobreposicao: rgba(141, 97, 120, 0.1);
   --erro: #d79ca7;
   --sucesso: #88b5be;
   --aviso-texto: #c1a2b2;
@@ -458,11 +458,11 @@
   --color-accent-contrast: #1a0e08;
   --color-body-glow-a: rgba(151, 93, 49, 0.1);
   --color-body-glow-b: rgba(208, 154, 97, 0.08);
-  --color-panel-accent: #e0b37c;
-  --color-panel-shell-start: color-mix(in srgb, #8e5834 10%, #312015 90%);
-  --color-panel-shell-mid: color-mix(in srgb, #d09a61 8%, #21140d 92%);
-  --color-panel-shell-end: #120b07;
-  --color-panel-overlay: rgba(208, 154, 97, 0.1);
+  --cor-painel-destaque: #e0b37c;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #8e5834 10%, #312015 90%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #d09a61 8%, #21140d 92%);
+  --cor-painel-fundo-fim: #120b07;
+  --cor-painel-sobreposicao: rgba(208, 154, 97, 0.1);
   --erro: #d39da3;
   --sucesso: #8db79e;
   --aviso-texto: #d2a46e;
@@ -490,11 +490,11 @@
   --color-accent-contrast: #021727;
   --color-body-glow-a: rgba(86, 136, 162, 0.1);
   --color-body-glow-b: rgba(49, 87, 107, 0.08);
-  --color-panel-accent: #b6c9d2;
-  --color-panel-shell-start: color-mix(in srgb, #4b7388 10%, #1f3742 90%);
-  --color-panel-shell-mid: color-mix(in srgb, #5688a2 8%, #162a34 92%);
-  --color-panel-shell-end: #0d1a21;
-  --color-panel-overlay: rgba(86, 136, 162, 0.1);
+  --cor-painel-destaque: #b6c9d2;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #4b7388 10%, #1f3742 90%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #5688a2 8%, #162a34 92%);
+  --cor-painel-fundo-fim: #0d1a21;
+  --cor-painel-sobreposicao: rgba(86, 136, 162, 0.1);
   --erro: #d8a079;
   --sucesso: #84b7c4;
   --aviso-texto: #9ebcca;
@@ -522,11 +522,11 @@
   --color-shadow: 0 24px 56px rgba(22, 8, 2, 0.44);
   --color-body-glow-a: rgba(198, 92, 28, 0.1);
   --color-body-glow-b: rgba(223, 145, 68, 0.08);
-  --color-panel-accent: #e5ae75;
-  --color-panel-shell-start: color-mix(in srgb, #b76729 10%, #4c2d16 90%);
-  --color-panel-shell-mid: color-mix(in srgb, #df9144 8%, #39200d 92%);
-  --color-panel-shell-end: #241407;
-  --color-panel-overlay: rgba(223, 145, 68, 0.1);
+  --cor-painel-destaque: #e5ae75;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #b76729 10%, #4c2d16 90%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #df9144 8%, #39200d 92%);
+  --cor-painel-fundo-fim: #241407;
+  --cor-painel-sobreposicao: rgba(223, 145, 68, 0.1);
   --erro: #d8a0a7;
   --sucesso: #8fb59d;
   --aviso-texto: #e3a160;
@@ -554,15 +554,15 @@
   --color-accent-contrast: #302317;
   --color-body-glow-a: rgba(184, 138, 86, 0.08);
   --color-body-glow-b: rgba(128, 101, 70, 0.06);
-  --color-panel-accent: #8f6b4a;
-  --color-panel-shell-start: color-mix(in srgb, #ffffff 82%, #f2e6d6 18%);
-  --color-panel-shell-mid: color-mix(in srgb, #efe5d8 80%, #faf6ef 20%);
-  --color-panel-shell-end: #f8f3eb;
-  --color-panel-overlay: rgba(184, 138, 86, 0.05);
-  --color-panel-chip-bg: rgba(255, 255, 255, 0.78);
-  --color-panel-chip-border: rgba(143, 107, 74, 0.12);
-  --color-panel-block-bg: rgba(255, 255, 255, 0.74);
-  --color-panel-block-border: rgba(184, 138, 86, 0.12);
+  --cor-painel-destaque: #8f6b4a;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #ffffff 82%, #f2e6d6 18%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #efe5d8 80%, #faf6ef 20%);
+  --cor-painel-fundo-fim: #f8f3eb;
+  --cor-painel-sobreposicao: rgba(184, 138, 86, 0.05);
+  --cor-painel-chip-fundo: rgba(255, 255, 255, 0.78);
+  --cor-painel-chip-borda: rgba(143, 107, 74, 0.12);
+  --cor-painel-bloco-fundo: rgba(255, 255, 255, 0.74);
+  --cor-painel-bloco-borda: rgba(184, 138, 86, 0.12);
   --erro: #a96b51;
   --sucesso: #4b7b5f;
   --aviso-texto: #a57a48;
@@ -590,11 +590,11 @@
   --color-accent-contrast: #0b0c0d;
   --color-body-glow-a: rgba(207, 214, 213, 0.06);
   --color-body-glow-b: rgba(255, 255, 255, 0.04);
-  --color-panel-accent: #d8dddc;
-  --color-panel-shell-start: color-mix(in srgb, #cfd6d5 5%, #212328 95%);
-  --color-panel-shell-mid: color-mix(in srgb, #e5ecea 4%, #16171a 96%);
-  --color-panel-shell-end: #0a0b0d;
-  --color-panel-overlay: rgba(207, 214, 213, 0.06);
+  --cor-painel-destaque: #d8dddc;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #cfd6d5 5%, #212328 95%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #e5ecea 4%, #16171a 96%);
+  --cor-painel-fundo-fim: #0a0b0d;
+  --cor-painel-sobreposicao: rgba(207, 214, 213, 0.06);
   --erro: #d49aa5;
   --sucesso: #8eb8b0;
   --aviso-texto: #d8dddc;
@@ -622,11 +622,11 @@
   --color-accent-contrast: #1f1a0a;
   --color-body-glow-a: rgba(199, 161, 74, 0.1);
   --color-body-glow-b: rgba(106, 132, 66, 0.08);
-  --color-panel-accent: #d6c085;
-  --color-panel-shell-start: color-mix(in srgb, #8a7c44 8%, #342a1a 92%);
-  --color-panel-shell-mid: color-mix(in srgb, #c7a14a 6%, #272014 94%);
-  --color-panel-shell-end: #18140d;
-  --color-panel-overlay: rgba(199, 161, 74, 0.1);
+  --cor-painel-destaque: #d6c085;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #8a7c44 8%, #342a1a 92%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #c7a14a 6%, #272014 94%);
+  --cor-painel-fundo-fim: #18140d;
+  --cor-painel-sobreposicao: rgba(199, 161, 74, 0.1);
   --erro: #d89e6b;
   --sucesso: #8db497;
   --aviso-texto: #d2b366;
@@ -654,11 +654,11 @@
   --color-accent-contrast: #ffffff;
   --color-body-glow-a: rgba(94, 104, 114, 0.08);
   --color-body-glow-b: rgba(148, 163, 184, 0.08);
-  --color-panel-accent: #5e6872;
-  --color-panel-shell-start: color-mix(in srgb, #ffffff 78%, #dce1e4 22%);
-  --color-panel-shell-mid: color-mix(in srgb, #e1e5e7 84%, #f9faf9 16%);
-  --color-panel-shell-end: #edf0f1;
-  --color-panel-overlay: rgba(94, 104, 114, 0.05);
+  --cor-painel-destaque: #5e6872;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #ffffff 78%, #dce1e4 22%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #e1e5e7 84%, #f9faf9 16%);
+  --cor-painel-fundo-fim: #edf0f1;
+  --cor-painel-sobreposicao: rgba(94, 104, 114, 0.05);
   --erro: #9c5f66;
   --sucesso: #48796e;
   --aviso-texto: #667257;
@@ -686,15 +686,15 @@
   --color-shadow: 0 18px 40px rgba(98, 78, 128, 0.1);
   --color-body-glow-a: rgba(139, 123, 181, 0.08);
   --color-body-glow-b: rgba(111, 143, 134, 0.05);
-  --color-panel-accent: #8b7bb5;
-  --color-panel-shell-start: color-mix(in srgb, #fffaff 82%, #e6dcf3 18%);
-  --color-panel-shell-mid: color-mix(in srgb, #ebe4f5 84%, #f4f0fa 16%);
-  --color-panel-shell-end: #f4f0fa;
-  --color-panel-overlay: rgba(139, 123, 181, 0.05);
-  --color-panel-chip-bg: rgba(255, 255, 255, 0.78);
-  --color-panel-chip-border: rgba(99, 116, 122, 0.12);
-  --color-panel-block-bg: rgba(255, 255, 255, 0.74);
-  --color-panel-block-border: rgba(139, 123, 181, 0.1);
+  --cor-painel-destaque: #8b7bb5;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #fffaff 82%, #e6dcf3 18%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #ebe4f5 84%, #f4f0fa 16%);
+  --cor-painel-fundo-fim: #f4f0fa;
+  --cor-painel-sobreposicao: rgba(139, 123, 181, 0.05);
+  --cor-painel-chip-fundo: rgba(255, 255, 255, 0.78);
+  --cor-painel-chip-borda: rgba(99, 116, 122, 0.12);
+  --cor-painel-bloco-fundo: rgba(255, 255, 255, 0.74);
+  --cor-painel-bloco-borda: rgba(139, 123, 181, 0.1);
   --erro: #a76072;
   --sucesso: #3f7a73;
   --aviso-texto: #89779e;
@@ -722,15 +722,15 @@
   --color-shadow: 0 18px 40px rgba(136, 86, 104, 0.1);
   --color-body-glow-a: rgba(195, 119, 146, 0.08);
   --color-body-glow-b: rgba(203, 146, 111, 0.06);
-  --color-panel-accent: #b96482;
-  --color-panel-shell-start: color-mix(in srgb, #fffdfd 82%, #f6e5e7 18%);
-  --color-panel-shell-mid: color-mix(in srgb, #f7e7e8 84%, #fcf3f4 16%);
-  --color-panel-shell-end: #fcf3f4;
-  --color-panel-overlay: rgba(195, 119, 146, 0.05);
-  --color-panel-chip-bg: rgba(255, 255, 255, 0.78);
-  --color-panel-chip-border: rgba(138, 94, 111, 0.12);
-  --color-panel-block-bg: rgba(255, 255, 255, 0.74);
-  --color-panel-block-border: rgba(195, 119, 146, 0.1);
+  --cor-painel-destaque: #b96482;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #fffdfd 82%, #f6e5e7 18%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #f7e7e8 84%, #fcf3f4 16%);
+  --cor-painel-fundo-fim: #fcf3f4;
+  --cor-painel-sobreposicao: rgba(195, 119, 146, 0.05);
+  --cor-painel-chip-fundo: rgba(255, 255, 255, 0.78);
+  --cor-painel-chip-borda: rgba(138, 94, 111, 0.12);
+  --cor-painel-bloco-fundo: rgba(255, 255, 255, 0.74);
+  --cor-painel-bloco-borda: rgba(195, 119, 146, 0.1);
   --erro: #a75872;
   --sucesso: #487a73;
   --aviso-texto: #c98d70;
@@ -758,11 +758,11 @@
   --color-accent-contrast: #15140c;
   --color-body-glow-a: rgba(112, 101, 63, 0.1);
   --color-body-glow-b: rgba(74, 91, 60, 0.07);
-  --color-panel-accent: #c2b783;
-  --color-panel-shell-start: color-mix(in srgb, #6f6a44 9%, #393520 91%);
-  --color-panel-shell-mid: color-mix(in srgb, #9a8b59 7%, #272417 93%);
-  --color-panel-shell-end: #19180f;
-  --color-panel-overlay: rgba(154, 139, 89, 0.1);
+  --cor-painel-destaque: #c2b783;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #6f6a44 9%, #393520 91%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #9a8b59 7%, #272417 93%);
+  --cor-painel-fundo-fim: #19180f;
+  --cor-painel-sobreposicao: rgba(154, 139, 89, 0.1);
   --erro: #d39c76;
   --sucesso: #8eaf95;
   --aviso-texto: #c2b783;
@@ -790,11 +790,11 @@
   --color-accent-contrast: #111827;
   --color-body-glow-a: rgba(79, 135, 173, 0.1);
   --color-body-glow-b: rgba(208, 154, 69, 0.08);
-  --color-panel-accent: #d7b36d;
-  --color-panel-shell-start: color-mix(in srgb, #4f87ad 8%, #2d3848 92%);
-  --color-panel-shell-mid: color-mix(in srgb, #d09a45 6%, #222b39 94%);
-  --color-panel-shell-end: #151a22;
-  --color-panel-overlay: rgba(79, 135, 173, 0.08);
+  --cor-painel-destaque: #d7b36d;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #4f87ad 8%, #2d3848 92%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #d09a45 6%, #222b39 94%);
+  --cor-painel-fundo-fim: #151a22;
+  --cor-painel-sobreposicao: rgba(79, 135, 173, 0.08);
   --erro: #d78e55;
   --sucesso: #6aa7c8;
   --aviso-texto: #d09a45;
@@ -828,15 +828,15 @@
   --color-accent-contrast: #000000;
   --color-body-glow-a: rgba(250, 204, 21, 0.1);
   --color-body-glow-b: rgba(255, 255, 255, 0.04);
-  --color-panel-accent: #facc15;
-  --color-panel-shell-start: #111111;
-  --color-panel-shell-mid: #111111;
-  --color-panel-shell-end: #000000;
-  --color-panel-overlay: rgba(255, 255, 255, 0.04);
-  --color-panel-chip-bg: #111111;
-  --color-panel-chip-border: #ffffff;
-  --color-panel-block-bg: #111111;
-  --color-panel-block-border: #ffffff;
+  --cor-painel-destaque: #facc15;
+  --cor-painel-fundo-inicio: #111111;
+  --cor-painel-fundo-meio: #111111;
+  --cor-painel-fundo-fim: #000000;
+  --cor-painel-sobreposicao: rgba(255, 255, 255, 0.04);
+  --cor-painel-chip-fundo: #111111;
+  --cor-painel-chip-borda: #ffffff;
+  --cor-painel-bloco-fundo: #111111;
+  --cor-painel-bloco-borda: #ffffff;
   --superficie-brilho: rgba(255, 255, 255, 0.01);
   --superficie-suave: #111111;
   --superficie-suave-hover: #1f1f1f;
@@ -1408,8 +1408,8 @@ html[data-accessibility="enhanced"] {
   --borda-suave: color-mix(in srgb, var(--color-text) 18%, var(--color-primary) 30%);
   --borda-media: color-mix(in srgb, var(--color-text) 24%, var(--color-primary) 52%);
   --contorno-superficie: color-mix(in srgb, var(--color-text) 22%, var(--color-primary) 58%);
-  --color-panel-chip-border: color-mix(in srgb, var(--color-on-dark) 18%, var(--color-panel-accent) 42%);
-  --color-panel-block-border: color-mix(in srgb, var(--color-on-dark) 18%, var(--color-panel-accent) 42%);
+  --cor-painel-chip-borda: color-mix(in srgb, var(--color-on-dark) 18%, var(--cor-painel-destaque) 42%);
+  --cor-painel-bloco-borda: color-mix(in srgb, var(--color-on-dark) 18%, var(--cor-painel-destaque) 42%);
   --color-focus: color-mix(in srgb, var(--color-primary) 68%, white 32%);
   --color-focus-ring: color-mix(in srgb, var(--color-primary) 42%, white 20%);
 }
@@ -1505,14 +1505,14 @@ html[data-accessibility="enhanced"] .pix-valor {
   min-height: 100%;
   border: 1px solid var(--color-border-medium);
   border-radius: var(--raio-maximo);
-  background: linear-gradient(165deg, var(--color-panel-shell-start) 0%, var(--color-panel-shell-mid) 55%, var(--color-panel-shell-end) 100%);
+  background: linear-gradient(165deg, var(--cor-painel-fundo-inicio) 0%, var(--cor-painel-fundo-meio) 55%, var(--cor-painel-fundo-fim) 100%);
   color: var(--color-on-dark);
   box-shadow: 0 18px 40px color-mix(in srgb, var(--color-shadow) 20%, transparent);
 }
 
 [data-theme="dark"] .destaque-inicial,
 [data-theme="dark"] .painel-horario {
-  background: linear-gradient(165deg, var(--color-panel-shell-start) 0%, var(--color-panel-shell-mid) 50%, var(--color-panel-shell-end) 100%);
+  background: linear-gradient(165deg, var(--cor-painel-fundo-inicio) 0%, var(--cor-painel-fundo-meio) 50%, var(--cor-painel-fundo-fim) 100%);
   border-color: var(--color-border-medium);
 }
 
@@ -1540,7 +1540,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at top right, color-mix(in srgb, var(--color-panel-overlay) 72%, transparent), transparent 30%),
+    radial-gradient(circle at top right, color-mix(in srgb, var(--cor-painel-sobreposicao) 72%, transparent), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 100%);
   pointer-events: none;
 }
@@ -1585,8 +1585,8 @@ html[data-accessibility="enhanced"] .pix-valor {
 
 .destaque-info,
 .chip {
-  border: 1px solid var(--color-panel-chip-border);
-  background: var(--color-panel-chip-bg);
+  border: 1px solid var(--cor-painel-chip-borda);
+  background: var(--cor-painel-chip-fundo);
   color: var(--color-on-dark);
 }
 
@@ -1651,7 +1651,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 
 .titulo-horario {
   font-size: 1.02rem;
-  color: var(--color-panel-accent);
+  color: var(--cor-painel-destaque);
   margin: 0;
 }
 
@@ -1670,7 +1670,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   margin-inline-start: auto;
   padding: 0.34rem 0.74rem 0.34rem 0.62rem;
   border-radius: var(--raio-pilula);
-  border: 1px solid var(--color-panel-chip-border);
+  border: 1px solid var(--cor-painel-chip-borda);
   font-weight: var(--peso-negrito);
   font-size: 0.74rem;
   letter-spacing: 0.01em;
@@ -1714,13 +1714,13 @@ html[data-accessibility="enhanced"] .pix-valor {
 
 .horario-bloco {
   padding: 0.72rem 0.78rem;
-  border: 1px solid var(--color-panel-block-border);
+  border: 1px solid var(--cor-painel-bloco-borda);
   border-radius: var(--raio-encaixe);
-  background: var(--color-panel-block-bg);
+  background: var(--cor-painel-bloco-fundo);
 }
 
 .rotulo-horario {
-  color: var(--color-panel-accent);
+  color: var(--cor-painel-destaque);
   font-size: 0.84rem;
   margin: 0;
 }
@@ -2942,7 +2942,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   border-radius: clamp(13px, 1.4vw, 16px);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 58%, transparent), transparent 100%),
-    color-mix(in srgb, var(--color-barra-mobile-bg) 96%, transparent);
+    color-mix(in srgb, var(--cor-barra-mobile-fundo) 96%, transparent);
   box-shadow:
     0 12px 28px color-mix(in srgb, var(--color-shadow) 26%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 28%, transparent);
@@ -2975,11 +2975,11 @@ html[data-accessibility="enhanced"] .pix-valor {
 
 @supports not (background: color-mix(in srgb, black 50%, white)) {
   :root {
-    --color-barra-mobile-bg: rgba(255, 255, 255, 0.94);
+    --cor-barra-mobile-fundo: rgba(255, 255, 255, 0.94);
   }
 
   [data-theme="dark"] {
-    --color-barra-mobile-bg: rgba(30, 41, 59, 0.96);
+    --cor-barra-mobile-fundo: rgba(30, 41, 59, 0.96);
   }
 }
 
@@ -3383,7 +3383,7 @@ body {
 .barra-mobile {
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 58%, transparent), transparent 100%),
-    color-mix(in srgb, var(--color-barra-mobile-bg) 96%, transparent);
+    color-mix(in srgb, var(--cor-barra-mobile-fundo) 96%, transparent);
   border-color: color-mix(in srgb, var(--borda-media) 74%, transparent);
   box-shadow:
     0 12px 28px color-mix(in srgb, var(--color-shadow) 26%, transparent),
@@ -8376,9 +8376,9 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
     align-items: flex-start;
     gap: 0.12rem;
     padding: 0.36rem 0.4rem;
-    border: 1px solid color-mix(in srgb, var(--color-panel-block-border) 68%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cor-painel-bloco-borda) 68%, transparent);
     border-radius: var(--raio-pequeno);
-    background: color-mix(in srgb, var(--color-panel-block-bg) 72%, transparent);
+    background: color-mix(in srgb, var(--cor-painel-bloco-fundo) 72%, transparent);
     font-size: 0.68rem;
     min-width: 0;
     min-height: auto;
@@ -8902,7 +8902,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   width: 100%;
   max-width: 100%;
   padding-bottom: 0.58rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-panel-block-border) 62%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--cor-painel-bloco-borda) 62%, transparent);
 }
 
 .topo-blocos .destaque-titulo,
@@ -8919,15 +8919,15 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 }
 
 .topo-blocos .destaque-info {
-  border-color: color-mix(in srgb, var(--color-panel-chip-border) 72%, transparent);
+  border-color: color-mix(in srgb, var(--cor-painel-chip-borda) 72%, transparent);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--color-on-dark) 4%, transparent), transparent 100%),
-    color-mix(in srgb, var(--color-panel-chip-bg) 88%, transparent);
+    color-mix(in srgb, var(--cor-painel-chip-fundo) 88%, transparent);
 }
 
 .topo-blocos .chip {
-  border-color: color-mix(in srgb, var(--color-panel-chip-border) 66%, transparent);
-  background: color-mix(in srgb, var(--color-panel-chip-bg) 80%, transparent);
+  border-color: color-mix(in srgb, var(--cor-painel-chip-borda) 66%, transparent);
+  background: color-mix(in srgb, var(--cor-painel-chip-fundo) 80%, transparent);
 }
 
 @media (max-width: 640px) {
@@ -9407,7 +9407,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 .topo-blocos .painel-horario-topo,
 .topo-blocos--without-hero-image .painel-horario-topo {
   padding-bottom: 0.68rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-panel-block-border) 62%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--cor-painel-bloco-borda) 62%, transparent);
 }
 
 .topo-blocos .painel-horario-head,
@@ -9444,11 +9444,11 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   gap: 0.32rem;
   min-height: 100%;
   padding: clamp(0.74rem, 0.7vw + 0.56rem, 0.95rem);
-  border-color: color-mix(in srgb, var(--color-panel-block-border) 70%, transparent);
+  border-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 70%, transparent);
   border-radius: var(--raio-encaixe);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--color-on-dark) 3%, transparent), transparent 100%),
-    color-mix(in srgb, var(--color-panel-block-bg) 88%, transparent);
+    color-mix(in srgb, var(--cor-painel-bloco-fundo) 88%, transparent);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, var(--color-on-dark) 8%, transparent),
     0 10px 22px color-mix(in srgb, var(--color-shadow) 8%, transparent);
@@ -9457,8 +9457,8 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 .topo-blocos .horario-bloco:first-child,
 .topo-blocos--without-hero-image .horario-bloco:first-child {
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--color-panel-accent) 8%, transparent), transparent 100%),
-    color-mix(in srgb, var(--color-panel-block-bg) 90%, transparent);
+    linear-gradient(180deg, color-mix(in srgb, var(--cor-painel-destaque) 8%, transparent), transparent 100%),
+    color-mix(in srgb, var(--cor-painel-bloco-fundo) 90%, transparent);
 }
 
 .topo-blocos .rotulo-horario,
@@ -9513,9 +9513,9 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   white-space: nowrap;
   min-height: auto;
   padding: 0.58rem 0.68rem;
-  border: 1px dashed color-mix(in srgb, var(--color-panel-block-border) 72%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--cor-painel-bloco-borda) 72%, transparent);
   border-radius: var(--raio-padrao);
-  background: color-mix(in srgb, var(--color-panel-block-bg) 62%, transparent);
+  background: color-mix(in srgb, var(--cor-painel-bloco-fundo) 62%, transparent);
   color: var(--color-on-dark-muted);
 }
 
@@ -9666,14 +9666,14 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   padding: clamp(0.82rem, 1.55vw, 1.12rem);
   border: 1px solid var(--color-border-medium);
   border-radius: var(--raio-maximo);
-  background: linear-gradient(165deg, var(--color-panel-shell-start) 0%, var(--color-panel-shell-mid) 55%, var(--color-panel-shell-end) 100%);
+  background: linear-gradient(165deg, var(--cor-painel-fundo-inicio) 0%, var(--cor-painel-fundo-meio) 55%, var(--cor-painel-fundo-fim) 100%);
   color: var(--color-on-dark);
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
 }
 
 [data-theme="dark"] .topo-blocos {
   border-color: var(--color-border-medium);
-  background: linear-gradient(165deg, var(--color-panel-shell-start) 0%, var(--color-panel-shell-mid) 50%, var(--color-panel-shell-end) 100%);
+  background: linear-gradient(165deg, var(--cor-painel-fundo-inicio) 0%, var(--cor-painel-fundo-meio) 50%, var(--cor-painel-fundo-fim) 100%);
 }
 
 .topo-blocos::before {
@@ -9682,7 +9682,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   inset: 0;
   z-index: var(--camada-base);
   background:
-    radial-gradient(circle at top right, color-mix(in srgb, var(--color-panel-overlay) 72%, transparent), transparent 30%),
+    radial-gradient(circle at top right, color-mix(in srgb, var(--cor-painel-sobreposicao) 72%, transparent), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 100%);
   pointer-events: none;
 }
@@ -9774,15 +9774,15 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 .topo-blocos--without-hero-image .horario-bloco {
   gap: 0.26rem;
   padding: 0.56rem 0.64rem;
-  border-color: color-mix(in srgb, var(--color-panel-block-border) 48%, transparent);
+  border-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 48%, transparent);
   border-radius: var(--raio-padrao);
-  background: color-mix(in srgb, var(--color-panel-block-bg) 42%, transparent);
+  background: color-mix(in srgb, var(--cor-painel-bloco-fundo) 42%, transparent);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-on-dark) 5%, transparent);
 }
 
 .topo-blocos .horario-bloco:first-child,
 .topo-blocos--without-hero-image .horario-bloco:first-child {
-  background: color-mix(in srgb, var(--color-panel-accent) 5%, var(--color-panel-block-bg) 32%);
+  background: color-mix(in srgb, var(--cor-painel-destaque) 5%, var(--cor-painel-bloco-fundo) 32%);
 }
 
 .topo-blocos .agenda-horario,
@@ -9808,7 +9808,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 
   .topo-blocos > .faixa-operacao {
     padding-left: clamp(0.9rem, 1.75vw, 1.25rem);
-    border-left: 1px solid color-mix(in srgb, var(--color-panel-block-border) 34%, transparent);
+    border-left: 1px solid color-mix(in srgb, var(--cor-painel-bloco-borda) 34%, transparent);
   }
 }
 
@@ -9824,7 +9824,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 
   .topo-blocos > .faixa-operacao {
     padding-top: clamp(0.7rem, 1.6vw, 0.9rem);
-    border-top: 1px solid color-mix(in srgb, var(--color-panel-block-border) 42%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--cor-painel-bloco-borda) 42%, transparent);
   }
 
   .topo-blocos .destaque-titulo,
@@ -11330,7 +11330,7 @@ body:not(.cart-has-items) .barra-mobile {
 
 .topo-blocos .horario-bloco,
 .topo-blocos--without-hero-image .horario-bloco {
-  background: color-mix(in srgb, var(--color-panel-block-bg) 30%, transparent);
+  background: color-mix(in srgb, var(--cor-painel-bloco-fundo) 30%, transparent);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-on-dark) 4%, transparent);
 }
 
@@ -11351,7 +11351,7 @@ body:not(.cart-has-items) .barra-mobile {
     padding-top: 0;
     padding-left: clamp(0.85rem, 1.5vw, 1.1rem);
     border-top: 0;
-    border-left: 1px solid color-mix(in srgb, var(--color-panel-block-border) 34%, transparent);
+    border-left: 1px solid color-mix(in srgb, var(--cor-painel-bloco-borda) 34%, transparent);
   }
 
   .topo-blocos .destaque-titulo,
@@ -11622,7 +11622,7 @@ body:not(.cart-has-items) .barra-mobile {
   .topo-blocos > .faixa-operacao {
     margin-top: 0.54rem;
     padding-top: 0.56rem;
-    border-top: 1px solid color-mix(in srgb, var(--color-panel-block-border) 24%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--cor-painel-bloco-borda) 24%, transparent);
   }
 
   .topo-blocos .destaque-inicial-conteudo,
@@ -11664,16 +11664,16 @@ body:not(.cart-has-items) .barra-mobile {
   .topo-blocos--without-hero-image .horario-bloco {
     gap: 0.22rem;
     padding: 0.44rem 0.5rem;
-    border-color: color-mix(in srgb, var(--color-panel-block-border) 18%, transparent);
+    border-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 18%, transparent);
     border-radius: var(--raio-pequeno);
-    background: color-mix(in srgb, var(--color-panel-block-bg) 18%, transparent);
+    background: color-mix(in srgb, var(--cor-painel-bloco-fundo) 18%, transparent);
     box-shadow: none;
   }
 
   .topo-blocos .horario-bloco:first-child,
   .topo-blocos--without-hero-image .horario-bloco:first-child {
-    background: color-mix(in srgb, var(--color-panel-accent) 4%, transparent);
-    border-color: color-mix(in srgb, var(--color-panel-accent) 16%, transparent);
+    background: color-mix(in srgb, var(--cor-painel-destaque) 4%, transparent);
+    border-color: color-mix(in srgb, var(--cor-painel-destaque) 16%, transparent);
   }
 
   .topo-blocos .rotulo-horario,
@@ -12023,11 +12023,11 @@ body:not(.cart-has-items) .barra-mobile {
 /* CABECALHO | Organiza informacoes do topo para a primeira dobra nao parecer carregada demais. */
 .topo-blocos {
   border-color: color-mix(in srgb, var(--color-border-medium) 82%, transparent);
-  background-color: var(--color-panel-shell-mid);
+  background-color: var(--cor-painel-fundo-meio);
   background-image:
     radial-gradient(circle at 14% 0%, rgba(255, 255, 255, 0.07), transparent 30%),
     radial-gradient(circle at 92% 10%, rgba(255, 255, 255, 0.04), transparent 28%),
-    linear-gradient(165deg, var(--color-panel-shell-start) 0%, var(--color-panel-shell-mid) 54%, var(--color-panel-shell-end) 100%);
+    linear-gradient(165deg, var(--cor-painel-fundo-inicio) 0%, var(--cor-painel-fundo-meio) 54%, var(--cor-painel-fundo-fim) 100%);
   box-shadow:
     0 18px 42px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.075);
@@ -12042,8 +12042,8 @@ body:not(.cart-has-items) .barra-mobile {
 
 .topo-blocos .destaque-info,
 .topo-blocos .chip {
-  border-color: color-mix(in srgb, var(--color-panel-block-border) 46%, transparent);
-  background-color: color-mix(in srgb, var(--color-panel-chip-bg) 54%, transparent);
+  border-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 46%, transparent);
+  background-color: color-mix(in srgb, var(--cor-painel-chip-fundo) 54%, transparent);
   background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 118%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.065);
 }
@@ -12054,21 +12054,21 @@ body:not(.cart-has-items) .barra-mobile {
 }
 
 .topo-blocos > .faixa-operacao {
-  border-color: color-mix(in srgb, var(--color-panel-block-border) 30%, transparent);
+  border-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 30%, transparent);
 }
 
 .topo-blocos .horario-bloco,
 .topo-blocos--without-hero-image .horario-bloco {
-  border-color: color-mix(in srgb, var(--color-panel-block-border) 36%, transparent);
-  background-color: color-mix(in srgb, var(--color-panel-block-bg) 30%, transparent);
+  border-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 36%, transparent);
+  background-color: color-mix(in srgb, var(--cor-painel-bloco-fundo) 30%, transparent);
   background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 112%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
 }
 
 .topo-blocos .horario-bloco:first-child,
 .topo-blocos--without-hero-image .horario-bloco:first-child {
-  border-color: color-mix(in srgb, var(--color-panel-accent) 24%, var(--color-panel-block-border));
-  background-color: color-mix(in srgb, var(--color-panel-accent) 6%, var(--color-panel-block-bg) 24%);
+  border-color: color-mix(in srgb, var(--cor-painel-destaque) 24%, var(--cor-painel-bloco-borda));
+  background-color: color-mix(in srgb, var(--cor-painel-destaque) 6%, var(--cor-painel-bloco-fundo) 24%);
 }
 
 .topo-blocos .rotulo-horario::before,
@@ -12078,13 +12078,13 @@ body:not(.cart-has-items) .barra-mobile {
 
 @media (min-width: 1025px) {
   .topo-blocos > .faixa-operacao {
-    border-left-color: color-mix(in srgb, var(--color-panel-block-border) 28%, transparent);
+    border-left-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 28%, transparent);
   }
 }
 
 @media (min-width: 900px) and (max-width: 1024px) {
   .topo-blocos > .faixa-operacao {
-    border-left-color: color-mix(in srgb, var(--color-panel-block-border) 28%, transparent);
+    border-left-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 28%, transparent);
   }
 }
 
@@ -12097,13 +12097,13 @@ body:not(.cart-has-items) .barra-mobile {
   }
 
   .topo-blocos > .faixa-operacao {
-    border-top-color: color-mix(in srgb, var(--color-panel-block-border) 22%, transparent);
+    border-top-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 22%, transparent);
   }
 
   .topo-blocos .horario-bloco,
   .topo-blocos--without-hero-image .horario-bloco {
-    border-color: color-mix(in srgb, var(--color-panel-block-border) 20%, transparent);
-    background-color: color-mix(in srgb, var(--color-panel-block-bg) 20%, transparent);
+    border-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 20%, transparent);
+    background-color: color-mix(in srgb, var(--cor-painel-bloco-fundo) 20%, transparent);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 }
@@ -13252,7 +13252,7 @@ body.admin-page.admin-auth-screen-active #adminStatus {
   border-color: color-mix(in srgb, var(--borda-media) 52%, transparent);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 48%, transparent), transparent 114%),
-    color-mix(in srgb, var(--color-barra-mobile-bg) 96%, transparent);
+    color-mix(in srgb, var(--cor-barra-mobile-fundo) 96%, transparent);
   box-shadow:
     0 14px 30px color-mix(in srgb, var(--color-shadow) 22%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 18%, transparent);
