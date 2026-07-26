@@ -14355,6 +14355,14 @@ body.admin-page .admin-cloud-advanced .admin-cloud-summary-value {
   }
 }
 
+body.admin-page .admin-topbar-actions {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 /* ADMIN | Centraliza estados de aviso, carregamento e feedback flutuante. */
 body.admin-page .admin-inline-status-warn {
   background:
@@ -18128,14 +18136,6 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
   body.admin-page [data-admin-tab-panel="settings"] .admin-settings-section {
     padding-bottom: clamp(0.76rem, 2.6vw, 0.98rem);
   }
-}
-
-body.admin-page .admin-topbar-actions {
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
 }
 
 #caixaCarrinho .acoes-checkout {
