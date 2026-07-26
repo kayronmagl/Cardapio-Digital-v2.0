@@ -14589,6 +14589,13 @@ body.admin-page .admin-inline-status + .admin-actions-row {
   }
 }
 
+@media (min-width: 769px) {
+  body.admin-page [data-admin-tab-panel="settings"] .admin-settings-nav {
+    grid-template-columns: repeat(auto-fit, minmax(8.8rem, 1fr));
+    max-width: none;
+  }
+}
+
 @media (max-width: 899px) {
   body.admin-page [data-admin-tab-panel="products"] .admin-product-card.admin-catalog-product-card {
     grid-template-columns: minmax(0, 1fr);
@@ -18639,11 +18646,4 @@ body.admin-page .admin-form select,
 body.admin-page .admin-toolbar-field select,
 body.admin-page .admin-combo-product-filter select {
   background-color: color-mix(in srgb, var(--superficie-elevada) 86%, transparent);
-}
-
-@media (min-width: 769px) {
-  body.admin-page [data-admin-tab-panel="settings"] .admin-settings-nav {
-    grid-template-columns: repeat(auto-fit, minmax(8.8rem, 1fr));
-    max-width: none;
-  }
 }
