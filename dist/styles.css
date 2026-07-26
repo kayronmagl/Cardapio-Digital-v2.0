@@ -18156,15 +18156,6 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
   }
 }
 
-@media (max-width: 768px) {
-  #mensagemStatus,
-  #mensagemErro,
-  body.admin-page #adminStatus,
-  body.admin-page .admin-inline-status {
-    display: none !important;
-  }
-}
-
 .rodape-legal-area {
   display: grid;
   gap: 0.36rem;
