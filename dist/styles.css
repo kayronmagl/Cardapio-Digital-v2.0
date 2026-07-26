@@ -4036,8 +4036,6 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 .admin-settings-nav a:focus-visible,
 .admin-settings-nav button:hover,
 .admin-settings-nav button:focus-visible {
-  border-color: color-mix(in srgb, var(--cor-destaque) 45%, var(--borda-suave));
-  color: var(--cor-destaque);
   outline: none;
 }
 
@@ -4229,8 +4227,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 74%, transparent), transparent 100%),
     color-mix(in srgb, var(--superficie-elevada) 88%, transparent);
   box-shadow:
-    0 10px 24px color-mix(in srgb, var(--cor-sombra) 24%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--branco) 10%, transparent);
+    0 10px 24px color-mix(in srgb, var(--cor-sombra) 24%, transparent);
   transform: translateX(-50%);
   backdrop-filter: blur(8px);
 }
@@ -4290,12 +4287,6 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   color: var(--cinza-sec);
 }
 
-.admin-settings-save-bar__actions .admin-section-top-link:hover,
-.admin-settings-save-bar__actions .admin-section-top-link:focus-visible {
-  border-color: color-mix(in srgb, var(--cor-destaque) 26%, transparent);
-  background: color-mix(in srgb, var(--cor-destaque) 8%, transparent);
-}
-
 .admin-settings-save-bar__actions .botao-principal {
   box-shadow: 0 8px 18px color-mix(in srgb, var(--amarelo) 18%, transparent);
 }
@@ -4343,8 +4334,6 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 
 .admin-section-top-link:hover,
 .admin-section-top-link:focus-visible {
-  border-color: color-mix(in srgb, var(--cor-destaque) 42%, var(--borda-suave));
-  color: var(--cor-destaque);
   outline: none;
 }
 
@@ -4490,10 +4479,6 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--cor-primaria) 20%, transparent), 0 18px 38px color-mix(in srgb, var(--cor-sombra) 46%, transparent);
 }
 
-.admin-theme-option[data-theme-card-state="applied"] .admin-theme-card {
-  border-color: color-mix(in srgb, var(--ok) 32%, var(--borda-media));
-}
-
 .admin-theme-option[data-theme-card-state="preview"] .admin-theme-card {
   border-color: color-mix(in srgb, var(--aviso-texto) 52%, var(--borda-media));
   box-shadow:
@@ -4595,11 +4580,6 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   font-weight: var(--peso-negrito);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-}
-
-.admin-theme-option[data-theme-card-state="applied"] .admin-theme-card__status {
-  background: color-mix(in srgb, var(--ok) 16%, transparent);
-  color: color-mix(in srgb, var(--ok) 74%, var(--cinza) 26%);
 }
 
 .admin-theme-option[data-theme-card-state="preview"] .admin-theme-card__status {
@@ -5694,7 +5674,6 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   padding: 0.7rem 0.85rem;
   border-radius: var(--raio-medio);
   border: 1px solid var(--borda-suave);
-  background: color-mix(in srgb, var(--superficie) 24%, var(--superficie-elevada));
 }
 
 .admin-cloud-summary-label {
@@ -5702,7 +5681,6 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   font-weight: var(--peso-negrito);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--texto-suave);
 }
 
 .admin-cloud-summary-value {
@@ -6546,10 +6524,6 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
     color-mix(in srgb, var(--superficie-elevada) 92%, transparent);
 }
 
-.admin-system-action-card--primary {
-  border-color: color-mix(in srgb, var(--cor-destaque) 32%, var(--borda-suave));
-}
-
 .admin-system-action-card--danger {
   border-color: color-mix(in srgb, var(--erro) 28%, var(--borda-suave));
 }
@@ -7199,14 +7173,12 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 .admin-catalog-product-card h3 {
   min-width: 0;
   margin: 0;
-  color: var(--texto-forte);
   font-size: clamp(1.04rem, 1vw + 0.78rem, 1.16rem);
   line-height: 1.18;
 }
 
 .admin-catalog-product-card .admin-product-price {
   margin: 0;
-  color: var(--texto-forte);
   font-size: clamp(0.98rem, 0.7vw + 0.82rem, 1.1rem);
   font-weight: var(--peso-pesado);
   line-height: 1.1;
@@ -14086,7 +14058,6 @@ body.admin-page .admin-catalog-product-card .admin-product-price {
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 24%, transparent), transparent 115%),
     color-mix(in srgb, var(--amarelo) 10%, var(--superficie-elevada));
-  color: var(--texto-forte);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 20%, transparent);
 }
 
@@ -14185,7 +14156,6 @@ body.admin-page .admin-cloud-advanced .admin-cloud-summary-value {
 
 /* ADMIN | Centraliza estados de aviso, carregamento e feedback flutuante. */
 body.admin-page .admin-inline-status-warn {
-  color: var(--texto-forte);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 20%, transparent), transparent 112%),
     color-mix(in srgb, var(--amarelo) 10%, var(--superficie-elevada));
@@ -14217,7 +14187,6 @@ body.admin-page .admin-toast {
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 24%, transparent), transparent 112%),
     var(--superficie-elevada);
-  color: var(--texto-forte);
   box-shadow: 0 12px 24px color-mix(in srgb, var(--cor-sombra) 16%, transparent);
   font-size: 0.88rem;
   font-weight: var(--peso-negrito-reforcado);
@@ -15244,7 +15213,6 @@ body.admin-page .admin-delivery-location-summary-copy span {
 }
 
 body.admin-page .admin-delivery-location-summary-copy strong {
-  color: var(--texto-forte);
   font-size: 0.98rem;
   font-weight: var(--peso-pesado);
   line-height: 1.2;
@@ -16159,7 +16127,6 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-offer-card--combo .admin-
 
 body.admin-page [data-admin-tab-panel="offers"] .admin-offer-card--combo h3 {
   margin: 0;
-  color: var(--texto-forte);
   font-size: clamp(0.98rem, 1.35vw, 1.12rem);
   line-height: 1.14;
 }
@@ -16392,7 +16359,6 @@ body.admin-page #settings-appearance .admin-theme-card__text {
 }
 
 body.admin-page #settings-appearance .admin-theme-card__title {
-  color: var(--texto-forte);
   font-size: 0.94rem;
   line-height: 1.12;
 }
@@ -16521,7 +16487,6 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-offers-list-card {
 body.admin-page [data-admin-tab-panel="offers"] .admin-offers-form-card > h2,
 body.admin-page [data-admin-tab-panel="offers"] .admin-offers-list-card > h2 {
   margin: 0 0 0.2rem;
-  color: var(--texto-forte);
   font-size: var(--admin-titulo-card-tamanho);
   line-height: 1.14;
   letter-spacing: 0.015em;
@@ -16545,7 +16510,6 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-offers-form-card > h3 {
   margin: 0.24rem 0 -0.12rem;
   padding-top: 0.9rem;
   border-top: 1px solid color-mix(in srgb, var(--borda-suave) 78%, transparent);
-  color: var(--texto-forte);
   font-size: var(--admin-titulo-formulario-tamanho);
   line-height: 1.18;
   letter-spacing: 0.01em;
@@ -17395,7 +17359,6 @@ body.admin-page .admin-combo-products-toolbar-head {
 }
 
 body.admin-page .admin-combo-products-counter {
-  color: var(--texto-principal);
   font-size: 0.86rem;
   font-weight: var(--peso-display-pesado);
 }
@@ -17523,7 +17486,6 @@ body.admin-page .admin-combo-product-main {
 }
 
 body.admin-page .admin-combo-product-main strong {
-  color: var(--texto-principal);
   font-size: 0.9rem;
   line-height: 1.16;
   overflow-wrap: anywhere;
@@ -18047,7 +18009,6 @@ body.admin-page .admin-topbar-actions {
   border: 1px solid color-mix(in srgb, var(--borda-media) 74%, transparent);
   border-radius: var(--raio-encaixe);
   background: color-mix(in srgb, var(--superficie-elevada) 88%, transparent);
-  color: var(--texto);
   font-weight: var(--peso-negrito);
   line-height: 1.35;
 }
@@ -18199,7 +18160,6 @@ body.admin-page .admin-cloud-action-disabled-note {
 .legal-card-title {
   max-width: 100%;
   margin: 0;
-  color: var(--texto-principal);
   font-family: var(--fonte-display);
   font-size: clamp(2rem, 9vw, 4.6rem);
   line-height: 0.94;
@@ -18243,13 +18203,11 @@ body.admin-page .admin-cloud-action-disabled-note {
   padding: clamp(0.86rem, 1.8vw, 1.08rem);
   border: 1px solid color-mix(in srgb, var(--borda-suave) 82%, transparent);
   border-radius: var(--raio-grande);
-  background: color-mix(in srgb, var(--superficie) 72%, transparent);
 }
 
 .legal-section h3,
 .legal-contact-card h3 {
   margin: 0;
-  color: var(--texto-principal);
   font-size: clamp(1rem, 1.8vw, 1.18rem);
   line-height: 1.18;
 }
