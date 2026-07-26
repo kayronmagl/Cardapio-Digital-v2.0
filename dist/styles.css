@@ -79,16 +79,16 @@
   --aviso-texto: #b45309;
   --superficie-elevada: var(--color-surface);
   --superficie-brilho: rgba(255, 255, 255, 0.28);
-  --surface-soft: color-mix(in srgb, var(--color-surface) 92%, var(--color-bg) 8%);
-  --surface-soft-hover: color-mix(in srgb, var(--color-surface) 84%, var(--color-bg-alt) 16%);
-  --surface-muted: color-mix(in srgb, var(--color-surface-strong) 76%, var(--color-bg) 24%);
-  --surface-outline: color-mix(in srgb, var(--color-border-medium) 82%, transparent);
-  --modal-shell-start: color-mix(in srgb, var(--color-surface) 96%, var(--color-bg-alt) 4%);
-  --modal-shell-end: color-mix(in srgb, var(--color-surface-strong) 84%, var(--color-bg) 16%);
-  --placeholder-color: color-mix(in srgb, var(--color-text-muted) 76%, transparent);
+  --superficie-suave: color-mix(in srgb, var(--color-surface) 92%, var(--color-bg) 8%);
+  --superficie-suave-hover: color-mix(in srgb, var(--color-surface) 84%, var(--color-bg-alt) 16%);
+  --superficie-neutra: color-mix(in srgb, var(--color-surface-strong) 76%, var(--color-bg) 24%);
+  --contorno-superficie: color-mix(in srgb, var(--color-border-medium) 82%, transparent);
+  --modal-fundo-inicio: color-mix(in srgb, var(--color-surface) 96%, var(--color-bg-alt) 4%);
+  --modal-fundo-fim: color-mix(in srgb, var(--color-surface-strong) 84%, var(--color-bg) 16%);
+  --cor-placeholder: color-mix(in srgb, var(--color-text-muted) 76%, transparent);
   --texto-quente: var(--color-primary);
   --texto-neutro: var(--color-text);
-  --layout-max: 1180px;
+  --largura-layout-maxima: 1180px;
   --sombra-forte: var(--color-shadow);
   --espaco-seguro-inferior: env(safe-area-inset-bottom, 0px);
   --camada-fundo-pagina: -2;
@@ -105,8 +105,9 @@
   --camada-modal: 1500;
   --camada-pular-conteudo: 2000;
   --camada-transicao-pagina: 9999;
-  --font-body: "Manrope", sans-serif;
-  --font-display: "Bebas Neue", sans-serif;
+  --fonte-corpo: "Manrope", sans-serif;
+  --fonte-display: "Bebas Neue", sans-serif;
+  --fonte-mono: var(--fonte-corpo);
   --peso-medio-forte: 600;
   --peso-reforco: 650;
   --peso-forte: 700;
@@ -162,11 +163,11 @@
   --color-ok-text: color-mix(in srgb, var(--sucesso) 82%, white 18%);
   --color-error-text: color-mix(in srgb, var(--erro) 88%, white 12%);
   --superficie-brilho: rgba(255, 255, 255, 0.04);
-  --surface-soft: color-mix(in srgb, var(--color-surface) 86%, var(--color-bg) 14%);
-  --surface-soft-hover: color-mix(in srgb, var(--color-surface-strong) 74%, var(--color-bg) 26%);
-  --surface-muted: color-mix(in srgb, var(--color-surface-strong) 82%, var(--color-bg) 18%);
-  --modal-shell-start: color-mix(in srgb, var(--color-surface-strong) 92%, var(--color-bg-alt) 8%);
-  --modal-shell-end: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg) 12%);
+  --superficie-suave: color-mix(in srgb, var(--color-surface) 86%, var(--color-bg) 14%);
+  --superficie-suave-hover: color-mix(in srgb, var(--color-surface-strong) 74%, var(--color-bg) 26%);
+  --superficie-neutra: color-mix(in srgb, var(--color-surface-strong) 82%, var(--color-bg) 18%);
+  --modal-fundo-inicio: color-mix(in srgb, var(--color-surface-strong) 92%, var(--color-bg-alt) 8%);
+  --modal-fundo-fim: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg) 12%);
 }
 
 /* TEMA | Paletas rapidas mudam a cor principal sem redesenhar o layout. Isso permite adaptar o cardapio a marcas diferentes pelo Admin. */
@@ -260,11 +261,11 @@
   --color-panel-block-border: rgba(255, 196, 0, 0.2);
   --color-barra-mobile-bg: color-mix(in srgb, #12100a 94%, #050505 6%);
   --superficie-brilho: rgba(255, 255, 255, 0.055);
-  --surface-soft: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg) 12%);
-  --surface-soft-hover: color-mix(in srgb, var(--color-surface-strong) 76%, var(--color-bg) 24%);
-  --surface-muted: color-mix(in srgb, var(--color-surface-strong) 82%, var(--color-bg) 18%);
-  --modal-shell-start: color-mix(in srgb, var(--color-surface-strong) 90%, var(--color-bg-alt) 10%);
-  --modal-shell-end: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg) 12%);
+  --superficie-suave: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg) 12%);
+  --superficie-suave-hover: color-mix(in srgb, var(--color-surface-strong) 76%, var(--color-bg) 24%);
+  --superficie-neutra: color-mix(in srgb, var(--color-surface-strong) 82%, var(--color-bg) 18%);
+  --modal-fundo-inicio: color-mix(in srgb, var(--color-surface-strong) 90%, var(--color-bg-alt) 10%);
+  --modal-fundo-fim: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg) 12%);
   --erro: #f2a6a0;
   --sucesso: #8fd4a8;
   --aviso-texto: #ffdc3d;
@@ -837,12 +838,12 @@
   --color-panel-block-bg: #111111;
   --color-panel-block-border: #ffffff;
   --superficie-brilho: rgba(255, 255, 255, 0.01);
-  --surface-soft: #111111;
-  --surface-soft-hover: #1f1f1f;
-  --surface-muted: #1f1f1f;
-  --surface-outline: #ffffff;
-  --modal-shell-start: #111111;
-  --modal-shell-end: #000000;
+  --superficie-suave: #111111;
+  --superficie-suave-hover: #1f1f1f;
+  --superficie-neutra: #1f1f1f;
+  --contorno-superficie: #ffffff;
+  --modal-fundo-inicio: #111111;
+  --modal-fundo-fim: #000000;
   --erro: #fb923c;
   --sucesso: #38bdf8;
   --aviso-texto: #facc15;
@@ -881,7 +882,7 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--fonte-corpo);
   position: relative;
   isolation: isolate;
   background-color: var(--color-bg);
@@ -991,7 +992,7 @@ img {
 
 /* BASE | Limita a largura util da pagina e centraliza o conteudo. Assim o cardapio nao fica largo demais em telas grandes. */
 .layout-shell {
-  width: min(calc(100% - clamp(1.2rem, 4vw, 3rem)), var(--layout-max));
+  width: min(calc(100% - clamp(1.2rem, 4vw, 3rem)), var(--largura-layout-maxima));
   margin-inline: auto;
 }
 
@@ -1230,7 +1231,7 @@ img {
 
 .titulo-site {
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: 2.62rem;
   line-height: 0.94;
   letter-spacing: 0;
@@ -1382,7 +1383,7 @@ img {
   border: 2px solid var(--color-primary);
   background: var(--color-surface);
   color: var(--color-primary);
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: 1rem;
   letter-spacing: 0.03em;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -1406,7 +1407,7 @@ html[data-accessibility="enhanced"] {
   --texto-secundario: color-mix(in srgb, var(--color-text) 78%, var(--color-bg) 22%);
   --borda-suave: color-mix(in srgb, var(--color-text) 18%, var(--color-primary) 30%);
   --borda-media: color-mix(in srgb, var(--color-text) 24%, var(--color-primary) 52%);
-  --surface-outline: color-mix(in srgb, var(--color-text) 22%, var(--color-primary) 58%);
+  --contorno-superficie: color-mix(in srgb, var(--color-text) 22%, var(--color-primary) 58%);
   --color-panel-chip-border: color-mix(in srgb, var(--color-on-dark) 18%, var(--color-panel-accent) 42%);
   --color-panel-block-border: color-mix(in srgb, var(--color-on-dark) 18%, var(--color-panel-accent) 42%);
   --color-focus: color-mix(in srgb, var(--color-primary) 68%, white 32%);
@@ -1552,14 +1553,14 @@ html[data-accessibility="enhanced"] .pix-valor {
 .rotulo-horario,
 .cart-section-title,
 .pix-titulo {
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   letter-spacing: 0.08em;
 }
 
 
 .destaque-titulo {
   max-width: 14ch;
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: clamp(1.95rem, 5.2vw, 3.3rem);
   line-height: 0.95;
   letter-spacing: 0.025em;
@@ -1876,7 +1877,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 }
 
 .cabecalho-categoria h2 {
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   letter-spacing: 0.05em;
 }
@@ -1909,8 +1910,8 @@ html[data-accessibility="enhanced"] .pix-valor {
   position: relative;
   overflow: hidden;
   border-radius: var(--raio-grande);
-  border: 1px solid var(--surface-outline);
-  background: var(--surface-soft);
+  border: 1px solid var(--contorno-superficie);
+  background: var(--superficie-suave);
 }
 
 .produto-imagem {
@@ -1937,7 +1938,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   height: 3rem;
   border-radius: var(--raio-pilula);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: 1.35rem;
   font-weight: var(--peso-negrito);
   letter-spacing: 0.08em;
@@ -2014,13 +2015,13 @@ html[data-accessibility="enhanced"] .pix-valor {
   padding: 0.8rem 0.85rem;
   border-radius: var(--raio-grande);
   border: 1px solid var(--borda-suave);
-  background: var(--surface-soft);
+  background: var(--superficie-suave);
   cursor: pointer;
   transition: background 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
 }
 
 .checkbox-linha:hover {
-  background: var(--surface-soft-hover);
+  background: var(--superficie-suave-hover);
   border-color: var(--borda-media);
 }
 
@@ -2078,7 +2079,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 }
 
 .preco-produto {
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   letter-spacing: 0.04em;
   font-size: 1.5rem;
   color: var(--amarelo);
@@ -2167,13 +2168,13 @@ html[data-accessibility="enhanced"] .pix-valor {
 }
 
 [data-theme="dark"] .botao-secundario {
-  background: var(--surface-soft);
+  background: var(--superficie-suave);
   color: var(--color-text);
 }
 
 [data-theme="dark"] .botao-secundario:hover,
 [data-theme="dark"] .botao-secundario:focus-visible {
-  background: var(--surface-soft-hover);
+  background: var(--superficie-suave-hover);
 }
 
 .botao-secundario:focus-visible {
@@ -2227,7 +2228,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   width: min(100%, 760px);
   border-radius: var(--raio-maximo);
   border: 1px solid var(--borda-media);
-  background: linear-gradient(180deg, var(--modal-shell-start), var(--modal-shell-end));
+  background: linear-gradient(180deg, var(--modal-fundo-inicio), var(--modal-fundo-fim));
   box-shadow: var(--sombra-forte);
 }
 
@@ -2240,7 +2241,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 }
 
 .titulo-caixa {
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   letter-spacing: 0.06em;
   font-size: 2rem;
 }
@@ -2271,7 +2272,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   padding: 0.78rem 0.9rem;
   border: 1px solid color-mix(in srgb, var(--borda-media) 72%, transparent);
   border-radius: var(--raio-encaixe);
-  background: color-mix(in srgb, var(--surface-soft) 92%, transparent);
+  background: color-mix(in srgb, var(--superficie-suave) 92%, transparent);
   line-height: 1.45;
 }
 
@@ -2292,7 +2293,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   padding: 1rem;
   border: 1px solid var(--borda-suave);
   border-radius: var(--raio-amplo);
-  background: var(--surface-soft);
+  background: var(--superficie-suave);
 }
 
 .cart-card,
@@ -2304,7 +2305,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 .cart-card {
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 54%, transparent), transparent 100%),
-    var(--surface-soft);
+    var(--superficie-suave);
 }
 
 .cart-card,
@@ -2391,7 +2392,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   padding: 0.25rem;
   border-radius: var(--raio-pilula);
   border: 1px solid var(--borda-media);
-  background: color-mix(in srgb, var(--surface-soft) 92%, transparent);
+  background: color-mix(in srgb, var(--superficie-suave) 92%, transparent);
 }
 
 .cart-btn {
@@ -2437,7 +2438,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 .btn-remover {
   padding: 0.55rem 0.8rem;
   border: 1px solid var(--borda-media);
-  background: var(--surface-soft);
+  background: var(--superficie-suave);
   color: var(--cinza);
   font-weight: var(--peso-negrito);
 }
@@ -2456,8 +2457,8 @@ html[data-accessibility="enhanced"] .pix-valor {
   min-width: 40px;
   padding: 0.25rem 0.6rem;
   border-radius: var(--raio-pilula);
-  background: var(--surface-soft);
-  border: 1px solid var(--surface-outline);
+  background: var(--superficie-suave);
+  border: 1px solid var(--contorno-superficie);
 }
 
 .item-linha {
@@ -2516,7 +2517,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 /* CHECKOUT | Titulos dos blocos do formulario. Eles dividem atendimento, entrega, usuario, pagamento e observacoes em etapas mais faceis. */
 .bloco-form legend {
   margin-bottom: 0.85rem;
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: 1rem;
   letter-spacing: 0.08em;
   color: var(--texto-quente);
@@ -2542,8 +2543,8 @@ html[data-accessibility="enhanced"] .pix-valor {
   margin-bottom: 0.85rem;
   padding: 0.85rem 0.95rem;
   border-radius: var(--raio-encaixe);
-  border: 1px solid var(--surface-outline);
-  background: var(--surface-soft);
+  border: 1px solid var(--contorno-superficie);
+  background: var(--superficie-suave);
   color: var(--cinza);
 }
 
@@ -2562,7 +2563,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 
 .bloco-form input::placeholder,
 .bloco-form textarea::placeholder {
-  color: var(--placeholder-color);
+  color: var(--cor-placeholder);
 }
 
 .bloco-form input:disabled,
@@ -2602,7 +2603,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   padding: 0.85rem 1rem;
   border-radius: var(--raio-grande);
   border: 1px solid var(--borda-suave);
-  background: var(--surface-soft);
+  background: var(--superficie-suave);
   cursor: pointer;
   transition: 0.2s ease;
 }
@@ -2621,7 +2622,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 
 .segmented-item.ativa {
   border-color: color-mix(in srgb, var(--amarelo) 48%, transparent);
-  background: color-mix(in srgb, var(--amarelo) 14%, var(--surface-soft));
+  background: color-mix(in srgb, var(--amarelo) 14%, var(--superficie-suave));
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amarelo) 18%, transparent);
 }
 
@@ -2638,7 +2639,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   padding: 1rem;
   border: 1px solid var(--borda-suave);
   border-radius: var(--raio-grande);
-  background: var(--surface-soft);
+  background: var(--superficie-suave);
   margin-bottom: 0.8rem;
 }
 
@@ -2815,7 +2816,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   padding: 1rem 1.5rem 1.35rem;
   border-top: 1px solid color-mix(in srgb, var(--borda-suave) 86%, transparent);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--modal-shell-start) 88%, transparent), color-mix(in srgb, var(--modal-shell-end) 98%, transparent));
+    linear-gradient(180deg, color-mix(in srgb, var(--modal-fundo-inicio) 88%, transparent), color-mix(in srgb, var(--modal-fundo-fim) 98%, transparent));
 }
 
 .caixa-confirmacao .confirmation-actions .botao {
@@ -2991,7 +2992,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 }
 
 .barra-mobile-info strong {
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: clamp(1.14rem, 0.68vw + 1rem, 1.28rem);
   font-weight: var(--peso-display-pesado);
   letter-spacing: 0.02em;
@@ -3820,7 +3821,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 }
 
 .admin-title {
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: clamp(2.3rem, 6vw, 3.6rem);
   letter-spacing: 0.04em;
   line-height: 0.96;
@@ -3882,7 +3883,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 }
 
 .admin-card h2 {
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   letter-spacing: 0.05em;
   margin-bottom: 0.22rem;
 }
@@ -3937,7 +3938,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 .admin-fieldset legend {
   padding: 0 0.45rem;
   font-weight: var(--peso-negrito);
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: 1.15rem;
   letter-spacing: 0.04em;
   color: var(--cinza);
@@ -5672,7 +5673,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 }
 
 .admin-cloud-summary-value--mono {
-  font-family: var(--font-mono);
+  font-family: var(--fonte-mono);
   font-size: 0.86rem;
 }
 
@@ -5699,7 +5700,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 }
 
 .admin-metric-card strong {
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: 1.7rem;
   letter-spacing: 0.04em;
 }
@@ -6120,7 +6121,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   border-color: color-mix(in srgb, var(--borda-media) 78%, transparent);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 32%, transparent), transparent),
-    color-mix(in srgb, var(--surface-soft) 86%, transparent);
+    color-mix(in srgb, var(--superficie-suave) 86%, transparent);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 20%, transparent);
 }
 
@@ -6128,7 +6129,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   border-color: color-mix(in srgb, var(--borda-media) 82%, transparent);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 28%, transparent), transparent),
-    color-mix(in srgb, var(--surface-soft) 84%, transparent);
+    color-mix(in srgb, var(--superficie-suave) 84%, transparent);
   transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 
@@ -6188,7 +6189,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   max-width: 100%;
   padding: 0.24rem 0.54rem;
   border-color: color-mix(in srgb, var(--borda-media) 75%, transparent);
-  background: color-mix(in srgb, var(--surface-soft) 92%, transparent);
+  background: color-mix(in srgb, var(--superficie-suave) 92%, transparent);
   color: color-mix(in srgb, var(--texto-secundario) 92%, var(--cinza) 8%);
   font-size: 0.7rem;
   font-weight: var(--peso-forte);
@@ -6211,7 +6212,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   overflow: hidden;
   border-radius: var(--raio-grande);
   border-color: color-mix(in srgb, var(--borda-media) 76%, transparent);
-  background: color-mix(in srgb, var(--surface-soft) 76%, transparent);
+  background: color-mix(in srgb, var(--superficie-suave) 76%, transparent);
 }
 
 .personalizacao summary {
@@ -6232,7 +6233,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   border-radius: var(--raio-pilula);
   background: color-mix(in srgb, var(--color-primary-soft) 72%, transparent);
   color: var(--texto-quente);
-  font-family: var(--font-body);
+  font-family: var(--fonte-corpo);
   font-size: 1rem;
   font-weight: var(--peso-pesado);
   line-height: 1;
@@ -6261,7 +6262,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   padding: 0.72rem 0.82rem;
   border: 1px solid color-mix(in srgb, var(--borda-media) 58%, transparent);
   border-radius: var(--raio-medio);
-  background: color-mix(in srgb, var(--surface-soft-hover) 58%, transparent);
+  background: color-mix(in srgb, var(--superficie-suave-hover) 58%, transparent);
   color: color-mix(in srgb, var(--texto-secundario) 90%, var(--texto-neutro) 10%);
 }
 
@@ -7433,7 +7434,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 
 .localizacao-title {
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   color: var(--cinza);
   font-size: clamp(1.2rem, 2.8vw, 1.55rem);
 }
@@ -7834,7 +7835,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
     z-index: var(--camada-fixo-interno);
     padding: calc(0.92rem + env(safe-area-inset-top, 0px)) 1rem 0.82rem;
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--modal-shell-start) 98%, transparent), color-mix(in srgb, var(--modal-shell-end) 94%, transparent));
+      linear-gradient(180deg, color-mix(in srgb, var(--modal-fundo-inicio) 98%, transparent), color-mix(in srgb, var(--modal-fundo-fim) 94%, transparent));
     border-bottom: 1px solid var(--borda-suave);
   }
 
@@ -7860,7 +7861,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
     gap: 0.62rem;
     padding: 0.82rem 1rem calc(0.92rem + var(--espaco-seguro-inferior));
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--modal-shell-start) 90%, transparent), color-mix(in srgb, var(--modal-shell-end) 98%, transparent));
+      linear-gradient(180deg, color-mix(in srgb, var(--modal-fundo-inicio) 90%, transparent), color-mix(in srgb, var(--modal-fundo-fim) 98%, transparent));
     border-top: 1px solid var(--borda-suave);
   }
 
@@ -8481,7 +8482,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
     z-index: var(--camada-fixo-interno);
     padding: calc(1rem + env(safe-area-inset-top, 0px)) 1.25rem 0.9rem;
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--modal-shell-start) 98%, transparent), color-mix(in srgb, var(--modal-shell-end) 94%, transparent));
+      linear-gradient(180deg, color-mix(in srgb, var(--modal-fundo-inicio) 98%, transparent), color-mix(in srgb, var(--modal-fundo-fim) 94%, transparent));
     border-bottom: 1px solid var(--borda-suave);
   }
 
@@ -8507,7 +8508,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
     gap: 0.7rem;
     padding: 0.9rem 1.25rem calc(1rem + var(--espaco-seguro-inferior));
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--modal-shell-start) 90%, transparent), color-mix(in srgb, var(--modal-shell-end) 98%, transparent));
+      linear-gradient(180deg, color-mix(in srgb, var(--modal-fundo-inicio) 90%, transparent), color-mix(in srgb, var(--modal-fundo-fim) 98%, transparent));
     border-top: 1px solid var(--borda-suave);
   }
 
@@ -8973,7 +8974,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 .menu-categorias {
   gap: clamp(0.5rem, 1vw, 0.72rem);
   padding-block: clamp(0.55rem, 1.2vw, 0.8rem) 0.38rem;
-  scroll-padding-inline: max(0.75rem, calc((100vw - var(--layout-max)) / 2));
+  scroll-padding-inline: max(0.75rem, calc((100vw - var(--largura-layout-maxima)) / 2));
 }
 
 .categoria {
@@ -9226,7 +9227,7 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
 .totais-carrinho {
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 42%, transparent), transparent 100%),
-    color-mix(in srgb, var(--surface-soft) 94%, transparent);
+    color-mix(in srgb, var(--superficie-suave) 94%, transparent);
 }
 
 .resumo-linha,
@@ -10065,7 +10066,7 @@ button[data-media-remove]:disabled {
   place-items: center;
   border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
   background: color-mix(in srgb, var(--color-primary-soft) 30%, transparent);
-  font-family: var(--font-body);
+  font-family: var(--fonte-corpo);
   font-size: 0.78rem;
   font-weight: var(--peso-pesado);
   letter-spacing: 0;
@@ -10116,7 +10117,7 @@ button[data-media-remove]:disabled {
   padding: 1.05rem 0.9rem;
   border: 1px dashed color-mix(in srgb, var(--borda-media) 68%, transparent);
   border-radius: var(--raio-padrao);
-  background: color-mix(in srgb, var(--surface-soft) 84%, transparent);
+  background: color-mix(in srgb, var(--superficie-suave) 84%, transparent);
   text-align: center;
 }
 
@@ -10197,7 +10198,7 @@ button[data-media-remove]:disabled {
   display: inline-grid;
   place-items: center;
   color: var(--texto-quente);
-  background: color-mix(in srgb, var(--surface-soft) 74%, transparent);
+  background: color-mix(in srgb, var(--superficie-suave) 74%, transparent);
   font-weight: var(--peso-pesado);
 }
 
@@ -10243,7 +10244,7 @@ button[data-media-remove]:disabled {
 
 #valorTotal strong {
   color: var(--texto-quente);
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: clamp(1.28rem, 1vw + 1rem, 1.58rem);
   letter-spacing: 0.02em;
   min-width: 0;
@@ -10436,7 +10437,7 @@ button[data-media-remove]:disabled {
 .resumo-topo-carrinho {
   padding: 0.72rem 0.78rem;
   border-radius: var(--raio-padrao);
-  background: color-mix(in srgb, var(--surface-soft) 88%, transparent);
+  background: color-mix(in srgb, var(--superficie-suave) 88%, transparent);
 }
 
 #resumoTopoItens,
@@ -10774,8 +10775,8 @@ button[data-media-remove]:disabled {
     gap: 0.52rem;
     padding: 0.72rem 0.9rem calc(0.82rem + var(--espaco-seguro-inferior));
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--modal-shell-start) 82%, transparent), color-mix(in srgb, var(--modal-shell-end) 100%, transparent) 42%),
-      var(--modal-shell-end);
+      linear-gradient(180deg, color-mix(in srgb, var(--modal-fundo-inicio) 82%, transparent), color-mix(in srgb, var(--modal-fundo-fim) 100%, transparent) 42%),
+      var(--modal-fundo-fim);
     border-top: 1px solid color-mix(in srgb, var(--borda-media) 74%, transparent);
     box-shadow: 0 -12px 26px color-mix(in srgb, var(--color-shadow) 18%, transparent);
   }
@@ -10809,7 +10810,7 @@ button[data-media-remove]:disabled {
 
   .botoes-carrinho.acoes-checkout #botaoFechar {
     border-color: color-mix(in srgb, var(--borda-media) 86%, transparent);
-    background: color-mix(in srgb, var(--superficie-elevada) 82%, var(--surface-soft) 18%);
+    background: color-mix(in srgb, var(--superficie-elevada) 82%, var(--superficie-suave) 18%);
     color: var(--texto-neutro);
   }
 }
@@ -12919,7 +12920,7 @@ body.admin-page #authPanel .admin-auth-box {
 body.admin-page #authPanel .admin-auth-box h2 {
   margin: 0;
   color: var(--cinza);
-  font-family: var(--font-body);
+  font-family: var(--fonte-corpo);
   font-size: clamp(1.08rem, 1.55vw, 1.22rem);
   font-weight: var(--peso-pesado);
   letter-spacing: 0;
@@ -13028,7 +13029,7 @@ body.admin-page.admin-auth-screen-active #adminStatus {
   border-color: color-mix(in srgb, var(--amarelo) 20%, var(--borda-media));
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 26%, transparent), transparent 30%),
-    linear-gradient(180deg, color-mix(in srgb, var(--surface-soft) 72%, var(--modal-shell-start) 28%), color-mix(in srgb, var(--color-surface-strong) 82%, var(--modal-shell-end) 18%));
+    linear-gradient(180deg, color-mix(in srgb, var(--superficie-suave) 72%, var(--modal-fundo-inicio) 28%), color-mix(in srgb, var(--color-surface-strong) 82%, var(--modal-fundo-fim) 18%));
   box-shadow:
     0 24px 64px color-mix(in srgb, var(--color-shadow) 30%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 18%, transparent);
@@ -13070,7 +13071,7 @@ body.admin-page.admin-auth-screen-active #adminStatus {
   background:
     linear-gradient(90deg, color-mix(in srgb, var(--amarelo) 5%, transparent), transparent 44%),
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 38%, transparent), transparent 108%),
-    color-mix(in srgb, var(--surface-soft) 84%, var(--color-surface-strong) 16%);
+    color-mix(in srgb, var(--superficie-suave) 84%, var(--color-surface-strong) 16%);
   box-shadow:
     0 12px 24px color-mix(in srgb, var(--color-shadow) 10%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 16%, transparent);
@@ -13520,7 +13521,7 @@ body.page-transition-arrive {
 
 .ofertas-title {
   color: var(--color-text);
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: clamp(1.65rem, 1.42rem + 0.7vw, 2.25rem);
   letter-spacing: 0;
   line-height: 1;
@@ -13594,7 +13595,7 @@ body.page-transition-arrive {
 
 .oferta-imagem-placeholder span {
   color: color-mix(in srgb, var(--texto-quente) 72%, var(--cinza) 28%);
-  font-family: var(--font-display);
+  font-family: var(--fonte-display);
   font-size: 3rem;
   line-height: 1;
 }
