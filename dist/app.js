@@ -875,14 +875,12 @@
   };
 
   const clone = shared?.clone;
- // IDIOMA | aceitos idiomas busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getSupportedLocales() {
     return state?.states?.brandConfig?.i18n?.supportedLocales || {
       "pt-BR": { label: "PT", name: "Português", formatLocale: "pt-BR", htmlLang: "pt-BR" },
       "en-US": { label: "EN", name: "English", formatLocale: "en-US", htmlLang: "en-US" },
     };
   }
- // IDIOMA | padrao idioma busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getDefaultLocale() {
     return state?.states?.brandConfig?.i18n?.defaultLocale || "pt-BR";
   }
@@ -895,41 +893,32 @@
       return state?.locale || getDefaultLocale();
     },
   });
- // IDIOMA | idioma separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveLocale(locale) {
     return localeTools?.resolveLocale(locale);
   }
- // IDIOMA | atual idioma busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function currentLocale() {
     state.locale = resolveLocale(state?.locale || getDefaultLocale());
     return state?.locale;
   }
- // BASE | base do sistema separa uma regra de base do sistema. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function t(key, params) {
     return localeTools?.translate(key, params);
   }
- // ACESSIBILIDADE | acessibilidade modo prepara dados de acessibilidade. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeAccessibilityMode(value) {
     return String(value || "").trim().toLowerCase() === "enabled" ? "enabled" : "disabled";
   }
- // ACESSIBILIDADE | acessibilidade melhorado confere uma condicao de acessibilidade. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isAccessibilityEnhanced() {
     return normalizeAccessibilityMode(state?.accessibilityMode) === "enabled";
   }
- // ACESSIBILIDADE | acessibilidade modo atualiza acessibilidade. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function saveAccessibilityMode(mode) {
     state.accessibilityMode = normalizeAccessibilityMode(mode);
     shared?.saveStorageValue(STORAGE_KEYS?.accessibility, state?.accessibilityMode, "local");
   }
- // IDIOMA | original mensagem separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function rawMessage(key) {
     return localeTools?.rawMessage(key);
   }
- // IDIOMA | texto regra separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function textValue(value, locale) {
     return localeTools?.textValue(value, locale);
   }
- // PRODUTOS | produto prepara dados de produtos. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function formatProductCopy(value) {
     const text = String(value || "").replace(/\s+/g, " ").trim();
     if (!text) {
@@ -940,39 +929,32 @@
     const lower = text.toLocaleLowerCase(locale);
     return lower.charAt(0).toLocaleUpperCase(locale) + lower.slice(1);
   }
- // IDIOMA | lista regra separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function arrayValue(value, locale) {
     return localeTools?.listValue(value, locale);
   }
 
   const escapeHtml = shared?.escapeHtml;
   const $ = shared?.byId;
- // ESTADO | cardapio regra busca um valor de estado salvo. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getMenuState() {
     return state?.states?.menuState || { categories: [], addOns: [], products: [] };
   }
- // ESTADO | marca ajuste busca um valor de estado salvo. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getBrandConfig() {
     return state?.states?.brandConfig || {};
   }
- // TRATAMENTO | comparavel texto prepara dados de tratamento de dados. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function normalizeComparableText(value) {
     return String(value || "")
       .trim()
       .replace(/\s+/g, " ")
       .toLowerCase();
   }
- // TRATAMENTO | repetido texto confere uma condicao de tratamento de dados. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isRepeatedText(primary, secondary) {
     const primaryText = normalizeComparableText(primary);
     const secondaryText = normalizeComparableText(secondary);
     return Boolean(primaryText && secondaryText && primaryText === secondaryText);
   }
- // RESPONSIVO | celular tamanho da tela confere uma condicao de telas menores. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isMobileViewport() {
     return Boolean(window?.matchMedia?.("(max-width: 768px)")?.matches) || Number(window?.innerWidth || 0) <= 768;
   }
- // NAVEGACAO | voltar avanco navegacao confere uma condicao de navegacao. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isBackForwardNavigation(event) {
     if (event?.persisted) {
       return true;
@@ -992,7 +974,6 @@
       return false;
     }
   }
- // NAVEGACAO | janela topo orienta o usuario em navegacao. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function scrollWindowToTop() {
     const run = function () {
       try {
@@ -1019,7 +1000,6 @@
     });
     window?.setTimeout?.(run, 90);
   }
- // NAVEGACAO | Admin celular voltar topo intencao separa uma regra de navegacao. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function consumeAdminMobileBackToTopIntent() {
     try {
       const storage = window?.sessionStorage;
@@ -1030,7 +1010,6 @@
       return false;
     }
   }
- // RESPONSIVO | Admin celular voltar atualiza telas menores. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setupAdminMobileBackReturn() {
     window?.addEventListener("pageshow", function (event) {
       const shouldReset = consumeAdminMobileBackToTopIntent();
@@ -1041,7 +1020,6 @@
       scrollWindowToTop();
     });
   }
- // NAVEGACAO | pagina navegacao transicao atualiza navegacao. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setupPageNavigationTransition() {
     shared?.setupPageTransition?.({
       selector: '#linkPainelAdmin[href="admin.html"]',
@@ -1054,23 +1032,19 @@
       durationMs: 220,
     });
   }
- // NUVEM | nuvem ajuste busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getCloudConfig() {
     return state?.states?.cloudConfig || {};
   }
 
   const REALTIME_TABLE_KEYS = ["categories", "products", "addOns", "productAddOns", "settings"];
- // NUVEM | nuvem online modo confere uma condicao de nuvem Supabase. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isCloudOnlineMode() {
     const cloud = getCloudConfig();
     return Boolean(cloud?.enabled && system?.isSupabaseConfigured(cloud));
   }
- // NUVEM | tempo real habilitado confere uma condicao de nuvem Supabase. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isRealtimeEnabled() {
     const cloud = getCloudConfig();
     return Boolean(isCloudOnlineMode() && cloud?.realtime);
   }
- // NUVEM | tempo real ajuste chave busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function realtimeConfigKey() {
     const cloud = getCloudConfig();
     return [
@@ -1085,7 +1059,6 @@
       cloud?.tables?.productAddOns,
     ]?.join("|");
   }
- // NUVEM | tempo real conexao em tempo real link busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function realtimeSocketUrl(cloud) {
     const socketUrl = new URL(
       "/realtime/v1/websocket",
@@ -1096,12 +1069,10 @@
     socketUrl.searchParams.set("vsn", "1.0.0");
     return socketUrl.toString();
   }
- // NUVEM | proximo tempo real referencia separa uma regra de nuvem Supabase. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function nextRealtimeRef() {
     state.realtimeRef += 1;
     return String(state?.realtimeRef);
   }
- // NUVEM | tempo real inscricao separa uma regra de nuvem Supabase. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function closeRealtimeSubscription() {
     if (state?.realtimeHeartbeatId) {
       window?.clearInterval(state?.realtimeHeartbeatId);
@@ -1123,7 +1094,6 @@
     state.realtimeSocket = null;
     state.realtimeConfigKey = "";
   }
- // NUVEM | atualizacao nuvem catalogo silencioso conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function refreshCloudCatalogSilently(options) {
     if (!isCloudOnlineMode()) {
       return Promise.resolve(false);
@@ -1158,7 +1128,6 @@
         state.cloudLoadInFlight = false;
       });
   }
- // NUVEM | agenda tempo real atualizacao orienta o usuario em nuvem Supabase. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function scheduleRealtimeRefresh() {
     if (Date.now() < Number(state?.ignoreRealtimeUntil || 0) || state?.cloudLoadInFlight) {
       return;
@@ -1173,7 +1142,6 @@
       refreshCloudCatalogSilently({ notify: false });
     }, 700);
   }
- // NUVEM | tempo real mensagem altera nuvem Supabase depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function sendRealtimeMessage(event, topic, payload) {
     if (!state?.realtimeSocket || state?.realtimeSocket?.readyState !== WebSocket?.OPEN) {
       return;
@@ -1186,7 +1154,7 @@
       ref: nextRealtimeRef(),
     }));
   }
- // NUVEM | tempo real inscricao abre a escuta online do cardapio. A logica valida se o recurso esta ativo, cria o WebSocket e agenda atualizacoes quando o Supabase avisa que houve mudanca.
+ // NUVEM | Escuta atualizacoes do Supabase por WebSocket e agenda recarga do cardapio quando o catalogo online muda.
   function startRealtimeSubscription() {
     if (!isRealtimeEnabled() || typeof WebSocket !== "function") {
       closeRealtimeSubscription();
@@ -1260,7 +1228,6 @@
       closeRealtimeSubscription();
     }
   }
- // NUVEM | inicio nuvem catalogo conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function bootCloudCatalog() {
     if (!isCloudOnlineMode()) {
       closeRealtimeSubscription();
@@ -1272,19 +1239,15 @@
       startRealtimeSubscription();
     });
   }
- // PRODUTOS | produto identificador busca um valor de produtos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getProductById(productId) {
     return getMenuState().products.find((product) => product?.id === productId) || null;
   }
- // CATEGORIAS | categoria codigo curto busca um valor de categorias. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getCategoryBySlug(slug) {
     return getMenuState().categories.find((category) => category?.slug === slug) || null;
   }
- // ADICIONAIS | identificador busca um valor de adicionais. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getAddOnById(addOnId) {
     return getMenuState().addOns.find((addOn) => addOn?.id === addOnId) || null;
   }
- // PRODUTOS | produto ativo confere uma condicao de produtos. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isProductActive(product) {
     if (!product) {
       return false;
@@ -1296,27 +1259,21 @@
 
     return product?.status !== "inactive";
   }
- // PRODUTOS | produto visivel confere uma condicao de produtos. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isProductVisible(product) {
     return Boolean(product) && isProductActive(product);
   }
- // PRODUTOS | produto compravel confere uma condicao de produtos. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isProductPurchasable(product) {
     return isProductVisible(product) && product?.available !== false;
   }
- // PRODUTOS | produto nome busca um valor de produtos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function productName(product) {
     return textValue(product?.name, currentLocale()) || product?.id || "";
   }
- // CATEGORIAS | categoria nome busca um valor de categorias. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function categoryName(category) {
     return textValue(category?.name, currentLocale()) || category?.slug || "";
   }
- // ADICIONAIS | nome altera adicionais depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function addOnName(addOn) {
     return textValue(addOn?.name, currentLocale()) || addOn?.id || "";
   }
- // COMBOS | combos regra busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getOffersState() {
     const offers = getMenuState()?.offers || {};
     return {
@@ -1324,21 +1281,17 @@
       discounts: [],
     };
   }
- // COMBOS | combo identificador busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getComboById(comboId) {
     return getOffersState()?.combos?.find(function (combo) {
       return combo?.id === comboId;
     }) || null;
   }
- // COMBOS | combo nome busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function offerName(offer) {
     return textValue(offer?.name, currentLocale()) || offer?.id || "";
   }
- // COMBOS | combo descricao busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function offerDescription(offer) {
     return textValue(offer?.description, currentLocale()) || "";
   }
- // COMBOS | combo itens busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getComboItems(combo) {
     return (Array.isArray(combo?.items) ? combo.items : [])
       ?.map(function (item) {
@@ -1350,7 +1303,6 @@
         };
       });
   }
- // COMBOS | combo compravel confere uma condicao de combos. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isComboPurchasable(combo) {
     const items = getComboItems(combo);
     return Boolean(
@@ -1362,13 +1314,11 @@
       })
     );
   }
- // COMBOS | combo original preco busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboOriginalPrice(combo) {
     return getComboItems(combo)?.reduce(function (total, item) {
       return total + Number(item?.product?.price || 0) * item?.quantity;
     }, 0);
   }
- // COMBOS | combo itens inclusos texto busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboIncludesText(combo) {
     return getComboItems(combo)
       ?.filter(function (item) {
@@ -1379,13 +1329,11 @@
       })
       ?.join(", ");
   }
- // PRODUTOS | exibicao produto etiqueta separa uma regra de produtos. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function displayProductTag(tag) {
     const raw = String(tag || "").trim();
     const localizedTags = DEMO_TAG_TRANSLATIONS[currentLocale()] || {};
     return localizedTags[raw] || raw;
   }
- // ADMIN | moeda prepara dados de painel Admin. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function formatCurrency(value) {
     const business = getBrandConfig()?.business || {};
     const locale = getSupportedLocales()[currentLocale()]?.formatLocale || currentLocale();
@@ -1395,7 +1343,6 @@
       currency: currency,
     });
   }
- // TRATAMENTO | externo link prepara dados de tratamento de dados. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function safeExternalUrl(value) {
     const raw = String(value || "")?.replace(/[<>"']/g, "")?.trim()?.slice(0, 600);
     if (!raw || !/^https?:\/\//i.test(raw)) {
@@ -1409,7 +1356,6 @@
       return "";
     }
   }
- // LEGAL | legal ajuste busca um valor de textos legais. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getLegalConfig() {
     const brandConfig = getBrandConfig();
     const legal = brandConfig?.legal && typeof brandConfig?.legal === "object" ? brandConfig.legal : {};
@@ -1429,7 +1375,6 @@
       termsOfUseUrl: safeExternalUrl(legal?.termsOfUseUrl),
     };
   }
- // LEGAL | atual legal rota busca um valor de textos legais. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function currentLegalRoute() {
     const hash = String(window?.location?.hash || "")?.replace(/^#\/?/, "")?.trim()?.toLowerCase();
     if (["privacy", "privacy-policy", "politica-de-privacidade", "privacidade"].includes(hash)) {
@@ -1440,7 +1385,6 @@
     }
     return "";
   }
- // LEGAL | legal documento visivel busca um valor de textos legais. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function legalDocumentVisible(type) {
     const legal = getLegalConfig();
     if (legal?.enabled === false) {
@@ -1448,17 +1392,14 @@
     }
     return type === "terms" ? legal?.showTermsOfUse !== false : legal?.showPrivacyPolicy !== false;
   }
- // LEGAL | legal conteudo separa uma regra de textos legais. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveLegalContent(type) {
     const locale = currentLocale();
     const localized = LEGAL_CONTENT[locale] || LEGAL_CONTENT["pt-BR"];
     return localized?.[type] || null;
   }
- // LEGAL | regra legal texto prepara dados de textos legais. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function interpolateLegalText(value, data) {
     return String(value || "")?.replace(/\{\{\s*business\s*\}\}/g, data?.business || legalBusinessName(currentLocale()));
   }
- // IDIOMA | legal estabelecimento nome busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function legalBusinessName(locale) {
     const legal = getLegalConfig();
     const targetLocale = resolveLocale(locale || currentLocale());
@@ -1468,7 +1409,6 @@
       t("businessNameFallback")
     );
   }
- // LEGAL | legal estabelecimento endereco busca um valor de textos legais. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function legalBusinessAddress() {
     const legal = getLegalConfig();
     const configuredAddress = String(legal?.businessAddress || "")?.trim();
@@ -1479,12 +1419,10 @@
     const locationLines = businessLocationLines(businessLocation());
     return locationLines?.join(", ") || t("legalNotProvided");
   }
- // LEGAL | legal contato regra busca um valor de textos legais. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function legalContactValue(key) {
     const value = String(getLegalConfig()?.[key] || "")?.trim();
     return value || t("legalNotProvided");
   }
- // LOCALIZACAO | coordenada regra separa uma regra de localizacao e entrega. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function coordinateValue(value, min, max) {
     const raw = String(value || "")?.replace(",", ".")?.trim()?.slice(0, 40);
     const number = Number(raw);
@@ -1493,13 +1431,11 @@
     }
     return String(number);
   }
- // LOCALIZACAO | coordenada rota link separa uma regra de localizacao e entrega. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function coordinateRouteUrl(latitude, longitude) {
     const lat = coordinateValue(latitude, -90, 90);
     const lng = coordinateValue(longitude, -180, 180);
     return lat && lng ? "https://www.google.com/maps?q=" + lat + "," + lng : "";
   }
- // LOCALIZACAO | estabelecimento localizacao busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function businessLocation() {
     const business = getBrandConfig()?.business || {};
     const location = business?.location && typeof business?.location === "object" ? business.location : {};
@@ -1515,11 +1451,9 @@
       pickupNote: String(location?.pickupNote || location?.note || "")?.trim(),
     };
   }
- // LOCALIZACAO | localizacao rota link busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function locationRouteUrl(location) {
     return safeExternalUrl(location?.mapsUrl) || coordinateRouteUrl(location?.latitude, location?.longitude);
   }
- // NUVEM | estabelecimento localizacao linhas busca um valor de nuvem Supabase. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function businessLocationLines(location) {
     const firstLine = [location?.address, location?.district]?.filter(Boolean)?.join(" — ");
     const cityState = location?.city && location?.state
@@ -1528,13 +1462,11 @@
 
     return [firstLine, cityState]?.filter(Boolean);
   }
- // LOCALIZACAO | usuario localizacao link busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function customerLocationUrl(form) {
     return safeExternalUrl(form?.customerMapsUrl) || coordinateRouteUrl(form?.customerLatitude, form?.customerLongitude);
   }
 
   const normalizePhone = shared?.normalizePhone;
- // TEMA | tema atualiza tema visual. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function applyTheme() {
     const appearance = getBrandConfig()?.appearance || {};
     const appliedAppearance = shared?.resolveAppliedAppearance?.(appearance) || {
@@ -1560,14 +1492,12 @@
       delete document.documentElement.dataset.accessibility;
     }
   }
- // HORARIOS | tempo minutos prepara dados de horarios. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function parseTimeToMinutes(timeString) {
     const parts = String(timeString || "")?.split(":");
     const hours = Number(parts[0] || 0);
     const minutes = Number(parts[1] || 0);
     return hours * 60 + minutes;
   }
- // HORARIOS | agenda janelas monta uma estrutura de horarios. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildScheduleWindows(referenceDate) {
     const baseDate = new Date(referenceDate);
     baseDate?.setHours(0, 0, 0, 0);
@@ -1602,7 +1532,6 @@
       return left?.start - right?.start;
     });
   }
- // HORARIOS | agenda status busca um valor de horarios. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getScheduleStatus(referenceDate) {
     const business = getBrandConfig()?.business || {};
     if (business.allowOrdersOutsideHours) {
@@ -1666,7 +1595,6 @@
       detail,
     };
   }
- // IDIOMA | idioma seletor monta a parte visual de idioma. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderLanguageSelector() {
     const selector = $("seletorIdioma");
     if (!selector) {
@@ -1682,7 +1610,6 @@
       ?.join("");
     selector.value = currentLocale();
   }
- // LEGAL | legal rodape links altera textos legais depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateLegalFooterLinks() {
     const privacyLink = $("linkPoliticaPrivacidade");
     const termsLink = $("linkTermosUso");
@@ -1726,7 +1653,6 @@
       separator.hidden = !(privacyVisible && termsVisible);
     }
   }
- // LEGAL | legal link separa uma regra de textos legais. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function resolveLegalLink(type) {
     const legal = getLegalConfig();
     const isTerms = type === "terms";
@@ -1737,7 +1663,6 @@
     }
     return { href: isTerms ? "#/terms" : "#/privacy", external: false };
   }
- // LEGAL | publico cardapio oculto legal atualiza textos legais. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setPublicMenuHiddenForLegal() {
     [
       "topoBlocos",
@@ -1756,7 +1681,6 @@
       element?.classList?.add("oculto");
     });
   }
- // LEGAL | publico cardapio apos legal separa uma regra de textos legais. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function restorePublicMenuAfterLegal() {
     [
       "topoBlocos",
@@ -1773,7 +1697,6 @@
       element?.classList?.remove("oculto");
     });
   }
- // LEGAL | legal pagina monta a parte visual de textos legais. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderLegalPage() {
     const page = $("paginaLegal");
     if (!page) {
@@ -1840,7 +1763,6 @@
 
     scrollWindowToTop();
   }
- // TRATAMENTO | fixo textos monta a parte visual de tratamento de dados. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderStaticTexts() {
     document.title = textValue(getBrandConfig()?.brand?.name, currentLocale()) || t("publicMenuTitle");
     $("rotuloIdioma").textContent = t("languageLabel");
@@ -1979,7 +1901,6 @@
     $("trocoPara").placeholder = t("changeForPlaceholder");
     $("observacoes").placeholder = t("notesPlaceholder");
   }
- // LOCALIZACAO | localizacao secao monta a parte visual de localizacao e entrega. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderLocationSection() {
     const section = $("secaoLocalizacao");
     if (!section) {
@@ -2014,7 +1935,6 @@
       }
     }
   }
- // TRATAMENTO | informacao marcacao monta a parte visual de tratamento de dados. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderHighlightInfoMarkup(text) {
     const rawText = String(text || "")?.trim();
     if (!rawText) {
@@ -2033,7 +1953,6 @@
       '<span class="destaque-info-value">' + escapeHtml(value || rawText) + "</span>"
     );
   }
- // NUVEM | publico metadados conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function syncPublicMetadata(brandName, menuSubtitle, highlightMessage) {
     document.title = brandName || t("publicMenuTitle");
     const description = [brandName, menuSubtitle, highlightMessage]
@@ -2047,7 +1966,6 @@
       metaDescription.setAttribute("content", description);
     }
   }
- // ESTADO | marca monta a parte visual de estado salvo. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderBranding() {
     const brand = getBrandConfig()?.brand || {};
     const destaqueInicial = getBrandConfig()?.destaqueInicial || getBrandConfig()?.hero || {};
@@ -2145,7 +2063,6 @@
       destaqueImagemArquivo.alt = "";
     }
   }
- // HORARIOS | agenda monta a parte visual de horarios. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderSchedule() {
     const agenda = $("agendaHorario");
     const schedule = Array.isArray(getBrandConfig()?.schedule) ? getBrandConfig()?.schedule : [];
@@ -2184,19 +2101,16 @@
     $("rotuloProximoHorario").textContent = status?.heading || t("nextSchedule");
     $("detalheHorario").textContent = status?.detail;
   }
- // PRODUTOS | categoria produto contador busca um valor de produtos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getCategoryProductCount(slug) {
     return getMenuState()?.products?.filter(function (product) {
       return product?.category === slug && isProductPurchasable(product);
     })?.length;
   }
- // BASE | publico categorias busca um valor de base do sistema. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getPublicCategories() {
     return getSortedCategories()?.filter(function (category) {
       return getCategoryProductCount(category?.slug) > 0;
     });
   }
- // CATEGORIAS | publico categoria filtro separa uma regra de categorias. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function ensurePublicCategoryFilter(categories) {
     const nextCategories = Array.isArray(categories) ? categories : getPublicCategories();
     if (!state?.filters || state.filters.category === "all") {
@@ -2213,7 +2127,6 @@
 
     return nextCategories;
   }
- // BASE | barra de ferramentas monta a parte visual de base do sistema. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderToolbar() {
     const toolbar = $("catalogToolbar");
     const categories = ensurePublicCategoryFilter(getPublicCategories());
@@ -2317,7 +2230,6 @@
       escapeHtml(t("clearFilters")) +
       "</button>";
   }
- // TRATAMENTO | opcoes monta uma estrutura de tratamento de dados. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildOptions(options, selectedValue) {
     return options
       ?.map(function (item) {
@@ -2333,7 +2245,6 @@
       })
       ?.join("");
   }
- // TRATAMENTO | botao monta uma estrutura de tratamento de dados. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildToggleButton(group, currentValue, buttonValue, label) {
     const active = currentValue === buttonValue;
     return (
@@ -2348,7 +2259,6 @@
       "</button>"
     );
   }
- // ESTADO | regra botao monta uma estrutura de estado salvo. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildStateButton(key, active, label, value) {
     return (
       '<button type="button" class="catalog-chip' +
@@ -2362,7 +2272,6 @@
       "</button>"
     );
   }
- // PEDIDO | cardapio pedido ordena dados de pedido. A logica compara ordem manual, nome e fallback para a lista aparecer sempre previsivel.
   function compareMenuOrder(leftOrder, rightOrder, leftLabel, rightLabel) {
     const leftSort = Number.isFinite(Number(leftOrder)) ? Number(leftOrder) : Number.MAX_SAFE_INTEGER;
     const rightSort = Number.isFinite(Number(rightOrder)) ? Number(rightOrder) : Number.MAX_SAFE_INTEGER;
@@ -2373,19 +2282,16 @@
 
     return String(leftLabel || "").localeCompare(String(rightLabel || ""), currentLocale());
   }
- // BASE | regra categorias busca um valor de base do sistema. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getSortedCategories() {
     return clone(getMenuState()?.categories || []).sort(function (left, right) {
       return compareMenuOrder(left?.sortOrder, right?.sortOrder, categoryName(left), categoryName(right));
     });
   }
- // PRODUTOS | regra produtos busca um valor de produtos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getSortedProducts(products) {
     return clone(products || []).sort(function (left, right) {
       return compareMenuOrder(left?.sortOrder, right?.sortOrder, productName(left), productName(right));
     });
   }
- // CATEGORIAS | categoria cardapio monta a parte visual de categorias. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderCategoryMenu() {
     const categories = ensurePublicCategoryFilter(getPublicCategories());
     const totalCount = (getMenuState()?.products || [])?.filter(function (product) {
@@ -2426,7 +2332,6 @@
         })
         ?.join("");
   }
- // PRODUTOS | filtrado produtos busca um valor de produtos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getFilteredProducts() {
     const categories = ensurePublicCategoryFilter(getPublicCategories());
     const categoryMap = new Map(
@@ -2522,7 +2427,6 @@
 
     return sorted;
   }
- // IDIOMA | vazio produtos mensagem busca um valor de idioma. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function emptyProductsMessage() {
     const hasSearchQuery = Boolean(String(state?.filters?.query || "")?.trim());
     const hasSecondaryFilters = state?.filters?.status !== "all"
@@ -2535,7 +2439,6 @@
 
     return t("noResults");
   }
- // IMAGEM | atual produto imagem busca um valor de imagens. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function currentProductImage(product) {
     const images = Array.isArray(product?.images) && product?.images?.length
       ? product?.images
@@ -2547,7 +2450,6 @@
     const selected = state?.gallerySelection[product?.id];
     return images?.includes(selected) ? selected : product?.primaryImage || images[0];
   }
- // IMAGEM | produto midia monta a parte visual de imagens. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderProductMedia(product, productImage) {
     if (!productImage) {
       return "";
@@ -2563,7 +2465,6 @@
       "</div>"
     );
   }
- // IMAGEM | combo midia monta a parte visual de imagens. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderOfferMedia(combo) {
     const image = combo?.primaryImage || combo?.imageUrl || "";
 
@@ -2581,7 +2482,6 @@
       "</div>"
     );
   }
- // COMBOS | combo combo monta a parte visual de combos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderComboOffer(combo) {
     const available = isComboPurchasable(combo);
     const originalPrice = comboOriginalPrice(combo);
@@ -2625,7 +2525,6 @@
       "</article>"
     );
   }
- // COMBOS | combos monta a parte visual de combos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderOffers() {
     const section = $("secaoOfertas");
     if (!section) {
@@ -2652,7 +2551,6 @@
       : t("offersSummary", { count: offerCount });
     $("ofertasCombos").innerHTML = combos?.map(renderComboOffer)?.join("");
   }
- // PRODUTOS | produtos monta a parte visual de produtos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderProducts() {
     const products = getFilteredProducts();
     const area = $("areaProdutos");
@@ -2683,7 +2581,6 @@
     area.innerHTML = products?.map(renderProductCard)?.join("");
     attachObserver();
   }
- // PRODUTOS | produto card monta a parte visual de produtos. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderProductCard(product) {
     const images = Array.isArray(product?.images) && product?.images?.length
       ? product?.images
@@ -2850,7 +2747,6 @@
       "</article>"
     );
   }
- // BASE | ligacao observador altera base do sistema depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function attachObserver() {
     disconnectObserver();
     const cards = document?.querySelectorAll("[data-product-id]");
@@ -2876,14 +2772,12 @@
       state?.observer?.observe(card);
     });
   }
- // BASE | desconexao observador limpa base do sistema. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function disconnectObserver() {
     if (state?.observer) {
       state?.observer?.disconnect();
       state.observer = null;
     }
   }
- // PRODUTOS | visualizacao registra uso em produtos. A logica soma o evento localmente e, se a nuvem estiver ativa, tenta enviar online sem travar a tela.
   function trackView(productId) {
     if (!productId || state?.viewTracker?.has(productId)) {
       return;
@@ -2892,26 +2786,21 @@
     state?.viewTracker?.add(productId);
     system?.trackView(productId);
   }
- // ADICIONAIS | card adicionais le dados preenchidos em adicionais. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readCardAddOns(card) {
     return Array?.from(card?.querySelectorAll("input[data-product-add-on]:checked"))?.map(function (input) {
       return String(input?.value || "");
     });
   }
- // PRODUTOS | card nota le dados preenchidos em produtos. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function readCardNote(card, productId) {
     const input = card?.querySelector("#obs-" + CSS?.escape(productId));
     return input ? String(input?.value || "")?.trim()?.slice(0, 70) : "";
   }
- // ADICIONAIS | carrinho chave busca um valor de adicionais. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function cartKey(productId, addOns, note) {
     return [productId, addOns?.slice()?.sort()?.join(","), note?.toLowerCase()]?.join("|");
   }
- // COMBOS | combo carrinho chave busca um valor de combos. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function comboCartKey(comboId) {
     return "combo|" + String(comboId || "");
   }
- // CARRINHO | carrinho prepara dados de carrinho. A logica remove valor vazio, formato estranho ou texto perigoso antes de salvar, comparar ou mostrar.
   function sanitizeCart() {
     const validProducts = new Set(getMenuState()?.products
       ?.filter(function (product) {
@@ -2964,7 +2853,6 @@
 
     saveJson(STORAGE_KEYS?.cart, state?.cart);
   }
- // PRODUTOS | produto carrinho altera produtos depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function addProductToCart(productId, card) {
     const product = getProductById(productId);
     if (!product || !isProductPurchasable(product)) {
@@ -3010,7 +2898,6 @@
 
     return true;
   }
- // COMBOS | combo carrinho altera combos depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function addComboToCart(comboId) {
     const combo = getComboById(comboId);
     if (!combo || !isComboPurchasable(combo)) {
@@ -3042,7 +2929,6 @@
     pulseCartControls();
     return true;
   }
- // CARRINHO | regra carrinho itens busca um valor de carrinho. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function getResolvedCartItems() {
     return state?.cart
       ?.map(function (item) {
@@ -3090,7 +2976,6 @@
       })
       ?.filter(Boolean);
   }
- // LOCALIZACAO | entrega locais busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function deliveryLocations() {
     const delivery = getBrandConfig()?.delivery || {};
     const source = Array.isArray(delivery?.locations)
@@ -3112,13 +2997,11 @@
       };
     });
   }
- // LOCALIZACAO | ativo entrega locais busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function activeDeliveryLocations() {
     return deliveryLocations().filter(function (location) {
       return location?.active !== false;
     });
   }
- // LOCALIZACAO | selecionado bairro busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function selectedNeighborhood(form) {
     const value = String(form?.neighborhood || "");
     if (!value) {
@@ -3136,12 +3019,10 @@
     const legacyIndex = Number?.parseInt(value, 10);
     return Number?.isNaN(legacyIndex) ? null : locations[legacyIndex] || null;
   }
- // LOCALIZACAO | personalizado entrega taxa confere uma condicao de localizacao e entrega. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function hasCustomDeliveryFee(form) {
     const location = selectedNeighborhood(form);
     return Boolean(location && location?.feeMode === "custom");
   }
- // LOCALIZACAO | entrega taxa busca um valor de localizacao e entrega. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function deliveryFee(form) {
     if (form?.serviceMode !== "delivery" || form?.deliveryType !== "entrega") {
       return 0;
@@ -3159,7 +3040,6 @@
 
     return Number(neighborhood?.fee ?? getBrandConfig()?.delivery?.baseFee ?? 0) || 0;
   }
- // ADMIN | formulario le dados preenchidos em painel Admin. A logica pega campos da tela, limpa valores e monta um pacote pronto para validar e salvar.
   function collectForm() {
     return {
       serviceMode: document.querySelector('input[name="tipoAtendimento"]:checked')?.value || "delivery",
@@ -3180,7 +3060,6 @@
       consent: $("aceiteLgpd")?.checked,
     };
   }
- // ADMIN | formulario dados altera painel Admin depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function rememberFormData() {
     const form = collectForm();
     if (!form?.remember) {
@@ -3191,7 +3070,6 @@
     delete form?.consent;
     saveJson(STORAGE_KEYS?.form, form);
   }
- // ADMIN | lembrado formulario altera painel Admin depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function hydrateRememberedForm() {
     const form = state?.rememberedForm && typeof state?.rememberedForm === "object" ? state?.rememberedForm : {};
     if (!Object?.keys(form)?.length) {
@@ -3218,7 +3096,6 @@
     $("observacoes").value = form?.notes || "";
     $("lembrarDadosCliente").checked = true;
   }
- // LOCALIZACAO | bairro opcoes altera localizacao e entrega depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateNeighborhoodOptions() {
     const neighborhoods = activeDeliveryLocations();
     const currentValue = $("bairroEntrega")?.value;
@@ -3246,7 +3123,6 @@
     $("labelBairroEntrega").hidden = !hasLocations;
     $("bairroEntrega").hidden = !hasLocations;
   }
- // PEDIDO | pagamento paineis altera pedido depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updatePaymentPanels() {
     const payment = $("pagamento")?.value;
     const cash = payment === "cash";
@@ -3256,7 +3132,6 @@
     $("trocoParaBox")?.classList?.toggle("oculto", !(cash && $("precisaTroco")?.checked));
     $("trocoPara").disabled = !(cash && $("precisaTroco")?.checked);
   }
- // PEDIDO | checkout modo altera pedido depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateCheckoutMode() {
     const form = collectForm();
     const deliveryMode = form?.serviceMode === "delivery";
@@ -3316,7 +3191,6 @@
 
     renderCart();
   }
- // PEDIDO | totais separa uma regra de pedido. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function computeTotals() {
     const items = getResolvedCartItems();
     const form = collectForm();
@@ -3336,7 +3210,6 @@
       total: subtotal + fee,
     };
   }
- // CARRINHO | celular carrinho visibilidade altera carrinho depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateMobileCartVisibility(itemCount) {
     const hasItems = Number(itemCount || 0) > 0;
     const bar = $("barraMobile");
@@ -3349,7 +3222,6 @@
     bar.hidden = !hasItems;
     bar?.setAttribute("aria-hidden", String(!hasItems));
   }
- // CARRINHO | celular carrinho rotulo monta a parte visual de carrinho. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderMobileCartLabel(itemCount) {
     const label = $("barraMobileLabel");
     updateMobileCartVisibility(itemCount);
@@ -3362,12 +3234,10 @@
       escapeHtml(t(itemCount === 1 ? "mobileItemsOne" : "mobileItemsOther", { count: itemCount })) +
       "</span>";
   }
- // HORARIOS | carrinho camada confere uma condicao de horarios. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isCartOverlayOpen() {
     const cart = $("caixaCarrinho");
     return Boolean(cart && !cart?.hidden && cart?.classList?.contains("show"));
   }
- // CARRINHO | carrinho monta a parte visual de carrinho. A logica le o estado atual, escolhe textos, status e botoes, depois gera o HTML que o usuario ve.
   function renderCart() {
     sanitizeCart();
     const list = $("listaCarrinho");
@@ -3484,18 +3354,15 @@
     renderMobileCartLabel(itemCount);
     $("totalBarraMobile").textContent = formatCurrency(totals?.subtotal);
   }
- // AVISOS | preferencia flutuante publico retorno visual separa uma regra de avisos da tela. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function prefersFloatingPublicFeedback() {
     return isMobileViewport() || isCartOverlayOpen();
   }
- // AVISOS | publico retorno visual area de exibicao separa uma regra de avisos da tela. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function publicFeedbackHost() {
     if (isCartOverlayOpen()) {
       return $("caixaCarrinho")?.querySelector?.(".caixa-carrinho") || document?.body;
     }
     return document?.body;
   }
- // NUVEM | publico retorno visual posicao conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function syncPublicFeedbackPlacement(feedback) {
     if (!feedback) {
       return;
@@ -3512,7 +3379,6 @@
     feedback?.classList?.toggle("public-action-feedback--cart-mobile", compactCart);
     feedback?.classList?.toggle("public-action-feedback--cart-desktop", inCart && !compactCart);
   }
- // AVISOS | publico regra retorno visual tom atualiza avisos da tela. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function setPublicActionFeedbackTone(feedback, type) {
     if (!feedback?.classList) {
       return;
@@ -3526,7 +3392,6 @@
     );
     feedback.classList.add("public-action-feedback--" + tone);
   }
- // IDIOMA | status orienta o usuario em idioma. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function showStatus(message, type, options) {
     const text = String(message || "").trim();
     const success = $("mensagemStatus");
@@ -3573,7 +3438,6 @@
       }, timeout);
     }
   }
- // AVISOS | status limpa avisos da tela. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearStatus() {
     if (state?.statusTimer) {
       window?.clearTimeout(state?.statusTimer);
@@ -3606,7 +3470,6 @@
     );
     if (feedback) feedback.textContent = "";
   }
- // CARRINHO | destaque rapido carrinho controles orienta o usuario em carrinho. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function pulseCartControls() {
     ["botaoCarrinho", "botaoAbrirCarrinhoMobile"]?.forEach(function (id) {
       const button = $(id);
@@ -3623,7 +3486,6 @@
       });
     });
   }
- // IDIOMA | micro retorno visual orienta o usuario em idioma. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function showMicroFeedback(message, type, options) {
     const text = String(message || "").trim();
     if (!text) {
@@ -3670,7 +3532,6 @@
       }, timeout);
     }
   }
- // AVISOS | regra botao retorno visual atualiza avisos da tela. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function markActionButtonFeedback(button) {
     if (!button) {
       return;
@@ -3684,15 +3545,12 @@
       button?.classList?.remove("botao-add-feedback");
     }, 850);
   }
- // HORARIOS | camada confere uma condicao de horarios. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function hasOpenOverlay() {
     return Boolean(document?.querySelector?.(".fundo-escuro.show"));
   }
- // MODAL | camada bloqueio altera modal depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function updateOverlayScrollLock() {
     document.body?.classList?.toggle("overlay-scroll-lock", hasOpenOverlay());
   }
- // HORARIOS | camada separa uma regra de horarios. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function openOverlay(element) {
     if (!element) {
       return;
@@ -3704,7 +3562,6 @@
     element?.classList?.add("show");
     updateOverlayScrollLock();
   }
- // MODAL | camada separa uma regra de modal. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function closeOverlay(element) {
     if (!element) {
       return;
@@ -3716,7 +3573,6 @@
     element?.setAttribute("aria-hidden", "true");
     updateOverlayScrollLock();
   }
- // HORARIOS | carrinho separa uma regra de horarios. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function openCart() {
     openOverlay($("caixaCarrinho"));
     trackCheckoutOpened();
@@ -3724,7 +3580,6 @@
     $("botaoCarrinho")?.setAttribute("aria-expanded", "true");
     $("botaoAbrirCarrinhoMobile")?.setAttribute("aria-expanded", "true");
   }
- // CARRINHO | carrinho separa uma regra de carrinho. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function closeCart() {
     clearStatus();
     clearPixCopyFeedback();
@@ -3732,7 +3587,6 @@
     $("botaoCarrinho")?.setAttribute("aria-expanded", "false");
     $("botaoAbrirCarrinhoMobile")?.setAttribute("aria-expanded", "false");
   }
- // IDIOMA | confirmacao separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function openConfirmation(message) {
     $("resumoConfirmacao").innerHTML = message
       ?.split("\n")
@@ -3742,11 +3596,9 @@
       ?.join("");
     openOverlay($("modalConfirmacao"));
   }
- // BASE | confirmacao separa uma regra de base do sistema. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function closeConfirmation() {
     closeOverlay($("modalConfirmacao"));
   }
- // PEDIDO | finalizacao pedido revisao liga pedido aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   function handleFinishOrderReview() {
     clearStatus();
     const form = collectForm();
@@ -3760,14 +3612,12 @@
     closeCart();
     openConfirmation(state?.pendingMessage);
   }
- // IDIOMA | checkout validacao separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function checkoutValidation(message, targetId) {
     return {
       message,
       targetId: targetId || "",
     };
   }
- // PEDIDO | regra checkout separa uma regra de pedido. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function validateCheckout(form) {
     if (!getResolvedCartItems()?.length) {
       return checkoutValidation(t("cartRequired"), "listaCarrinho");
@@ -3817,11 +3667,9 @@
 
     return checkoutValidation("", "");
   }
- // ADMIN | regra formulario separa uma regra de painel Admin. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function validateForm(form) {
     return validateCheckout(form)?.message || "";
   }
- // RELATORIOS | carrinho metrica chave busca um valor de relatorios. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function cartMetricKey() {
     return getResolvedCartItems()
       ?.map(function (item) {
@@ -3830,7 +3678,6 @@
       ?.filter(Boolean)
       ?.join("|");
   }
- // HORARIOS | checkout aberto registra uso em horarios. A logica soma o evento localmente e, se a nuvem estiver ativa, tenta enviar online sem travar a tela.
   function trackCheckoutOpened() {
     const key = cartMetricKey();
     if (!key || state?.lastCheckoutMetricKey === key) {
@@ -3840,7 +3687,6 @@
     state.lastCheckoutMetricKey = key;
     system?.trackCheckoutOpened?.();
   }
- // PEDIDO | pedido preparado registra uso em pedido. A logica soma o evento localmente e, se a nuvem estiver ativa, tenta enviar online sem travar a tela.
   function trackOrderPrepared(form) {
     system?.trackOrderPrepared?.({
       payment: form?.payment,
@@ -3848,7 +3694,6 @@
       deliveryType: form?.deliveryType,
     });
   }
- // PRODUTOS | busca sem resultado registra uso em produtos. A logica soma o evento localmente e, se a nuvem estiver ativa, tenta enviar online sem travar a tela.
   function trackSearchNoResult(products) {
     const term = String(state?.filters?.query || "")?.trim()?.toLowerCase();
     if (products?.length || !term || term?.length < 3 || term === state?.lastNoResultSearchTerm) {
@@ -3858,7 +3703,6 @@
     state.lastNoResultSearchTerm = term;
     system?.trackSearchNoResult?.(term);
   }
- // PEDIDO | checkout campo erros limpa pedido. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearCheckoutFieldErrors() {
     document?.querySelectorAll?.(".checkout-field-error")?.forEach(function (item) {
       item?.remove();
@@ -3880,7 +3724,6 @@
       }
     });
   }
- // PEDIDO | checkout validacao erro orienta o usuario em pedido. A logica decide quando focar, rolar, destacar ou avisar para deixar claro o que mudou.
   function showCheckoutValidationError(validation) {
     if (!validation?.message) {
       return;
@@ -3931,7 +3774,6 @@
       field?.focus?.({ preventScroll: true });
     }, 180);
   }
- // PEDIDO | pagamento rotulo busca um valor de pedido. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function paymentLabel(value) {
     if (value === "pix") {
       return t("paymentPixLabel");
@@ -3944,11 +3786,9 @@
     }
     return value || "-";
   }
- // PEDIDO | atendimento rotulo busca um valor de pedido. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function serviceLabel(serviceMode) {
     return serviceMode === "no_local" ? t("serviceLocalLabel") : t("serviceDeliveryLabel");
   }
- // PEDIDO | pedido atendimento rotulo busca um valor de pedido. A logica tenta o dado salvo, usa um fallback quando falta informacao e entrega algo seguro para tela ou outra regra.
   function orderServiceLabel(form) {
     if (form?.serviceMode === "no_local") {
       return t("serviceLocalLabel");
@@ -3961,7 +3801,6 @@
     }
     return serviceLabel(form?.serviceMode);
   }
- // IDIOMA | pedido mensagem monta uma estrutura de idioma. A logica junta partes soltas em um formato unico para renderizar, salvar ou enviar.
   function buildOrderMessage() {
     const form = collectForm();
     const totals = computeTotals();
@@ -4054,7 +3893,6 @@
 
     return lines?.join("\n");
   }
- // IDIOMA | WhatsApp aplicacao separa uma regra de idioma. A logica deixa esse comportamento isolado para outras partes chamarem sem repetir codigo.
   function openWhatsApp(message) {
     const whatsappNumber = normalizePhone(getBrandConfig()?.business?.whatsappNumber || "");
     if (!/^\d{10,15}$/?.test(whatsappNumber)) {
@@ -4068,13 +3906,11 @@
 
     return opened ? { ok: true } : { ok: false, message: t("popupBlocked") };
   }
- // PRODUTOS | favorito altera produtos depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function toggleFavorite(productId) {
     state.favorites = system?.toggleFavorite(productId);
     renderToolbar();
     renderProducts();
   }
- // ACESSIBILIDADE | acessibilidade modo altera acessibilidade depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function toggleAccessibilityMode() {
     saveAccessibilityMode(isAccessibilityEnhanced() ? "disabled" : "enabled");
     applyTheme();
@@ -4088,7 +3924,6 @@
     showStatus(t(isAccessibilityEnhanced() ? "accessibilityEnabled" : "accessibilityDisabled"), "ok", { timeout: 2200 });
     showMicroFeedback(t(isAccessibilityEnhanced() ? "accessibilityEnabled" : "accessibilityDisabled"));
   }
- // EVENTOS | interface regra atualiza eventos da tela. A logica muda estado, classes ou dados salvos em um ponto so para a tela responder sem espalhar alteracoes.
   function applyUiChange(group, value) {
     if (group === "visualMode") {
       system?.saveClientUiState({
@@ -4097,7 +3932,6 @@
       return;
     }
   }
- // TRATAMENTO | interface marcador altera tratamento de dados depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function toggleUiFlag(key, value) {
     if (key === "highlightMode") {
       system?.saveClientUiState({
@@ -4119,7 +3953,6 @@
       renderProducts();
     }
   }
- // BUSCA | filtros limpa busca e filtros. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function resetFilters() {
     state.filters = {
       query: "",
@@ -4133,7 +3966,6 @@
     renderCategoryMenu();
     renderProducts();
   }
- // NUVEM | sistema conversa com nuvem Supabase. A logica monta a requisicao, interpreta resposta e mantem fallback local quando a parte externa falha.
   function syncFromSystem() {
     state.states = system?.getStates();
     state.ui = system?.getClientUiState();
@@ -4156,7 +3988,6 @@
     renderCart();
     renderLegalPage();
   }
- // RELATORIOS | metrica regra regra confere uma condicao de relatorios. A logica analisa os dados atuais e devolve verdadeiro ou falso para decidir se a acao continua, espera ou para.
   function isMetricStateChange(detail) {
     const type = String(detail?.type || "");
     return [
@@ -4169,12 +4000,10 @@
       "clear-metrics",
     ].includes(type);
   }
- // PEDIDO | Pix retorno visual limpa pedido. A logica remove filtros, timers, avisos ou rascunhos antigos para a proxima acao comecar sem sobra.
   function clearPixCopyFeedback() {
     $("mensagemCopiaPix")?.classList?.add("oculto");
     $("mensagemErroCopiaPix")?.classList?.add("oculto");
   }
- // PEDIDO | Pix chave altera pedido depois de uma acao. A logica atualiza o dado principal e sincroniza a tela para o usuario ver resposta imediata.
   function copyPixKey() {
     const key = String(getBrandConfig()?.pix?.key || "")?.trim();
     clearPixCopyFeedback();
@@ -4195,7 +4024,6 @@
       showStatus(t("pixCopyFailed"), "error", { timeout: 2600 });
     });
   }
- // IMAGEM | cardapio imagem erro liga imagens aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   function handleMenuImageError(event) {
     const image = event?.target;
     if (!(image instanceof HTMLImageElement)) {
@@ -4212,7 +4040,6 @@
       image?.remove();
     }
   }
- // EVENTOS | eventos liga eventos da tela aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   function bindEvents() {
     document?.addEventListener("error", handleMenuImageError, true);
 
@@ -4544,7 +4371,6 @@
       }
     });
   }
- // BASE | base do sistema liga base do sistema aos eventos da tela. A logica escuta cliques, envios ou mudancas e chama a regra certa para cada caso.
   function init() {
     state.locale = resolveLocale(state?.locale || getDefaultLocale());
     state.accessibilityMode = normalizeAccessibilityMode(state?.accessibilityMode);
@@ -4559,4 +4385,3 @@
 
   init();
 })();
-
