@@ -17492,6 +17492,24 @@ body.admin-page .admin-mobile-form-save-bar {
   }
 }
 
+#caixaCarrinho .acoes-checkout {
+  border-top: 1px solid color-mix(in srgb, var(--borda-media) 44%, transparent);
+  box-shadow:
+    0 -14px 32px color-mix(in srgb, var(--cor-sombra) 18%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 12%, transparent);
+  backdrop-filter: blur(10px) saturate(1.02);
+}
+
+#caixaCarrinho .acoes-checkout .botao {
+  border-radius: var(--raio-medio);
+}
+
+@media (max-width: 768px) {
+  #caixaCarrinho .acoes-checkout {
+    padding-top: 0.62rem;
+  }
+}
+
 /* CARRINHO | Separa itens, totais e formulario dentro do modal. */
 #caixaCarrinho .carrinho-cabecalho {
   display: grid;
@@ -18138,28 +18156,12 @@ body.admin-page [data-admin-tab-panel="offers"] .admin-combo-product .admin-badg
   }
 }
 
-#caixaCarrinho .acoes-checkout {
-  border-top: 1px solid color-mix(in srgb, var(--borda-media) 44%, transparent);
-  box-shadow:
-    0 -14px 32px color-mix(in srgb, var(--cor-sombra) 18%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 12%, transparent);
-  backdrop-filter: blur(10px) saturate(1.02);
-}
-
-#caixaCarrinho .acoes-checkout .botao {
-  border-radius: var(--raio-medio);
-}
-
 @media (max-width: 768px) {
   #mensagemStatus,
   #mensagemErro,
   body.admin-page #adminStatus,
   body.admin-page .admin-inline-status {
     display: none !important;
-  }
-
-  #caixaCarrinho .acoes-checkout {
-    padding-top: 0.62rem;
   }
 }
 
