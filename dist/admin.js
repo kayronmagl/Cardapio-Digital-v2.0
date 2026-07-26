@@ -1,4 +1,5 @@
 ﻿(function () {
+  // ADMIN | Concentra telas, formulários e ações online do painel sem mudar o estado diretamente fora do state-manager.
   const system = window?.TemplateProductSystem;
   const shared = window?.TemplateShared;
   const adminAuthFactory = window?.TemplateAdminAuth;
@@ -1601,6 +1602,7 @@
   }
 
   const slugify = shared?.slugify;
+  // IDENTIFICADORES | Evita colisão ao criar categorias, produtos, adicionais e combos com nomes repetidos.
   function makeUniqueIdentifier(value, fallback, existingValues, currentValue) {
     const base = slugify(value, fallback);
     const current = String(currentValue || "");
@@ -2286,7 +2288,7 @@
       element?.classList?.remove("admin-card--attention");
     }, Number(duration || 1100));
   }
- // ADMIN | Leva o usuario ate uma area do painel, destaca o alvo e mostra o aviso perto do ponto alterado.
+  // ADMIN | Leva o usuário até uma área do painel, destaca o alvo e mostra o aviso perto do ponto alterado.
   function guideAdminTarget(target, options) {
     const element = resolveAdminTarget(target);
     if (!element) {
@@ -2385,6 +2387,7 @@
     return shouldAutoPublishAdminForm(formId) ? t("savingAndPublishing") : t("savingChanges");
   }
   async function publishAdminChangesAfterSave(options) {
+    // PUBLICAÇÃO | Em modo online, salvar no Admin também tenta publicar o catálogo sem exigir um segundo clique.
     const localMessage = String(options?.localMessage || t("savingChanges")).trim();
     if (!shouldAutoPublishAdminForm(options?.formId)) {
       return {
@@ -2544,7 +2547,7 @@
       capturedAt: new Date()?.toISOString(),
     };
   }
- // ADMIN | Guarda campos editados antes de renderizar de novo para nao perder rascunhos do Admin.
+  // ADMIN | Guarda campos editados antes de renderizar de novo para não perder rascunhos do Admin.
   function captureAdminFormDraft(form) {
     if (!(form instanceof HTMLFormElement) || !isTrackedAdminFormId(form?.id) || form?.id === "productForm") {
       return;
@@ -2752,6 +2755,7 @@
     return Boolean(hasActiveAdminDraft() && isDestructiveAdminStateChange(detail));
   }
   function deferRemoteAdminUpdate(detail, options) {
+    // SINCRONIZAÇÃO | Atualização remota espera o rascunho terminar para não apagar edição em andamento.
     const guard = getAdminEditGuard();
     const pendingType = String(detail?.type || options?.type || "cloud-sync-to-local");
     const shouldKeepSnapshot = pendingType === "cloud-sync-to-local" || pendingType === "external-storage";
@@ -3174,7 +3178,7 @@
     keepActiveTabVisible(previousTabsScrollLeft);
     loadOnlineReportsForActiveTab(false);
   }
- // ADMIN | Mostra a aba ativa e esconde as demais sem apagar o conteudo ja montado.
+  // ADMIN | Mostra a aba ativa e esconde as demais sem apagar o conteúdo já montado.
   function renderPanel(id, content) {
     const hidden = state?.activeTab !== id;
     return (
@@ -5029,7 +5033,7 @@
       focusSelector: 'input[name^="deliveryLocationNamePt"]',
     });
   }
- // LOCALIZACAO | Remove uma localidade do formulario, atualiza o estado vazio e marca configuracoes pendentes.
+  // LOCALIZAÇÃO | Remove uma localidade do formulário, atualiza o estado vazio e marca configurações pendentes.
   function removeDeliveryLocationRow(button) {
     const editor = button?.closest?.(".admin-delivery-locations-editor");
     button?.closest?.("[data-delivery-location-row]")?.remove();
@@ -5615,6 +5619,7 @@
     );
   }
   function readImageFieldValue(formData, imagesFieldName, primaryFieldName) {
+    // IMAGENS | Mantém a imagem principal dentro da galeria para o público sempre ter fallback visual.
     const images = parseImagesText(formData?.get(imagesFieldName));
     const primaryImage = sanitizeImageValue(formData?.get(primaryFieldName) || images[0] || "");
     return {
@@ -6070,6 +6075,7 @@
       });
   }
   function readSettingsForm(form) {
+    // CONFIGURAÇÕES | Lê o formulário inteiro e preserva partes existentes que não aparecem como campo editável.
     const formData = new FormData(form);
     const current = clone(state?.states?.brandConfig);
     const nextAppearance = resolveThemeAppearanceForSave(

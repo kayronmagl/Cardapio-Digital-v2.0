@@ -1,4 +1,5 @@
 (function () {
+  // COMPARTILHADO | Funções pequenas usadas pelo público, Admin e estado para evitar regras duplicadas entre arquivos.
   function getStorage(mode) {
     try {
       return mode === "session" ? window.sessionStorage : window.localStorage;
@@ -37,7 +38,7 @@
       return false;
     }
   }
- // ESTADO | Remove uma chave do armazenamento escolhido sem quebrar a tela se o navegador bloquear acesso local.
+  // ESTADO | Remove uma chave do armazenamento escolhido sem quebrar a tela se o navegador bloquear acesso local.
   function removeStorageValue(key, mode) {
     try {
       getStorage(mode)?.removeItem(key);
@@ -60,7 +61,7 @@
   function normalizePhone(phone) {
     return String(phone || "").replace(/\D/g, "");
   }
- // TRATAMENTO | Transforma nomes em codigos curtos para URL, categoria ou produto, usando fallback quando o texto fica vazio.
+  // TRATAMENTO | Transforma nomes em códigos curtos para URL, categoria ou produto, usando fallback quando o texto fica vazio.
   function slugify(value, fallback) {
     const source = String(value || fallback || "")
       .normalize("NFD")
@@ -109,6 +110,7 @@
   }
 
   const PAGE_TRANSITION_KEY = "template-cardapio-page-transition-v1";
+  // TRANSIÇÃO | Anima apenas navegação interna comum e respeita preferências de movimento reduzido.
   function prefersReducedMotion() {
     return Boolean(window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
   }

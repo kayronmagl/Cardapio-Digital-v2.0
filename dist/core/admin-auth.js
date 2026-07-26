@@ -1,4 +1,5 @@
 (function () {
+  // AUTENTICAÇÃO | Mantém a senha local do Admin e a sessão Supabase separadas, mas expõe uma API única para o painel.
   const shared = window.TemplateShared;
 
   if (!shared) {
@@ -44,6 +45,7 @@
   function isRemoteSessionValid(session) {
     return Boolean(session?.access_token && Number(session?.expires_at) > Date.now() + 5000);
   }
+  // SUPABASE | Usa a API REST de autenticação para não depender de SDK externo no carregamento do Admin.
   async function requestSupabaseAuth(cloudConfig, path, options) {
     if (!cloudConfig?.url || !cloudConfig?.anonKey) {
       throw new Error("Supabase não está configurado. Confira a URL e a chave pública do projeto.");
@@ -133,6 +135,7 @@
     return Boolean(getSupabaseSession()?.access_token);
   }
   function createAuthHelpers(config) {
+    // SESSÃO | A senha local protege o painel; o token remoto só libera ações online no Supabase.
     const keys = {
       passwordHash: "template-cardapio-admin-password-hash-v1",
       session: "template-cardapio-admin-session-v1",

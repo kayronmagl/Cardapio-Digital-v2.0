@@ -1,4 +1,5 @@
 (function () {
+  // ESTADO | Centraliza dados do cardápio, configurações, métricas e sincronização para público e Admin.
   const STORAGE_KEYS = {
     legacyCatalog: "template-cardapio-catalog-v2",
     legacySettings: "template-cardapio-settings-v2",
@@ -1235,7 +1236,7 @@
       return false;
     }
   }
- // ESTADO | Remove uma chave local com seguranca e informa falha sem interromper o restante do sistema.
+  // ESTADO | Remove uma chave local com segurança e informa falha sem interromper o restante do sistema.
   function removeStorage(key) {
     try {
       window?.localStorage?.removeItem(key);
@@ -1397,6 +1398,7 @@
     });
   }
   function resolveCloudConfig(options) {
+    // NUVEM | Prioridade: config pública, config salva no Admin, config legada e, por último, valores padrão.
     const publicCloudConfig = sanitizeCloudConfig(options?.publicCloudConfig);
     const storedCloudConfig = sanitizeCloudConfig(options?.storedCloudConfig);
     const legacyCloudConfig = normalizeLegacySupabaseConfig(options?.legacySupabaseConfig);
@@ -1434,7 +1436,7 @@
 
     return mergeOperationalCloudConfig(attachStatus(defaultCloudConfig), storedCloudConfig);
   }
- // TRATAMENTO | Prepara nomes para virar identificador, removendo acentos e usando fallback quando o texto fica vazio.
+  // TRATAMENTO | Prepara nomes para virar identificador, removendo acentos e usando fallback quando o texto fica vazio.
   function slugify(value, fallback) {
     const source = sanitizeText(value, fallback || "", 120)
       ?.normalize("NFD")
@@ -1895,7 +1897,7 @@
   function resolveProductStatus(product) {
     return resolveProductActiveFlag(product) ? "active" : "inactive";
   }
- // IMAGEM | Mantem imagem principal e galeria no mesmo formato, sem duplicadas nem entradas vazias.
+  // IMAGEM | Mantém imagem principal e galeria no mesmo formato, sem duplicadas nem entradas vazias.
   function ensureImageArray(value) {
     const items = Array.isArray(value) ? value : [value];
     return Array?.from(
@@ -2088,6 +2090,7 @@
     );
   }
   function buildCanonicalStates() {
+    // COMPATIBILIDADE | Sempre monta o estado novo a partir dos dados atuais e dos formatos antigos salvos no navegador.
     const legacyCatalog = readStorage(STORAGE_KEYS?.legacyCatalog, {});
     const legacySettings = readStorage(STORAGE_KEYS?.legacySettings, {});
     const rawStoredCloudConfig = readStorage(STORAGE_KEYS?.cloudConfig, {});
@@ -2297,6 +2300,7 @@
     };
   }
   function recordMetricEventOnline(eventType, details) {
+    // MÉTRICAS | O envio online é complementar; se falhar, a métrica local continua sendo preservada.
     const cloudConfig = getStates()?.cloudConfig;
     if (!isSupabaseConfigured(cloudConfig)) {
       return Promise.resolve({ ok: false, skipped: true });
@@ -2455,7 +2459,7 @@
       clientUi: getClientUiState(),
     };
   }
- // ESTADO | Restaura backup validando arquivo, cardapio, marca, nuvem e metricas antes de gravar o estado oficial.
+  // ESTADO | Restaura backup validando arquivo, cardápio, marca, nuvem e métricas antes de gravar o estado oficial.
   function restoreBackup(backup) {
     if (!backup || typeof backup !== "object") {
       throw new Error("Backup inválido.");
@@ -2946,6 +2950,7 @@
     }
   }
   async function prepareMenuStateForCloudPublish(menuState, cloudConfig) {
+    // IMAGENS | Antes de publicar, imagens coladas em base64 viram URLs públicas para reduzir peso no banco.
     const nextMenuState = sanitizeMenuState(menuState)?.state || {
       categories: [],
       addOns: [],

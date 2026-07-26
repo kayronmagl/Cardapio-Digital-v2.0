@@ -1,4 +1,5 @@
 ﻿window.PUBLIC_CLOUD_CONFIG = {
+  // NUVEM | Configuração pública do Supabase usada pelo cardápio e pelo Admin; a chave anon é esperada no navegador.
   enabled: true,
   provider: "supabase",
   realtime: true,

@@ -1,4 +1,5 @@
 (function () {
+  // PÚBLICO | Renderiza o cardápio do cliente final e mantém carrinho, filtros, horários e pedido por WhatsApp.
   const system = window?.TemplateProductSystem;
   const shared = window?.TemplateShared;
 
@@ -1154,7 +1155,7 @@
       ref: nextRealtimeRef(),
     }));
   }
- // NUVEM | Escuta atualizacoes do Supabase por WebSocket e agenda recarga do cardapio quando o catalogo online muda.
+  // NUVEM | Escuta atualizações do Supabase por WebSocket e agenda recarga do cardápio quando o catálogo online muda.
   function startRealtimeSubscription() {
     if (!isRealtimeEnabled() || typeof WebSocket !== "function") {
       closeRealtimeSubscription();
@@ -1499,6 +1500,7 @@
     return hours * 60 + minutes;
   }
   function buildScheduleWindows(referenceDate) {
+    // HORÁRIOS | Inclui ontem e a próxima semana para cobrir turnos que passam da meia-noite.
     const baseDate = new Date(referenceDate);
     baseDate?.setHours(0, 0, 0, 0);
     const schedule = Array.isArray(getBrandConfig()?.schedule) ? getBrandConfig()?.schedule : [];
@@ -1953,26 +1955,49 @@
       '<span class="destaque-info-value">' + escapeHtml(value || rawText) + "</span>"
     );
   }
+  const QUICK_ORDER_HIGHLIGHT_TITLE = "peca rapido e sem complicacao.";
+
+  function comparableText(value) {
+    return String(value || "")
+      .trim()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  }
+
+  function isQuickOrderHighlightTitle(text) {
+    return comparableText(text) === QUICK_ORDER_HIGHLIGHT_TITLE;
+  }
+
+  // DESTAQUE | Mantém o título vindo do Admin, mas aplica a quebra visual só na chamada atual.
+  function renderQuickOrderHighlightTitleMarkup() {
+    return (
+      '<span class="destaque-titulo-linha">Peça <span class="destaque-titulo-enfase">rápido</span></span>' +
+      " " +
+      '<span class="destaque-titulo-linha">e sem complicação.</span>'
+    );
+  }
+
   function renderHighlightTitleMarkup(text) {
     const rawText = String(text || "")?.trim();
     if (!rawText) {
       return "";
     }
 
-    const comparable = rawText
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase();
-
-    if (comparable === "peca rapido e sem complicacao.") {
-      return (
-        '<span class="destaque-titulo-linha">Peça <span class="destaque-titulo-enfase">rápido</span></span>' +
-        " " +
-        '<span class="destaque-titulo-linha">e sem complicação.</span>'
-      );
+    if (isQuickOrderHighlightTitle(rawText)) {
+      return renderQuickOrderHighlightTitleMarkup();
     }
 
     return escapeHtml(rawText);
+  }
+
+  function syncHighlightTitle(element, text) {
+    if (!element) {
+      return;
+    }
+
+    element.classList.toggle("destaque-titulo--pedido-rapido", isQuickOrderHighlightTitle(text));
+    element.innerHTML = renderHighlightTitleMarkup(text);
   }
   function syncPublicMetadata(brandName, menuSubtitle, highlightMessage) {
     document.title = brandName || t("publicMenuTitle");
@@ -2025,16 +2050,7 @@
       enderecoTopo.textContent = "";
       enderecoTopo.hidden = true;
     }
-    const destaqueTitulo = $("destaqueTitulo");
-    const destaqueTituloTexto = textValue(destaqueInicial?.title, currentLocale());
-    destaqueTitulo.classList.toggle(
-      "destaque-titulo--pedido-rapido",
-      destaqueTituloTexto
-        ?.normalize("NFD")
-        ?.replace(/[\u0300-\u036f]/g, "")
-        ?.toLowerCase() === "peca rapido e sem complicacao."
-    );
-    destaqueTitulo.innerHTML = renderHighlightTitleMarkup(destaqueTituloTexto);
+    syncHighlightTitle($("destaqueTitulo"), textValue(destaqueInicial?.title, currentLocale()));
     $("destaqueSubtitulo").textContent = highlightMessage;
     $("destaqueTempo").innerHTML = renderHighlightInfoMarkup(textValue(destaqueInicial?.waitingTimeLabel, currentLocale()));
     $("destaquePagamento").innerHTML = renderHighlightInfoMarkup(textValue(destaqueInicial?.paymentLabel, currentLocale()));
@@ -2363,6 +2379,7 @@
         ?.join("");
   }
   function getFilteredProducts() {
+    // CATÁLOGO | Aplica todos os filtros antes da ordenação para manter contagem, busca e favoritos coerentes.
     const categories = ensurePublicCategoryFilter(getPublicCategories());
     const categoryMap = new Map(
       categories?.map(function (category) {
@@ -2832,6 +2849,7 @@
     return "combo|" + String(comboId || "");
   }
   function sanitizeCart() {
+    // CARRINHO | Revalida itens salvos quando o catálogo muda para não manter produto, combo ou adicional indisponível.
     const validProducts = new Set(getMenuState()?.products
       ?.filter(function (product) {
         return product && isProductPurchasable(product);
@@ -3649,6 +3667,7 @@
     };
   }
   function validateCheckout(form) {
+    // PEDIDO | Valida na mesma ordem em que o cliente corrige os campos na tela.
     if (!getResolvedCartItems()?.length) {
       return checkoutValidation(t("cartRequired"), "listaCarrinho");
     }

@@ -1686,10 +1686,8 @@ html[data-accessibility="enhanced"] .pix-valor {
 }
 
 .destaque-titulo-enfase {
-  color: var(--cor-painel-destaque);
-  text-shadow:
-    0 1px 0 color-mix(in srgb, var(--cor-contraste-destaque) 42%, transparent),
-    0 0 18px color-mix(in srgb, var(--cor-primaria) 28%, transparent);
+  color: color-mix(in srgb, var(--cor-painel-destaque) 82%, var(--cor-sobre-escuro) 18%);
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--cor-contraste-destaque) 24%, transparent);
 }
 
 .destaque-subtitulo {
@@ -11654,8 +11652,8 @@ body:not(.cart-has-items) .barra-mobile {
 }
 
 .topo-blocos + .menu-categorias {
-  margin-top: clamp(0.3rem, 0.7vw, 0.48rem);
-  padding-top: clamp(0.36rem, 0.8vw, 0.52rem);
+  margin-top: clamp(0.22rem, 0.55vw, 0.36rem);
+  padding-top: clamp(0.3rem, 0.65vw, 0.44rem);
 }
 
 @media (max-width: 768px) {
