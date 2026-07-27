@@ -2377,7 +2377,7 @@
     return shouldAutoPublishAdminForm(formId) ? t("savingAndPublishing") : t("savingChanges");
   }
   async function publishAdminChangesAfterSave(options) {
-    // PUBLICAÇÃO | Em modo online, salvar no Admin também tenta publicar o catálogo sem exigir um segundo clique.
+    // ONLINE | Em modo online, cada salvamento publica apenas o dominio alterado para reduzir escrita no Supabase.
     const localMessage = String(options?.localMessage || t("savingChanges")).trim();
     if (!shouldAutoPublishAdminForm(options?.formId)) {
       return {
@@ -2388,7 +2388,11 @@
     }
 
     try {
-      const result = await system?.replaceCloudCatalog?.();
+      if (!options?.cloudChange?.type) {
+        throw new Error("Tipo de publicacao online nao informado.");
+      }
+
+      const result = await system?.publishAdminChange?.(options.cloudChange);
       const hasImageUploadWarnings = Boolean(result?.imageUploadWarnings?.length);
       return {
         message: hasImageUploadWarnings ? t("cloudPublishedWithImageWarning") : t("savedAndPublishedOnline"),
@@ -5779,6 +5783,11 @@
     });
 
     if (existingIndex >= 0) {
+      const previousAddOns = Array.isArray(menuState?.products[existingIndex]?.addOns)
+        ? menuState.products[existingIndex].addOns
+        : [];
+      const nextAddOns = Array.isArray(nextProduct?.addOns) ? nextProduct.addOns : [];
+      const addOnsChanged = JSON?.stringify(previousAddOns) !== JSON?.stringify(nextAddOns);
       nextProduct.createdAt = menuState?.products[existingIndex]?.createdAt || payload?.createdAt;
       nextProduct.sortOrder = menuState?.products[existingIndex]?.sortOrder ?? existingIndex;
       menuState.products[existingIndex] = {
@@ -5788,7 +5797,15 @@
         available: nextProduct?.available !== false,
       };
       system?.setMenuState(menuState, { type: "product-update" });
-      return "updated";
+      return {
+        status: "updated",
+        cloudChange: {
+          type: "product",
+          action: "upsert",
+          id: nextProduct?.id,
+          addOnsChanged,
+        },
+      };
     }
 
     nextProduct.id = makeUniqueIdentifier(
@@ -5803,7 +5820,15 @@
     nextProduct.available = nextProduct?.available !== false;
     menuState?.products?.push(nextProduct);
     system?.setMenuState(menuState, { type: "product-create" });
-    return "created";
+    return {
+      status: "created",
+      cloudChange: {
+        type: "product",
+        action: "upsert",
+        id: nextProduct?.id,
+        addOnsChanged: true,
+      },
+    };
   }
   function readCategoryForm(form) {
     const formData = new FormData(form);
@@ -5836,6 +5861,16 @@
 
     if (existingIndex >= 0) {
       const previousSlug = menuState?.categories[existingIndex]?.slug;
+      const slugChanged = previousSlug !== nextSlug;
+      const affectedProductIds = slugChanged
+        ? menuState?.products
+          ?.filter(function (product) {
+            return product?.category === previousSlug;
+          })
+          ?.map(function (product) {
+            return product?.id;
+          })
+        : [];
       menuState.categories[existingIndex] = {
         ...menuState?.categories[existingIndex],
         slug: nextSlug,
@@ -5846,7 +5881,16 @@
         return product?.category === previousSlug ? { ...product, category: nextSlug } : product;
       });
       system?.setMenuState(menuState, { type: "category-update" });
-      return "updated";
+      return {
+        status: "updated",
+        cloudChange: {
+          type: "category",
+          action: "upsert",
+          slug: nextSlug,
+          previousSlug,
+          affectedProductIds,
+        },
+      };
     }
 
     menuState?.categories?.push({
@@ -5856,7 +5900,16 @@
       sortOrder: menuState?.categories?.length,
     });
     system?.setMenuState(menuState, { type: "category-create" });
-    return "created";
+    return {
+      status: "created",
+      cloudChange: {
+        type: "category",
+        action: "upsert",
+        slug: nextSlug,
+        previousSlug: "",
+        affectedProductIds: [],
+      },
+    };
   }
   function readAddOnForm(form) {
     const formData = new FormData(form);
@@ -5895,6 +5948,13 @@
 
     if (existingIndex >= 0) {
       const previousId = menuState?.addOns[existingIndex]?.id;
+      const affectedProductIds = menuState?.products
+        ?.filter(function (product) {
+          return Array.isArray(product?.addOns) && product?.addOns?.includes(previousId);
+        })
+        ?.map(function (product) {
+          return product?.id;
+        });
       menuState.addOns[existingIndex] = {
         ...menuState?.addOns[existingIndex],
         id: nextId,
@@ -5914,7 +5974,16 @@
         };
       });
       system?.setMenuState(menuState, { type: "add-on-update" });
-      return "updated";
+      return {
+        status: "updated",
+        cloudChange: {
+          type: "add-on",
+          action: "upsert",
+          id: nextId,
+          previousId,
+          affectedProductIds,
+        },
+      };
     }
 
     menuState?.addOns?.push({
@@ -5927,7 +5996,16 @@
       updatedAt: payload?.updatedAt,
     });
     system?.setMenuState(menuState, { type: "add-on-create" });
-    return "created";
+    return {
+      status: "created",
+      cloudChange: {
+        type: "add-on",
+        action: "upsert",
+        id: nextId,
+        previousId: "",
+        affectedProductIds: [],
+      },
+    };
   }
   function ensureOffersContainer(menuState) {
     menuState.offers = menuState?.offers && typeof menuState.offers === "object"
@@ -6006,7 +6084,14 @@
       };
       delete offers.combos[existingIndex].idOriginal;
       system?.setMenuState(menuState, { type: "combo-update" });
-      return "updated";
+      return {
+        status: "updated",
+        cloudChange: {
+          type: "combo",
+          action: "upsert",
+          id: nextId,
+        },
+      };
     }
 
     const nextCombo = {
@@ -6018,7 +6103,14 @@
     delete nextCombo.idOriginal;
     offers.combos.push(nextCombo);
     system?.setMenuState(menuState, { type: "combo-create" });
-    return "created";
+    return {
+      status: "created",
+      cloudChange: {
+        type: "combo",
+        action: "upsert",
+        id: nextId,
+      },
+    };
   }
   function deliveryLocationControl(row, key, field) {
     const name = "deliveryLocation" + field + "-" + key;
@@ -6315,11 +6407,12 @@
           if (form?.id === "productForm") {
             const payload = readProductForm(form);
             clearAdminFormEditing("productForm");
-            const status = commitProduct(payload);
-            const localMessage = status === "updated" ? t("productSaved") : t("productCreated");
+            const result = commitProduct(payload);
+            const localMessage = result?.status === "updated" ? t("productSaved") : t("productCreated");
             const feedback = await publishAdminChangesAfterSave({
               formId: "productForm",
               localMessage,
+              cloudChange: result?.cloudChange,
             });
             renderDashboard({ preserveProductDraft: false, preserveAdminDrafts: false });
             showStatus(feedback.message, feedback.type);
@@ -6340,11 +6433,12 @@
           if (form?.id === "categoryForm") {
             const payload = readCategoryForm(form);
             clearAdminFormEditing("categoryForm");
-            const status = commitCategory(payload);
-            const localMessage = status === "updated" ? t("categorySaved") : t("categoryCreated");
+            const result = commitCategory(payload);
+            const localMessage = result?.status === "updated" ? t("categorySaved") : t("categoryCreated");
             const feedback = await publishAdminChangesAfterSave({
               formId: "categoryForm",
               localMessage,
+              cloudChange: result?.cloudChange,
             });
             renderDashboard({ preserveProductDraft: false, preserveAdminDrafts: false });
             showStatus(feedback.message, feedback.type);
@@ -6364,11 +6458,12 @@
           if (form?.id === "addOnForm") {
             const payload = readAddOnForm(form);
             clearAdminFormEditing("addOnForm");
-            const status = commitAddOn(payload);
-            const localMessage = status === "updated" ? t("addOnSaved") : t("addOnCreated");
+            const result = commitAddOn(payload);
+            const localMessage = result?.status === "updated" ? t("addOnSaved") : t("addOnCreated");
             const feedback = await publishAdminChangesAfterSave({
               formId: "addOnForm",
               localMessage,
+              cloudChange: result?.cloudChange,
             });
             renderDashboard({ preserveProductDraft: false, preserveAdminDrafts: false });
             showStatus(feedback.message, feedback.type);
@@ -6388,11 +6483,12 @@
           if (form?.id === "comboForm") {
             const payload = readComboForm(form);
             clearAdminFormEditing("comboForm");
-            const status = commitCombo(payload);
-            const localMessage = status === "updated" ? t("comboSaved") : t("comboCreated");
+            const result = commitCombo(payload);
+            const localMessage = result?.status === "updated" ? t("comboSaved") : t("comboCreated");
             const feedback = await publishAdminChangesAfterSave({
               formId: "comboForm",
               localMessage,
+              cloudChange: result?.cloudChange,
             });
             renderDashboard({ preserveProductDraft: false, preserveAdminDrafts: false });
             showStatus(feedback.message, feedback.type);
@@ -6417,6 +6513,7 @@
             const feedback = await publishAdminChangesAfterSave({
               formId: "settingsForm",
               localMessage: t("settingsSaved"),
+              cloudChange: { type: "settings" },
             });
             renderDashboard({ preserveProductDraft: false, preserveAdminDrafts: false });
             showStatus(feedback.message, feedback.type);
@@ -7159,6 +7256,12 @@
       const feedback = await publishAdminChangesAfterSave({
         formId: "product-action",
         localMessage: t("productStatusUpdated"),
+        cloudChange: {
+          type: "product",
+          action: "upsert",
+          id: productId,
+          addOnsChanged: false,
+        },
       });
       renderDashboard();
       showStatus(feedback.message, feedback.type);
@@ -7183,6 +7286,12 @@
       const feedback = await publishAdminChangesAfterSave({
         formId: "product-action",
         localMessage: t("productAvailabilityUpdated"),
+        cloudChange: {
+          type: "product",
+          action: "upsert",
+          id: productId,
+          addOnsChanged: false,
+        },
       });
       renderDashboard();
       showStatus(feedback.message, feedback.type);
@@ -7207,6 +7316,11 @@
       const feedback = await publishAdminChangesAfterSave({
         formId: "product-action",
         localMessage: t("productDeleted"),
+        cloudChange: {
+          type: "product",
+          action: "delete",
+          id: productId,
+        },
       });
       if (wasEditingDeletedProduct) {
         state.editingProductId = "";
@@ -7261,6 +7375,13 @@
       const replacement = menuState?.categories?.find(function (item) {
         return item?.slug !== categorySlug;
       });
+      const affectedProductIds = menuState?.products
+        ?.filter(function (product) {
+          return product?.category === categorySlug;
+        })
+        ?.map(function (product) {
+          return product?.id;
+        });
       menuState.categories = menuState?.categories?.filter(function (item) {
         return item?.slug !== categorySlug;
       });
@@ -7271,6 +7392,12 @@
       const feedback = await publishAdminChangesAfterSave({
         formId: "category-action",
         localMessage: t("categoryDeleted"),
+        cloudChange: {
+          type: "category",
+          action: "delete",
+          slug: categorySlug,
+          affectedProductIds,
+        },
       });
       clearAdminFormEditing("categoryForm");
       renderDashboard({ preserveAdminDrafts: false });
@@ -7314,6 +7441,13 @@
         return;
       }
 
+      const affectedProductIds = menuState?.products
+        ?.filter(function (product) {
+          return Array.isArray(product?.addOns) && product?.addOns?.includes(addOnId);
+        })
+        ?.map(function (product) {
+          return product?.id;
+        });
       menuState.addOns = menuState?.addOns?.filter(function (item) {
         return item?.id !== addOnId;
       });
@@ -7331,6 +7465,13 @@
       const feedback = await publishAdminChangesAfterSave({
         formId: "add-on-action",
         localMessage: t("addOnDeleted"),
+        cloudChange: {
+          type: "add-on",
+          action: "delete",
+          id: addOnId,
+          previousId: addOnId,
+          affectedProductIds,
+        },
       });
       clearAdminFormEditing("addOnForm");
       renderDashboard({ preserveAdminDrafts: false });
@@ -7384,6 +7525,11 @@
       const feedback = await publishAdminChangesAfterSave({
         formId: "combo-action",
         localMessage: t("comboSaved"),
+        cloudChange: {
+          type: "combo",
+          action: "upsert",
+          id: comboId,
+        },
       });
       renderDashboard();
       showStatus(feedback.message, feedback.type);
@@ -7410,6 +7556,11 @@
       const feedback = await publishAdminChangesAfterSave({
         formId: "combo-action",
         localMessage: t("comboDeleted"),
+        cloudChange: {
+          type: "combo",
+          action: "delete",
+          id: comboId,
+        },
       });
       renderDashboard({ preserveAdminDrafts: false });
       showStatus(feedback.message, feedback.type);

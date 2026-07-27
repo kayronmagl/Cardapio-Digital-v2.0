@@ -3648,14 +3648,18 @@
     await deleteCloudRows(tableName, "created_at", "all");
     return true;
   }
-  async function saveMenuSettingsOnline(brandConfig, cloudConfig, menuState) {
+  async function saveMenuSettingsOnline(brandConfig, cloudConfig, menuState, options) {
     const resolvedCloud = sanitizeCloudConfig(cloudConfig || getStates()?.cloudConfig);
     const settingsTable = resolvedCloud?.tables?.settings;
     if (!settingsTable) {
       return [];
     }
 
-    const rows = buildMenuSettingsRows(brandConfig || getStates()?.brandConfig, resolvedCloud, menuState || getStates()?.menuState);
+    const allowedKeys = new Set(ensureStringArray(options?.keys));
+    const rows = buildMenuSettingsRows(brandConfig || getStates()?.brandConfig, resolvedCloud, menuState || getStates()?.menuState)
+      .filter(function (row) {
+        return !allowedKeys.size || allowedKeys.has(row?.key);
+      });
     await upsertCloudRows(settingsTable, rows, ["key"]);
     return rows;
   }
@@ -3714,10 +3718,29 @@
       ok: true,
     };
   }
-  async function replaceCloudCatalog(options) {
+  function ensureValidCloudSnapshot(snapshot, allowEmpty) {
+    if (!snapshot?.valid) {
+      const error = new Error(snapshot?.errors?.[0] || "Snapshot de publicacao invalido.");
+      error.details = snapshot;
+      throw error;
+    }
+
+    if (!allowEmpty && (!snapshot?.categories?.length || !snapshot?.products?.length)) {
+      throw new Error("Cadastre pelo menos uma categoria e um produto antes de publicar.");
+    }
+  }
+  function persistPreparedMenuState(preparedMenuState) {
+    if (!preparedMenuState) {
+      return;
+    }
+
+    if (JSON?.stringify(getStates()?.menuState) !== JSON?.stringify(preparedMenuState)) {
+      setMenuState(preparedMenuState, { type: "cloud-publish-prepared" });
+    }
+  }
+  async function prepareCloudCatalogPublication(options) {
     const states = getStates();
     const cloudConfig = states?.cloudConfig;
-    const tables = cloudConfig?.tables;
     const prepared = await prepareMenuStateForCloudPublish(states?.menuState, cloudConfig);
     const preparedMenuState = prepared?.menuState;
     const imageUploadWarnings = Array.isArray(prepared?.imageUploadWarnings)
@@ -3727,17 +3750,189 @@
       ...states,
       menuState: preparedMenuState,
     });
-    const allowEmpty = Boolean(options?.allowEmpty);
 
-    if (!snapshot?.valid) {
-      const error = new Error(snapshot?.errors?.[0] || "Snapshot de publicação inválido.");
-      error.details = snapshot;
-      throw error;
+    ensureValidCloudSnapshot(snapshot, Boolean(options?.allowEmpty));
+
+    return {
+      states,
+      cloudConfig,
+      tables: cloudConfig?.tables,
+      preparedMenuState,
+      snapshot,
+      imageUploadWarnings,
+    };
+  }
+  function findSnapshotRow(rows, field, value) {
+    const normalized = sanitizeText(value, "", 80);
+    return (Array.isArray(rows) ? rows : []).find(function (row) {
+      return sanitizeText(row?.[field], "", 80) === normalized;
+    }) || null;
+  }
+  function snapshotProductRows(snapshot, productIds) {
+    const ids = new Set(ensureStringArray(productIds));
+    return (snapshot?.products || []).filter(function (row) {
+      return ids.has(row?.id);
+    });
+  }
+  function snapshotProductAddOnRows(snapshot, productIds) {
+    const ids = new Set(ensureStringArray(productIds));
+    return (snapshot?.productAddOns || []).filter(function (row) {
+      return ids.has(row?.product_id);
+    });
+  }
+  async function publishProductAddOnRowsForProducts(tables, snapshot, productIds) {
+    const ids = ensureStringArray(productIds).filter(Boolean);
+    if (!ids.length) {
+      return;
     }
 
-    if (!allowEmpty && (!snapshot?.categories?.length || !snapshot?.products?.length)) {
-      throw new Error("Cadastre pelo menos uma categoria e um produto antes de publicar.");
+    await deleteCloudRowsSafely(tables.productAddOns, "product_id", "in", ids);
+    await upsertCloudRows(tables.productAddOns, snapshotProductAddOnRows(snapshot, ids), ["product_id", "add_on_id"]);
+  }
+  async function publishCloudProductChange(change, publication) {
+    const productId = sanitizeText(change?.id || change?.productId, "", 80);
+    if (!productId) {
+      throw new Error("Produto sem ID para publicacao online.");
     }
+
+    if (change?.action === "delete") {
+      await deleteCloudRowsSafely(publication?.tables?.productAddOns, "product_id", "in", [productId]);
+      await deleteCloudRowsSafely(publication?.tables?.products, "id", "in", [productId]);
+      return publication;
+    }
+
+    const productRow = findSnapshotRow(publication?.snapshot?.products, "id", productId);
+    if (!productRow) {
+      throw new Error("Produto nao encontrado no snapshot de publicacao online.");
+    }
+
+    await upsertCloudRows(publication?.tables?.products, [productRow], ["id"]);
+    if (change?.addOnsChanged !== false) {
+      await publishProductAddOnRowsForProducts(publication?.tables, publication?.snapshot, [productId]);
+    }
+    return publication;
+  }
+  async function publishCloudCategoryChange(change, publication) {
+    const slug = sanitizeText(change?.slug || change?.id, "", 80);
+    const previousSlug = sanitizeText(change?.previousSlug, "", 80);
+    const affectedProductIds = ensureStringArray(change?.affectedProductIds);
+
+    if (!slug) {
+      throw new Error("Categoria sem slug para publicacao online.");
+    }
+
+    if (change?.action === "delete") {
+      await upsertCloudRows(publication?.tables?.products, snapshotProductRows(publication?.snapshot, affectedProductIds), ["id"]);
+      await deleteCloudRowsSafely(publication?.tables?.categories, "slug", "in", [slug]);
+      return publication;
+    }
+
+    const categoryRow = findSnapshotRow(publication?.snapshot?.categories, "slug", slug);
+    if (!categoryRow) {
+      throw new Error("Categoria nao encontrada no snapshot de publicacao online.");
+    }
+
+    await upsertCloudRows(publication?.tables?.categories, [categoryRow], ["slug"]);
+    await upsertCloudRows(publication?.tables?.products, snapshotProductRows(publication?.snapshot, affectedProductIds), ["id"]);
+    if (previousSlug && previousSlug !== slug) {
+      await deleteCloudRowsSafely(publication?.tables?.categories, "slug", "in", [previousSlug]);
+    }
+    return publication;
+  }
+  async function publishCloudAddOnChange(change, publication) {
+    const addOnId = sanitizeText(change?.id || change?.addOnId, "", 80);
+    const previousId = sanitizeText(change?.previousId, "", 80);
+    const affectedProductIds = ensureStringArray(change?.affectedProductIds);
+
+    if (!addOnId && !previousId) {
+      throw new Error("Adicional sem ID para publicacao online.");
+    }
+
+    if (change?.action === "delete") {
+      await deleteCloudRowsSafely(publication?.tables?.productAddOns, "add_on_id", "in", [previousId || addOnId]);
+      await deleteCloudRowsSafely(publication?.tables?.addOns, "id", "in", [previousId || addOnId]);
+      return publication;
+    }
+
+    const addOnRow = findSnapshotRow(publication?.snapshot?.addOns, "id", addOnId);
+    if (!addOnRow) {
+      throw new Error("Adicional nao encontrado no snapshot de publicacao online.");
+    }
+
+    await upsertCloudRows(publication?.tables?.addOns, [addOnRow], ["id"]);
+    if (previousId && previousId !== addOnId) {
+      await deleteCloudRowsSafely(publication?.tables?.productAddOns, "add_on_id", "in", [previousId]);
+      await publishProductAddOnRowsForProducts(publication?.tables, publication?.snapshot, affectedProductIds);
+      await deleteCloudRowsSafely(publication?.tables?.addOns, "id", "in", [previousId]);
+    }
+    return publication;
+  }
+  async function publishCloudSettingsChange(change, publication) {
+    const keys = ensureStringArray(change?.keys);
+    await saveMenuSettingsOnline(
+      publication?.states?.brandConfig,
+      publication?.cloudConfig,
+      publication?.preparedMenuState,
+      { keys: keys.length ? keys : publicMenuSettingsKeys() }
+    );
+    return publication;
+  }
+  function publicMenuSettingsKeys() {
+    return ["store", "whatsapp", "pix", "theme", "legal", "delivery", "business_hours", "order_message"];
+  }
+  async function publishAdminChange(change) {
+    // ONLINE | Um salvamento comum publica so o dominio alterado; a republicacao completa fica para o botao manual.
+    const type = sanitizeText(change?.type, "", 40);
+    if (!type) {
+      throw new Error("Tipo de publicacao online nao informado.");
+    }
+    if (type === "full") {
+      return replaceCloudCatalog(change);
+    }
+
+    if (type === "settings") {
+      const states = getStates();
+      const keys = ensureStringArray(change?.keys);
+      await saveMenuSettingsOnline(
+        states?.brandConfig,
+        states?.cloudConfig,
+        states?.menuState,
+        { keys: keys.length ? keys : publicMenuSettingsKeys() }
+      );
+      return {
+        cloudConfig: getStates()?.cloudConfig,
+        snapshot: null,
+        imageUploadWarnings: [],
+      };
+    }
+
+    const publication = await prepareCloudCatalogPublication(change);
+    let result = publication;
+
+    if (type === "product") {
+      result = await publishCloudProductChange(change, publication);
+    } else if (type === "category") {
+      result = await publishCloudCategoryChange(change, publication);
+    } else if (type === "add-on") {
+      result = await publishCloudAddOnChange(change, publication);
+    } else if (type === "combo") {
+      result = await publishCloudSettingsChange({ ...change, keys: ["offers"] }, publication);
+    } else {
+      throw new Error("Tipo de publicacao online desconhecido: " + type + ".");
+    }
+
+    persistPreparedMenuState(result?.preparedMenuState);
+
+    return {
+      cloudConfig: getStates()?.cloudConfig,
+      snapshot: result?.snapshot,
+      imageUploadWarnings: result?.imageUploadWarnings || [],
+    };
+  }
+  async function replaceCloudCatalog(options) {
+    const publication = await prepareCloudCatalogPublication(options);
+    const tables = publication?.tables;
+    const snapshot = publication?.snapshot;
 
     await upsertCloudRows(tables.categories, snapshot.categories, ["slug"]);
     await upsertCloudRows(tables.addOns, snapshot.addOns, ["id"]);
@@ -3777,14 +3972,14 @@
       snapshot.categories.map((category) => category?.slug)
     );
 
-    await saveMenuSettingsOnline(states?.brandConfig, cloudConfig, preparedMenuState);
+    await saveMenuSettingsOnline(publication?.states?.brandConfig, publication?.cloudConfig, publication?.preparedMenuState);
     await checkCloudConnection();
     await syncCloudToLocal();
 
     return {
       cloudConfig: getStates()?.cloudConfig,
       snapshot,
-      imageUploadWarnings,
+      imageUploadWarnings: publication?.imageUploadWarnings,
     };
   }
   function downloadJsonFile(filename, data) {
@@ -3857,6 +4052,7 @@
     saveCloudOperationalSettings,
     syncCloudToLocal,
     loadCloudCatalog,
+    publishAdminChange,
     replaceCloudCatalog,
     buildCloudCatalogSnapshot,
     downloadJsonFile,
