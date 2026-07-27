@@ -1223,7 +1223,7 @@
       return;
     }
 
-    refreshCloudCatalogSilently({ notify: true })?.then(function () {
+    refreshCloudCatalogSilently({ notify: false })?.then(function () {
       state.ignoreRealtimeUntil = Date.now() + 1500;
       startRealtimeSubscription();
     });

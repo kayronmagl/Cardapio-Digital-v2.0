@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark" data-theme-preset="tobias-lanches">
 
 <head>
   <meta charset="UTF-8">
@@ -8,10 +8,23 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description"
     content="Painel administrativo oficial do Tobia's Lanches para gerenciamento do cardápio online.">
-  <meta name="theme-color" content="#17120d">
+  <meta name="theme-color" content="#030303">
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'">
   <title>Painel - Tobia's Lanches</title>
+  <style>
+    html {
+      color-scheme: dark;
+      background: #030303;
+      color: #fffdf4;
+    }
+
+    body {
+      margin: 0;
+      background: #030303;
+      color: #fffdf4;
+    }
+  </style>
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./assets/favicon.png">
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
@@ -21,7 +34,7 @@
     href="https://fonts.gstatic.com/s/bebasneue/v16/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400..800&display=block"
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400..800&display=optional"
     rel="stylesheet">
   <link rel="stylesheet" href="./dist/styles.css?v=2.0.29">
 </head>

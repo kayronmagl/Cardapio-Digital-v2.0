@@ -135,6 +135,12 @@
   --admin-legenda-campo-tamanho: clamp(1.06rem, 0.94rem + 0.45vw, 1.28rem);
   --admin-titulo-configuracoes-tamanho: clamp(1.45rem, 1.08rem + 1.2vw, 1.9rem);
   --admin-legenda-configuracoes-tamanho: clamp(1.18rem, 0.98rem + 0.7vw, 1.42rem);
+  --admin-contorno: var(--borda-suave);
+  --admin-realce-suave: var(--cor-primaria-suave);
+  --admin-superficie-cartao: linear-gradient(180deg, var(--superficie-brilho), transparent 100%), var(--superficie-elevada);
+  --admin-superficie-secao: color-mix(in srgb, var(--cor-superficie) 88%, transparent);
+  --admin-superficie-campo: var(--superficie-elevada);
+  --admin-superficie-nav: color-mix(in srgb, var(--cor-superficie) 78%, transparent);
 }
 
 /* TEMA | Troca as variaveis para o modo escuro. A estrutura continua igual, mas fundo, texto, bordas e sombras mudam para leitura em fundo escuro. */
@@ -300,6 +306,19 @@
   --erro: #f2a6a0;
   --sucesso: #8fd4a8;
   --aviso-texto: var(--cor-primaria-interacao);
+  --admin-contorno: rgba(var(--cor-primaria-rgb), 0.18);
+  --admin-realce-suave: rgba(var(--cor-primaria-rgb), 0.055);
+  --admin-superficie-cartao:
+    linear-gradient(135deg, rgba(var(--cor-primaria-rgb), 0.045), transparent 44%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.052), transparent 100%),
+    color-mix(in srgb, var(--cor-superficie) 76%, var(--cor-fundo) 24%);
+  --admin-superficie-secao:
+    linear-gradient(180deg, rgba(var(--cor-primaria-rgb), 0.035), transparent 100%),
+    color-mix(in srgb, var(--cor-superficie) 68%, var(--cor-fundo) 32%);
+  --admin-superficie-campo: color-mix(in srgb, var(--cor-superficie) 78%, var(--cor-fundo) 22%);
+  --admin-superficie-nav:
+    linear-gradient(90deg, rgba(var(--cor-primaria-rgb), 0.04), transparent 62%),
+    color-mix(in srgb, var(--cor-superficie) 70%, var(--cor-fundo) 30%);
 }
 
 /* TEMA | Preset escuro premium. Ele muda a sensacao visual para algo mais elegante, mantendo textos, cards e botoes legiveis. */
@@ -3526,8 +3545,8 @@ body {
 .barra-mobile,
 .admin-card,
 .admin-product-card {
-  background: linear-gradient(180deg, var(--superficie-brilho), transparent 100%), var(--superficie-elevada);
-  border-color: var(--borda-suave);
+  background: var(--admin-superficie-cartao);
+  border-color: var(--admin-contorno);
 }
 
 .destaque-inicial,
@@ -3579,9 +3598,9 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 .admin-form input,
 .admin-form select,
 .admin-form textarea {
-  background: var(--superficie-elevada);
+  background: var(--admin-superficie-campo);
   color: var(--cinza);
-  border-color: var(--borda-media);
+  border-color: var(--admin-contorno);
 }
 
 .botao-principal,
@@ -4126,8 +4145,9 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 .admin-fieldset {
   margin: 0;
   padding: 0.85rem 1rem 1rem;
-  border: 1px solid var(--borda-suave);
+  border: 1px solid var(--admin-contorno);
   border-radius: var(--raio-medio);
+  background: var(--admin-superficie-secao);
 }
 
 .admin-fieldset + .admin-fieldset {
@@ -4169,9 +4189,9 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   gap: 0.45rem;
   margin: 0.35rem 0 0.75rem;
   padding: 0.55rem;
-  border: 1px solid var(--borda-suave);
+  border: 1px solid var(--admin-contorno);
   border-radius: var(--raio-medio);
-  background: color-mix(in srgb, var(--cor-superficie) 78%, transparent);
+  background: var(--admin-superficie-nav);
 }
 
 .admin-settings-nav a,
@@ -4181,9 +4201,9 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   justify-content: center;
   min-height: 36px;
   padding: 0.42rem 0.68rem;
-  border: 1px solid var(--borda-suave);
+  border: 1px solid var(--admin-contorno);
   border-radius: var(--raio-pilula);
-  background: var(--superficie-elevada);
+  background: var(--admin-superficie-campo);
   color: var(--cinza);
   font: inherit;
   font-size: 0.84rem;
@@ -4213,7 +4233,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 }
 
 .admin-settings-section {
-  background: color-mix(in srgb, var(--cor-superficie) 88%, transparent);
+  background: var(--admin-superficie-secao);
 }
 
 .admin-settings-stack {
@@ -4620,8 +4640,8 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   height: 100%;
   padding: 0.95rem;
   border-radius: var(--raio-grande);
-  border: 1px solid var(--borda-media);
-  background: linear-gradient(180deg, var(--superficie-brilho), transparent 100%), var(--superficie-elevada);
+  border: 1px solid var(--admin-contorno);
+  background: var(--admin-superficie-cartao);
   box-shadow: 0 14px 32px color-mix(in srgb, var(--cor-sombra) 30%, transparent);
   cursor: pointer;
   transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
@@ -5783,8 +5803,8 @@ body.admin-page .admin-topbar-actions .idioma-seletor:focus-visible {
   gap: 0.4rem;
   padding: 0.9rem 1rem;
   border-radius: var(--raio-grande);
-  border: 1px solid var(--borda-suave);
-  background: var(--superficie-elevada);
+  border: 1px solid var(--admin-contorno);
+  background: var(--admin-superficie-cartao);
 }
 
 .admin-cloud-primary-grid {
@@ -7528,16 +7548,14 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
 
 .admin-cloud-card--status,
 .admin-cloud-card--actions {
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 90%, transparent), transparent 100%),
-    color-mix(in srgb, var(--superficie-elevada) 96%, transparent);
+  background: var(--admin-superficie-cartao);
 }
 
 .admin-cloud-status-card {
   gap: 0.55rem;
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--amarelo) 8%, transparent), transparent 100%),
-    var(--superficie-elevada);
+    var(--admin-superficie-campo);
 }
 
 @media (max-width: 1179px) {
@@ -7552,10 +7570,8 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
 
 .admin-cloud-action-item {
   gap: 0.7rem;
-  border-color: color-mix(in srgb, var(--borda-suave) 92%, transparent);
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 92%, transparent), transparent 100%),
-    var(--superficie-elevada);
+  border-color: color-mix(in srgb, var(--admin-contorno) 92%, transparent);
+  background: var(--admin-superficie-secao);
 }
 
 .admin-cloud-action-item--primary {
@@ -7566,8 +7582,8 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
 .admin-cloud-form {
   padding: 1rem;
   border-radius: var(--raio-grande);
-  border: 1px solid var(--borda-suave);
-  background: color-mix(in srgb, var(--superficie-elevada) 92%, transparent);
+  border: 1px solid var(--admin-contorno);
+  background: var(--admin-superficie-secao);
 }
 
 .admin-actions-row--cloud {
@@ -13649,17 +13665,20 @@ body.page-transition-arrive {
 .page-transition-overlay {
   position: fixed;
   inset: 0;
+  width: 100dvw;
+  min-height: 100dvh;
   z-index: var(--camada-transicao-pagina);
   display: grid;
   place-items: center;
-  padding: 22px;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, var(--espaco-seguro-inferior)) max(16px, env(safe-area-inset-left));
+  overflow: hidden;
   pointer-events: none;
   opacity: 0;
   background:
-    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--amarelo) 8%, transparent), transparent 28%),
-    color-mix(in srgb, var(--cor-fundo) 66%, transparent);
-  backdrop-filter: blur(8px) saturate(1.04);
-  -webkit-backdrop-filter: blur(8px) saturate(1.04);
+    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--amarelo) 7%, transparent), transparent 30%),
+    color-mix(in srgb, var(--cor-fundo) 90%, #000000 10%);
+  backdrop-filter: blur(4px) saturate(1.02);
+  -webkit-backdrop-filter: blur(4px) saturate(1.02);
   transition: opacity 140ms ease;
 }
 
@@ -13669,12 +13688,13 @@ body.page-transition-arrive {
 }
 
 .page-transition-card {
-  width: min(320px, 100%);
-  min-height: 136px;
+  width: min(21rem, calc(100dvw - 32px));
+  min-height: clamp(112px, 23dvh, 138px);
+  max-height: calc(100dvh - 32px);
   display: grid;
   gap: 12px;
   align-content: center;
-  padding: 22px;
+  padding: clamp(1rem, 3.8vw, 1.38rem);
   border: 1px solid color-mix(in srgb, var(--borda-media) 58%, var(--amarelo) 18%);
   border-radius: var(--raio-grande);
   background:
@@ -13710,6 +13730,7 @@ body.page-transition-arrive {
   font-weight: var(--peso-pesado);
   letter-spacing: 0;
   line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .page-transition-loader {
@@ -15604,52 +15625,6 @@ body.admin-page .admin-offer-thumb {
   border-radius: var(--raio-medio);
 }
 
-.page-transition-overlay {
-  width: 100dvw;
-  min-height: 100dvh;
-  place-items: center;
-  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, var(--espaco-seguro-inferior)) max(16px, env(safe-area-inset-left));
-  overflow: hidden;
-}
-
-.page-transition-card {
-  width: min(21rem, calc(100dvw - 32px));
-  min-height: clamp(112px, 23dvh, 138px);
-  max-height: calc(100dvh - 32px);
-  padding: clamp(1rem, 3.8vw, 1.38rem);
-}
-
-.page-transition-title {
-  overflow-wrap: anywhere;
-}
-
-.page-transition-loader {
-  justify-self: center;
-  width: clamp(2rem, 7.8vw, 2.55rem);
-  height: clamp(2rem, 7.8vw, 2.55rem);
-  border-width: 2px;
-  border-color: color-mix(in srgb, var(--borda-media) 56%, transparent);
-  border-top-color: color-mix(in srgb, var(--amarelo) 88%, var(--texto-quente) 12%);
-  border-radius: var(--raio-pilula);
-  background:
-    radial-gradient(circle, color-mix(in srgb, var(--superficie-brilho) 22%, transparent), transparent 62%),
-    color-mix(in srgb, var(--cor-superficie-forte) 42%, transparent);
-  box-shadow:
-    0 8px 18px color-mix(in srgb, var(--cor-sombra) 12%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 16%, transparent);
-  animation: page-transition-spin 960ms linear infinite;
-}
-
-.page-transition-loader span {
-  display: none;
-}
-
-@keyframes page-transition-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @media (max-width: 430px) {
   body.admin-page .admin-delivery-location-summary {
     min-height: 54px;
@@ -15675,12 +15650,6 @@ body.admin-page .admin-offer-thumb {
     width: 52px;
     height: 52px;
     border-radius: var(--raio-entre-medio);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .page-transition-loader {
-    animation: none !important;
   }
 }
 
@@ -17102,16 +17071,6 @@ body.admin-page #settings-appearance .admin-theme-card {
 
 .oferta-card:hover .oferta-imagem {
   filter: none;
-}
-
-.page-transition-loader,
-.page-transition-loader span {
-  box-shadow: none;
-}
-
-.page-transition-loader,
-.page-transition-loader span {
-  animation-duration: 1080ms;
 }
 
 .fundo-escuro,
