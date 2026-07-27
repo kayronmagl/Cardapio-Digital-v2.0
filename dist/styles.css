@@ -85,6 +85,18 @@
   --contorno-superficie: color-mix(in srgb, var(--cor-borda-media) 82%, transparent);
   --janela-fundo-inicio: color-mix(in srgb, var(--cor-superficie) 96%, var(--cor-fundo-alternativo) 4%);
   --janela-fundo-fim: color-mix(in srgb, var(--cor-superficie-forte) 84%, var(--cor-fundo) 16%);
+  --carrinho-borda-destaque: color-mix(in srgb, var(--cor-primaria) 20%, var(--borda-media));
+  --carrinho-borda-suave: color-mix(in srgb, var(--cor-primaria) 16%, var(--borda-media));
+  --carrinho-realce-suave: color-mix(in srgb, var(--cor-primaria) 8%, transparent);
+  --carrinho-texto-titulo: color-mix(in srgb, var(--cor-texto) 76%, var(--cor-primaria) 24%);
+  --carrinho-texto-corpo: color-mix(in srgb, var(--cor-texto) 88%, #ffffff 12%);
+  --carrinho-texto-suave: color-mix(in srgb, var(--cor-texto-suave) 82%, var(--cor-texto) 18%);
+  --carrinho-fundo-janela: linear-gradient(180deg, var(--janela-fundo-inicio), var(--janela-fundo-fim));
+  --carrinho-fundo-resumo: linear-gradient(90deg, var(--carrinho-realce-suave), transparent 42%), color-mix(in srgb, var(--superficie-elevada) 84%, var(--cor-superficie-forte) 16%);
+  --carrinho-fundo-cartao: linear-gradient(90deg, color-mix(in srgb, var(--cor-primaria) 5%, transparent), transparent 44%), color-mix(in srgb, var(--superficie-suave) 84%, var(--cor-superficie-forte) 16%);
+  --carrinho-fundo-item: color-mix(in srgb, var(--superficie-elevada) 70%, var(--cor-superficie-forte) 30%);
+  --carrinho-fundo-controle: color-mix(in srgb, var(--superficie-elevada) 80%, var(--cor-superficie-forte) 20%);
+  --carrinho-fundo-controle-interacao: color-mix(in srgb, var(--cor-primaria) 14%, var(--superficie-elevada));
   --cor-sugestao-campo: color-mix(in srgb, var(--cor-texto-suave) 76%, transparent);
   --texto-quente: var(--cor-primaria);
   --texto-neutro: var(--cor-texto);
@@ -227,48 +239,67 @@
   --cor-contraste-destaque: #17212d;
 }
 
-/* TEMA | Preset completo do Tobias Lanches. Ele combina fundo escuro, amarelo forte e contraste alto para deixar o cardapio publico pronto para essa marca. */
+/* TEMA | Preset completo do Tobias Lanches. Ele segue o preto, amarelo dourado e branco do logo para manter o cardapio alinhado com a marca. */
 [data-theme-preset="tobias-lanches"] {
-  --cor-primaria: #ffc400;
-  --cor-primaria-interacao: #ffdc3d;
-  --cor-primaria-suave: rgba(255, 196, 0, 0.2);
-  --cor-fundo: #050505;
-  --cor-fundo-alternativo: #0b0904;
-  --cor-superficie: #12100a;
-  --cor-superficie-forte: #1d1708;
-  --cor-texto: #fff8e8;
-  --cor-texto-suave: #d8caa7;
+  --cor-primaria: #ffc000;
+  --cor-primaria-rgb: 255, 192, 0;
+  --cor-primaria-interacao: #ffd23a;
+  --cor-primaria-suave: rgba(var(--cor-primaria-rgb), 0.16);
+  --cor-fundo: #030303;
+  --cor-fundo-alternativo: #080806;
+  --cor-superficie: #10100c;
+  --cor-superficie-forte: #181507;
+  --cor-texto: #fffdf4;
+  --cor-texto-suave: #d8cfb6;
   --cor-sobre-escuro: #fffdf4;
-  --cor-sobre-escuro-suave: #efe3be;
-  --cor-sobre-escuro-sutil: #b9a979;
+  --cor-sobre-escuro-suave: #f0e7c8;
+  --cor-sobre-escuro-sutil: #b8ac82;
   --cor-borda-suave: rgba(255, 255, 255, 0.08);
-  --cor-borda-media: rgba(255, 196, 0, 0.3);
-  --cor-foco: #ffe05c;
-  --cor-anel-foco: rgba(255, 196, 0, 0.32);
+  --cor-borda-media: rgba(var(--cor-primaria-rgb), 0.26);
+  --cor-foco: #ffd23a;
+  --cor-anel-foco: rgba(var(--cor-primaria-rgb), 0.24);
   --cor-sobreposicao: rgba(0, 0, 0, 0.86);
   --cor-sombra: 0 24px 56px rgba(0, 0, 0, 0.56);
-  --cor-contraste-destaque: #080805;
-  --cor-brilho-fundo-a: rgba(255, 196, 0, 0.13);
-  --cor-brilho-fundo-b: rgba(255, 224, 92, 0.07);
-  --cor-painel-destaque: #ffd21a;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #ffc400 10%, #1d1708 90%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #ffc400 6%, #12100a 94%);
-  --cor-painel-fundo-fim: #050505;
-  --cor-painel-sobreposicao: rgba(255, 196, 0, 0.11);
-  --cor-painel-selo-fundo: rgba(29, 23, 8, 0.78);
-  --cor-painel-selo-borda: rgba(255, 196, 0, 0.26);
-  --cor-painel-bloco-fundo: rgba(18, 16, 10, 0.76);
-  --cor-painel-bloco-borda: rgba(255, 196, 0, 0.2);
-  --cor-barra-celular-fundo: color-mix(in srgb, #12100a 94%, #050505 6%);
+  --cor-contraste-destaque: #050504;
+  --cor-brilho-fundo-a: rgba(var(--cor-primaria-rgb), 0.1);
+  --cor-brilho-fundo-b: rgba(255, 255, 255, 0.045);
+  --cor-painel-destaque: var(--cor-primaria);
+  --cor-painel-fundo-inicio: color-mix(in srgb, var(--cor-primaria) 9%, var(--cor-superficie-forte) 91%);
+  --cor-painel-fundo-meio: color-mix(in srgb, var(--cor-primaria) 5%, var(--cor-superficie) 95%);
+  --cor-painel-fundo-fim: var(--cor-fundo);
+  --cor-painel-sobreposicao: rgba(var(--cor-primaria-rgb), 0.09);
+  --cor-painel-selo-fundo: rgba(24, 21, 7, 0.78);
+  --cor-painel-selo-borda: rgba(var(--cor-primaria-rgb), 0.22);
+  --cor-painel-bloco-fundo: rgba(16, 16, 12, 0.76);
+  --cor-painel-bloco-borda: rgba(var(--cor-primaria-rgb), 0.18);
+  --cor-barra-celular-fundo: color-mix(in srgb, var(--cor-superficie) 94%, var(--cor-fundo) 6%);
   --superficie-brilho: rgba(255, 255, 255, 0.055);
   --superficie-suave: color-mix(in srgb, var(--cor-superficie) 88%, var(--cor-fundo) 12%);
   --superficie-suave-interacao: color-mix(in srgb, var(--cor-superficie-forte) 76%, var(--cor-fundo) 24%);
   --superficie-neutra: color-mix(in srgb, var(--cor-superficie-forte) 82%, var(--cor-fundo) 18%);
   --janela-fundo-inicio: color-mix(in srgb, var(--cor-superficie-forte) 90%, var(--cor-fundo-alternativo) 10%);
   --janela-fundo-fim: color-mix(in srgb, var(--cor-superficie) 88%, var(--cor-fundo) 12%);
+  --carrinho-borda-destaque: rgba(var(--cor-primaria-rgb), 0.22);
+  --carrinho-borda-suave: rgba(var(--cor-primaria-rgb), 0.15);
+  --carrinho-realce-suave: rgba(var(--cor-primaria-rgb), 0.07);
+  --carrinho-texto-titulo: color-mix(in srgb, var(--cor-sobre-escuro) 70%, var(--cor-primaria) 30%);
+  --carrinho-texto-corpo: var(--cor-sobre-escuro-suave);
+  --carrinho-texto-suave: var(--cor-sobre-escuro-sutil);
+  --carrinho-fundo-janela:
+    linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 18%, transparent), transparent 30%),
+    linear-gradient(180deg, color-mix(in srgb, var(--cor-superficie) 82%, var(--cor-fundo) 18%), color-mix(in srgb, var(--cor-superficie-forte) 84%, var(--cor-fundo) 16%));
+  --carrinho-fundo-resumo:
+    linear-gradient(90deg, var(--carrinho-realce-suave), transparent 42%),
+    color-mix(in srgb, var(--cor-superficie) 84%, var(--cor-superficie-forte) 16%);
+  --carrinho-fundo-cartao:
+    linear-gradient(90deg, color-mix(in srgb, var(--cor-primaria) 4%, transparent), transparent 44%),
+    color-mix(in srgb, var(--cor-superficie) 84%, var(--cor-superficie-forte) 16%);
+  --carrinho-fundo-item: color-mix(in srgb, var(--cor-superficie) 72%, var(--cor-superficie-forte) 28%);
+  --carrinho-fundo-controle: color-mix(in srgb, var(--cor-superficie) 78%, var(--cor-superficie-forte) 22%);
+  --carrinho-fundo-controle-interacao: color-mix(in srgb, var(--cor-primaria) 10%, var(--cor-superficie));
   --erro: #f2a6a0;
   --sucesso: #8fd4a8;
-  --aviso-texto: #ffdc3d;
+  --aviso-texto: var(--cor-primaria-interacao);
 }
 
 /* TEMA | Preset escuro premium. Ele muda a sensacao visual para algo mais elegante, mantendo textos, cards e botoes legiveis. */
@@ -9113,7 +9144,7 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
 
 .topo-blocos .destaque-subtitulo,
 .topo-blocos .destaque-inicial--without-image .destaque-subtitulo {
-  margin-top: 0.46rem;
+  margin-top: 0.32rem;
   width: 100%;
   max-width: 100%;
   padding-bottom: 0.58rem;
@@ -13269,10 +13300,8 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 
 /* CARRINHO | Organiza o formulario dentro do carrinho para entrega, pagamento e observacoes ficarem em etapas. */
 #caixaCarrinho .caixa-carrinho {
-  border-color: color-mix(in srgb, var(--amarelo) 20%, var(--borda-media));
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 26%, transparent), transparent 30%),
-    linear-gradient(180deg, color-mix(in srgb, var(--superficie-suave) 72%, var(--janela-fundo-inicio) 28%), color-mix(in srgb, var(--cor-superficie-forte) 82%, var(--janela-fundo-fim) 18%));
+  border-color: var(--carrinho-borda-destaque);
+  background: var(--carrinho-fundo-janela);
   box-shadow:
     0 24px 64px color-mix(in srgb, var(--cor-sombra) 30%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 18%, transparent);
@@ -13282,39 +13311,35 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 #caixaCarrinho .bloco-form-intro,
 #caixaCarrinho .ajuda-texto,
 #caixaCarrinho .aviso {
-  color: color-mix(in srgb, var(--cinza) 72%, #ffffff 28%);
+  color: var(--carrinho-texto-suave);
 }
 
 #caixaCarrinho .resumo-topo-carrinho {
-  border-color: color-mix(in srgb, var(--amarelo) 18%, var(--borda-media));
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--amarelo) 11%, transparent), transparent 42%),
-    linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 32%, transparent), transparent 112%),
-    color-mix(in srgb, var(--superficie-elevada) 84%, var(--cor-superficie-forte) 16%);
+  border-color: var(--carrinho-borda-destaque);
+  background: var(--carrinho-fundo-resumo);
   box-shadow:
-    inset 3px 0 0 color-mix(in srgb, var(--amarelo) 58%, transparent),
+    inset 3px 0 0 color-mix(in srgb, var(--cor-primaria) 48%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 18%, transparent),
     0 10px 22px color-mix(in srgb, var(--cor-sombra) 12%, transparent);
 }
 
 #caixaCarrinho #resumoTopoItens {
-  color: color-mix(in srgb, var(--cinza) 90%, #ffffff 10%);
+  color: var(--carrinho-texto-corpo);
   font-weight: var(--peso-negrito-reforcado);
+  overflow-wrap: anywhere;
 }
 
 #caixaCarrinho #resumoTopoSubtotal {
   color: var(--texto-quente);
   font-weight: var(--peso-pesado);
+  overflow-wrap: anywhere;
 }
 
 #caixaCarrinho .cart-card,
 #caixaCarrinho .bloco-form,
 #caixaCarrinho .resumo-confirmacao {
-  border-color: color-mix(in srgb, var(--amarelo) 16%, var(--borda-media));
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--amarelo) 5%, transparent), transparent 44%),
-    linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 38%, transparent), transparent 108%),
-    color-mix(in srgb, var(--superficie-suave) 84%, var(--cor-superficie-forte) 16%);
+  border-color: var(--carrinho-borda-suave);
+  background: var(--carrinho-fundo-cartao);
   box-shadow:
     0 12px 24px color-mix(in srgb, var(--cor-sombra) 10%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 16%, transparent);
@@ -13322,7 +13347,22 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 
 #caixaCarrinho .cart-section-title,
 #caixaCarrinho .bloco-form legend {
-  color: color-mix(in srgb, #fff1c7 72%, var(--amarelo) 28%);
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  color: var(--carrinho-texto-titulo);
+  text-transform: uppercase;
+}
+
+#caixaCarrinho .cart-section-title::before,
+#caixaCarrinho .bloco-form legend::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  flex: 0 0 auto;
+  border-radius: var(--raio-pilula);
+  background: var(--cor-primaria);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-primaria) 12%, transparent);
 }
 
 #caixaCarrinho .bloco-form label,
@@ -13330,55 +13370,64 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 #caixaCarrinho .checkbox-linha,
 #caixaCarrinho .pix-card,
 #caixaCarrinho .checkout-coordinate-label {
-  color: color-mix(in srgb, var(--cinza) 88%, #ffffff 12%);
+  color: var(--carrinho-texto-corpo);
 }
 
 #caixaCarrinho .item-carrinho {
-  border-color: color-mix(in srgb, var(--amarelo) 14%, var(--borda-media));
+  border-color: var(--carrinho-borda-suave);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 26%, transparent), transparent 110%),
-    color-mix(in srgb, var(--superficie-elevada) 70%, var(--cor-superficie-forte) 30%);
+    var(--carrinho-fundo-item);
   box-shadow:
     0 8px 18px color-mix(in srgb, var(--cor-sombra) 9%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 14%, transparent);
 }
 
 #caixaCarrinho .item-nome {
-  color: var(--cinza);
+  color: var(--carrinho-texto-corpo);
+  overflow-wrap: anywhere;
 }
 
 #caixaCarrinho .item-detalhes {
-  color: color-mix(in srgb, var(--cinza) 70%, #ffffff 30%);
+  color: var(--carrinho-texto-suave);
+  overflow-wrap: anywhere;
 }
 
 #caixaCarrinho .item-valor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.22rem 0.46rem;
+  border: 1px solid color-mix(in srgb, var(--cor-primaria) 22%, var(--carrinho-borda-suave));
+  border-radius: var(--raio-suave);
+  background: color-mix(in srgb, var(--cor-primaria) 6%, var(--carrinho-fundo-controle));
   color: var(--texto-quente);
   font-weight: var(--peso-pesado);
 }
 
 #caixaCarrinho .cart-qty,
 #caixaCarrinho .cart-qty-pill {
-  border-color: color-mix(in srgb, var(--amarelo) 16%, var(--borda-media));
+  border-color: var(--carrinho-borda-suave);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 22%, transparent), transparent 112%),
-    color-mix(in srgb, var(--superficie-elevada) 82%, var(--cor-superficie-forte) 18%);
+    var(--carrinho-fundo-controle);
 }
 
 #caixaCarrinho .cart-btn {
-  border-color: color-mix(in srgb, var(--amarelo) 12%, var(--borda-media));
+  border-color: var(--carrinho-borda-suave);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 22%, transparent), transparent 112%),
-    color-mix(in srgb, var(--superficie-elevada) 76%, var(--cor-superficie-forte) 24%);
-  color: color-mix(in srgb, var(--cinza) 92%, #ffffff 8%);
+    var(--carrinho-fundo-controle);
+  color: var(--carrinho-texto-corpo);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 14%, transparent);
 }
 
 #caixaCarrinho .cart-btn:hover,
 #caixaCarrinho .cart-btn:focus-visible {
-  border-color: color-mix(in srgb, var(--amarelo) 52%, var(--borda-media));
+  border-color: color-mix(in srgb, var(--cor-primaria) 46%, var(--borda-media));
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 24%, transparent), transparent 112%),
-    color-mix(in srgb, var(--amarelo) 14%, var(--superficie-elevada));
+    var(--carrinho-fundo-controle-interacao);
 }
 
 #caixaCarrinho .cart-btn--danger,
@@ -13402,49 +13451,56 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 }
 
 #caixaCarrinho .totais-carrinho {
-  border-color: color-mix(in srgb, var(--amarelo) 18%, var(--borda-media));
+  border-color: var(--carrinho-borda-destaque);
   background:
-    linear-gradient(90deg, color-mix(in srgb, var(--amarelo) 8%, transparent), transparent 48%),
+    linear-gradient(90deg, var(--carrinho-realce-suave), transparent 48%),
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 30%, transparent), transparent 112%),
-    color-mix(in srgb, var(--superficie-elevada) 72%, var(--cor-superficie-forte) 28%);
+    var(--carrinho-fundo-item);
 }
 
 #caixaCarrinho .resumo-linha {
-  color: color-mix(in srgb, var(--cinza) 78%, #ffffff 22%);
+  border-color: color-mix(in srgb, var(--carrinho-borda-suave) 80%, transparent);
+  background: color-mix(in srgb, var(--carrinho-fundo-controle) 78%, transparent);
+  color: var(--carrinho-texto-suave);
 }
 
 #caixaCarrinho .resumo-linha strong,
 #caixaCarrinho #valorTotal strong {
   color: var(--texto-quente);
+  overflow-wrap: anywhere;
 }
 
 #caixaCarrinho #valorTotal {
-  border-color: color-mix(in srgb, var(--amarelo) 36%, var(--borda-media));
+  border-color: color-mix(in srgb, var(--cor-primaria) 32%, var(--carrinho-borda-destaque));
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 24%, transparent), transparent 110%),
-    color-mix(in srgb, var(--amarelo) 7%, var(--superficie-elevada));
+    var(--carrinho-fundo-controle-interacao);
   box-shadow:
     0 8px 18px color-mix(in srgb, var(--cor-sombra) 8%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 12%, transparent);
 }
 
+#caixaCarrinho #valorTotal span {
+  color: var(--carrinho-texto-corpo);
+}
+
 #caixaCarrinho .bloco-form input,
 #caixaCarrinho .bloco-form select,
 #caixaCarrinho .bloco-form textarea {
-  border-color: color-mix(in srgb, var(--amarelo) 14%, var(--borda-media));
+  border-color: var(--carrinho-borda-suave);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 18%, transparent), transparent 116%),
-    color-mix(in srgb, var(--superficie-elevada) 86%, var(--cor-superficie-forte) 14%);
+    var(--carrinho-fundo-controle);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 14%, transparent);
-  color: color-mix(in srgb, var(--cinza) 92%, #ffffff 8%);
+  color: var(--carrinho-texto-corpo);
 }
 
 #caixaCarrinho .bloco-form input:focus-visible,
 #caixaCarrinho .bloco-form select:focus-visible,
 #caixaCarrinho .bloco-form textarea:focus-visible {
-  border-color: color-mix(in srgb, var(--amarelo) 54%, var(--borda-media));
+  border-color: color-mix(in srgb, var(--cor-primaria) 48%, var(--borda-media));
   box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--amarelo) 16%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--cor-primaria) 12%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 12%, transparent);
 }
 
@@ -13452,18 +13508,18 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 #caixaCarrinho .checkbox-linha,
 #caixaCarrinho .pix-card,
 #caixaCarrinho .checkout-coordinate-group {
-  border-color: color-mix(in srgb, var(--amarelo) 14%, var(--borda-media));
+  border-color: var(--carrinho-borda-suave);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 22%, transparent), transparent 112%),
-    color-mix(in srgb, var(--superficie-elevada) 74%, var(--cor-superficie-forte) 26%);
+    var(--carrinho-fundo-controle);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 14%, transparent);
 }
 
 #caixaCarrinho .segmented-item.ativa {
-  border-color: color-mix(in srgb, var(--amarelo) 58%, var(--borda-media));
+  border-color: color-mix(in srgb, var(--cor-primaria) 50%, var(--borda-media));
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 20%, transparent), transparent 112%),
-    color-mix(in srgb, var(--amarelo) 18%, var(--superficie-elevada));
+    var(--carrinho-fundo-controle-interacao);
 }
 
 #caixaCarrinho .pix-titulo,
@@ -13472,9 +13528,9 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 }
 
 #caixaCarrinho .acoes-checkout {
-  border-color: color-mix(in srgb, var(--amarelo) 14%, var(--borda-media));
+  border-color: var(--carrinho-borda-suave);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--superficie-elevada) 82%, transparent), color-mix(in srgb, var(--cor-superficie-forte) 92%, transparent));
+    linear-gradient(180deg, color-mix(in srgb, var(--superficie-elevada) 78%, transparent), color-mix(in srgb, var(--cor-superficie-forte) 90%, transparent));
 }
 
 #caixaCarrinho .acoes-checkout .botao-principal {
@@ -13484,11 +13540,11 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 }
 
 #caixaCarrinho .acoes-checkout .botao-secundario {
-  border-color: color-mix(in srgb, var(--amarelo) 12%, var(--borda-media));
+  border-color: var(--carrinho-borda-suave);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 18%, transparent), transparent 112%),
-    color-mix(in srgb, var(--superficie-elevada) 78%, var(--cor-superficie-forte) 22%);
-  color: color-mix(in srgb, var(--cinza) 90%, #ffffff 10%);
+    var(--carrinho-fundo-controle);
+  color: var(--carrinho-texto-corpo);
 }
 
 .barra-mobile {
@@ -13555,10 +13611,10 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 }
 
 #caixaCarrinho #botaoCopiarPix.botao-secundario {
-  border-color: color-mix(in srgb, var(--amarelo) 82%, var(--borda-media));
+  border-color: color-mix(in srgb, var(--cor-primaria) 78%, var(--borda-media));
   background:
     linear-gradient(180deg, color-mix(in srgb, #ffffff 18%, transparent), transparent 96%),
-    var(--amarelo);
+    var(--cor-primaria);
   color: var(--cor-contraste-destaque);
   box-shadow:
     0 12px 26px color-mix(in srgb, var(--cor-sombra) 16%, transparent),
@@ -13570,7 +13626,7 @@ body.admin-page.admin-auth-screen-active #adminStatus {
   border-color: color-mix(in srgb, var(--cor-primaria-interacao) 82%, var(--borda-media));
   background:
     linear-gradient(180deg, color-mix(in srgb, #ffffff 20%, transparent), transparent 96%),
-    var(--amarelo-interacao);
+    var(--cor-primaria-interacao);
   color: var(--cor-contraste-destaque);
 }
 
@@ -16846,7 +16902,7 @@ html[data-theme-preset="tobias-lanches"] .logo-site {
   border-color: color-mix(in srgb, var(--cor-primaria) 52%, #000000 48%);
   box-shadow:
     0 12px 28px rgba(0, 0, 0, 0.31),
-    0 0 0 2px rgba(255, 196, 0, 0.1),
+    0 0 0 2px rgba(var(--cor-primaria-rgb), 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
@@ -16856,12 +16912,12 @@ html[data-theme-preset="tobias-lanches"] .titulo-site {
 }
 
 html[data-theme-preset="tobias-lanches"] .topo-blocos {
-  border-color: rgba(255, 196, 0, 0.34);
-  background-color: #060606;
+  border-color: rgba(var(--cor-primaria-rgb), 0.28);
+  background-color: var(--cor-fundo);
   background-image:
-    radial-gradient(circle at 9% 0%, rgba(255, 196, 0, 0.13), transparent 30%),
+    radial-gradient(circle at 9% 0%, rgba(var(--cor-primaria-rgb), 0.1), transparent 30%),
     radial-gradient(circle at 92% 4%, rgba(255, 255, 255, 0.045), transparent 32%),
-    linear-gradient(145deg, #121006 0%, #090806 48%, #030303 100%);
+    linear-gradient(145deg, var(--cor-superficie) 0%, var(--cor-fundo-alternativo) 48%, var(--cor-fundo) 100%);
   box-shadow:
     0 20px 48px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.065);
@@ -16870,7 +16926,7 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos {
 html[data-theme-preset="tobias-lanches"] .topo-blocos::before {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 54%),
-    radial-gradient(circle at 16% 18%, rgba(255, 196, 0, 0.08), transparent 30%);
+    radial-gradient(circle at 16% 18%, rgba(var(--cor-primaria-rgb), 0.07), transparent 30%);
 }
 
 
@@ -16889,7 +16945,7 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horar
 
 html[data-theme-preset="tobias-lanches"] .topo-blocos .destaque-info,
 html[data-theme-preset="tobias-lanches"] .topo-blocos .chip {
-  border-color: rgba(255, 196, 0, 0.24);
+  border-color: rgba(var(--cor-primaria-rgb), 0.2);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.052), transparent 112%),
     rgba(8, 8, 6, 0.68);
@@ -16902,7 +16958,7 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos .chip {
 html[data-theme-preset="tobias-lanches"] .topo-blocos .destaque-info-label,
 html[data-theme-preset="tobias-lanches"] .topo-blocos .rotulo-horario,
 html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .rotulo-horario {
-  color: #ffd84a;
+  color: var(--cor-primaria-interacao);
 }
 
 html[data-theme-preset="tobias-lanches"] .topo-blocos .destaque-info-value,
@@ -16914,13 +16970,13 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .detal
 
 html[data-theme-preset="tobias-lanches"] .topo-blocos .titulo-horario,
 html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .titulo-horario {
-  color: #ffc400;
+  color: var(--cor-primaria);
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.42);
 }
 
 html[data-theme-preset="tobias-lanches"] .topo-blocos .horario-bloco,
 html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horario-bloco {
-  border-color: rgba(255, 196, 0, 0.18);
+  border-color: rgba(var(--cor-primaria-rgb), 0.16);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 112%),
     rgba(8, 8, 6, 0.58);
@@ -16928,9 +16984,9 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horar
 
 html[data-theme-preset="tobias-lanches"] .topo-blocos .horario-bloco:first-child,
 html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horario-bloco:first-child {
-  border-color: rgba(255, 196, 0, 0.44);
+  border-color: rgba(var(--cor-primaria-rgb), 0.38);
   background:
-    linear-gradient(180deg, rgba(255, 196, 0, 0.09), transparent 116%),
+    linear-gradient(180deg, rgba(var(--cor-primaria-rgb), 0.08), transparent 116%),
     rgba(8, 8, 6, 0.7);
 }
 
@@ -17159,8 +17215,8 @@ body.admin-page .admin-mobile-form-save-bar {
 #caixaCarrinho .carrinho-cabecalho {
   display: grid;
   gap: 0.28rem;
-  min-height: 0;
-  padding-bottom: clamp(0.54rem, 0.9vw, 0.72rem);
+  min-height: 3.85rem;
+  padding-bottom: clamp(0.38rem, 0.7vw, 0.52rem);
 }
 
 #caixaCarrinho .carrinho-cabecalho > .titulo-caixa {
@@ -17259,7 +17315,11 @@ body.admin-page .admin-mobile-form-save-bar {
 
 #caixaCarrinho .resumo-linha,
 #caixaCarrinho #valorTotal {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
   gap: clamp(0.5rem, 1vw, 0.78rem);
+  min-width: 0;
 }
 
 #caixaCarrinho #formCliente {
@@ -17370,7 +17430,7 @@ body.admin-page .admin-mobile-form-save-bar {
   }
 
   #caixaCarrinho .carrinho-cabecalho {
-    min-height: 5.2rem;
+    min-height: 4.1rem;
     align-content: start;
   }
 
@@ -17489,6 +17549,30 @@ body.admin-page .admin-mobile-form-save-bar {
     white-space: normal;
   }
 
+  #caixaCarrinho .cart-card,
+  #caixaCarrinho .bloco-form,
+  #caixaCarrinho .item-carrinho,
+  #caixaCarrinho .totais-carrinho {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  #caixaCarrinho .resumo-linha,
+  #caixaCarrinho #valorTotal {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 0.28rem;
+  }
+
+  #caixaCarrinho .resumo-linha span,
+  #caixaCarrinho .resumo-linha strong,
+  #caixaCarrinho #valorTotal span,
+  #caixaCarrinho #valorTotal strong {
+    max-width: 100%;
+    justify-self: start;
+    text-align: left;
+  }
+
   #caixaCarrinho .item-linha {
     grid-template-columns: 1fr;
     gap: 0.34rem;
@@ -17501,11 +17585,26 @@ body.admin-page .admin-mobile-form-save-bar {
 
   #caixaCarrinho .cart-controls {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: 1fr;
   }
 
   #caixaCarrinho .cart-qty {
     justify-self: start;
+  }
+
+  #caixaCarrinho .cart-btn--danger {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #caixaCarrinho .acoes-checkout {
+    grid-template-columns: 1fr;
+  }
+
+  #caixaCarrinho .acoes-checkout #botaoFinalizar,
+  #caixaCarrinho .acoes-checkout #botaoLimparCarrinho,
+  #caixaCarrinho .acoes-checkout #botaoFechar {
+    grid-column: auto;
   }
 
   #caixaCarrinho .segmented,
@@ -17552,6 +17651,8 @@ body.admin-page .admin-mobile-form-save-bar {
 
 #caixaCarrinho .acoes-checkout .botao {
   border-radius: var(--raio-medio);
+  min-width: 0;
+  white-space: normal;
 }
 
 @media (max-width: 768px) {
@@ -17581,7 +17682,7 @@ body.admin-page .admin-mobile-form-save-bar {
 
 @media (max-width: 768px) {
   #caixaCarrinho .carrinho-cabecalho {
-    min-height: 5.2rem;
+    min-height: 4.05rem;
     align-content: start;
   }
 
@@ -17598,8 +17699,8 @@ body.admin-page .admin-mobile-form-save-bar {
 @media (max-width: 430px) {
   #caixaCarrinho .carrinho-cabecalho {
     gap: 0.3rem;
-    min-height: 5.65rem;
-    padding-bottom: 0.58rem;
+    min-height: 4.45rem;
+    padding-bottom: 0.42rem;
   }
 
   #caixaCarrinho #descricaoCarrinho {
