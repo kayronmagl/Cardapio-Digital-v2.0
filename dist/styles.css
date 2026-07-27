@@ -9724,10 +9724,11 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
 
 .topo-blocos .rotulo-horario,
 .topo-blocos--without-hero-image .rotulo-horario {
-  display: inline-flex;
+  display: inline-grid;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 0.42rem;
-  line-height: 1;
+  line-height: 1.12;
 }
 
 .topo-blocos .rotulo-horario::before,
@@ -9735,6 +9736,7 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
   content: "";
   width: 0.42rem;
   height: 0.42rem;
+  align-self: center;
   border-radius: var(--raio-pilula);
   background: currentColor;
   box-shadow: 0 0 0 0.18rem color-mix(in srgb, currentColor 15%, transparent);
@@ -12354,6 +12356,40 @@ body:not(.cart-has-items) .barra-mobile {
   .topo-blocos > .faixa-operacao {
     border-left-color: color-mix(in srgb, var(--cor-painel-bloco-borda) 28%, transparent);
   }
+
+  .topo-blocos .agenda-horario,
+  .topo-blocos--without-hero-image .agenda-horario {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.42rem;
+  }
+
+  .topo-blocos .agenda-horario li,
+  .topo-blocos--without-hero-image .agenda-horario li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    justify-content: stretch;
+    gap: 0.12rem;
+    min-height: 2.62rem;
+    padding: 0.44rem 0.52rem;
+    border: 1px solid color-mix(in srgb, var(--cor-painel-bloco-borda) 30%, transparent);
+    border-radius: var(--raio-entre-pequeno);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 12%, transparent), transparent 118%),
+      color-mix(in srgb, var(--cor-painel-bloco-fundo) 18%, transparent);
+  }
+
+  .topo-blocos .agenda-horario .agenda-dia,
+  .topo-blocos--without-hero-image .agenda-horario .agenda-dia,
+  .topo-blocos .agenda-horario .agenda-hora,
+  .topo-blocos--without-hero-image .agenda-horario .agenda-hora {
+    min-width: 0;
+  }
+
+  .topo-blocos .agenda-horario .agenda-hora,
+  .topo-blocos--without-hero-image .agenda-horario .agenda-hora {
+    text-align: left;
+  }
 }
 
 @media (min-width: 900px) and (max-width: 1024px) {
@@ -13460,7 +13496,12 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 
 #caixaCarrinho .resumo-linha {
   border-color: color-mix(in srgb, var(--carrinho-borda-suave) 80%, transparent);
-  background: color-mix(in srgb, var(--carrinho-fundo-controle) 78%, transparent);
+  border-radius: var(--raio-medio);
+  padding: clamp(0.52rem, 0.9vw, 0.66rem) clamp(0.64rem, 1vw, 0.8rem);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 18%, transparent), transparent 120%),
+    color-mix(in srgb, var(--carrinho-fundo-controle) 78%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 10%, transparent);
   color: var(--carrinho-texto-suave);
 }
 
@@ -17022,6 +17063,7 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horar
 
 .topo-blocos .destaque-subtitulo,
 .topo-blocos .destaque-inicial--without-image .destaque-subtitulo {
+  margin-top: clamp(0.12rem, 0.22vw, 0.18rem);
   font-size: clamp(0.94rem, 0.82rem + 0.45vw, 1.06rem);
   line-height: 1.38;
 }
@@ -17071,6 +17113,11 @@ body.admin-page [data-admin-tab-panel="settings"] .admin-settings-subgroup h3 {
   .topo-blocos .destaque-titulo,
   .topo-blocos .destaque-inicial--without-image .destaque-titulo {
     font-size: clamp(1.9rem, 8vw, 2.05rem);
+  }
+
+  .topo-blocos .destaque-subtitulo,
+  .topo-blocos .destaque-inicial--without-image .destaque-subtitulo {
+    margin-top: 0.12rem;
   }
 }
 
@@ -17655,9 +17702,72 @@ body.admin-page .admin-mobile-form-save-bar {
   white-space: normal;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 641px) and (max-width: 1024px) {
   #caixaCarrinho .acoes-checkout {
-    padding-top: 0.62rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.62rem 0.9rem calc(0.72rem + var(--espaco-seguro-inferior));
+  }
+
+  #caixaCarrinho .acoes-checkout .botao {
+    flex: 0 1 auto;
+    width: auto;
+    min-height: 42px;
+    padding: 0.5rem 0.76rem;
+    border-radius: var(--raio-entre-pequeno);
+    font-size: 0.84rem;
+    line-height: 1.08;
+  }
+
+  #caixaCarrinho .acoes-checkout #botaoFinalizar {
+    min-width: 11.5rem;
+  }
+
+  #caixaCarrinho .acoes-checkout #botaoLimparCarrinho {
+    min-width: 9.8rem;
+  }
+
+  #caixaCarrinho .acoes-checkout #botaoFechar {
+    min-width: 6.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  #caixaCarrinho .acoes-checkout {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.46rem;
+    padding: 0.54rem 0.76rem calc(0.62rem + var(--espaco-seguro-inferior));
+  }
+
+  #caixaCarrinho .acoes-checkout .botao {
+    width: 100%;
+    min-height: 40px;
+    padding: 0.48rem 0.54rem;
+    border-radius: var(--raio-entre-pequeno);
+    font-size: 0.8rem;
+    line-height: 1.08;
+  }
+
+  #caixaCarrinho .acoes-checkout #botaoFinalizar,
+  #caixaCarrinho .acoes-checkout #botaoLimparCarrinho,
+  #caixaCarrinho .acoes-checkout #botaoFechar {
+    grid-column: auto;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  #caixaCarrinho .acoes-checkout {
+    gap: 0.34rem;
+    padding-inline: 0.56rem;
+  }
+
+  #caixaCarrinho .acoes-checkout .botao {
+    min-height: 38px;
+    padding: 0.42rem 0.34rem;
+    font-size: 0.74rem;
   }
 }
 
