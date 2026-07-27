@@ -118,8 +118,6 @@
               "city": "",
               "state": "",
               "mapsUrl": "",
-              "latitude": "",
-              "longitude": "",
               "pickupNote": ""
           },
           "whatsappNumber": "",
@@ -1301,19 +1299,6 @@
       termsOfUseUrl: sanitizeLegalUrl(source?.termsOfUseUrl),
     };
   }
-  function sanitizeCoordinate(value, min, max) {
-    const raw = sanitizeText(value, "", 40)?.replace(",", ".");
-    if (!raw) {
-      return "";
-    }
-
-    const number = Number(raw);
-    if (!Number.isFinite(number) || number < min || number > max) {
-      return "";
-    }
-
-    return String(number);
-  }
   function sanitizeBusinessLocation(rawLocation, rawBusiness) {
     const source = rawLocation && typeof rawLocation === "object" ? rawLocation : {};
     const business = rawBusiness && typeof rawBusiness === "object" ? rawBusiness : {};
@@ -1324,8 +1309,6 @@
       city: sanitizeText(source?.city, "", 80),
       state: sanitizeText(source?.state || source?.uf, "", 20)?.toUpperCase(),
       mapsUrl: sanitizeMapsUrl(source?.mapsUrl || source?.googleMapsUrl || source?.routeUrl),
-      latitude: sanitizeCoordinate(source?.latitude || source?.lat, -90, 90),
-      longitude: sanitizeCoordinate(source?.longitude || source?.lng || source?.lon, -180, 180),
       pickupNote: sanitizeText(source?.pickupNote || source?.note, "", 220),
     };
   }

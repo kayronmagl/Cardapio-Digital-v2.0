@@ -243,7 +243,7 @@
       settingsGroupPix: "Pix",
       settingsGroupLanguage: "Idioma",
       settingsLocationAdvanced: "Opções avançadas de mapa",
-      settingsLocationAdvancedHelp: "Use apenas se quiser informar link do Google Maps ou coordenadas.",
+      settingsLocationAdvancedHelp: "Use apenas se quiser informar o link do Google Maps.",
       brandNamePt: "Nome do estabelecimento",
       brandNameEn: "Nome do estabelecimento — EN",
       brandNamePtPlaceholder: "Nome do seu negócio",
@@ -280,7 +280,7 @@
       sectionOperation: "Operação",
       sectionOperationHelp: "WhatsApp, entrega, Pix e idioma padrão usados no pedido.",
       sectionLocation: "Localização",
-      sectionLocationHelp: "Endereço e rota simples. Cole um link do Google Maps ou use coordenadas opcionais.",
+      sectionLocationHelp: "Endereço e rota simples. Cole um link do Google Maps se quiser exibir o botão de rota.",
       sectionAppearance: "Aparência",
       sectionAppearanceHelp: "Teste uma prévia visual; salve as configurações para aplicar no cardápio público.",
       whatsappNumber: "WhatsApp do pedido",
@@ -295,11 +295,6 @@
       locationMapsUrl: "Link do Google Maps",
       locationMapsUrlPlaceholder: "https://maps.app.goo.gl/...",
       locationMapsHelp: "Abra seu estabelecimento no Google Maps, toque em Compartilhar e cole o link aqui. Esse link será usado no botão Ver rota.",
-      locationLatitude: "Latitude (opcional)",
-      locationLongitude: "Longitude (opcional)",
-      locationLatitudePlaceholder: "-6.025839",
-      locationLongitudePlaceholder: "-38.348820",
-      locationCoordinatesHelp: "Opcional. Use apenas se não tiver um link do Google Maps. Informe latitude e longitude.",
       pickupNote: "Observação de retirada (opcional)",
       pickupNotePlaceholder: "Ex.: retire no balcão principal.",
       baseFee: "Taxa base de entrega",
@@ -719,7 +714,7 @@
       settingsGroupPix: "Pix",
       settingsGroupLanguage: "Language",
       settingsLocationAdvanced: "Advanced map options",
-      settingsLocationAdvancedHelp: "Use only if you want to enter a Google Maps link or coordinates.",
+      settingsLocationAdvancedHelp: "Use only if you want to enter a Google Maps link.",
       brandNamePt: "Business name — PT-BR",
       brandNameEn: "Business name",
       brandNamePtPlaceholder: "Nome do seu negócio",
@@ -756,7 +751,7 @@
       sectionOperation: "Operations",
       sectionOperationHelp: "WhatsApp, delivery, Pix, and default language used in orders.",
       sectionLocation: "Location",
-      sectionLocationHelp: "Simple address and route. Paste a Google Maps link or use optional coordinates.",
+      sectionLocationHelp: "Simple address and route. Paste a Google Maps link if you want to show the directions button.",
       sectionAppearance: "Appearance",
       sectionAppearanceHelp: "Test a visual preview; save the settings to apply it to the public menu.",
       whatsappNumber: "Order WhatsApp",
@@ -771,11 +766,6 @@
       locationMapsUrl: "Google Maps link",
       locationMapsUrlPlaceholder: "https://maps.app.goo.gl/...",
       locationMapsHelp: "Open your business on Google Maps, tap Share, and paste the link here. This link will be used in the Get directions button.",
-      locationLatitude: "Latitude (optional)",
-      locationLongitude: "Longitude (optional)",
-      locationLatitudePlaceholder: "-6.025839",
-      locationLongitudePlaceholder: "-38.348820",
-      locationCoordinatesHelp: "Optional. Use only if you do not have a Google Maps link. Enter latitude and longitude.",
       pickupNote: "Pickup note (optional)",
       pickupNotePlaceholder: "Ex.: pick up at the main counter.",
       baseFee: "Base delivery fee (without area)",
@@ -1093,7 +1083,7 @@
       settingsSaveBarClean: "Revise os campos e salve quando terminar.",
       settingsQuickPolicies: "Políticas",
       sectionOperationHelp: "WhatsApp, entrega, Pix e idioma padrão usados no pedido do cliente.",
-      sectionLocationHelp: "Endereço e rota do estabelecimento. Use link do Google Maps ou coordenadas opcionais.",
+      sectionLocationHelp: "Endereço e rota do estabelecimento. Use link do Google Maps se quiser exibir o botão de rota.",
       sectionAppearanceHelp: "Teste a aparência no painel. Salve para aplicar no cardápio público.",
       sectionPolicies: "Políticas",
       sectionPoliciesHelp: "Controle os links legais do rodapé e os dados exibidos nas páginas públicas. Use link externo se o estabelecimento já tiver uma política própria.",
@@ -1306,7 +1296,7 @@
       settingsSaveBarClean: "Review the fields and save when finished.",
       settingsQuickPolicies: "Policies",
       sectionOperationHelp: "WhatsApp, delivery, Pix, and default language used in the customer order.",
-      sectionLocationHelp: "Store address and route. Use a Google Maps link or optional coordinates.",
+      sectionLocationHelp: "Store address and route. Use a Google Maps link if you want to show the directions button.",
       sectionAppearanceHelp: "Preview the appearance in the panel. Save to apply it to the public menu.",
       sectionPolicies: "Policies",
       sectionPoliciesHelp: "Control the legal footer links and the details shown on the public pages. Use an external link if the business already has its own policy.",
@@ -4792,13 +4782,6 @@
         settingsInput("locationMapsUrl", t("locationMapsUrl"), location?.mapsUrl || "", "url", null, null, t("locationMapsUrlPlaceholder")) +
         '<p class="admin-field-note">' + escapeHtml(t("locationMapsHelp")) + "</p>" +
         "</div>" +
-        '<div class="admin-settings-map-group">' +
-        '<div class="admin-split">' +
-        settingsInput("locationLatitude", t("locationLatitude"), location?.latitude || "", "text", null, null, t("locationLatitudePlaceholder")) +
-        settingsInput("locationLongitude", t("locationLongitude"), location?.longitude || "", "text", null, null, t("locationLongitudePlaceholder")) +
-        "</div>" +
-        '<p class="admin-field-note">' + escapeHtml(t("locationCoordinatesHelp")) + "</p>" +
-        "</div>" +
         "</div>" +
         "</details>",
         "settings-location"
@@ -6091,8 +6074,6 @@
       city: String(formData?.get("locationCity") || "")?.trim(),
       state: String(formData?.get("locationState") || "")?.trim()?.toUpperCase(),
       mapsUrl: String(formData?.get("locationMapsUrl") || "")?.trim(),
-      latitude: String(formData?.get("locationLatitude") || "")?.trim(),
-      longitude: String(formData?.get("locationLongitude") || "")?.trim(),
       pickupNote: String(formData?.get("pickupNote") || "")?.trim(),
     };
 

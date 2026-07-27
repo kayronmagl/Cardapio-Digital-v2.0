@@ -148,10 +148,6 @@
       customerMapLinkPlaceholder: "https://maps.app.goo.gl/...",
       customerMapLinkHelp: "Abra o Google Maps, procure sua localização, toque em Compartilhar e cole o link aqui para facilitar a entrega.",
       customerAddressEnoughHelp: "O link do Google Maps é opcional. Use apenas se quiser facilitar a localização da entrega.",
-      customerCoordinatesLabel: "Coordenadas (opcional)",
-      customerCoordinatesHelp: "Use apenas se você souber sua latitude e longitude. Exemplo: -6.025839, -38.348820",
-      customerLatitudePlaceholder: "Latitude",
-      customerLongitudePlaceholder: "Longitude",
       pickupAt: "Retirada no local:",
       localLegend: "2. Consumo no local",
       localHelp: "Informe o número da mesa para o pedido ser identificado com facilidade.",
@@ -401,10 +397,6 @@
       customerMapLinkPlaceholder: "https://maps.app.goo.gl/...",
       customerMapLinkHelp: "Open Google Maps, choose your location, tap Share, and paste the link here to make delivery easier.",
       customerAddressEnoughHelp: "The Google Maps link is optional. Use it only if you want to make delivery easier to find.",
-      customerCoordinatesLabel: "Coordinates (optional)",
-      customerCoordinatesHelp: "Use only if you know your latitude and longitude. Example: -6.025839, -38.348820",
-      customerLatitudePlaceholder: "Latitude",
-      customerLongitudePlaceholder: "Longitude",
       pickupAt: "Pickup at the store:",
       localLegend: "2. Dine in",
       localHelp: "Enter the table number so the order can be identified easily.",
@@ -560,8 +552,6 @@
     customerMapLinkLabel: "Link do Google Maps da entrega (opcional)",
     customerMapLinkHelp: "Opcional. Cole o link da sua localização no Google Maps se quiser facilitar a entrega.",
     customerAddressEnoughHelp: "O endereço acima já é suficiente. O link do Google Maps é opcional.",
-    customerCoordinatesLabel: "Coordenadas da entrega (opcional)",
-    customerCoordinatesHelp: "Use apenas se souber latitude e longitude. Se não souber, deixe em branco.",
     pixMissing: "A chave Pix não está disponível no momento. Escolha outra forma de pagamento ou combine pelo WhatsApp.",
     clipboardUnavailable: "Não foi possível copiar automaticamente. Copie a chave Pix manualmente.",
     pixCopyFailed: "Não foi possível copiar automaticamente. Copie a chave Pix manualmente.",
@@ -646,8 +636,6 @@
     customerMapLinkLabel: "Delivery Google Maps link (optional)",
     customerMapLinkHelp: "Optional. Paste your Google Maps location link if you want to make delivery easier.",
     customerAddressEnoughHelp: "The address above is enough. The Google Maps link is optional.",
-    customerCoordinatesLabel: "Delivery coordinates (optional)",
-    customerCoordinatesHelp: "Use only if you know latitude and longitude. If not, leave blank.",
     pixMissing: "The Pix key is unavailable right now. Choose another payment method or confirm through WhatsApp.",
     clipboardUnavailable: "Could not copy automatically. Copy the Pix key manually.",
     pixCopyFailed: "Could not copy automatically. Copy the Pix key manually.",
@@ -1424,19 +1412,6 @@
     const value = String(getLegalConfig()?.[key] || "")?.trim();
     return value || t("legalNotProvided");
   }
-  function coordinateValue(value, min, max) {
-    const raw = String(value || "")?.replace(",", ".")?.trim()?.slice(0, 40);
-    const number = Number(raw);
-    if (!raw || !Number.isFinite(number) || number < min || number > max) {
-      return "";
-    }
-    return String(number);
-  }
-  function coordinateRouteUrl(latitude, longitude) {
-    const lat = coordinateValue(latitude, -90, 90);
-    const lng = coordinateValue(longitude, -180, 180);
-    return lat && lng ? "https://www.google.com/maps?q=" + lat + "," + lng : "";
-  }
   function businessLocation() {
     const business = getBrandConfig()?.business || {};
     const location = business?.location && typeof business?.location === "object" ? business.location : {};
@@ -1447,13 +1422,11 @@
       city: String(location?.city || "")?.trim(),
       state: String(location?.state || location?.uf || "")?.trim(),
       mapsUrl: safeExternalUrl(location?.mapsUrl || location?.googleMapsUrl || location?.routeUrl),
-      latitude: coordinateValue(location?.latitude || location?.lat, -90, 90),
-      longitude: coordinateValue(location?.longitude || location?.lng || location?.lon, -180, 180),
       pickupNote: String(location?.pickupNote || location?.note || "")?.trim(),
     };
   }
   function locationRouteUrl(location) {
-    return safeExternalUrl(location?.mapsUrl) || coordinateRouteUrl(location?.latitude, location?.longitude);
+    return safeExternalUrl(location?.mapsUrl);
   }
   function businessLocationLines(location) {
     const firstLine = [location?.address, location?.district]?.filter(Boolean)?.join(" — ");
@@ -1464,7 +1437,7 @@
     return [firstLine, cityState]?.filter(Boolean);
   }
   function customerLocationUrl(form) {
-    return safeExternalUrl(form?.customerMapsUrl) || coordinateRouteUrl(form?.customerLatitude, form?.customerLongitude);
+    return safeExternalUrl(form?.customerMapsUrl);
   }
 
   const normalizePhone = shared?.normalizePhone;
@@ -1853,8 +1826,6 @@
     $("labelClienteMapsUrl").textContent = t("customerMapLinkLabel");
     $("ajudaClienteMapsUrl").textContent = t("customerMapLinkHelp");
     $("ajudaEnderecoSuficiente").textContent = t("customerAddressEnoughHelp");
-    $("labelClienteCoordenadas").textContent = t("customerCoordinatesLabel");
-    $("ajudaClienteCoordenadas").textContent = t("customerCoordinatesHelp");
     $("legendaNoLocal").textContent = t("localLegend");
     $("ajudaNoLocal").textContent = t("localHelp");
     $("labelNumeroMesa").textContent = t("tableNumberLabel");
@@ -1895,10 +1866,6 @@
     $("enderecoEntrega").placeholder = t("addressPlaceholder");
     $("referencia").placeholder = t("referencePlaceholder");
     $("clienteMapsUrl").placeholder = t("customerMapLinkPlaceholder");
-    $("clienteLatitude").placeholder = t("customerLatitudePlaceholder");
-    $("clienteLatitude")?.setAttribute("aria-label", t("customerLatitudePlaceholder"));
-    $("clienteLongitude").placeholder = t("customerLongitudePlaceholder");
-    $("clienteLongitude")?.setAttribute("aria-label", t("customerLongitudePlaceholder"));
     $("numeroMesa").placeholder = t("tableNumberPlaceholder");
     $("trocoPara").placeholder = t("changeForPlaceholder");
     $("observacoes").placeholder = t("notesPlaceholder");
@@ -3096,8 +3063,6 @@
       address: String($("enderecoEntrega")?.value || "")?.trim()?.slice(0, 140),
       reference: String($("referencia")?.value || "")?.trim()?.slice(0, 100),
       customerMapsUrl: safeExternalUrl($("clienteMapsUrl")?.value || ""),
-      customerLatitude: coordinateValue($("clienteLatitude")?.value || "", -90, 90),
-      customerLongitude: coordinateValue($("clienteLongitude")?.value || "", -180, 180),
       tableNumber: String($("numeroMesa")?.value || "")?.trim()?.slice(0, 10),
       name: String($("nome")?.value || "")?.trim()?.slice(0, 80),
       payment: $("pagamento")?.value,
@@ -3134,8 +3099,6 @@
     $("enderecoEntrega").value = form?.address || "";
     $("referencia").value = form?.reference || "";
     $("clienteMapsUrl").value = form?.customerMapsUrl || "";
-    $("clienteLatitude").value = form?.customerLatitude || "";
-    $("clienteLongitude").value = form?.customerLongitude || "";
     $("numeroMesa").value = form?.tableNumber || "";
     $("nome").value = form?.name || "";
     $("pagamento").value = form?.payment || "";
@@ -3201,8 +3164,6 @@
     $("enderecoEntrega").disabled = !deliveryAddressMode;
     $("referencia").disabled = !deliveryAddressMode;
     $("clienteMapsUrl").disabled = !deliveryAddressMode;
-    $("clienteLatitude").disabled = !deliveryAddressMode;
-    $("clienteLongitude").disabled = !deliveryAddressMode;
     $("numeroMesa").disabled = deliveryMode;
 
     if (!deliveryAddressMode) {
@@ -3379,13 +3340,17 @@
         escapeHtml(deliveryFeeText) +
         "</strong></span>"
       : "";
-    $("resumoPedido").innerHTML =
-      '<span class="resumo-linha resumo-linha--subtotal"><span>' +
-      escapeHtml(t("orderSubtotal")) +
-      "</span><strong>" +
-      escapeHtml(formatCurrency(totals?.subtotal)) +
-      "</strong></span>" +
-      deliveryFeeLine;
+    const summaryLines = totals?.showDeliveryFee
+      ? '<span class="resumo-linha resumo-linha--subtotal"><span>' +
+        escapeHtml(t("orderSubtotal")) +
+        "</span><strong>" +
+        escapeHtml(formatCurrency(totals?.subtotal)) +
+        "</strong></span>" +
+        deliveryFeeLine
+      : "";
+    const summary = $("resumoPedido");
+    summary.innerHTML = summaryLines;
+    summary.hidden = !summaryLines;
 
     $("valorTotal").innerHTML =
       "<span>" +
@@ -3400,7 +3365,7 @@
     if (topSubtotal) topSubtotal.textContent = t("topSubtotal", { value: formatCurrency(totals?.subtotal) });
     $("carrinhoSubtitulo").textContent = itemCount === 1 ? t("cartItemsOne", { count: itemCount }) : t("cartItemsOther", { count: itemCount });
     renderMobileCartLabel(itemCount);
-    $("totalBarraMobile").textContent = formatCurrency(totals?.subtotal);
+    $("totalBarraMobile").textContent = formatCurrency(totals?.total);
   }
   function prefersFloatingPublicFeedback() {
     return isMobileViewport() || isCartOverlayOpen();
@@ -3881,8 +3846,8 @@
     });
 
     lines?.push("");
-    lines?.push(t("subtotalField", { value: formatCurrency(totals?.subtotal) }));
     if (form?.serviceMode === "delivery" && form?.deliveryType === "entrega") {
+      lines?.push(t("subtotalField", { value: formatCurrency(totals?.subtotal) }));
       lines?.push(t("deliveryFeeField", {
         value: totals?.deliveryFeeMode === "custom" ? t("deliveryFeeCustom") : formatCurrency(totals?.deliveryFee),
       }));
@@ -4113,8 +4078,6 @@
           "enderecoEntrega",
           "referencia",
           "clienteMapsUrl",
-          "clienteLatitude",
-          "clienteLongitude",
           "numeroMesa",
           "nome",
           "pagamento",

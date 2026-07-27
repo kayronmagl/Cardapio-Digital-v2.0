@@ -2812,8 +2812,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   row-gap: 0;
 }
 
-#camposEntrega label,
-#camposEntrega .checkout-coordinate-label {
+#camposEntrega label {
   margin: 0 0 0.42rem;
 }
 
@@ -2824,8 +2823,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 
 #camposEntrega select + label,
 #camposEntrega input + label,
-#camposEntrega .ajuda-texto + label,
-#camposEntrega .checkout-coordinate-group + .taxa {
+#camposEntrega .ajuda-texto + label {
   margin-top: 1.05rem;
 }
 
@@ -2841,25 +2839,12 @@ html[data-accessibility="enhanced"] .pix-valor {
 
 #camposEntrega #ajudaEnderecoSuficiente {
   margin-top: 0;
-  margin-bottom: 1.15rem;
-}
-
-#camposEntrega .checkout-coordinate-group {
-  margin-top: 0.2rem;
-  padding-top: 0.1rem;
-}
-
-#camposEntrega .checkout-coordinate-group .ajuda-texto {
-  margin-bottom: 0.7rem;
-}
-
-#camposEntrega .checkout-coordinate-grid input {
-  margin-bottom: 0;
+  margin-bottom: 0.42rem;
 }
 
 #camposEntrega .taxa,
 #camposEntrega #bloqueioEntregaInfo {
-  margin: 1.05rem 0 0;
+  margin: 0.78rem 0 0;
   line-height: 1.45;
 }
 
@@ -7714,22 +7699,6 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
   min-width: 132px;
 }
 
-.checkout-coordinate-group {
-  display: grid;
-  gap: 0.45rem;
-}
-
-.checkout-coordinate-label {
-  font-weight: var(--peso-negrito);
-  color: var(--cinza);
-}
-
-.checkout-coordinate-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
-}
-
 @media (max-width: 1024px) {
   .topo-blocos,
   .topo-blocos--without-hero-image {
@@ -8459,10 +8428,6 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
 
   .admin-action-btn {
     font-size: 0.94rem;
-  }
-
-  .checkout-coordinate-grid {
-    grid-template-columns: 1fr;
   }
 
   .rodape-links {
@@ -9724,9 +9689,11 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
 
 .topo-blocos .rotulo-horario,
 .topo-blocos--without-hero-image .rotulo-horario {
+  --marcador-horario-tamanho: 0.42rem;
   display: inline-grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: var(--marcador-horario-tamanho) minmax(0, 1fr);
   align-items: center;
+  justify-items: start;
   gap: 0.42rem;
   line-height: 1.12;
 }
@@ -9734,13 +9701,13 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
 .topo-blocos .rotulo-horario::before,
 .topo-blocos--without-hero-image .rotulo-horario::before {
   content: "";
-  width: 0.42rem;
-  height: 0.42rem;
-  align-self: center;
+  width: var(--marcador-horario-tamanho);
+  height: var(--marcador-horario-tamanho);
+  display: block;
+  place-self: center;
   border-radius: var(--raio-pilula);
   background: currentColor;
   box-shadow: 0 0 0 0.18rem color-mix(in srgb, currentColor 15%, transparent);
-  flex: 0 0 auto;
 }
 
 .topo-blocos .detalhe-horario,
@@ -9905,10 +9872,13 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
     min-height: auto;
   }
 
+  .topo-blocos .rotulo-horario,
+  .topo-blocos--without-hero-image .rotulo-horario {
+    --marcador-horario-tamanho: 0.34rem;
+  }
+
   .topo-blocos .rotulo-horario::before,
   .topo-blocos--without-hero-image .rotulo-horario::before {
-    width: 0.34rem;
-    height: 0.34rem;
     box-shadow: 0 0 0 0.14rem color-mix(in srgb, currentColor 14%, transparent);
   }
 
@@ -11954,14 +11924,13 @@ body:not(.cart-has-items) .barra-mobile {
 
   .topo-blocos .rotulo-horario,
   .topo-blocos--without-hero-image .rotulo-horario {
+    --marcador-horario-tamanho: 0.34rem;
     gap: 0.32rem;
     font-size: 0.68rem;
   }
 
   .topo-blocos .rotulo-horario::before,
   .topo-blocos--without-hero-image .rotulo-horario::before {
-    width: 0.34rem;
-    height: 0.34rem;
     box-shadow: none;
     opacity: 0.75;
   }
@@ -13404,8 +13373,7 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 #caixaCarrinho .bloco-form label,
 #caixaCarrinho .segmented-item,
 #caixaCarrinho .checkbox-linha,
-#caixaCarrinho .pix-card,
-#caixaCarrinho .checkout-coordinate-label {
+#caixaCarrinho .pix-card {
   color: var(--carrinho-texto-corpo);
 }
 
@@ -13547,8 +13515,7 @@ body.admin-page.admin-auth-screen-active #adminStatus {
 
 #caixaCarrinho .segmented-item,
 #caixaCarrinho .checkbox-linha,
-#caixaCarrinho .pix-card,
-#caixaCarrinho .checkout-coordinate-group {
+#caixaCarrinho .pix-card {
   border-color: var(--carrinho-borda-suave);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 22%, transparent), transparent 112%),
@@ -17439,10 +17406,6 @@ body.admin-page .admin-mobile-form-save-bar {
   border-radius: var(--raio-entre-medio);
 }
 
-#caixaCarrinho .checkout-coordinate-grid {
-  gap: 0.48rem;
-}
-
 #caixaCarrinho .acoes-checkout {
   position: static;
   z-index: auto;
@@ -17654,8 +17617,7 @@ body.admin-page .admin-mobile-form-save-bar {
     grid-column: auto;
   }
 
-  #caixaCarrinho .segmented,
-  #caixaCarrinho .checkout-coordinate-grid {
+  #caixaCarrinho .segmented {
     grid-template-columns: 1fr;
   }
 }

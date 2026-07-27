@@ -94,8 +94,8 @@ Além da reorganização visual e estrutural, a v2.0 concentra recursos que apar
 - **Entrega por localidade**
   - A taxa pode variar por localidade, e o sistema também trata casos em que determinada área não está disponível para entrega.
 
-- **Link do Google Maps e coordenadas opcionais**
-  - O cliente pode informar um link da localização ou preencher latitude e longitude para facilitar a entrega.
+- **Link opcional do Google Maps**
+  - O cliente pode informar um link da localização para facilitar a entrega, sem precisar preencher dados técnicos.
 
 - **Painel de Pix no checkout**
   - Ao escolher Pix, a chave aparece no fluxo de pagamento com suporte para cópia rápida.
@@ -145,7 +145,7 @@ O fluxo de pedido cobre:
 - cálculo de taxa quando aplicável
 - preenchimento de endereço e referência
 - preenchimento de número da mesa para consumo no local
-- uso opcional de coordenadas e link do Google Maps
+- uso opcional de link do Google Maps
 - exibição de dados do Pix com cópia rápida da chave
 - confirmação final antes de abrir o WhatsApp
 
