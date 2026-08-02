@@ -139,6 +139,8 @@
   --duracao-painel-entrada: 260ms;
   --duracao-painel-suave: 220ms;
   --duracao-produto-entrada: 420ms;
+  --duracao-superficie-entrada: 280ms;
+  --duracao-retorno-entrada: 180ms;
   --fonte-corpo: "Manrope", sans-serif;
   --fonte-destaque: "Bebas Neue", sans-serif;
   --fonte-monoespacada: var(--fonte-corpo);
@@ -3116,6 +3118,30 @@ html[data-accessibility="enhanced"] .pix-valor {
   display: none !important;
 }
 
+@keyframes superficie-entrando {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes retorno-entrando {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .erro {
   color: var(--erro);
 }
@@ -3141,6 +3167,12 @@ html[data-accessibility="enhanced"] .pix-valor {
 #mensagemStatus {
   color: var(--sucesso);
   background: var(--cor-retorno-sucesso-fundo);
+}
+
+#mensagemStatus:not(.oculto),
+#mensagemErro:not(.oculto),
+.checkout-field-error {
+  animation: retorno-entrando var(--duracao-retorno-entrada) ease-out both;
 }
 
 .public-action-feedback {
@@ -3911,18 +3943,10 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
   outline-offset: 2px;
 }
 
+#authPanel:not([hidden]),
+#adminApp:not([hidden]),
 .admin-tab-panel:not(.oculto) {
-  animation: admin-fade-in 0.2s ease-out;
-}
-
-@keyframes admin-fade-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  animation: superficie-entrando var(--duracao-superficie-entrada) ease-out both;
 }
 
 .admin-panels-grid {
@@ -13990,6 +14014,17 @@ body.menu-entry-reveal .grade-produtos {
   body.menu-entry-reveal .grade-produtos {
     animation: none !important;
   }
+
+  #mensagemStatus,
+  #mensagemErro,
+  .checkout-field-error,
+  .ofertas-section,
+  .legal-page.layout-shell,
+  #authPanel,
+  #adminApp,
+  .admin-tab-panel {
+    animation: none !important;
+  }
 }
 
 /* COMBOS | Organiza a area de combos. Produtos incluidos, preco final e acoes ficam mais claros para o usuario. */
@@ -14008,6 +14043,10 @@ body.menu-entry-reveal .grade-produtos {
   box-shadow:
     0 18px 42px color-mix(in srgb, var(--cor-sombra) 14%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 12%, transparent);
+}
+
+.ofertas-section:not(.oculto) {
+  animation: superficie-entrando var(--duracao-superficie-entrada) ease-out both;
 }
 
 .ofertas-head {
@@ -14776,11 +14815,16 @@ body.admin-page .admin-inline-status + .admin-actions-row {
   margin-top: 0.42rem;
 }
 
+body.admin-page .admin-inline-status {
+  animation: retorno-entrando var(--duracao-retorno-entrada) ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   body.admin-page .admin-card--attention,
   body.admin-page .admin-toast,
   body.admin-page .admin-toast--leaving,
-  body.admin-page .admin-action-busy::after {
+  body.admin-page .admin-action-busy::after,
+  body.admin-page .admin-inline-status {
     animation: none;
   }
 }
@@ -18789,6 +18833,10 @@ body.admin-page .admin-combo-product-filter select {
   max-width: calc(100vw - 1.2rem);
   margin-block: clamp(1rem, 3vw, 2.4rem);
   overflow-x: clip;
+}
+
+.legal-page.layout-shell:not(.oculto) {
+  animation: superficie-entrando var(--duracao-superficie-entrada) ease-out both;
 }
 
 .legal-card {

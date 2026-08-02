@@ -23,6 +23,19 @@
       background: #030303;
       color: #fffdf4;
     }
+
+    .page-transition-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      width: 100vw;
+      height: 100vh;
+      min-height: 100dvh;
+      background: #030303;
+      color: #fffdf4;
+    }
   </style>
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./assets/favicon.png">
@@ -31,10 +44,18 @@
     href="./assets/fonts/bebas-neue-latin.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="./assets/fonts/manrope-latin-variable.woff2">
-  <link rel="stylesheet" href="./dist/styles.css?v=2.0.34">
+  <link rel="stylesheet" href="./dist/styles.css?v=2.0.35">
 </head>
 
-<body>
+<body class="page-transition-active">
+  <div id="templatePageTransition" class="page-transition-overlay page-transition-overlay--show" aria-hidden="false">
+    <div class="page-transition-card" role="status" aria-live="polite">
+      <span class="page-transition-kicker" data-page-transition-brand>Tobia's Lanches</span>
+      <strong class="page-transition-title" data-page-transition-message>Carregando cardapio</strong>
+      <span class="page-transition-loader" aria-hidden="true"><span></span></span>
+    </div>
+  </div>
+
   <div class="fundo-animado" aria-hidden="true"></div>
 
   <header class="topo layout-shell" id="topo">

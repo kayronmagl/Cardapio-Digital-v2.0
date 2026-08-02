@@ -24,6 +24,19 @@
       background: #030303;
       color: #fffdf4;
     }
+
+    .page-transition-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      width: 100vw;
+      height: 100vh;
+      min-height: 100dvh;
+      background: #030303;
+      color: #fffdf4;
+    }
   </style>
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./assets/favicon.png">
@@ -32,10 +45,18 @@
     href="./assets/fonts/bebas-neue-latin.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="./assets/fonts/manrope-latin-variable.woff2">
-  <link rel="stylesheet" href="./dist/styles.css?v=2.0.34">
+  <link rel="stylesheet" href="./dist/styles.css?v=2.0.35">
 </head>
 
-<body class="admin-page">
+<body class="admin-page page-transition-active">
+  <div id="templatePageTransition" class="page-transition-overlay page-transition-overlay--show" aria-hidden="false">
+    <div class="page-transition-card" role="status" aria-live="polite">
+      <span class="page-transition-kicker" data-page-transition-brand>Tobia's Lanches</span>
+      <strong class="page-transition-title" data-page-transition-message>Carregando Admin</strong>
+      <span class="page-transition-loader" aria-hidden="true"><span></span></span>
+    </div>
+  </div>
+
   <main class="admin-shell">
     <header class="admin-topo">
       <div>
@@ -62,7 +83,7 @@
   <script src="./dist/core/shared-utils.js?v=2.1.5"></script>
   <script src="./dist/core/admin-auth.js?v=2.1.0"></script>
   <script src="./dist/core/state-manager.js?v=2.0.5"></script>
-  <script src="./dist/admin.js?v=2.0.13"></script>
+  <script src="./dist/admin.js?v=2.0.14"></script>
 </body>
 
 </html>

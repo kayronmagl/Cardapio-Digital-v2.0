@@ -50,6 +50,7 @@
       panelSubtitle: "Edite com calma. No modo online, o painel publica automaticamente ao salvar.",
       viewPublic: "Ver cardápio público",
       transitionToPublic: "Voltando ao cardápio...",
+      initialAdminLoading: "Carregando Admin",
       languageLabel: "Idioma",
       logout: "Sair",
       authSetPassword: "Defina sua senha",
@@ -521,6 +522,7 @@
       panelSubtitle: "Edit calmly. In online mode, the panel publishes automatically when you save.",
       viewPublic: "View public menu",
       transitionToPublic: "Returning to menu...",
+      initialAdminLoading: "Loading Admin",
       languageLabel: "Language",
       logout: "Sign out",
       authSetPassword: "Set your password",
@@ -7580,6 +7582,14 @@
     applyTheme();
     applyLocaleToHeader();
     applyHeaderTexts();
+    shared?.showPageTransitionLoading?.({
+      message: function () {
+        return t("initialAdminLoading");
+      },
+      brand: function () {
+        return textValue(getBrandConfig()?.brand?.name, currentLocale()) || "Tobia's Lanches";
+      },
+    });
     bindEvents();
     setupPageNavigationTransition();
     setupAdminMobileBackToTop();
@@ -7600,7 +7610,7 @@
       renderAuth();
     }
 
-    shared?.finishPageTransitionAfterVisualReady?.({ timeoutMs: 2400 });
+    shared?.finishPageTransitionAfterVisualReady?.({ timeoutMs: 2400, minDurationMs: 700 });
 
     window?.setInterval(function () {
       if (!isAdminAuthenticated()) {
