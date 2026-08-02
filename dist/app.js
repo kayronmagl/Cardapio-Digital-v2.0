@@ -15,6 +15,9 @@
     accessibility: "template-cardapio-accessibility-mode-v1",
   };
   const ADMIN_MOBILE_BACK_TO_TOP_KEY = "template-cardapio-admin-mobile-back-top-v1";
+  const DURACAO_FECHAMENTO_SOBREPOSICAO_MS = 260;
+  const DURACAO_ATUALIZACAO_GRADE_MS = 520;
+  const temporizadoresFechamentoSobreposicao = new WeakMap();
 
   const AUTHOR_NAME = "Kayron Magalhães";
   const AUTHOR_URL = "https://www.instagram.com/kayronmagl/";
@@ -945,6 +948,9 @@
   }
   function isMobileViewport() {
     return Boolean(window?.matchMedia?.("(max-width: 768px)")?.matches) || Number(window?.innerWidth || 0) <= 768;
+  }
+  function prefersReducedMotion() {
+    return Boolean(window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
   }
   function isBackForwardNavigation(event) {
     if (event?.persisted) {
@@ -2595,11 +2601,27 @@
         escapeHtml(emptyProductsMessage()) +
         "</p></article>";
       disconnectObserver();
+      animarAtualizacaoGrade(area);
       return;
     }
 
     area.innerHTML = products?.map(renderProductCard)?.join("");
     attachObserver();
+    animarAtualizacaoGrade(area);
+  }
+  // PRODUTOS | A grade e reconstruida pelos filtros; a classe reaplica a entrada sem duplicar HTML.
+  function animarAtualizacaoGrade(area) {
+    if (!area || prefersReducedMotion()) {
+      return;
+    }
+
+    area?.classList?.remove("grade-produtos--atualizando");
+    window?.requestAnimationFrame?.(function () {
+      area?.classList?.add("grade-produtos--atualizando");
+      window?.setTimeout?.(function () {
+        area?.classList?.remove("grade-produtos--atualizando");
+      }, DURACAO_ATUALIZACAO_GRADE_MS);
+    });
   }
   function renderProductCard(product) {
     const images = Array.isArray(product?.images) && product?.images?.length
@@ -3565,19 +3587,27 @@
     }, 850);
   }
   function hasOpenOverlay() {
-    return Boolean(document?.querySelector?.(".fundo-escuro.show"));
+    return Boolean(document?.querySelector?.(".fundo-escuro.show, .fundo-escuro.sobreposicao-fechando"));
   }
   function updateOverlayScrollLock() {
     document.body?.classList?.toggle("overlay-scroll-lock", hasOpenOverlay());
   }
+  // SOBREPOSICAO | Espera a animacao de saida terminar antes de esconder o modal.
   function openOverlay(element) {
     if (!element) {
       return;
     }
+    const closeTimer = temporizadoresFechamentoSobreposicao.get(element);
+    if (closeTimer) {
+      window?.clearTimeout?.(closeTimer);
+      temporizadoresFechamentoSobreposicao.delete(element);
+    }
+
     element.hidden = false;
     element.inert = false;
     element?.setAttribute("aria-hidden", "false");
     element?.classList?.remove("oculto");
+    element?.classList?.remove("sobreposicao-fechando");
     element?.classList?.add("show");
     updateOverlayScrollLock();
   }
@@ -3586,11 +3616,25 @@
       return;
     }
     element?.classList?.remove("show");
-    element?.classList?.add("oculto");
+    element?.classList?.add("sobreposicao-fechando");
     element.inert = true;
-    element.hidden = true;
     element?.setAttribute("aria-hidden", "true");
     updateOverlayScrollLock();
+    const delay = prefersReducedMotion() ? 0 : DURACAO_FECHAMENTO_SOBREPOSICAO_MS;
+    const closeTimer = window?.setTimeout?.(function () {
+      if (element?.classList?.contains("show")) {
+        return;
+      }
+
+      element?.classList?.remove("sobreposicao-fechando");
+      element?.classList?.add("oculto");
+      element.hidden = true;
+      temporizadoresFechamentoSobreposicao.delete(element);
+      updateOverlayScrollLock();
+    }, delay);
+    if (closeTimer) {
+      temporizadoresFechamentoSobreposicao.set(element, closeTimer);
+    }
   }
   function openCart() {
     openOverlay($("caixaCarrinho"));

@@ -133,6 +133,12 @@
   --camada-janela: 1500;
   --camada-pular-conteudo: 2000;
   --camada-transicao-pagina: 9999;
+  --duracao-sobreposicao: 260ms;
+  --duracao-modal-entrada: 280ms;
+  --duracao-modal-saida: 230ms;
+  --duracao-painel-entrada: 260ms;
+  --duracao-painel-suave: 220ms;
+  --duracao-produto-entrada: 420ms;
   --fonte-corpo: "Manrope", sans-serif;
   --fonte-destaque: "Bebas Neue", sans-serif;
   --fonte-monoespacada: var(--fonte-corpo);
@@ -2056,6 +2062,35 @@ html[data-accessibility="enhanced"] .pix-valor {
   min-height: min(34rem, 72vh);
 }
 
+/* PRODUTOS | Reaplica uma entrada leve quando busca, filtro ou categoria reconstrui a grade. */
+.grade-produtos--atualizando .produto-card {
+  animation: produto-card-entrando var(--duracao-produto-entrada) ease-out both;
+}
+
+.grade-produtos--atualizando .produto-card:nth-child(2) {
+  animation-delay: 28ms;
+}
+
+.grade-produtos--atualizando .produto-card:nth-child(3) {
+  animation-delay: 56ms;
+}
+
+.grade-produtos--atualizando .produto-card:nth-child(n + 4) {
+  animation-delay: 84ms;
+}
+
+@keyframes produto-card-entrando {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .cabecalho-categoria {
   grid-column: 1 / -1;
   display: flex;
@@ -2408,9 +2443,75 @@ html[data-accessibility="enhanced"] .pix-valor {
   z-index: var(--camada-janela);
 }
 
-#caixaCarrinho:not(.show),
-#modalConfirmacao:not(.show) {
+#caixaCarrinho:not(.show):not(.sobreposicao-fechando),
+#modalConfirmacao:not(.show):not(.sobreposicao-fechando) {
   display: none !important;
+}
+
+/* SOBREPOSICAO | Mantem carrinho e confirmacao no DOM ate a animacao de saida terminar. */
+#caixaCarrinho.show,
+#modalConfirmacao.show {
+  animation: sobreposicao-entrando var(--duracao-sobreposicao) ease both;
+}
+
+#caixaCarrinho.sobreposicao-fechando,
+#modalConfirmacao.sobreposicao-fechando {
+  display: grid !important;
+  animation: sobreposicao-saindo var(--duracao-sobreposicao) ease both;
+}
+
+#caixaCarrinho.show .caixa-centro,
+#modalConfirmacao.show .caixa-centro {
+  animation: modal-entrando var(--duracao-modal-entrada) cubic-bezier(0.2, 0.72, 0.18, 1) both;
+}
+
+#caixaCarrinho.sobreposicao-fechando .caixa-centro,
+#modalConfirmacao.sobreposicao-fechando .caixa-centro {
+  animation: modal-saindo var(--duracao-modal-saida) ease both;
+}
+
+@keyframes sobreposicao-entrando {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sobreposicao-saindo {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-entrando {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modal-saindo {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
 }
 
 .caixa-centro {
@@ -5407,6 +5508,23 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   gap: 0.78rem;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   padding: 0 1rem 1rem;
+}
+
+.catalog-filters-panel[open] .catalog-toolbar {
+  animation: painel-conteudo-entrando var(--duracao-painel-entrada) ease-out both;
+  transform-origin: top;
+}
+
+@keyframes painel-conteudo-entrando {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .catalog-field {
@@ -17409,10 +17527,24 @@ body.admin-page .admin-mobile-form-save-bar {
   display: grid;
   gap: clamp(0.42rem, 0.8vw, 0.58rem);
   margin-top: 0.12rem;
+  max-height: 28rem;
+  opacity: 1;
+  overflow: hidden;
+  transform: translateY(0);
+  transition:
+    max-height var(--duracao-painel-entrada) ease,
+    opacity var(--duracao-painel-suave) ease,
+    margin-top var(--duracao-painel-suave) ease,
+    transform var(--duracao-painel-suave) ease;
 }
 
 #caixaCarrinho .painel-condicional.oculto {
-  display: none;
+  display: grid !important;
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
 }
 
 #caixaCarrinho .segmented {
