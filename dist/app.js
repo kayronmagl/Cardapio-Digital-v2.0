@@ -40,6 +40,7 @@
       footerBackToTop: "Voltar ao topo",
       footerViewMenu: "Ver cardápio",
       footerAdmin: "Entrar no Admin",
+      initialMenuLoading: "Carregando cardapio",
       authorCreditAria: "Crédito de autoria",
       authorCreditPrefix: "Cardápio digital por",
       locationSectionAria: "Localização",
@@ -289,6 +290,7 @@
       footerBackToTop: "Back to top",
       footerViewMenu: "View menu",
       footerAdmin: "Admin login",
+      initialMenuLoading: "Loading menu",
       authorCreditAria: "Author credit",
       authorCreditPrefix: "Digital menu by",
       locationSectionAria: "Location",
@@ -1220,12 +1222,16 @@
   function bootCloudCatalog() {
     if (!isCloudOnlineMode()) {
       closeRealtimeSubscription();
-      return;
+      return Promise.resolve(false);
     }
 
-    refreshCloudCatalogSilently({ notify: false })?.then(function () {
+    return refreshCloudCatalogSilently({ notify: false })?.then(function () {
       state.ignoreRealtimeUntil = Date.now() + 1500;
       startRealtimeSubscription();
+      return true;
+    })?.catch(function () {
+      closeRealtimeSubscription();
+      return false;
     });
   }
   function getProductById(productId) {
@@ -4390,9 +4396,28 @@
     bindEvents();
     setupPageNavigationTransition();
     setupAdminMobileBackReturn();
+    shared?.showPageTransitionLoading?.({
+      message: function () {
+        return t("initialMenuLoading");
+      },
+      brand: function () {
+        return textValue(getBrandConfig()?.brand?.name, currentLocale()) || t("businessNameFallback");
+      },
+    });
     syncFromSystem();
-    shared?.finishPageTransitionAfterVisualReady?.({ timeoutMs: 2400 });
-    bootCloudCatalog();
+    const catalogReady = Promise.race([
+      Promise.resolve(bootCloudCatalog()),
+      new Promise(function (resolve) {
+        window?.setTimeout?.(resolve, 3600);
+      }),
+    ]);
+    shared?.finishPageTransitionAfterVisualReady?.({
+      timeoutMs: 3600,
+      minDurationMs: 1100,
+      revealClass: "menu-entry-reveal",
+      revealDurationMs: 760,
+      waitFor: catalogReady,
+    });
     window?.setInterval(renderSchedule, 60000);
   }
 

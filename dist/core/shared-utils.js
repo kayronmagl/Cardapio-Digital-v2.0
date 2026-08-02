@@ -111,6 +111,7 @@
 
   const PAGE_TRANSITION_KEY = "template-cardapio-page-transition-v1";
   let pageTransitionArrivalActive = false;
+  let pageTransitionShownAt = 0;
   // TRANSIÇÃO | Anima apenas navegação interna comum e respeita preferências de movimento reduzido.
   function prefersReducedMotion() {
     return Boolean(window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
@@ -220,12 +221,38 @@
   function hidePageTransitionOverlay() {
     document?.body?.classList?.remove("page-transition-active");
     pageTransitionArrivalActive = false;
+    pageTransitionShownAt = 0;
     const overlay = document?.getElementById("templatePageTransition");
     if (!overlay) {
       return;
     }
     overlay.setAttribute("aria-hidden", "true");
     overlay?.classList?.remove("page-transition-overlay--show");
+  }
+  function revealPageAfterTransition(className, options) {
+    const revealClass = optionText(className, "");
+    if (!revealClass || !document?.body || prefersReducedMotion()) {
+      return;
+    }
+
+    document.body.classList.add(revealClass);
+    window?.setTimeout?.(function () {
+      document?.body?.classList?.remove(revealClass);
+    }, Math.max(240, Math.min(Number(options?.revealDurationMs ?? 760), 1600)));
+  }
+  function showPageTransitionLoading(options) {
+    if (pageTransitionArrivalActive || !document?.body) {
+      return false;
+    }
+
+    const overlay = getPageTransitionOverlay();
+    updatePageTransitionOverlay(overlay, options);
+    pageTransitionArrivalActive = true;
+    pageTransitionShownAt = Date.now();
+    document?.body?.classList?.add("page-transition-active");
+    overlay?.setAttribute("aria-hidden", "false");
+    overlay?.classList?.add("page-transition-overlay--show");
+    return true;
   }
   function markPageTransitionArrival(options) {
     let pending = false;
@@ -253,6 +280,7 @@
       }
       : options);
     pageTransitionArrivalActive = true;
+    pageTransitionShownAt = Date.now();
     document?.body?.classList?.add("page-transition-active");
     overlay?.setAttribute("aria-hidden", "false");
     overlay?.classList?.add("page-transition-overlay--show");
@@ -300,14 +328,31 @@
       timeout,
     ]);
   }
+  function waitForMinimumTransition(options) {
+    const minDurationMs = Math.max(0, Math.min(Number(options?.minDurationMs ?? 0), 3200));
+    const elapsed = pageTransitionShownAt ? Date.now() - pageTransitionShownAt : minDurationMs;
+    const remaining = Math.max(0, minDurationMs - elapsed);
+    if (!remaining) {
+      return Promise.resolve();
+    }
+
+    return new Promise(function (resolve) {
+      window?.setTimeout?.(resolve, remaining);
+    });
+  }
   function finishPageTransitionAfterVisualReady(options) {
     if (!pageTransitionArrivalActive) {
       return Promise.resolve(false);
     }
 
-    return waitForVisualReady(options)?.then(function () {
+    return Promise.all([
+      waitForVisualReady(options),
+      waitForMinimumTransition(options),
+      Promise.resolve(options?.waitFor)?.catch?.(function () {}),
+    ])?.then(function () {
       if (pageTransitionArrivalActive) {
         hidePageTransitionOverlay();
+        revealPageAfterTransition(options?.revealClass, options);
       }
       return true;
     });
@@ -662,6 +707,7 @@
     removeStorageValue,
     resolveAppliedAppearance,
     saveStorageValue,
+    showPageTransitionLoading,
     finishPageTransitionAfterVisualReady,
     setupPageTransition,
     sha256,
