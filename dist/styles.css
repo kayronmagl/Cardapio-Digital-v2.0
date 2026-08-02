@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "Manrope";
+  src: url("../assets/fonts/manrope-latin-variable.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("../assets/fonts/bebas-neue-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
 /* BASE | Guarda cores, fontes, bordas e tamanhos principais. Quando uma variavel muda aqui, cardapio publico e Admin acompanham a mesma identidade visual. */
 :root {
   color-scheme: light;
@@ -1366,17 +1382,18 @@ img {
 }
 
 .logo-site {
-  width: 72px;
-  height: 72px;
+  width: 82px;
+  height: 82px;
   flex: 0 0 auto;
   border-radius: 50%;
   object-fit: contain;
-  padding: 0.08rem;
-  border: 1px solid color-mix(in srgb, var(--cor-primaria) 38%, var(--borda-media));
+  padding: 0.16rem;
+  border: 1px solid color-mix(in srgb, var(--cor-primaria) 58%, var(--borda-media));
   background: #000000;
   box-shadow:
-    0 12px 28px color-mix(in srgb, var(--cor-sombra) 24%, transparent),
-    0 0 0 3px color-mix(in srgb, var(--cor-primaria) 9%, transparent);
+    0 14px 30px color-mix(in srgb, var(--cor-sombra) 28%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--cor-primaria) 13%, transparent),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .marca-topo {
@@ -3309,8 +3326,8 @@ html[data-accessibility="enhanced"] .pix-valor {
   }
 
   .logo-site {
-    width: 64px;
-    height: 64px;
+    width: 70px;
+    height: 70px;
   }
 
   .marca-topo {
@@ -3451,8 +3468,8 @@ html[data-accessibility="enhanced"] .pix-valor {
 
 @media (max-width: 540px) {
   .logo-site {
-    width: 58px;
-    height: 58px;
+    width: 66px;
+    height: 66px;
   }
 
   .titulo-site {
@@ -12160,6 +12177,13 @@ body:not(.cart-has-items) .barra-mobile {
     inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
+.produto-conteudo {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
 .produto-card:hover {
   border-color: color-mix(in srgb, var(--borda-media) 76%, transparent);
   box-shadow:
@@ -12192,18 +12216,27 @@ body:not(.cart-has-items) .barra-mobile {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
 }
 
+.produto-topo {
+  min-height: clamp(3.05rem, 4vw, 3.42rem);
+}
+
 .produto-card h3 {
   font-size: clamp(1.08rem, 1.05vw, 1.2rem);
   font-weight: var(--peso-pesado);
 }
 
 .produto-descricao {
+  min-height: calc(1.42em * 2);
   color: color-mix(in srgb, var(--texto-neutro) 88%, var(--cinza-sec) 12%);
 }
 
 .produto-descricao-longa,
 .produto-tags {
   color: color-mix(in srgb, var(--cinza-sec) 92%, var(--texto-neutro) 8%);
+}
+
+.produto-conteudo > .personalizacao {
+  margin-top: auto;
 }
 
 .preco-produto {
@@ -16873,14 +16906,15 @@ html[data-theme-preset="tobias-lanches"] .caixa-logo {
 }
 
 html[data-theme-preset="tobias-lanches"] .logo-site {
-  width: clamp(66px, 5.4vw, 78px);
-  height: clamp(66px, 5.4vw, 78px);
-  padding: 1px;
-  border-color: color-mix(in srgb, var(--cor-primaria) 52%, #000000 48%);
+  width: clamp(76px, 6.2vw, 88px);
+  height: clamp(76px, 6.2vw, 88px);
+  padding: 0.16rem;
+  border-color: color-mix(in srgb, var(--cor-primaria) 62%, #000000 38%);
+  background: #000000;
   box-shadow:
-    0 12px 28px rgba(0, 0, 0, 0.31),
-    0 0 0 2px rgba(var(--cor-primaria-rgb), 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    0 14px 30px rgba(0, 0, 0, 0.35),
+    0 0 0 3px rgba(var(--cor-primaria-rgb), 0.13),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 html[data-theme-preset="tobias-lanches"] .titulo-site {
@@ -16969,8 +17003,8 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horar
 
 @media (max-width: 540px) {
   html[data-theme-preset="tobias-lanches"] .logo-site {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
   }
 
   html[data-theme-preset="tobias-lanches"] .titulo-site {
@@ -16980,8 +17014,8 @@ html[data-theme-preset="tobias-lanches"] .topo-blocos--without-hero-image .horar
 
 @media (max-width: 360px) {
   html[data-theme-preset="tobias-lanches"] .logo-site {
-    width: 54px;
-    height: 54px;
+    width: 62px;
+    height: 62px;
   }
 
   html[data-theme-preset="tobias-lanches"] .titulo-site {
@@ -18476,11 +18510,16 @@ body.admin-page .admin-combo-product-filter select {
 
 @media (max-width: 600px) {
   .catalog-tools,
-  .grade-produtos,
-  .produto-card {
+  .grade-produtos {
     max-width: 100%;
     min-width: 0;
     overflow-x: clip;
+  }
+
+  .grade-produtos {
+    grid-template-columns: minmax(0, min(100%, 31rem));
+    justify-content: center;
+    justify-items: center;
   }
 
   .menu-categorias {
@@ -18490,7 +18529,11 @@ body.admin-page .admin-combo-product-filter select {
   }
 
   .produto-card {
-    width: 100%;
+    width: min(100%, 31rem);
+    max-width: 100%;
+    min-width: 0;
+    justify-self: center;
+    overflow-x: clip;
   }
 }
 

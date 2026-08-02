@@ -1074,7 +1074,7 @@
     categorySlug: "Código da categoria (opcional)",
     categoryDescriptionPt: "Descrição da categoria",
     categoryDescriptionEn: "Descrição da categoria em inglês",
-    addOnsSubtitle: "Cadastre extras que podem ser adicionados aos produtos, como queijo, bacon ou molhos.",
+    addOnsSubtitle: "Cadastre extras que podem ser adicionados aos produtos, como queijo ou molhos.",
     addOnFormTitle: "Cadastrar ou editar adicional",
     addOnId: "Código do adicional (opcional)",
     addOnEnabled: "Adicional ativo: aparece nos produtos vinculados",
@@ -1287,7 +1287,7 @@
     categorySlug: "Category code (optional)",
     categoryDescriptionPt: "Category description in PT-BR",
     categoryDescriptionEn: "Category description",
-    addOnsSubtitle: "Add extras that can be included with products, such as cheese, bacon, or sauces.",
+    addOnsSubtitle: "Add extras that can be included with products, such as cheese or sauces.",
     addOnFormTitle: "Add or edit add-on",
     addOnId: "Add-on code (optional)",
     addOnEnabled: "Active add-on: appears in linked products",
@@ -7599,6 +7599,8 @@
     } else {
       renderAuth();
     }
+
+    shared?.finishPageTransitionAfterVisualReady?.({ timeoutMs: 2400 });
 
     window?.setInterval(function () {
       if (!isAdminAuthenticated()) {

@@ -110,6 +110,7 @@
   }
 
   const PAGE_TRANSITION_KEY = "template-cardapio-page-transition-v1";
+  let pageTransitionArrivalActive = false;
   // TRANSIÇÃO | Anima apenas navegação interna comum e respeita preferências de movimento reduzido.
   function prefersReducedMotion() {
     return Boolean(window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
@@ -181,8 +182,44 @@
     document?.body?.appendChild(overlay);
     return overlay;
   }
+  function updatePageTransitionOverlay(overlay, options) {
+    const brand = optionText(options?.brand, "");
+    const message = optionText(options?.arrivalMessage || options?.message, "Carregando...");
+    const brandElement = overlay?.querySelector("[data-page-transition-brand]");
+    const messageElement = overlay?.querySelector("[data-page-transition-message]");
+
+    if (brandElement) {
+      brandElement.textContent = brand;
+      brandElement.hidden = !brand;
+    }
+    if (messageElement) {
+      messageElement.textContent = message;
+    }
+  }
+  function pageTransitionPayload(options) {
+    return {
+      brand: optionText(options?.brand, ""),
+      message: optionText(options?.message, "Carregando..."),
+    };
+  }
+  function parsePageTransitionPayload(raw) {
+    if (!raw || raw === "1") {
+      return null;
+    }
+
+    try {
+      const payload = JSON.parse(raw);
+      return {
+        brand: optionText(payload?.brand, ""),
+        message: optionText(payload?.message, ""),
+      };
+    } catch (error) {
+      return null;
+    }
+  }
   function hidePageTransitionOverlay() {
     document?.body?.classList?.remove("page-transition-active");
+    pageTransitionArrivalActive = false;
     const overlay = document?.getElementById("templatePageTransition");
     if (!overlay) {
       return;
@@ -190,20 +227,35 @@
     overlay.setAttribute("aria-hidden", "true");
     overlay?.classList?.remove("page-transition-overlay--show");
   }
-  function markPageTransitionArrival() {
+  function markPageTransitionArrival(options) {
     let pending = false;
+    let payload = null;
 
     try {
-      pending = getStorage("session")?.getItem(PAGE_TRANSITION_KEY) === "1";
+      const raw = getStorage("session")?.getItem(PAGE_TRANSITION_KEY);
+      pending = Boolean(raw);
+      payload = parsePageTransitionPayload(raw);
       getStorage("session")?.removeItem(PAGE_TRANSITION_KEY);
     } catch (error) {
       pending = false;
     }
 
     if (!pending || !document?.body) {
-      return;
+      return false;
     }
 
+    const overlay = getPageTransitionOverlay();
+    updatePageTransitionOverlay(overlay, payload?.message || payload?.brand
+      ? {
+        ...options,
+        brand: payload?.brand,
+        message: payload?.message,
+      }
+      : options);
+    pageTransitionArrivalActive = true;
+    document?.body?.classList?.add("page-transition-active");
+    overlay?.setAttribute("aria-hidden", "false");
+    overlay?.classList?.add("page-transition-overlay--show");
     document.body.classList.add("page-transition-arrive");
     const clearArrival = function () {
       document?.body?.classList?.remove("page-transition-arrive");
@@ -211,10 +263,54 @@
 
     if (prefersReducedMotion()) {
       clearArrival();
-      return;
+      return true;
     }
 
     window?.setTimeout(clearArrival, 260);
+    return true;
+  }
+  function waitForVisualReady(options) {
+    const timeoutMs = Math.max(320, Math.min(Number(options?.timeoutMs ?? 2400), 5000));
+    const waitFrame = new Promise(function (resolve) {
+      const schedule = typeof window?.requestAnimationFrame === "function"
+        ? window.requestAnimationFrame.bind(window)
+        : function (callback) { window?.setTimeout?.(callback, 16); };
+      schedule(function () {
+        schedule(resolve);
+      });
+    });
+    const waitFonts = document?.fonts?.ready?.catch?.(function () {}) || Promise.resolve();
+    const imagePromises = Array.from(document?.images || [])
+      .filter(function (image) {
+        return image && !image.complete && image.loading !== "lazy";
+      })
+      .slice(0, 16)
+      .map(function (image) {
+        return new Promise(function (resolve) {
+          image.addEventListener("load", resolve, { once: true });
+          image.addEventListener("error", resolve, { once: true });
+        });
+      });
+    const timeout = new Promise(function (resolve) {
+      window?.setTimeout?.(resolve, timeoutMs);
+    });
+
+    return Promise.race([
+      Promise.all([waitFrame, waitFonts, Promise.all(imagePromises)]),
+      timeout,
+    ]);
+  }
+  function finishPageTransitionAfterVisualReady(options) {
+    if (!pageTransitionArrivalActive) {
+      return Promise.resolve(false);
+    }
+
+    return waitForVisualReady(options)?.then(function () {
+      if (pageTransitionArrivalActive) {
+        hidePageTransitionOverlay();
+      }
+      return true;
+    });
   }
   function setupPageTransition(options) {
     const selector = String(options?.selector || "").trim();
@@ -222,10 +318,12 @@
       return;
     }
 
-    markPageTransitionArrival();
+    markPageTransitionArrival(options);
 
-    window?.addEventListener("pageshow", function () {
-      hidePageTransitionOverlay();
+    window?.addEventListener("pageshow", function (event) {
+      if (event?.persisted) {
+        hidePageTransitionOverlay();
+      }
     });
 
     document?.addEventListener("click", function (event) {
@@ -236,21 +334,10 @@
 
       event.preventDefault();
       const overlay = getPageTransitionOverlay();
-      const brand = optionText(options?.brand, "");
-      const message = optionText(options?.message, "Carregando...");
-      const brandElement = overlay?.querySelector("[data-page-transition-brand]");
-      const messageElement = overlay?.querySelector("[data-page-transition-message]");
-
-      if (brandElement) {
-        brandElement.textContent = brand;
-        brandElement.hidden = !brand;
-      }
-      if (messageElement) {
-        messageElement.textContent = message;
-      }
+      updatePageTransitionOverlay(overlay, options);
 
       try {
-        getStorage("session")?.setItem(PAGE_TRANSITION_KEY, "1");
+        getStorage("session")?.setItem(PAGE_TRANSITION_KEY, JSON.stringify(pageTransitionPayload(options)));
       } catch (error) {
       }
 
@@ -575,6 +662,7 @@
     removeStorageValue,
     resolveAppliedAppearance,
     saveStorageValue,
+    finishPageTransitionAfterVisualReady,
     setupPageTransition,
     sha256,
     slugify,

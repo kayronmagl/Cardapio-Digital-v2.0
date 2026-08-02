@@ -4391,6 +4391,7 @@
     setupPageNavigationTransition();
     setupAdminMobileBackReturn();
     syncFromSystem();
+    shared?.finishPageTransitionAfterVisualReady?.({ timeoutMs: 2400 });
     bootCloudCatalog();
     window?.setInterval(renderSchedule, 60000);
   }
