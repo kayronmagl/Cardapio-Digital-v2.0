@@ -255,14 +255,7 @@ A aplicação aceita hospedagem em qualquer provedor de conteúdo estático.
 * **Vercel:** O arquivo `vercel.json` na raiz do repositório já contém as regras de reescrita e cabeçalhos.
 * **Outros Servidores (Netlify, GitHub Pages):** Requer apenas a alocação dos arquivos do repositório no diretório público do servidor.
 
-<div align="center">
-  <img
-    width="72%"
-    height="1"
-    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
-    alt=""
-  />
-</div>
+<br>
 
 ## Licença
 
