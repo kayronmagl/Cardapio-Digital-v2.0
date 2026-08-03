@@ -1,344 +1,269 @@
-# Cardápio Digital v2.0 - Tobia's Lanches
-
 <div align="center">
-  <p>Uma evolução da primeira versão do cardápio digital, com categorias mais fáceis de encontrar, fechamento do pedido mais previsível e um painel Admin voltado para ajustes diários de catálogo, taxas, horários e combos.</p>
-  <p>
-    <a href="https://cardapio-digital-tobias-lanches-v2-0.vercel.app/"><b>Ver projeto online</b>
+  <img
+    width="100%"
+    src="https://capsule-render.vercel.app/api?type=waving&height=115&section=header&color=0:5C5C5C,50:6F6F6F,100:828282&animation=twinkling"
+    alt="Cabeçalho"
+  />  
 </div>
 
-## Visão geral
+<div align="center">
+  <img
+    src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=23&duration=2800&pause=1000&color=828282&center=true&vCenter=true&width=720&height=75&lines=Card%C3%A1pio+Digital+v2.0"
+    alt="Cardápio Digital v2.0"
+  />
+</div>
 
-O **Cardápio Digital v2.0** nasceu da evolução da primeira versão criada para o Tobia's Lanches. A primeira versão já tirava o pedido da conversa solta no WhatsApp e transformava o PDF em um cardápio web. A v2.0 levou essa base para uma rotina mais completa de atendimento, com catálogo maior, checkout por tipo de atendimento, Admin para manutenção diária e operação online com Supabase.
+<div align="center">
+  <p>
+    Conhecça a evolução do Cardápio Digital do Tobia's Lanches!
+  </p>
 
-A solução foi reorganizar a experiência pública e o painel Admin para deixar o fluxo do pedido mais fácil de acompanhar. O cliente navega pelo cardápio, monta o pedido, confere itens, valores e forma de atendimento, e envia a mensagem pronta pelo WhatsApp. No Admin, a manutenção do catálogo, das configurações e da personalização fica concentrada em uma estrutura mais fácil de continuar evoluindo.
+  <p>
+    <a href="https://cardapio-digital-tobias-lanches-v2-0.vercel.app/index.html">
+      <img src="https://img.shields.io/badge/Projeto_ao_vivo-0D1117?style=for-the-badge&logo=vercel&logoColor=828282" alt="Projeto ao vivo"/>
+    </a>
+    <a href="LICENSE">
+      <img src="https://img.shields.io/badge/Licen%C3%A7a-0D1117?style=for-the-badge&logo=opensourceinitiative&logoColor=828282" alt="Licença"/>
+    </a>
+  </p>
+</div>
 
-## Resumo rápido
+<div align="center">
+  <img
+    width="72%"
+    height="1"
+    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
+    alt=""
+  />
+</div>
 
-| Área | O que a v2.0 entrega |
-| --- | --- |
-| Público | Categorias visíveis, carrinho com resumo do pedido e checkout dividido por tipo de atendimento |
-| Admin | Edição de produtos, categorias, adicionais, combos, horários, Pix, taxas e dados do estabelecimento |
-| Operação | Controle de disponibilidade, horários, taxas, Pix e localidades |
-| Online | Integração com Supabase por `config.js` |
-| Publicação | Arquivos estáticos prontos para uso local ou deploy na Vercel |
+<br>
 
-## Contexto do projeto
+## Visão Geral
 
-### O problema
+O **Cardápio Digital v2.0** é a evolução do meu projeto de cardápio digital, pensada para entregar uma experiência mais completa tanto para quem faz o pedido quanto para quem administra o catálogo
 
-A primeira versão já resolvia um ponto importante: tirar o pedido do PDF e das mensagens soltas no WhatsApp. Mesmo assim, o projeto ainda precisava cobrir mais partes do dia a dia do estabelecimento. O catálogo cresceu, o checkout precisava lidar com entrega, retirada e consumo no local, e o Admin precisava dar mais controle para editar dados sem depender de mudanças diretas no código.
+O sistema é dividido em dois blocos:
 
-### Qual foi a solução?
+* **Área pública:** interface focada em facilitar a navegação do catálogo, seleção de produtos, cálculo de taxas e fechamento do pedido pelo cliente.
+* **Painel administrativo:** nova interface de controle focada para o ADM do Tobia's contendo o cadastro de produtos, categorias, adicionais, combos, horários de funcionamento, personalização visual, trocas e adição de imagens, taxas por localidade e formas de pagamento.
 
-Reorganizei a área pública e o painel Admin para transformar o cardápio em uma base mais próxima de produto. A área pública ficou focada em escolha, revisão e envio do pedido. O Admin ficou focado em manutenção: produtos, categorias, adicionais, combos, horários, Pix, localidades, taxas e integração online.
+O cardápio suporta operação offline por meio de armazenamento local ou sincronização online via integração nativa com o **Supabase**.
 
-### Minha contribuição
+<div align="center">
+  <img
+    width="72%"
+    height="1"
+    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
+    alt=""
+  />
+</div>
 
-- Na concepção, defini a evolução da primeira versão para uma base mais completa.
-- Na análise de requisitos, organizei as necessidades do cliente, do atendimento e do Admin.
-- No design e na modelagem, planejei a interface pública, o fluxo de pedido e a estrutura do painel administrativo.
-- No código, desenvolvi catálogo, carrinho, checkout, Admin e integração com Supabase.
-- Nos testes, validei funcionamento e responsividade em diferentes tamanhos de tela.
-- Na implantação, publiquei na Vercel e deixei a base preparada para ajustes e evolução.
-
-### O que se destaca?
-
-- Catálogo público com produtos, categorias, adicionais e combos em uma navegação direta.
-- Checkout preparado para entrega, retirada ou consumo no local, com taxa por localidade, Pix, mesa e dados de endereço.
-- Painel Admin para cuidar do catálogo, horários, localidades, taxas, personalização e uso online com Supabase.
-
-## O que mudou em relação à versão anterior
-
-### Interface pública
-- Categorias e produtos separados de forma mais fácil de escanear
-- Títulos, descrições e preços com leitura mais direta no cardápio
-- Combos em seção própria, sem parecerem improviso dentro da lista de produtos
-- Carrinho com comportamento mais previsível em desktop e mobile
-- Checkout separado para entrega, retirada e consumo no local
-- Resumo do pedido mais fácil de conferir antes de abrir o WhatsApp
-
-### Painel administrativo
-- Cadastro do catálogo separado por produtos, categorias, adicionais e combos
-- Organização do Admin seguindo a rotina de edição do estabelecimento
-- Configurações reunindo dados usados no pedido, como horários, Pix, taxas e localidades
-- Ajustes recorrentes concentrados no painel e no `config.js`, sem exigir edição do HTML principal
-
-### Operação do estabelecimento
-- Controle de disponibilidade de produtos
-- Controle de horários de funcionamento
-- Configuração de Pix e formas de pagamento
-- Configuração de taxas e localidades de entrega
-- Dados prontos para sincronização online quando o Supabase estiver configurado
-
-## Recursos novos da v2.0
-
-Além da reorganização visual e estrutural, a v2.0 concentra recursos que aparecem no fluxo de pedido de ponta a ponta: idioma, acessibilidade, combos, entrega por localidade, Pix e atualização online.
-
-### Recursos novos no público
-
-- **Idioma em PT-BR e EN**
-  - A interface pública conta com seletor de idioma e estrutura preparada para conteúdo bilíngue.
-
-- **Modo de acessibilidade**
-  - O topo da aplicação inclui um modo acessível com leitura reforçada para deixar textos e controles mais fáceis de identificar.
-
-- **Combos com destaque próprio**
-  - A versão 2.0 ganhou uma área dedicada para combos, com título próprio, indicação de economia e adição direta ao carrinho.
-
-- **Checkout por tipo de atendimento**
-  - O cliente pode escolher entre entrega, retirada ou consumo no local, sem depender de um fluxo único e engessado.
-
-- **Pedido no local com identificação de mesa**
-  - Para consumo no estabelecimento, o sistema permite informar o número da mesa no próprio checkout.
-
-- **Entrega por localidade**
-  - A taxa pode variar por localidade, e o sistema também trata casos em que determinada área não está disponível para entrega.
-
-- **Link opcional do Google Maps**
-  - O cliente pode informar um link da localização para facilitar a entrega, sem precisar preencher dados técnicos.
-
-- **Painel de Pix no checkout**
-  - Ao escolher Pix, a chave aparece no fluxo de pagamento com suporte para cópia rápida.
-
-- **Feedback de atualização online**
-  - Quando o modo online está ativo, o público recebe mensagens de atualização do cardápio sem depender de recarga manual como única saída.
-
-### Recursos novos no Admin
-
-- **Gestão do catálogo e da operação**
-  - A manutenção não fica restrita a produtos: a v2.0 organiza categorias, adicionais, combos, horários, taxas, Pix e dados do estabelecimento.
-
-- **Área de Nuvem**
-  - O projeto passa a ter uma área específica para operação online, conectando a manutenção diária com a estrutura de sincronização.
-
-- **Relatórios**
-  - O painel inclui uma área dedicada para leitura operacional e acompanhamento, então o Admin não fica limitado ao cadastro de produtos.
-
-- **Imagens preparadas para operação online**
-  - A estrutura do projeto já considera bucket de imagens (`product-images`) para publicação e manutenção visual do catálogo.
-
-- **Publicação e manutenção contínua**
-  - Em vez de funcionar apenas como uma página estática editada manualmente, a v2.0 separa arquivos e dados para facilitar atualizações frequentes.
-
-## Principais funcionalidades
-
-### Catálogo público
-Na área pública, o cliente pode:
-
-- navegar pelas categorias do cardápio
-- visualizar produtos com nome, descrição e preço
-- acessar combos em seção dedicada
-- adicionar itens ao carrinho
-- escolher adicionais quando aplicável
-- alternar idioma da interface
-- ativar o modo de acessibilidade
-- revisar o pedido antes do envio
-- finalizar tudo pelo WhatsApp
-
-### Carrinho e checkout
-O fluxo de pedido cobre:
-
-- revisão dos itens do carrinho
-- resumo financeiro do pedido
-- escolha entre entrega, retirada ou consumo no local
-- seleção da localidade de entrega
-- cálculo de taxa quando aplicável
-- preenchimento de endereço e referência
-- preenchimento de número da mesa para consumo no local
-- uso opcional de link do Google Maps
-- exibição de dados do Pix com cópia rápida da chave
-- confirmação final antes de abrir o WhatsApp
-
-### Painel Admin
-O `admin.html` concentra a gestão do sistema e cobre:
-
-- **Produtos**
-- **Categorias**
-- **Adicionais**
-- **Combos**
-- **Configurações**
-- **Nuvem**
-- **Relatórios**
-
-Na prática, isso permite atualizar o cardápio e os dados operacionais com muito mais controle do que na primeira versão.
-
-## Estrutura do projeto
+## Arquitetura do projeto
 
 ```text
-Cardapio Digital v2.0/
-|-- index.html
-|-- admin.html
-|-- config.js
-|-- vercel.json
-|-- robots.txt
-|-- LICENSE
-|-- README.md
-|-- assets/
-`-- dist/
+Cliente
+│
+▼
+Frontend (HTML5 / CSS3 / JavaScript)
+│
+├── Supabase Database (PostgreSQL)
+├── Supabase Storage (Imagens de Produtos)
+├── Supabase Realtime (Sincronização de Dados)
+│
+▼
+WhatsApp Web / Application API Link
+
 ```
 
-### Arquivos principais
+<div align="center">
+  <img
+    width="72%"
+    height="1"
+    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
+    alt=""
+  />
+</div>
 
-| Arquivo | Função |
+## Recursos
+
+### Área Pública
+
+* Navegação estruturada por categorias.
+* Catálogo de produtos e seções de combos.
+* Seleção e personalização de adicionais.
+* Gerenciamento de estado do carrinho de compras.
+* Checkout parametrizado por modalidade de atendimento.
+* Exibição estática e dinâmica de chave Pix para pagamento.
+* Suporte a internacionalização (PT-BR / EN).
+* Camada de acessibilidade nativa.
+* Formatação e encaminhamento de payload para o WhatsApp.
+
+### Painel Administrativo
+
+* CRUD de produtos e controle de visibilidade.
+* CRUD de categorias do cardápio.
+* CRUD de adicionais e vinculação por produto.
+* CRUD de combos configuráveis.
+* Definição de horários de funcionamento e status da loja.
+* Gestão de localidades e taxas de entrega estipuladas.
+* Cadastro de formas de pagamento aceitas.
+* Emissão de relatórios de operações.
+* Configuração e teste de conexão com o Supabase.
+
+<div align="center">
+  <img
+    width="72%"
+    height="1"
+    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
+    alt=""
+  />
+</div>
+
+## Funcionalidades
+
+### Área Pública
+
+| Funcionalidade | Descrição Técnica |
 | --- | --- |
-| `index.html` | Entrada do cardápio público |
-| `admin.html` | Entrada do painel administrativo |
-| `config.js` | Configuração pública do modo online |
-| `assets/` | Logo, favicon e arquivos visuais |
-| `dist/` | Scripts e estilos usados pelo público e pelo Admin |
-| `vercel.json` | Regras de deploy e headers para publicação |
+| **Filtro de Catálogo** | Filtragem de itens em tempo de execução baseada na categoria selecionada. |
+| **Visualização de Produto** | Exibição de atributos principais: nome, descrição detalhada, preço unitário e imagem. |
+| **Módulo de Combos** | Mapeamento e exibição de agrupamentos de itens configurados via painel. |
+| **Gerenciamento de Carrinho** | Adição, remoção e alteração de quantidades com atualização contínua do total. |
+| **Opções de Adicionais** | Inclusão de complementos vinculados à estrutura relacional do produto. |
+| **Acessibilidade e Idioma** | Alternância de idioma (PT-BR/EN) e aplicação de estilos para alto contraste. |
+| **Envio do Pedido** | Redirecionamento estruturado para a API do WhatsApp com o texto do pedido formatado. |
 
-## Fluxo de uso
+### Carrinho e Checkout
 
-### Área pública
-1. O cliente abre o cardápio
-2. Navega pelas categorias
-3. Escolhe os produtos
-4. Adiciona itens ao carrinho
-5. Revisa o pedido
-6. Define entrega, retirada ou consumo no local
-7. Confirma os dados
-8. Abre o WhatsApp com a mensagem pronta para envio
+| Módulo | Parâmetros e Operações |
+| --- | --- |
+| **Resumo Financeiro** | Cálculo do subtotal, aplicação de taxa de entrega e somatório final do pedido. |
+| **Tipo de Atendimento** | Seleção entre três modalidades: Entrega (Delivery), Retirada no Local ou Consumo na Mesa. |
+| **Logística e Endereço** | Inclusão de logradouro, ponto de referência, número da mesa ou link do Google Maps. |
+| **Pagamento Pix** | Renderização da chave Pix cadastrada para cópia direta durante o fluxo do checkout. |
+| **Validação de Envio** | Verificação de campos obrigatórios antes da geração do payload do WhatsApp. |
 
-### Área administrativa
-1. O responsável acessa `admin.html`
-2. Entra no painel
-3. Ajusta catálogo e configurações
-4. Publica ou sincroniza os dados conforme o modo configurado
-5. Revisa o resultado no cardápio público
+### Painel Administrativo
 
-## Tecnologias utilizadas
+| Módulo | Escopo de Gestão |
+| --- | --- |
+| **Gestão de Produtos** | Inserção, edição, exclusão e atribuição de imagens no bucket do Supabase. |
+| **Gestão de Categorias** | Ordenação e cadastro das seções que compõem o menu principal. |
+| **Gestão de Adicionais** | Configuração de itens extras e associação com a tabela relacional correspondente. |
+| **Gestão de Combos** | Definição de pacotes promocionais contendo múltiplos produtos cadastrados. |
+| **Configuração de Loja** | Alteração de dados institucionais, status de funcionamento e taxas por bairro/região. |
+| **Relatórios** | Consolidação e visualização gráfica de dados operacionais dos pedidos. |
 
-### Frontend
-- HTML5
-- CSS3
-- JavaScript Vanilla
+### Descrição dos Arquivos Principais
 
-### Operação online
-- Supabase
-- Supabase Storage
-- Supabase Realtime
+| Arquivo / Diretório | Função no Sistema |
+| --- | --- |
+| `index.html` | Ponto de entrada da interface pública do cardápio e checkout. |
+| `admin.html` | Ponto de entrada do painel administrativo e telas de gestão. |
+| `config.js` | Arquivo contendo os parâmetros de inicialização do cliente Supabase. |
+| `assets/` | Diretório de recursos estáticos (logos, favicons e elementos gráficos). |
+| `dist/` | Scripts empacotados, módulos JavaScript e arquivos de estilo compilados. |
+| `vercel.json` | Arquivo de parametrização de rotas e headers para deploy na Vercel. |
 
-### Publicação
-- Vercel
+<div align="center">
+  <img
+    width="72%"
+    height="1"
+    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
+    alt=""
+  />
+</div>
 
-Essa base mantém o projeto leve, com arquivos estáticos para publicação rápida e suporte a Supabase quando a operação precisar de sincronização online.
+## Banco de Dados
 
-## Modo online
+A persistência de dados no Supabase é baseada nas seguintes tabelas relacionais:
 
-O projeto suporta operação online com Supabase, e a configuração pública fica centralizada em `config.js`.
+| Tabela | Função | Chave Primária / Relações |
+| --- | --- | --- |
+| `menu_categories` | Armazena as categorias do catálogo. | `id` |
+| `menu_products` | Armazena os produtos e preços. | `id`, Foreign Key `category_id` -> `menu_categories.id` |
+| `menu_add_ons` | Armazena os adicionais disponíveis. | `id` |
+| `menu_product_add_ons` | Tabela associativa entre produtos e adicionais. | Foreign Key `product_id`, Foreign Key `add_on_id` |
+| `menu_settings` | Armazena as configurações globais da aplicação. | `id` |
 
-Hoje, essa configuração cobre:
+### Storage
 
-- ativação do modo online
-- provider usado
-- realtime
-- URL do projeto Supabase
-- chave pública `anon`
-- schema
-- nomes das tabelas
-- bucket de imagens
+* **Bucket:** `product-images` (Utilizado para armazenamento de imagens de produtos e identificadores visuais do estabelecimento).
 
-### Estrutura configurada
-- `menu_categories`
-- `menu_products`
-- `menu_add_ons`
-- `menu_product_add_ons`
-- `menu_settings`
-- bucket `product-images`
+<div align="center">
+  <img
+    width="72%"
+    height="1"
+    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
+    alt=""
+  />
+</div>
 
-### Importante
-O `config.js` deve conter apenas dados públicos compatíveis com frontend, como:
+## Modo Online
 
-- URL pública
-- chave `anon`
-- nomes das tabelas
-- bucket
+A integração com serviços externos é gerenciada centralmente pelo arquivo `config.js`.
 
-Ele **não** deve receber:
+### Parâmetros do `config.js`
 
-- chave administrativa do Supabase
-- credenciais privadas
-- segredos de backend
+* Habilitação da sincronização remota (`true`/`false`).
+* Identificação do provider (`supabase`).
+* Configuração de escuta via WebSockets (`realtime`).
+* Endpoint da API (`SUPABASE_URL`).
+* Chave de acesso público (`SUPABASE_ANON_KEY`).
+* Schema do banco de dados (padrão: `public`).
+* Mapeamento das tabelas e do bucket de armazenamento.
 
-## Uso e publicação
+### Diretrizes de Segurança
 
-### Uso local
-- abra `index.html` para acessar o cardápio
-- abra `admin.html` para acessar o painel administrativo
+| Permitido em `config.js` | Proibido em `config.js` |
+| --- | --- |
+| URL pública do projeto | Chave de serviço (`service_role`) |
+| Chave pública anônima (`anon`) | Credenciais administrativas de banco |
+| Nomes das tabelas e buckets | Chaves privadas e segredos de API |
 
-Esta versão já inclui a pasta `dist/`, então não depende de build para uso comum.
-
-### Publicação
-- para publicar sem backend próprio, basta hospedar os arquivos
-- para deploy na Vercel, o projeto já inclui `vercel.json`
-- a estrutura atual já está pronta para deploy estático
+<div align="center">
+  <img
+    width="72%"
+    height="1"
+    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
+    alt=""
+  />
+</div>
 
 ## Personalização
 
-Sem alterar a estrutura principal, é possível ajustar:
+A aplicação permite parametrização de elementos visuais e operacionais sem alteração do código-fonte principal:
 
-- logo
-- favicon
-- textos do estabelecimento
-- dados de contato
-- dados de pagamento
-- catálogo
-- categorias
-- adicionais
-- combos
-- horários
-- disponibilidade
-- localidades e taxas de entrega
+* **Identidade Visual:** substituição dos arquivos de imagem em `assets/` (logo e favicon).
+* **Conteúdo do Catálogo:** modificação dos cadastros de categorias, produtos, adicionais e combos via painel.
+* **Regras de Negócio:** ajuste de horários de atendimento, taxas de entrega por localidade e formas de pagamento no painel administrativo.
 
-Isso permite reaproveitar a base para outro estabelecimento trocando conteúdo, identidade visual e dados operacionais, sem reconstruir a aplicação.
+<div align="center">
+  <img
+    width="72%"
+    height="1"
+    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
+    alt=""
+  />
+</div>
 
-## O que evoluiu?
+## Deploy
 
-A primeira versão cumpria bem a função de transformar um cardápio estático em uma experiência clicável com envio por WhatsApp. Ela provou que o fluxo de atendimento podia ficar mais rápido e organizado.
+A aplicação aceita hospedagem em qualquer provedor de conteúdo estático.
 
-A v2.0 deixou de ser apenas um ajuste visual e passou a ser uma base de produto em uso, com:
+* **Vercel:** O arquivo `vercel.json` na raiz do repositório já contém as regras de reescrita e cabeçalhos.
+* **Outros Servidores (Netlify, GitHub Pages):** Requer apenas a alocação dos arquivos do repositório no diretório público do servidor.
 
-- telas públicas com hierarquia visível entre títulos, botões, descrições e preços
-- fluxo público com passos mais previsíveis
-- layout ajustado para leitura em desktop e mobile
-- suporte a idioma e acessibilidade na experiência pública
-- checkout separado para entrega, retirada e consumo no local
-- localidade de entrega com cálculo e bloqueio por área
-- Pix integrado ao fluxo de fechamento do pedido
-- combos tratados como parte real da experiência, não como exceção
-- Admin organizado por tarefas de manutenção
-- estrutura preparada para continuar evoluindo o projeto
-- conexão online documentada por `config.js` e tabelas Supabase
-
-Em resumo: a ideia continua direta, mas agora o projeto cobre mais etapas reais do pedido, da manutenção e da publicação online.
-
-## Indicação de uso
-
-Esta base é adequada para cenários como:
-
-- quiosques
-- lanchonetes
-- pequenos negócios de alimentação com cardápio atualizado com frequência
-- operações que recebem pedidos por WhatsApp
-- cardápios digitais com necessidade de manutenção frequente
-- publicação rápida de um cardápio estático com opção de sincronização online
-
-## Observações finais
-
-- o projeto pode ser publicado como site estático
-- a área pública prioriza leitura e pedido no celular
-- o Admin concentra os ajustes diários do cardápio e da operação
-- a configuração online depende do `config.js`
-- branding e conteúdo podem ser ajustados sem reestruturar a base
+<div align="center">
+  <img
+    width="72%"
+    height="1"
+    src="https://capsule-render.vercel.app/api?type=rect&height=1&color=0:5C5C5C,50:828282,100:5C5C5C"
+    alt=""
+  />
+</div>
 
 ## Licença
 
-Este projeto é protegido por direitos autorais.
-
-Consulte o arquivo `LICENSE` para a política de uso desta base.
-
-## Autor
-
-Desenvolvido por **Kayron Magalhães**.
-Todos os direitos reservados.
+Este projeto está sujeito aos termos de propriedade intelectual descritos no arquivo LICENSE.
