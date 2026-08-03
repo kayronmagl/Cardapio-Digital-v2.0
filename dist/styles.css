@@ -269,7 +269,7 @@
   --cor-contraste-destaque: #17212d;
 }
 
-/* TEMA | Preset completo do Tobias Lanches. Ele segue o preto, amarelo dourado e branco do logo para manter o cardapio alinhado com a marca. */
+/* TEMA | Presets oficiais do cardapio. A lista fica curta para o Admin escolher temas de marca e datas comerciais sem perder previsibilidade. */
 [data-theme-preset="tobias-lanches"] {
   --cor-primaria: #ffc000;
   --cor-primaria-rgb: 255, 192, 0;
@@ -345,591 +345,260 @@
     color-mix(in srgb, var(--cor-superficie) 70%, var(--cor-fundo) 30%);
 }
 
-/* TEMA | Preset escuro premium. Ele muda a sensacao visual para algo mais elegante, mantendo textos, cards e botoes legiveis. */
 [data-theme-preset="dark-premium"] {
   --cor-primaria: #d4ad54;
   --cor-primaria-interacao: #e1bf72;
   --cor-primaria-suave: rgba(212, 173, 84, 0.14);
-  --cor-fundo: #0c1320;
-  --cor-fundo-alternativo: #121926;
-  --cor-superficie: #131c2b;
-  --cor-superficie-forte: #1a2435;
-  --cor-texto: #f8fafc;
-  --cor-texto-suave: #bcc8d8;
-  --cor-sobre-escuro: #f8fafc;
-  --cor-sobre-escuro-suave: #dde5f0;
-  --cor-sobre-escuro-sutil: #8c98ab;
-  --cor-borda-suave: rgba(248, 250, 252, 0.08);
-  --cor-borda-media: rgba(248, 250, 252, 0.14);
+  --cor-fundo: #030303;
+  --cor-fundo-alternativo: #080806;
+  --cor-superficie: #11100c;
+  --cor-superficie-forte: #211b0b;
+  --cor-texto: #fffdf4;
+  --cor-texto-suave: #d8cfb6;
+  --cor-sobre-escuro: #fffdf4;
+  --cor-sobre-escuro-suave: #eee2bd;
+  --cor-sobre-escuro-sutil: #ad9d73;
+  --cor-borda-suave: rgba(255, 255, 255, 0.08);
+  --cor-borda-media: rgba(212, 173, 84, 0.24);
   --cor-foco: #e1bf72;
-  --cor-anel-foco: rgba(225, 191, 114, 0.28);
-  --cor-sobreposicao: rgba(2, 6, 23, 0.78);
-  --cor-sombra: 0 24px 56px rgba(2, 6, 23, 0.42);
-  --cor-contraste-destaque: #111827;
-  --cor-brilho-fundo-a: rgba(212, 173, 84, 0.1);
-  --cor-brilho-fundo-b: rgba(71, 85, 105, 0.08);
+  --cor-anel-foco: rgba(225, 191, 114, 0.24);
+  --cor-sobreposicao: rgba(0, 0, 0, 0.84);
+  --cor-sombra: 0 24px 56px rgba(0, 0, 0, 0.54);
+  --cor-contraste-destaque: #050504;
+  --cor-brilho-fundo-a: rgba(212, 173, 84, 0.08);
+  --cor-brilho-fundo-b: rgba(255, 255, 255, 0.035);
   --cor-painel-destaque: #d8c188;
-  --cor-painel-fundo-inicio: color-mix(in srgb, var(--cor-primaria) 10%, #1e2a3c 90%);
-  --cor-painel-fundo-meio: color-mix(in srgb, var(--cor-primaria) 7%, #172131 93%);
-  --cor-painel-fundo-fim: #0c1320;
-  --cor-painel-sobreposicao: rgba(212, 173, 84, 0.1);
+  --cor-painel-fundo-inicio: color-mix(in srgb, #d4ad54 8%, #211b0b 92%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #d4ad54 5%, #11100c 95%);
+  --cor-painel-fundo-fim: #030303;
+  --cor-painel-sobreposicao: rgba(212, 173, 84, 0.08);
   --erro: #e8a0ab;
   --sucesso: #76c8ad;
   --aviso-texto: #d3a764;
 }
 
-/* TEMA | Preset claro e limpo. Ele deixa o cardapio mais leve para lojas que preferem fundo claro e cores menos pesadas. */
-[data-theme-preset="light-clean"] {
-  --cor-primaria: #4f7892;
-  --cor-primaria-interacao: #3f647a;
-  --cor-primaria-suave: rgba(79, 120, 146, 0.12);
-  --cor-contraste-destaque: #ffffff;
-  --cor-fundo: #f7f8f6;
-  --cor-fundo-alternativo: #edf1ef;
-  --cor-superficie: #ffffff;
-  --cor-superficie-forte: #f0f3f1;
-  --cor-texto: #17212d;
-  --cor-texto-suave: #566373;
-  --cor-sobre-escuro: #17212d;
-  --cor-sobre-escuro-suave: #4f5a68;
-  --cor-sobre-escuro-sutil: #748091;
-  --cor-borda-suave: rgba(15, 23, 42, 0.08);
-  --cor-borda-media: rgba(23, 33, 45, 0.12);
-  --cor-foco: #4f7892;
-  --cor-anel-foco: rgba(79, 120, 146, 0.22);
-  --cor-sombra: 0 20px 44px rgba(15, 23, 42, 0.08);
-  --cor-brilho-fundo-a: rgba(79, 120, 146, 0.1);
-  --cor-brilho-fundo-b: rgba(148, 163, 184, 0.08);
-  --cor-painel-destaque: #4f7892;
-  --cor-painel-fundo-inicio: color-mix(in srgb, var(--cor-primaria) 7%, #ffffff 93%);
-  --cor-painel-fundo-meio: color-mix(in srgb, var(--cor-primaria) 5%, #f7f8f6 95%);
-  --cor-painel-fundo-fim: #edf1ef;
-  --cor-painel-sobreposicao: rgba(79, 120, 146, 0.06);
-  --cor-painel-selo-fundo: rgba(255, 255, 255, 0.72);
-  --cor-painel-selo-borda: rgba(23, 33, 45, 0.08);
-  --cor-painel-bloco-fundo: rgba(255, 255, 255, 0.76);
-  --cor-painel-bloco-borda: rgba(23, 33, 45, 0.08);
-  --erro: #9d5b58;
-  --sucesso: #2f7668;
-  --aviso-texto: #6e7f4f;
+[data-theme-preset="carnaval"] {
+  --cor-primaria: #ffc000;
+  --cor-primaria-interacao: #e94b7b;
+  --cor-primaria-suave: rgba(255, 192, 0, 0.15);
+  --cor-fundo: #090407;
+  --cor-fundo-alternativo: #150916;
+  --cor-superficie: #1d0d1f;
+  --cor-superficie-forte: #2b1430;
+  --cor-texto: #fff8ee;
+  --cor-texto-suave: #dfc8d7;
+  --cor-sobre-escuro: #fff8ee;
+  --cor-sobre-escuro-suave: #eed9e6;
+  --cor-sobre-escuro-sutil: #b894ad;
+  --cor-borda-suave: rgba(255, 255, 255, 0.08);
+  --cor-borda-media: rgba(255, 192, 0, 0.26);
+  --cor-foco: #ffc000;
+  --cor-anel-foco: rgba(255, 192, 0, 0.22);
+  --cor-sobreposicao: rgba(9, 4, 7, 0.84);
+  --cor-sombra: 0 24px 56px rgba(7, 2, 8, 0.48);
+  --cor-contraste-destaque: #090407;
+  --cor-brilho-fundo-a: rgba(233, 75, 123, 0.11);
+  --cor-brilho-fundo-b: rgba(255, 192, 0, 0.08);
+  --cor-painel-destaque: #ffd45c;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #e94b7b 9%, #2b1430 91%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #ffc000 6%, #1d0d1f 94%);
+  --cor-painel-fundo-fim: #090407;
+  --cor-painel-sobreposicao: rgba(255, 192, 0, 0.08);
+  --erro: #f0a0a6;
+  --sucesso: #89c7a4;
+  --aviso-texto: #ffc000;
 }
 
-[data-theme-preset="burger-red"] {
-  --cor-primaria: #c76d48;
-  --cor-primaria-interacao: #b95d43;
-  --cor-primaria-suave: rgba(199, 109, 72, 0.16);
-  --cor-contraste-destaque: #1b1110;
-  --cor-fundo: #1b1110;
-  --cor-fundo-alternativo: #241514;
-  --cor-superficie: #271715;
-  --cor-superficie-forte: #34201d;
-  --cor-texto: #f8efe9;
-  --cor-texto-suave: #d7c1b5;
-  --cor-sobre-escuro: #f8efe9;
-  --cor-sobre-escuro-suave: #e5d2c8;
-  --cor-sobre-escuro-sutil: #c5a28e;
+[data-theme-preset="sao-joao-nordeste"] {
+  --cor-primaria: #ffc000;
+  --cor-primaria-interacao: #df6b2f;
+  --cor-primaria-suave: rgba(255, 192, 0, 0.15);
+  --cor-fundo: #120805;
+  --cor-fundo-alternativo: #1d0f08;
+  --cor-superficie: #271408;
+  --cor-superficie-forte: #3a210d;
+  --cor-texto: #fff6e8;
+  --cor-texto-suave: #e2c7a8;
+  --cor-sobre-escuro: #fff6e8;
+  --cor-sobre-escuro-suave: #ecd5b8;
+  --cor-sobre-escuro-sutil: #c29a6f;
   --cor-borda-suave: rgba(255, 247, 237, 0.08);
-  --cor-borda-media: rgba(132, 74, 62, 0.28);
-  --cor-foco: #cf8a64;
-  --cor-anel-foco: rgba(207, 138, 100, 0.24);
-  --cor-sobreposicao: rgba(24, 8, 8, 0.84);
-  --cor-sombra: 0 24px 56px rgba(18, 6, 6, 0.44);
-  --cor-brilho-fundo-a: rgba(145, 63, 55, 0.12);
-  --cor-brilho-fundo-b: rgba(199, 109, 72, 0.08);
-  --cor-painel-destaque: #d8ab93;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #8f453f 10%, #271715 90%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #c76d48 8%, #34201d 92%);
-  --cor-painel-fundo-fim: #1b1110;
-  --cor-painel-sobreposicao: rgba(199, 109, 72, 0.1);
-  --erro: #d99992;
-  --sucesso: #7eb99c;
-  --aviso-texto: #cf8a64;
+  --cor-borda-media: rgba(255, 192, 0, 0.26);
+  --cor-foco: #ffc000;
+  --cor-anel-foco: rgba(255, 192, 0, 0.22);
+  --cor-sobreposicao: rgba(18, 8, 5, 0.84);
+  --cor-sombra: 0 24px 56px rgba(16, 6, 2, 0.48);
+  --cor-contraste-destaque: #120805;
+  --cor-brilho-fundo-a: rgba(215, 80, 40, 0.11);
+  --cor-brilho-fundo-b: rgba(42, 121, 75, 0.07);
+  --cor-painel-destaque: #ffd05a;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #d75028 9%, #3a210d 91%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #ffc000 6%, #271408 94%);
+  --cor-painel-fundo-fim: #120805;
+  --cor-painel-sobreposicao: rgba(255, 192, 0, 0.08);
+  --erro: #e8a0a0;
+  --sucesso: #89c59c;
+  --aviso-texto: #ffc000;
 }
 
-[data-theme-preset="fresh-green"] {
-  --cor-primaria: #768f46;
-  --cor-primaria-interacao: #637940;
-  --cor-primaria-suave: rgba(118, 143, 70, 0.16);
-  --cor-fundo: #0d1f17;
-  --cor-fundo-alternativo: #13271d;
-  --cor-superficie: #162c21;
-  --cor-superficie-forte: #20382a;
-  --cor-texto: #eff5ef;
-  --cor-texto-suave: #c1d0c1;
-  --cor-sobre-escuro: #eff5ef;
-  --cor-sobre-escuro-suave: #d9e4d7;
-  --cor-sobre-escuro-sutil: #97ac96;
-  --cor-borda-suave: rgba(240, 253, 244, 0.08);
-  --cor-borda-media: rgba(104, 126, 88, 0.26);
-  --cor-foco: #8ba45c;
-  --cor-anel-foco: rgba(139, 164, 92, 0.24);
-  --cor-sobreposicao: rgba(2, 44, 25, 0.82);
-  --cor-sombra: 0 24px 56px rgba(2, 44, 25, 0.42);
-  --cor-contraste-destaque: #032314;
-  --cor-brilho-fundo-a: rgba(90, 126, 86, 0.1);
-  --cor-brilho-fundo-b: rgba(118, 143, 70, 0.08);
-  --cor-painel-destaque: #bcc8ab;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #5f7a57 10%, #20382a 90%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #768f46 8%, #162c21 92%);
-  --cor-painel-fundo-fim: #0d1f17;
-  --cor-painel-sobreposicao: rgba(118, 143, 70, 0.1);
-  --erro: #d79ba4;
-  --sucesso: #8eb59c;
-  --aviso-texto: #b3c48a;
+[data-theme-preset="dia-das-maes"] {
+  --cor-primaria: #f5d7c8;
+  --cor-primaria-interacao: #d87a8a;
+  --cor-primaria-suave: rgba(245, 215, 200, 0.14);
+  --cor-fundo: #100609;
+  --cor-fundo-alternativo: #1c0b11;
+  --cor-superficie: #281019;
+  --cor-superficie-forte: #3b1725;
+  --cor-texto: #fff7f4;
+  --cor-texto-suave: #e6c7c2;
+  --cor-sobre-escuro: #fff7f4;
+  --cor-sobre-escuro-suave: #eed6d1;
+  --cor-sobre-escuro-sutil: #c9999d;
+  --cor-borda-suave: rgba(255, 245, 245, 0.08);
+  --cor-borda-media: rgba(216, 122, 138, 0.28);
+  --cor-foco: #f5d7c8;
+  --cor-anel-foco: rgba(245, 215, 200, 0.22);
+  --cor-sobreposicao: rgba(16, 6, 9, 0.84);
+  --cor-sombra: 0 24px 56px rgba(14, 4, 8, 0.48);
+  --cor-contraste-destaque: #100609;
+  --cor-brilho-fundo-a: rgba(216, 122, 138, 0.1);
+  --cor-brilho-fundo-b: rgba(245, 215, 200, 0.06);
+  --cor-painel-destaque: #f5d7c8;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #d87a8a 9%, #3b1725 91%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #f5d7c8 5%, #281019 95%);
+  --cor-painel-fundo-fim: #100609;
+  --cor-painel-sobreposicao: rgba(245, 215, 200, 0.07);
+  --erro: #eca2a8;
+  --sucesso: #8fc3a0;
+  --aviso-texto: #f5d7c8;
 }
 
-[data-theme-preset="acai-purple"] {
-  --cor-primaria: #8d6178;
-  --cor-primaria-interacao: #775063;
-  --cor-primaria-suave: rgba(141, 97, 120, 0.16);
-  --cor-contraste-destaque: #ffffff;
-  --cor-fundo: #1a1218;
-  --cor-fundo-alternativo: #24171f;
-  --cor-superficie: #281a23;
-  --cor-superficie-forte: #36212d;
-  --cor-texto: #f6eef3;
-  --cor-texto-suave: #d3c1cb;
-  --cor-sobre-escuro: #f6eef3;
-  --cor-sobre-escuro-suave: #e6dae1;
-  --cor-sobre-escuro-sutil: #aa8d9c;
-  --cor-borda-suave: rgba(250, 245, 255, 0.08);
-  --cor-borda-media: rgba(124, 82, 104, 0.26);
-  --cor-foco: #a67d91;
-  --cor-anel-foco: rgba(166, 125, 145, 0.24);
-  --cor-sobreposicao: rgba(23, 8, 36, 0.84);
-  --cor-sombra: 0 24px 56px rgba(20, 8, 31, 0.44);
-  --cor-brilho-fundo-a: rgba(141, 97, 120, 0.1);
-  --cor-brilho-fundo-b: rgba(79, 53, 72, 0.08);
-  --cor-painel-destaque: #d4bcc8;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #8d6178 10%, #36212d 90%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #6a4557 8%, #281a23 92%);
-  --cor-painel-fundo-fim: #1a1218;
-  --cor-painel-sobreposicao: rgba(141, 97, 120, 0.1);
-  --erro: #d79ca7;
-  --sucesso: #88b5be;
-  --aviso-texto: #c1a2b2;
-}
-
-[data-theme-preset="coffee-brown"] {
-  --cor-primaria: #d09a61;
-  --cor-primaria-interacao: #ba804b;
-  --cor-primaria-suave: rgba(208, 154, 97, 0.16);
-  --cor-fundo: #120b07;
-  --cor-fundo-alternativo: #1b100a;
-  --cor-superficie: #21140d;
-  --cor-superficie-forte: #312015;
-  --cor-texto: #faefe3;
-  --cor-texto-suave: #dac1aa;
-  --cor-sobre-escuro: #faefe3;
-  --cor-sobre-escuro-suave: #ead4bf;
-  --cor-sobre-escuro-sutil: #bd9671;
-  --cor-borda-suave: rgba(255, 247, 237, 0.08);
-  --cor-borda-media: rgba(132, 86, 52, 0.3);
-  --cor-foco: #d2a46e;
-  --cor-anel-foco: rgba(210, 164, 110, 0.24);
-  --cor-sobreposicao: rgba(19, 9, 4, 0.84);
-  --cor-sombra: 0 24px 56px rgba(14, 6, 3, 0.44);
-  --cor-contraste-destaque: #1a0e08;
-  --cor-brilho-fundo-a: rgba(151, 93, 49, 0.1);
-  --cor-brilho-fundo-b: rgba(208, 154, 97, 0.08);
-  --cor-painel-destaque: #e0b37c;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #8e5834 10%, #312015 90%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #d09a61 8%, #21140d 92%);
-  --cor-painel-fundo-fim: #120b07;
-  --cor-painel-sobreposicao: rgba(208, 154, 97, 0.1);
-  --erro: #d39da3;
-  --sucesso: #8db79e;
-  --aviso-texto: #d2a46e;
-}
-
-[data-theme-preset="ocean-blue"] {
-  --cor-primaria: #5688a2;
-  --cor-primaria-interacao: #46748a;
-  --cor-primaria-suave: rgba(86, 136, 162, 0.16);
-  --cor-fundo: #0d1a21;
-  --cor-fundo-alternativo: #12222b;
-  --cor-superficie: #162a34;
-  --cor-superficie-forte: #1f3742;
-  --cor-texto: #eef4f7;
-  --cor-texto-suave: #bfd0d8;
-  --cor-sobre-escuro: #eef4f7;
-  --cor-sobre-escuro-suave: #d9e5ea;
-  --cor-sobre-escuro-sutil: #90a9b6;
-  --cor-borda-suave: rgba(240, 249, 255, 0.08);
-  --cor-borda-media: rgba(82, 118, 138, 0.28);
-  --cor-foco: #719ab0;
-  --cor-anel-foco: rgba(113, 154, 176, 0.24);
-  --cor-sobreposicao: rgba(4, 24, 38, 0.82);
-  --cor-sombra: 0 24px 56px rgba(4, 16, 28, 0.42);
-  --cor-contraste-destaque: #021727;
-  --cor-brilho-fundo-a: rgba(86, 136, 162, 0.1);
-  --cor-brilho-fundo-b: rgba(49, 87, 107, 0.08);
-  --cor-painel-destaque: #b6c9d2;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #4b7388 10%, #1f3742 90%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #5688a2 8%, #162a34 92%);
-  --cor-painel-fundo-fim: #0d1a21;
-  --cor-painel-sobreposicao: rgba(86, 136, 162, 0.1);
-  --erro: #d8a079;
-  --sucesso: #84b7c4;
-  --aviso-texto: #9ebcca;
-}
-
-[data-theme-preset="pizza-orange"] {
-  --cor-primaria: #df9144;
-  --cor-primaria-interacao: #c77d38;
-  --cor-primaria-suave: rgba(223, 145, 68, 0.16);
-  --cor-contraste-destaque: #211207;
-  --cor-fundo: #241407;
-  --cor-fundo-alternativo: #2e1a0a;
-  --cor-superficie: #39200d;
-  --cor-superficie-forte: #4c2d16;
-  --cor-texto: #fbefe0;
-  --cor-texto-suave: #e4c1a0;
-  --cor-sobre-escuro: #fbefe0;
-  --cor-sobre-escuro-suave: #efd4b5;
-  --cor-sobre-escuro-sutil: #d0a070;
-  --cor-borda-suave: rgba(255, 247, 237, 0.08);
-  --cor-borda-media: rgba(174, 96, 39, 0.32);
-  --cor-foco: #e3a160;
-  --cor-anel-foco: rgba(227, 161, 96, 0.24);
-  --cor-sobreposicao: rgba(31, 13, 3, 0.84);
-  --cor-sombra: 0 24px 56px rgba(22, 8, 2, 0.44);
-  --cor-brilho-fundo-a: rgba(198, 92, 28, 0.1);
-  --cor-brilho-fundo-b: rgba(223, 145, 68, 0.08);
-  --cor-painel-destaque: #e5ae75;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #b76729 10%, #4c2d16 90%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #df9144 8%, #39200d 92%);
-  --cor-painel-fundo-fim: #241407;
-  --cor-painel-sobreposicao: rgba(223, 145, 68, 0.1);
-  --erro: #d8a0a7;
-  --sucesso: #8fb59d;
-  --aviso-texto: #e3a160;
-}
-
-[data-theme-preset="bakery-cream"] {
-  --cor-primaria: #b88a56;
-  --cor-primaria-interacao: #976b41;
-  --cor-primaria-suave: rgba(184, 138, 86, 0.12);
-  --cor-fundo: #f6f1e8;
-  --cor-fundo-alternativo: #eee5d7;
-  --cor-superficie: #fbf8f2;
-  --cor-superficie-forte: #f1e8da;
-  --cor-texto: #3f3124;
-  --cor-texto-suave: #756252;
-  --cor-sobre-escuro: #3f3124;
-  --cor-sobre-escuro-suave: #684f3c;
-  --cor-sobre-escuro-sutil: #98806b;
-  --cor-borda-suave: rgba(124, 45, 18, 0.12);
-  --cor-borda-media: rgba(190, 160, 126, 0.52);
-  --cor-foco: #b88a56;
-  --cor-anel-foco: rgba(184, 138, 86, 0.2);
-  --cor-sobreposicao: rgba(59, 36, 20, 0.42);
-  --cor-sombra: 0 20px 44px rgba(90, 63, 38, 0.1);
-  --cor-contraste-destaque: #302317;
-  --cor-brilho-fundo-a: rgba(184, 138, 86, 0.08);
-  --cor-brilho-fundo-b: rgba(128, 101, 70, 0.06);
-  --cor-painel-destaque: #8f6b4a;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #ffffff 82%, #f2e6d6 18%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #efe5d8 80%, #faf6ef 20%);
-  --cor-painel-fundo-fim: #f8f3eb;
-  --cor-painel-sobreposicao: rgba(184, 138, 86, 0.05);
-  --cor-painel-selo-fundo: rgba(255, 255, 255, 0.78);
-  --cor-painel-selo-borda: rgba(143, 107, 74, 0.12);
-  --cor-painel-bloco-fundo: rgba(255, 255, 255, 0.74);
-  --cor-painel-bloco-borda: rgba(184, 138, 86, 0.12);
-  --erro: #a96b51;
-  --sucesso: #4b7b5f;
-  --aviso-texto: #a57a48;
-}
-
-[data-theme-preset="minimal-black"] {
-  --cor-primaria: #cfd6d5;
-  --cor-primaria-interacao: #e5ecea;
-  --cor-primaria-suave: rgba(207, 214, 213, 0.12);
-  --cor-fundo: #0a0b0d;
-  --cor-fundo-alternativo: #121316;
-  --cor-superficie: #16171a;
-  --cor-superficie-forte: #212328;
-  --cor-texto: #f3f4f6;
-  --cor-texto-suave: #c8ccd2;
-  --cor-sobre-escuro: #f3f4f6;
-  --cor-sobre-escuro-suave: #e0e3e7;
-  --cor-sobre-escuro-sutil: #9ba0a8;
-  --cor-borda-suave: rgba(250, 250, 250, 0.08);
-  --cor-borda-media: rgba(86, 89, 96, 0.62);
-  --cor-foco: #cfd6d5;
-  --cor-anel-foco: rgba(207, 214, 213, 0.22);
-  --cor-sobreposicao: rgba(0, 0, 0, 0.84);
-  --cor-sombra: 0 24px 56px rgba(0, 0, 0, 0.46);
-  --cor-contraste-destaque: #0b0c0d;
-  --cor-brilho-fundo-a: rgba(207, 214, 213, 0.06);
-  --cor-brilho-fundo-b: rgba(255, 255, 255, 0.04);
-  --cor-painel-destaque: #d8dddc;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #cfd6d5 5%, #212328 95%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #e5ecea 4%, #16171a 96%);
-  --cor-painel-fundo-fim: #0a0b0d;
-  --cor-painel-sobreposicao: rgba(207, 214, 213, 0.06);
-  --erro: #d49aa5;
-  --sucesso: #8eb8b0;
-  --aviso-texto: #d8dddc;
-}
-
-[data-theme-preset="tropical-yellow"] {
-  --cor-primaria: #c7a14a;
-  --cor-primaria-interacao: #ab8840;
-  --cor-primaria-suave: rgba(199, 161, 74, 0.16);
-  --cor-fundo: #18140d;
-  --cor-fundo-alternativo: #211b12;
-  --cor-superficie: #272014;
-  --cor-superficie-forte: #342a1a;
-  --cor-texto: #f7f1df;
-  --cor-texto-suave: #d9cca5;
-  --cor-sobre-escuro: #f7f1df;
-  --cor-sobre-escuro-suave: #e8dfbf;
-  --cor-sobre-escuro-sutil: #b8a768;
-  --cor-borda-suave: rgba(254, 252, 232, 0.08);
-  --cor-borda-media: rgba(129, 103, 52, 0.32);
-  --cor-foco: #d2b366;
-  --cor-anel-foco: rgba(210, 179, 102, 0.24);
-  --cor-sobreposicao: rgba(20, 16, 6, 0.84);
-  --cor-sombra: 0 24px 56px rgba(16, 12, 4, 0.44);
-  --cor-contraste-destaque: #1f1a0a;
-  --cor-brilho-fundo-a: rgba(199, 161, 74, 0.1);
-  --cor-brilho-fundo-b: rgba(106, 132, 66, 0.08);
-  --cor-painel-destaque: #d6c085;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #8a7c44 8%, #342a1a 92%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #c7a14a 6%, #272014 94%);
-  --cor-painel-fundo-fim: #18140d;
-  --cor-painel-sobreposicao: rgba(199, 161, 74, 0.1);
-  --erro: #d89e6b;
-  --sucesso: #8db497;
-  --aviso-texto: #d2b366;
-}
-
-[data-theme-preset="neutral-gray"] {
-  --cor-primaria: #5e6872;
-  --cor-primaria-interacao: #48535e;
-  --cor-primaria-suave: rgba(94, 104, 114, 0.12);
-  --cor-fundo: #edf0f1;
-  --cor-fundo-alternativo: #e1e5e7;
-  --cor-superficie: #f9faf9;
-  --cor-superficie-forte: #e7ebed;
-  --cor-texto: #222930;
-  --cor-texto-suave: #5e6872;
-  --cor-sobre-escuro: #222930;
-  --cor-sobre-escuro-suave: #4f5963;
-  --cor-sobre-escuro-sutil: #7b858e;
-  --cor-borda-suave: rgba(34, 41, 48, 0.08);
-  --cor-borda-media: rgba(94, 104, 114, 0.18);
-  --cor-foco: #5e6872;
-  --cor-anel-foco: rgba(94, 104, 114, 0.22);
-  --cor-sobreposicao: rgba(34, 41, 48, 0.42);
-  --cor-sombra: 0 20px 44px rgba(34, 41, 48, 0.1);
-  --cor-contraste-destaque: #ffffff;
-  --cor-brilho-fundo-a: rgba(94, 104, 114, 0.08);
-  --cor-brilho-fundo-b: rgba(148, 163, 184, 0.08);
-  --cor-painel-destaque: #5e6872;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #ffffff 78%, #dce1e4 22%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #e1e5e7 84%, #f9faf9 16%);
-  --cor-painel-fundo-fim: #edf0f1;
-  --cor-painel-sobreposicao: rgba(94, 104, 114, 0.05);
-  --erro: #9c5f66;
-  --sucesso: #48796e;
-  --aviso-texto: #667257;
-}
-
-[data-theme-preset="pastel-soft"] {
-  --cor-primaria: #8b7bb5;
-  --cor-primaria-interacao: #74659d;
-  --cor-primaria-suave: rgba(139, 123, 181, 0.12);
-  --cor-contraste-destaque: #1f1830;
-  --cor-fundo: #f4f0fa;
-  --cor-fundo-alternativo: #ebe4f5;
-  --cor-superficie: #fffaff;
-  --cor-superficie-forte: #eee6f7;
-  --cor-texto: #2d2638;
-  --cor-texto-suave: #6b6178;
-  --cor-sobre-escuro: #2d2638;
-  --cor-sobre-escuro-suave: #5a5068;
-  --cor-sobre-escuro-sutil: #9285a4;
-  --cor-borda-suave: rgba(69, 56, 92, 0.1);
-  --cor-borda-media: rgba(201, 190, 220, 0.72);
-  --cor-foco: #8b7bb5;
-  --cor-anel-foco: rgba(139, 123, 181, 0.2);
-  --cor-sobreposicao: rgba(36, 27, 54, 0.42);
-  --cor-sombra: 0 18px 40px rgba(98, 78, 128, 0.1);
-  --cor-brilho-fundo-a: rgba(139, 123, 181, 0.08);
-  --cor-brilho-fundo-b: rgba(111, 143, 134, 0.05);
-  --cor-painel-destaque: #8b7bb5;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #fffaff 82%, #e6dcf3 18%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #ebe4f5 84%, #f4f0fa 16%);
-  --cor-painel-fundo-fim: #f4f0fa;
-  --cor-painel-sobreposicao: rgba(139, 123, 181, 0.05);
-  --cor-painel-selo-fundo: rgba(255, 255, 255, 0.78);
-  --cor-painel-selo-borda: rgba(99, 116, 122, 0.12);
-  --cor-painel-bloco-fundo: rgba(255, 255, 255, 0.74);
-  --cor-painel-bloco-borda: rgba(139, 123, 181, 0.1);
-  --erro: #a76072;
-  --sucesso: #3f7a73;
-  --aviso-texto: #89779e;
-}
-
-[data-theme-preset="ice-cream-pink"] {
-  --cor-primaria: #c37792;
-  --cor-primaria-interacao: #cb926f;
-  --cor-primaria-suave: rgba(195, 119, 146, 0.12);
-  --cor-contraste-destaque: #311622;
-  --cor-fundo: #fcf3f4;
-  --cor-fundo-alternativo: #f7e7e8;
-  --cor-superficie: #fffdfd;
-  --cor-superficie-forte: #faecee;
-  --cor-texto: #40212d;
-  --cor-texto-suave: #8a5e6f;
-  --cor-sobre-escuro: #40212d;
-  --cor-sobre-escuro-suave: #744858;
-  --cor-sobre-escuro-sutil: #b18495;
-  --cor-borda-suave: rgba(159, 18, 57, 0.12);
-  --cor-borda-media: rgba(222, 189, 198, 0.74);
-  --cor-foco: #c37792;
-  --cor-anel-foco: rgba(195, 119, 146, 0.18);
-  --cor-sobreposicao: rgba(59, 10, 30, 0.4);
-  --cor-sombra: 0 18px 40px rgba(136, 86, 104, 0.1);
-  --cor-brilho-fundo-a: rgba(195, 119, 146, 0.08);
-  --cor-brilho-fundo-b: rgba(203, 146, 111, 0.06);
-  --cor-painel-destaque: #b96482;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #fffdfd 82%, #f6e5e7 18%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #f7e7e8 84%, #fcf3f4 16%);
-  --cor-painel-fundo-fim: #fcf3f4;
-  --cor-painel-sobreposicao: rgba(195, 119, 146, 0.05);
-  --cor-painel-selo-fundo: rgba(255, 255, 255, 0.78);
-  --cor-painel-selo-borda: rgba(138, 94, 111, 0.12);
-  --cor-painel-bloco-fundo: rgba(255, 255, 255, 0.74);
-  --cor-painel-bloco-borda: rgba(195, 119, 146, 0.1);
-  --erro: #a75872;
-  --sucesso: #487a73;
-  --aviso-texto: #c98d70;
-}
-
-[data-theme-preset="rustic-wood"] {
-  --cor-primaria: #9a8b59;
-  --cor-primaria-interacao: #847545;
-  --cor-primaria-suave: rgba(154, 139, 89, 0.16);
-  --cor-fundo: #19180f;
-  --cor-fundo-alternativo: #211f13;
-  --cor-superficie: #272417;
-  --cor-superficie-forte: #393520;
-  --cor-texto: #f3f0e5;
-  --cor-texto-suave: #cbc4a9;
-  --cor-sobre-escuro: #f3f0e5;
-  --cor-sobre-escuro-suave: #e0dbc7;
-  --cor-sobre-escuro-sutil: #aaa17b;
-  --cor-borda-suave: rgba(255, 247, 237, 0.08);
-  --cor-borda-media: rgba(116, 107, 72, 0.34);
-  --cor-foco: #afa26e;
-  --cor-anel-foco: rgba(175, 162, 110, 0.24);
-  --cor-sobreposicao: rgba(16, 14, 7, 0.84);
-  --cor-sombra: 0 24px 56px rgba(12, 10, 4, 0.44);
-  --cor-contraste-destaque: #15140c;
-  --cor-brilho-fundo-a: rgba(112, 101, 63, 0.1);
-  --cor-brilho-fundo-b: rgba(74, 91, 60, 0.07);
-  --cor-painel-destaque: #c2b783;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #6f6a44 9%, #393520 91%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #9a8b59 7%, #272417 93%);
-  --cor-painel-fundo-fim: #19180f;
-  --cor-painel-sobreposicao: rgba(154, 139, 89, 0.1);
-  --erro: #d39c76;
-  --sucesso: #8eaf95;
-  --aviso-texto: #c2b783;
-}
-
-[data-theme-preset="colorblind-safe"] {
-  --cor-primaria: #d09a45;
+[data-theme-preset="dia-dos-pais"] {
+  --cor-primaria: #ffc000;
   --cor-primaria-interacao: #4f87ad;
-  --cor-primaria-suave: rgba(208, 154, 69, 0.14);
-  --cor-fundo: #151a22;
-  --cor-fundo-alternativo: #1d2430;
-  --cor-superficie: #222b39;
-  --cor-superficie-forte: #2d3848;
-  --cor-texto: #f4f6f7;
-  --cor-texto-suave: #d0d6db;
-  --cor-sobre-escuro: #f4f6f7;
-  --cor-sobre-escuro-suave: #e1e6ea;
-  --cor-sobre-escuro-sutil: #9bbacf;
-  --cor-borda-suave: rgba(249, 250, 251, 0.08);
-  --cor-borda-media: rgba(98, 112, 131, 0.58);
-  --cor-foco: #5d95b8;
-  --cor-anel-foco: rgba(93, 149, 184, 0.24);
-  --cor-sobreposicao: rgba(8, 12, 20, 0.82);
-  --cor-sombra: 0 24px 56px rgba(2, 6, 23, 0.42);
-  --cor-contraste-destaque: #111827;
+  --cor-primaria-suave: rgba(255, 192, 0, 0.14);
+  --cor-fundo: #06090d;
+  --cor-fundo-alternativo: #0c1118;
+  --cor-superficie: #111923;
+  --cor-superficie-forte: #1b2836;
+  --cor-texto: #f7fbff;
+  --cor-texto-suave: #c8d4df;
+  --cor-sobre-escuro: #f7fbff;
+  --cor-sobre-escuro-suave: #dce7ef;
+  --cor-sobre-escuro-sutil: #94aabd;
+  --cor-borda-suave: rgba(240, 249, 255, 0.08);
+  --cor-borda-media: rgba(255, 192, 0, 0.24);
+  --cor-foco: #ffc000;
+  --cor-anel-foco: rgba(255, 192, 0, 0.22);
+  --cor-sobreposicao: rgba(6, 9, 13, 0.84);
+  --cor-sombra: 0 24px 56px rgba(2, 6, 13, 0.48);
+  --cor-contraste-destaque: #06090d;
   --cor-brilho-fundo-a: rgba(79, 135, 173, 0.1);
-  --cor-brilho-fundo-b: rgba(208, 154, 69, 0.08);
-  --cor-painel-destaque: #d7b36d;
-  --cor-painel-fundo-inicio: color-mix(in srgb, #4f87ad 8%, #2d3848 92%);
-  --cor-painel-fundo-meio: color-mix(in srgb, #d09a45 6%, #222b39 94%);
-  --cor-painel-fundo-fim: #151a22;
-  --cor-painel-sobreposicao: rgba(79, 135, 173, 0.08);
-  --erro: #d78e55;
-  --sucesso: #6aa7c8;
-  --aviso-texto: #d09a45;
-  --cor-sucesso-fundo: color-mix(in srgb, #6aa7c8 14%, var(--cor-superficie));
-  --cor-sucesso-borda: color-mix(in srgb, #6aa7c8 34%, var(--cor-borda-media));
-  --cor-sucesso-texto: #c0def0;
-  --cor-erro-fundo: color-mix(in srgb, #d78e55 14%, var(--cor-superficie));
-  --cor-erro-borda: color-mix(in srgb, #d78e55 34%, var(--cor-borda-media));
-  --cor-erro-texto: #e9c29e;
+  --cor-brilho-fundo-b: rgba(255, 192, 0, 0.07);
+  --cor-painel-destaque: #ffd05a;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #4f87ad 9%, #1b2836 91%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #ffc000 5%, #111923 95%);
+  --cor-painel-fundo-fim: #06090d;
+  --cor-painel-sobreposicao: rgba(255, 192, 0, 0.07);
+  --erro: #e49d93;
+  --sucesso: #86c5ad;
+  --aviso-texto: #ffc000;
 }
 
-[data-theme-preset="high-contrast"] {
-  --cor-primaria: #facc15;
-  --cor-primaria-interacao: #ffffff;
-  --cor-primaria-suave: rgba(250, 204, 21, 0.16);
-  --cor-fundo: #000000;
-  --cor-fundo-alternativo: #111111;
-  --cor-superficie: #111111;
-  --cor-superficie-forte: #1f1f1f;
-  --cor-texto: #ffffff;
-  --cor-texto-suave: #e5e7eb;
-  --cor-sobre-escuro: #ffffff;
-  --cor-sobre-escuro-suave: #ffffff;
-  --cor-sobre-escuro-sutil: #facc15;
-  --cor-borda-suave: rgba(255, 255, 255, 0.24);
-  --cor-borda-media: rgba(255, 255, 255, 0.9);
-  --cor-foco: #facc15;
-  --cor-anel-foco: rgba(250, 204, 21, 0.34);
-  --cor-sobreposicao: rgba(0, 0, 0, 0.9);
-  --cor-sombra: 0 0 0 rgba(0, 0, 0, 0);
-  --cor-contraste-destaque: #000000;
-  --cor-brilho-fundo-a: rgba(250, 204, 21, 0.1);
-  --cor-brilho-fundo-b: rgba(255, 255, 255, 0.04);
-  --cor-painel-destaque: #facc15;
-  --cor-painel-fundo-inicio: #111111;
-  --cor-painel-fundo-meio: #111111;
-  --cor-painel-fundo-fim: #000000;
-  --cor-painel-sobreposicao: rgba(255, 255, 255, 0.04);
-  --cor-painel-selo-fundo: #111111;
-  --cor-painel-selo-borda: #ffffff;
-  --cor-painel-bloco-fundo: #111111;
-  --cor-painel-bloco-borda: #ffffff;
-  --superficie-brilho: rgba(255, 255, 255, 0.01);
-  --superficie-suave: #111111;
-  --superficie-suave-interacao: #1f1f1f;
-  --superficie-neutra: #1f1f1f;
-  --contorno-superficie: #ffffff;
-  --janela-fundo-inicio: #111111;
-  --janela-fundo-fim: #000000;
-  --erro: #fb923c;
-  --sucesso: #38bdf8;
-  --aviso-texto: #facc15;
-  --cor-sucesso-fundo: #111111;
-  --cor-sucesso-borda: #38bdf8;
-  --cor-sucesso-texto: #38bdf8;
-  --cor-erro-fundo: #111111;
-  --cor-erro-borda: #fb923c;
-  --cor-erro-texto: #fb923c;
-  --cor-aviso-fundo: #111111;
-  --cor-aviso-borda: #facc15;
-  --cor-aviso-texto: #ffffff;
+[data-theme-preset="dia-dos-namorados"] {
+  --cor-primaria: #ffc000;
+  --cor-primaria-interacao: #d9445f;
+  --cor-primaria-suave: rgba(255, 192, 0, 0.14);
+  --cor-fundo: #120408;
+  --cor-fundo-alternativo: #1f0710;
+  --cor-superficie: #2a0d14;
+  --cor-superficie-forte: #3a121c;
+  --cor-texto: #fff7f1;
+  --cor-texto-suave: #e6c5c5;
+  --cor-sobre-escuro: #fff7f1;
+  --cor-sobre-escuro-suave: #eed7d4;
+  --cor-sobre-escuro-sutil: #c99a9c;
+  --cor-borda-suave: rgba(255, 245, 245, 0.08);
+  --cor-borda-media: rgba(217, 68, 95, 0.3);
+  --cor-foco: #ffc000;
+  --cor-anel-foco: rgba(255, 192, 0, 0.22);
+  --cor-sobreposicao: rgba(18, 4, 8, 0.84);
+  --cor-sombra: 0 24px 56px rgba(14, 4, 7, 0.48);
+  --cor-contraste-destaque: #120408;
+  --cor-brilho-fundo-a: rgba(217, 68, 95, 0.1);
+  --cor-brilho-fundo-b: rgba(255, 192, 0, 0.06);
+  --cor-painel-destaque: #ffd05a;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #d9445f 9%, #3a121c 91%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #ffc000 5%, #2a0d14 95%);
+  --cor-painel-fundo-fim: #120408;
+  --cor-painel-sobreposicao: rgba(255, 192, 0, 0.07);
+  --erro: #eca0a7;
+  --sucesso: #8bc3a0;
+  --aviso-texto: #ffc000;
+}
+
+[data-theme-preset="dia-das-criancas"] {
+  --cor-primaria: #ffc000;
+  --cor-primaria-interacao: #2fa7b8;
+  --cor-primaria-suave: rgba(255, 192, 0, 0.15);
+  --cor-fundo: #090806;
+  --cor-fundo-alternativo: #11100b;
+  --cor-superficie: #18140b;
+  --cor-superficie-forte: #252014;
+  --cor-texto: #fff9ed;
+  --cor-texto-suave: #ded0ae;
+  --cor-sobre-escuro: #fff9ed;
+  --cor-sobre-escuro-suave: #eee0bd;
+  --cor-sobre-escuro-sutil: #b9aa78;
+  --cor-borda-suave: rgba(255, 255, 255, 0.08);
+  --cor-borda-media: rgba(255, 192, 0, 0.24);
+  --cor-foco: #ffc000;
+  --cor-anel-foco: rgba(255, 192, 0, 0.22);
+  --cor-sobreposicao: rgba(9, 8, 6, 0.84);
+  --cor-sombra: 0 24px 56px rgba(8, 6, 3, 0.48);
+  --cor-contraste-destaque: #090806;
+  --cor-brilho-fundo-a: rgba(47, 167, 184, 0.1);
+  --cor-brilho-fundo-b: rgba(255, 192, 0, 0.08);
+  --cor-painel-destaque: #ffd05a;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #2fa7b8 8%, #252014 92%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #ffc000 6%, #18140b 94%);
+  --cor-painel-fundo-fim: #090806;
+  --cor-painel-sobreposicao: rgba(255, 192, 0, 0.07);
+  --erro: #e8a06f;
+  --sucesso: #83c1a4;
+  --aviso-texto: #ffc000;
+}
+
+[data-theme-preset="natal-fim-de-ano"] {
+  --cor-primaria: #ffc000;
+  --cor-primaria-interacao: #c73d2b;
+  --cor-primaria-suave: rgba(255, 192, 0, 0.14);
+  --cor-fundo: #050906;
+  --cor-fundo-alternativo: #0a140d;
+  --cor-superficie: #102016;
+  --cor-superficie-forte: #183020;
+  --cor-texto: #f5fff7;
+  --cor-texto-suave: #c4dac7;
+  --cor-sobre-escuro: #f5fff7;
+  --cor-sobre-escuro-suave: #d8eadb;
+  --cor-sobre-escuro-sutil: #94b59a;
+  --cor-borda-suave: rgba(240, 253, 244, 0.08);
+  --cor-borda-media: rgba(255, 192, 0, 0.24);
+  --cor-foco: #ffc000;
+  --cor-anel-foco: rgba(255, 192, 0, 0.22);
+  --cor-sobreposicao: rgba(5, 9, 6, 0.84);
+  --cor-sombra: 0 24px 56px rgba(3, 8, 4, 0.48);
+  --cor-contraste-destaque: #050906;
+  --cor-brilho-fundo-a: rgba(199, 61, 43, 0.09);
+  --cor-brilho-fundo-b: rgba(255, 192, 0, 0.07);
+  --cor-painel-destaque: #ffd05a;
+  --cor-painel-fundo-inicio: color-mix(in srgb, #c73d2b 8%, #183020 92%);
+  --cor-painel-fundo-meio: color-mix(in srgb, #ffc000 5%, #102016 95%);
+  --cor-painel-fundo-fim: #050906;
+  --cor-painel-sobreposicao: rgba(255, 192, 0, 0.07);
+  --erro: #e59c8f;
+  --sucesso: #7dc49b;
+  --aviso-texto: #ffc000;
 }
 
 :root {
@@ -969,77 +638,40 @@
 }
 
 [data-theme-preset="tobias-lanches"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23ffc400' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23ffc000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 [data-theme-preset="dark-premium"] {
   --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23d4ad54' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-[data-theme-preset="light-clean"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%234f7892' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+[data-theme-preset="carnaval"] {
+  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23ffc000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-[data-theme-preset="burger-red"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23c76d48' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+[data-theme-preset="sao-joao-nordeste"] {
+  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23ffc000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-[data-theme-preset="fresh-green"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23768f46' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+[data-theme-preset="dia-das-maes"] {
+  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23f5d7c8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-[data-theme-preset="acai-purple"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%238d6178' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+[data-theme-preset="dia-dos-pais"] {
+  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23ffc000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-[data-theme-preset="coffee-brown"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23d09a61' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+[data-theme-preset="dia-dos-namorados"] {
+  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23ffc000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-[data-theme-preset="ocean-blue"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%235688a2' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+[data-theme-preset="dia-das-criancas"] {
+  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23ffc000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-[data-theme-preset="pizza-orange"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23df9144' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+[data-theme-preset="natal-fim-de-ano"] {
+  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23ffc000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
-
-[data-theme-preset="bakery-cream"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23b88a56' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-[data-theme-preset="minimal-black"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23cfd6d5' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-[data-theme-preset="neutral-gray"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%235e6872' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-[data-theme-preset="tropical-yellow"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23c7a14a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-[data-theme-preset="pastel-soft"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%238b7bb5' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-[data-theme-preset="ice-cream-pink"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23c37792' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-[data-theme-preset="rustic-wood"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%239a8b59' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-[data-theme-preset="colorblind-safe"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23d09a45' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-[data-theme-preset="high-contrast"] {
-  --icone-seta-campo-selecao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23facc15' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
 
 /* BASE | Zera margens padrao do navegador e faz borda e padding entrarem no calculo do tamanho. Isso evita espacamentos estranhos entre navegadores diferentes. */
 * {
@@ -3946,7 +3578,7 @@ html[data-accessibility="enhanced"] .barra-mobile-info strong {
 #authPanel:not([hidden]),
 #adminApp:not([hidden]),
 .admin-tab-panel:not(.oculto) {
-  animation: superficie-entrando var(--duracao-superficie-entrada) ease-out both;
+  animation: superficie-entrando var(--duracao-superficie-entrada) ease-out;
 }
 
 .admin-panels-grid {
@@ -4809,6 +4441,8 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 }
 
 .admin-theme-card__preview {
+  position: relative;
+  overflow: hidden;
   display: block;
   padding: 0.55rem;
   border-radius: var(--raio-encaixe);
@@ -4818,7 +4452,63 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   border: 1px solid var(--tema-previa-borda);
 }
 
+.admin-theme-card__preview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--tema-previa-destaque) 18%, transparent), transparent 24%),
+    linear-gradient(135deg, transparent 0 54%, color-mix(in srgb, var(--tema-previa-destaque) 10%, transparent) 54% 58%, transparent 58% 100%);
+  pointer-events: none;
+}
+
+[data-theme-preview-preset="carnaval"]::before {
+  background:
+    radial-gradient(circle at 14% 20%, color-mix(in srgb, #ffc000 28%, transparent), transparent 18%),
+    radial-gradient(circle at 86% 18%, color-mix(in srgb, #e94b7b 26%, transparent), transparent 20%),
+    linear-gradient(135deg, transparent 0 44%, color-mix(in srgb, #2fa7b8 20%, transparent) 44% 49%, transparent 49% 100%);
+}
+
+[data-theme-preview-preset="sao-joao-nordeste"]::before {
+  background:
+    linear-gradient(135deg, transparent 0 18%, color-mix(in srgb, #ffc000 20%, transparent) 18% 23%, transparent 23% 42%, color-mix(in srgb, #d75028 18%, transparent) 42% 47%, transparent 47%),
+    radial-gradient(circle at 84% 18%, color-mix(in srgb, #2a794b 22%, transparent), transparent 22%);
+}
+
+[data-theme-preview-preset="dia-das-maes"]::before {
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, #f5d7c8 22%, transparent), transparent 24%),
+    radial-gradient(circle at 88% 28%, color-mix(in srgb, #d87a8a 20%, transparent), transparent 20%);
+}
+
+[data-theme-preview-preset="dia-dos-pais"]::before {
+  background:
+    linear-gradient(135deg, transparent 0 48%, color-mix(in srgb, #4f87ad 20%, transparent) 48% 54%, transparent 54% 100%),
+    radial-gradient(circle at 84% 18%, color-mix(in srgb, #ffc000 22%, transparent), transparent 22%);
+}
+
+[data-theme-preview-preset="dia-dos-namorados"]::before {
+  background:
+    radial-gradient(circle at 18% 18%, color-mix(in srgb, #d9445f 24%, transparent), transparent 23%),
+    radial-gradient(circle at 84% 20%, color-mix(in srgb, #ffc000 18%, transparent), transparent 18%);
+}
+
+[data-theme-preview-preset="dia-das-criancas"]::before {
+  background:
+    radial-gradient(circle at 16% 20%, color-mix(in srgb, #ffc000 24%, transparent), transparent 18%),
+    radial-gradient(circle at 82% 22%, color-mix(in srgb, #2fa7b8 24%, transparent), transparent 20%),
+    linear-gradient(135deg, transparent 0 58%, color-mix(in srgb, #d75028 14%, transparent) 58% 63%, transparent 63% 100%);
+}
+
+[data-theme-preview-preset="natal-fim-de-ano"]::before {
+  background:
+    radial-gradient(circle at 14% 18%, color-mix(in srgb, #ffc000 22%, transparent), transparent 20%),
+    radial-gradient(circle at 86% 22%, color-mix(in srgb, #c73d2b 20%, transparent), transparent 21%);
+}
+
 .admin-theme-card__preview-shell {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 0.45rem;
   min-height: 132px;
@@ -5090,11 +4780,12 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 
 .admin-hours-row {
   display: grid;
-  grid-template-columns: minmax(150px, 220px) 108px minmax(260px, 1fr);
+  grid-template-columns: minmax(10rem, 1fr) minmax(18rem, 24rem) auto;
+  grid-template-areas: "day times toggle";
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.72rem;
   min-height: 56px;
-  padding: 0.42rem 0.65rem;
+  padding: 0.52rem 0.68rem;
   border-bottom: 1px solid color-mix(in srgb, var(--borda-suave) 82%, transparent);
   background: transparent;
 }
@@ -5104,6 +4795,9 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 }
 
 .admin-hours-row:has(.admin-hours-checkbox:not(:checked)) {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "day toggle";
+  min-height: 50px;
   background: color-mix(in srgb, var(--cor-superficie) 46%, transparent);
 }
 
@@ -5121,6 +4815,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 }
 
 .admin-hours-day {
+  grid-area: day;
   display: grid;
   min-width: 0;
 }
@@ -5136,10 +4831,11 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 }
 
 .admin-hours-toggle {
+  grid-area: toggle;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  justify-self: start;
+  justify-self: end;
   gap: 0.38rem;
   width: 108px;
   min-height: 38px;
@@ -5170,18 +4866,21 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 }
 
 .admin-hours-times {
+  grid-area: times;
   display: grid;
-  grid-template-columns: max-content auto max-content;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-self: end;
-  gap: 0.4rem;
+  justify-self: stretch;
+  gap: 0.46rem;
+  width: 100%;
 }
 
 .admin-form .admin-hours-time {
   display: inline-grid;
-  grid-template-columns: auto 6.7rem;
+  grid-template-columns: max-content minmax(0, 6.5rem);
   align-items: center;
-  gap: 0.35rem;
+  justify-content: end;
+  gap: 0.4rem;
   font-size: 0.76rem;
   font-weight: var(--peso-negrito);
   color: var(--cinza-sec);
@@ -5189,7 +4888,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 }
 
 .admin-form .admin-hours-time input {
-  width: 6.7rem;
+  width: 100%;
   min-height: 38px;
   padding: 0.42rem 0.52rem;
   border-radius: var(--raio-entre-pequeno);
@@ -5251,6 +4950,9 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
 
   .admin-hours-row {
     grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "day toggle"
+      "times times";
     gap: 0.5rem 0.62rem;
     min-height: 0;
     padding: 0.62rem;
@@ -5264,6 +4966,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   }
 
   .admin-hours-row:has(.admin-hours-checkbox:not(:checked)) {
+    grid-template-areas: "day toggle";
     padding-block: 0.52rem;
   }
 
@@ -5279,22 +4982,23 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   }
 
   .admin-hours-times {
-    grid-column: 1 / -1;
-    grid-template-columns: 1fr;
+    grid-area: times;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     justify-self: stretch;
-    gap: 0.42rem;
-    padding-top: 0.1rem;
+    gap: 0.46rem;
+    padding-top: 0.06rem;
   }
 
   .admin-form .admin-hours-time {
-    grid-template-columns: minmax(3.5rem, 1fr) minmax(0, 8.25rem);
-    gap: 0.5rem;
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: 0.28rem;
     white-space: normal;
   }
 
   .admin-form .admin-hours-time input {
     width: 100%;
-    justify-self: end;
+    justify-self: stretch;
   }
 
   .admin-hours-separator {
@@ -13849,12 +13553,8 @@ body.page-transition-arrive {
   overflow: hidden;
   pointer-events: none;
   opacity: 0;
-  background:
-    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--amarelo) 7%, transparent), transparent 30%),
-    color-mix(in srgb, var(--cor-fundo) 90%, #000000 10%);
-  backdrop-filter: blur(4px) saturate(1.02);
-  -webkit-backdrop-filter: blur(4px) saturate(1.02);
-  transition: opacity 260ms ease;
+  background: #030303;
+  transition: opacity 320ms ease;
 }
 
 .page-transition-overlay--show {
@@ -13863,24 +13563,19 @@ body.page-transition-arrive {
 }
 
 .page-transition-card {
-  width: min(21rem, calc(100dvw - 32px));
-  min-height: clamp(112px, 23dvh, 138px);
+  width: min(16rem, calc(100dvw - 32px));
+  min-height: 0;
   max-height: calc(100dvh - 32px);
   display: grid;
-  gap: 12px;
+  justify-items: center;
+  gap: 18px;
   align-content: center;
-  padding: clamp(1rem, 3.8vw, 1.38rem);
-  border: 1px solid color-mix(in srgb, var(--borda-media) 58%, var(--amarelo) 18%);
-  border-radius: var(--raio-grande);
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 26%, transparent), transparent 110%),
-    color-mix(in srgb, var(--superficie-elevada) 88%, var(--cor-superficie-forte) 12%);
-  color: var(--cor-texto);
-  box-shadow:
-    0 18px 42px color-mix(in srgb, var(--cor-sombra) 22%, transparent),
-    inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 16%, transparent);
-  transform: translateY(6px) scale(0.992);
-  transition: transform 260ms ease, opacity 260ms ease;
+  padding: 0;
+  color: var(--texto-quente);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: page-transition-card-in 420ms cubic-bezier(0.2, 0.72, 0.18, 1) 80ms both;
+  transition: transform 360ms ease, opacity 360ms ease;
 }
 
 .page-transition-overlay--show .page-transition-card {
@@ -13888,54 +13583,63 @@ body.page-transition-arrive {
 }
 
 .page-transition-kicker {
-  overflow: hidden;
-  color: color-mix(in srgb, var(--cinza-sec) 86%, var(--texto-quente) 14%);
-  font-size: 0.76rem;
-  font-weight: var(--peso-pesado);
-  letter-spacing: 0;
-  line-height: 1.15;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
-  white-space: nowrap;
+  display: none;
 }
 
 .page-transition-title {
+  order: 2;
   text-align: center;
-  color: var(--texto-quente);
-  font-size: clamp(1rem, 0.96rem + 0.18vw, 1.12rem);
-  font-weight: var(--peso-pesado);
+  color: color-mix(in srgb, #fffdf4 92%, var(--amarelo) 8%);
+  font-size: clamp(0.9rem, 0.86rem + 0.14vw, 0.98rem);
+  font-weight: var(--peso-medio-forte);
   letter-spacing: 0;
-  line-height: 1.2;
+  line-height: 1.25;
   overflow-wrap: anywhere;
 }
 
 .page-transition-loader {
   position: relative;
+  order: 1;
   display: grid;
   place-items: center;
   justify-self: center;
-  width: 46px;
-  height: 46px;
+  width: clamp(94px, 16vw, 108px);
+  height: clamp(94px, 16vw, 108px);
   overflow: visible;
-  border: 1px solid color-mix(in srgb, var(--borda-media) 52%, transparent);
   border-radius: 50%;
-  background: color-mix(in srgb, var(--cor-superficie-forte) 46%, transparent);
+  background: #030303;
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--superficie-brilho) 16%, transparent),
-    0 0 18px color-mix(in srgb, var(--amarelo) 9%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--amarelo) 7%, transparent),
+    0 0 34px color-mix(in srgb, var(--amarelo) 8%, transparent);
+}
+
+.page-transition-logo {
+  position: relative;
+  z-index: var(--camada-conteudo);
+  width: calc(100% - 18px);
+  height: calc(100% - 18px);
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amarelo) 18%, transparent);
+  animation: page-transition-logo-breathe 1800ms ease-in-out infinite;
 }
 
 .page-transition-loader span {
   position: absolute;
-  inset: 7px;
+  inset: 0;
   width: auto;
-  border: 3px solid color-mix(in srgb, var(--amarelo) 18%, transparent);
-  border-top-color: var(--amarelo);
-  border-right-color: color-mix(in srgb, var(--amarelo) 72%, #ffffff 10%);
   border-radius: 50%;
-  background: transparent;
-  box-shadow: 0 0 12px color-mix(in srgb, var(--amarelo) 16%, transparent);
-  animation: page-transition-loader 780ms linear infinite;
+  background: conic-gradient(from 0deg, transparent 0 54%, color-mix(in srgb, var(--amarelo) 20%, transparent) 68%, var(--amarelo) 82%, transparent 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  animation: page-transition-loader 1150ms linear infinite;
+}
+
+@keyframes page-transition-card-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes page-transition-arrive {
@@ -13957,6 +13661,12 @@ body.page-transition-arrive {
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes page-transition-logo-breathe {
+  50% {
+    transform: scale(1.025);
   }
 }
 
@@ -13986,9 +13696,7 @@ body.menu-entry-reveal .grade-produtos {
   }
 
   .page-transition-card {
-    min-height: 126px;
-    padding: 18px;
-    border-radius: var(--raio-encaixe);
+    width: min(14rem, calc(100dvw - 32px));
   }
 }
 
@@ -14002,6 +13710,8 @@ body.menu-entry-reveal .grade-produtos {
     transition: none !important;
   }
 
+  .page-transition-card,
+  .page-transition-logo,
   .page-transition-loader span {
     animation: none !important;
     transform: none !important;
@@ -15229,8 +14939,8 @@ body.admin-page .admin-hours-master {
 }
 
 body.admin-page .admin-hours-grid {
-  gap: 0.42rem;
-  padding: 0.42rem;
+  gap: 0.44rem;
+  padding: 0.44rem;
   border-color: color-mix(in srgb, var(--borda-suave) 78%, transparent);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 14%, transparent), transparent 130%),
@@ -15239,11 +14949,20 @@ body.admin-page .admin-hours-grid {
 
 body.admin-page .admin-hours-row {
   min-height: 0;
+  padding: 0.56rem 0.64rem;
   border: 1px solid color-mix(in srgb, var(--borda-suave) 72%, transparent);
   border-radius: var(--raio-medio);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 13%, transparent), transparent 120%),
     color-mix(in srgb, var(--superficie-elevada) 78%, transparent);
+}
+
+body.admin-page .admin-hours-row:has(.admin-hours-checkbox:checked) {
+  border-color: color-mix(in srgb, var(--amarelo) 24%, var(--borda-suave));
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--amarelo) 5%, transparent), transparent 36%),
+    linear-gradient(180deg, color-mix(in srgb, var(--superficie-brilho) 14%, transparent), transparent 120%),
+    color-mix(in srgb, var(--superficie-elevada) 82%, transparent);
 }
 
 body.admin-page .admin-hours-row:last-child {
@@ -15326,9 +15045,17 @@ body.admin-page .admin-form .admin-hours-time input {
 
   body.admin-page .admin-hours-row {
     grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "day toggle"
+      "times times";
     gap: 0.48rem 0.58rem;
     padding: 0.6rem;
     border-radius: var(--raio-medio);
+  }
+
+  body.admin-page .admin-hours-row:has(.admin-hours-checkbox:not(:checked)) {
+    grid-template-areas: "day toggle";
+    min-height: 58px;
   }
 
   body.admin-page .admin-hours-toggle {
@@ -15338,13 +15065,18 @@ body.admin-page .admin-form .admin-hours-time input {
   }
 
   body.admin-page .admin-hours-times {
-    gap: 0.36rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.46rem;
     padding-top: 0;
   }
 
+  body.admin-page .admin-hours-separator {
+    display: none;
+  }
+
   body.admin-page .admin-form .admin-hours-time {
-    grid-template-columns: minmax(3.35rem, 0.72fr) minmax(0, 7.7rem);
-    gap: 0.42rem;
+    grid-template-columns: 1fr;
+    gap: 0.28rem;
     font-size: 0.74rem;
   }
 
@@ -15374,7 +15106,7 @@ body.admin-page .admin-form .admin-hours-time input {
   }
 
   body.admin-page .admin-form .admin-hours-time {
-    grid-template-columns: 3.2rem minmax(0, 7.25rem);
+    grid-template-columns: 1fr;
   }
 }
 
@@ -16742,6 +16474,7 @@ body.admin-page #settings-appearance {
 }
 
 body.admin-page #settings-appearance .admin-theme-fieldset {
+  margin-top: clamp(0.78rem, 1vw, 1rem);
   padding: clamp(0.72rem, 1.1vw, 0.95rem);
   border-color: color-mix(in srgb, var(--borda-media) 42%, transparent);
   border-radius: var(--raio-encaixe);

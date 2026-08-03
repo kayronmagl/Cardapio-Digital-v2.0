@@ -178,7 +178,10 @@
       '<div class="page-transition-card" role="status" aria-live="polite">' +
       '<span class="page-transition-kicker" data-page-transition-brand></span>' +
       '<strong class="page-transition-title" data-page-transition-message></strong>' +
-      '<span class="page-transition-loader" aria-hidden="true"><span></span></span>' +
+      '<span class="page-transition-loader" aria-hidden="true">' +
+      '<img class="page-transition-logo" src="./assets/NovaLogoTobias.png" alt="" decoding="async">' +
+      "<span></span>" +
+      "</span>" +
       "</div>";
     document?.body?.appendChild(overlay);
     return overlay;
@@ -201,6 +204,8 @@
     return {
       brand: optionText(options?.brand, ""),
       message: optionText(options?.message, "Carregando..."),
+      arrivalBrand: optionText(options?.arrivalBrand, ""),
+      arrivalMessage: optionText(options?.arrivalMessage, ""),
     };
   }
   function parsePageTransitionPayload(raw) {
@@ -213,6 +218,8 @@
       return {
         brand: optionText(payload?.brand, ""),
         message: optionText(payload?.message, ""),
+        arrivalBrand: optionText(payload?.arrivalBrand, ""),
+        arrivalMessage: optionText(payload?.arrivalMessage, ""),
       };
     } catch (error) {
       return null;
@@ -271,19 +278,20 @@
       return false;
     }
 
-    const overlay = getPageTransitionOverlay();
-    updatePageTransitionOverlay(overlay, payload?.message || payload?.brand
-      ? {
+    if (payload?.arrivalMessage || payload?.arrivalBrand) {
+      const overlay = getPageTransitionOverlay();
+      updatePageTransitionOverlay(overlay, {
         ...options,
-        brand: payload?.brand,
-        message: payload?.message,
-      }
-      : options);
-    pageTransitionArrivalActive = true;
-    pageTransitionShownAt = Date.now();
-    document?.body?.classList?.add("page-transition-active");
-    overlay?.setAttribute("aria-hidden", "false");
-    overlay?.classList?.add("page-transition-overlay--show");
+        brand: payload?.arrivalBrand || payload?.brand,
+        message: payload?.arrivalMessage,
+      });
+      pageTransitionArrivalActive = true;
+      pageTransitionShownAt = Date.now();
+      document?.body?.classList?.add("page-transition-active");
+      overlay?.setAttribute("aria-hidden", "false");
+      overlay?.classList?.add("page-transition-overlay--show");
+    }
+
     document.body.classList.add("page-transition-arrive");
     const clearArrival = function () {
       document?.body?.classList?.remove("page-transition-arrive");
@@ -403,110 +411,139 @@
       theme: "dark",
       palette: "gold",
       swatches: ["#050505", "#12100a", "#ffffff", "#ffc400"],
+      preview: {
+        badge: { "pt-BR": "Mais pedido", "en-US": "Top order" },
+        product: { "pt-BR": "X-Bacon do Tobia", "en-US": "Tobia's bacon burger" },
+        action: { "pt-BR": "Adicionar", "en-US": "Add" },
+        price: 24.9,
+        accentText: "#111827",
+      },
     },
     {
       key: "dark-premium",
       theme: "dark",
       palette: "gold",
-      swatches: ["#0f172a", "#111827", "#1f2937", "#f4b903"],
+      swatches: ["#030303", "#11100c", "#211b0b", "#d4ad54"],
+      preview: {
+        badge: { "pt-BR": "Especial", "en-US": "Special" },
+        product: { "pt-BR": "Combo artesanal", "en-US": "Craft combo" },
+        action: { "pt-BR": "Escolher", "en-US": "Choose" },
+        price: 34.9,
+        accentText: "#111827",
+      },
     },
     {
-      key: "light-clean",
-      theme: "light",
-      palette: "orange",
-      swatches: ["#f7f8f6", "#ffffff", "#edf1ef", "#4f7892"],
-    },
-    {
-      key: "burger-red",
-      theme: "dark",
-      palette: "orange",
-      swatches: ["#1b1110", "#271715", "#34201d", "#c76d48"],
-    },
-    {
-      key: "fresh-green",
-      theme: "dark",
-      palette: "green",
-      swatches: ["#0d1f17", "#162c21", "#20382a", "#768f46"],
-    },
-    {
-      key: "acai-purple",
+      key: "carnaval",
       theme: "dark",
       palette: "purple",
-      swatches: ["#241033", "#32164a", "#4a1d6f", "#c084fc"],
+      swatches: ["#090407", "#221025", "#ffc000", "#e94b7b"],
+      preview: {
+        badge: { "pt-BR": "Folia", "en-US": "Carnival" },
+        product: { "pt-BR": "Combo folião", "en-US": "Party combo" },
+        action: { "pt-BR": "Pedir", "en-US": "Order" },
+        price: 29.9,
+        accentText: "#ffffff",
+      },
     },
     {
-      key: "coffee-brown",
-      theme: "dark",
-      palette: "brown",
-      swatches: ["#120b07", "#21140d", "#3a2416", "#d09a61"],
-    },
-    {
-      key: "ocean-blue",
-      theme: "dark",
-      palette: "sky",
-      swatches: ["#0d1a21", "#162a34", "#1f3742", "#5688a2"],
-    },
-    {
-      key: "pizza-orange",
+      key: "sao-joao-nordeste",
       theme: "dark",
       palette: "orange",
-      swatches: ["#241407", "#39200d", "#593416", "#df9144"],
+      swatches: ["#120805", "#2a1608", "#ffc000", "#d75028"],
+      preview: {
+        badge: { "pt-BR": "Arraiá", "en-US": "June party" },
+        product: { "pt-BR": "Combo São João", "en-US": "Sao Joao combo" },
+        action: { "pt-BR": "Pedir", "en-US": "Order" },
+        price: 31.9,
+        accentText: "#ffffff",
+      },
     },
     {
-      key: "bakery-cream",
-      theme: "light",
-      palette: "brown",
-      swatches: ["#f6f1e8", "#fbf8f2", "#f1e8da", "#b88a56"],
-    },
-    {
-      key: "minimal-black",
+      key: "dia-das-maes",
       theme: "dark",
-      palette: "gold",
-      swatches: ["#0a0b0d", "#16171a", "#212328", "#cfd6d5"],
-    },
-    {
-      key: "tropical-yellow",
-      theme: "dark",
-      palette: "gold",
-      swatches: ["#1f1a0a", "#30260d", "#45350f", "#facc15"],
-    },
-    {
-      key: "neutral-gray",
-      theme: "light",
-      palette: "blue",
-      swatches: ["#edf0f1", "#f9faf9", "#e1e5e7", "#5e6872"],
-    },
-    {
-      key: "pastel-soft",
-      theme: "light",
-      palette: "purple",
-      swatches: ["#f4f0fa", "#fffaff", "#ebe4f5", "#8b7bb5"],
-    },
-    {
-      key: "ice-cream-pink",
-      theme: "light",
       palette: "red",
-      swatches: ["#fcf3f4", "#fffdfd", "#faecee", "#c37792"],
+      swatches: ["#100609", "#281019", "#f5d7c8", "#d87a8a"],
+      preview: {
+        badge: { "pt-BR": "Família", "en-US": "Family" },
+        product: { "pt-BR": "Combo da mãe", "en-US": "Mother's combo" },
+        action: { "pt-BR": "Presentear", "en-US": "Treat her" },
+        price: 36.9,
+        accentText: "#ffffff",
+      },
     },
     {
-      key: "rustic-wood",
-      theme: "dark",
-      palette: "brown",
-      swatches: ["#19180f", "#272417", "#3d3820", "#9a8b59"],
-    },
-    {
-      key: "colorblind-safe",
+      key: "dia-dos-pais",
       theme: "dark",
       palette: "sky",
-      swatches: ["#111827", "#1f2937", "#374151", "#38bdf8"],
+      swatches: ["#06090d", "#111923", "#ffc000", "#4f87ad"],
+      preview: {
+        badge: { "pt-BR": "Especial", "en-US": "Special" },
+        product: { "pt-BR": "Combo do pai", "en-US": "Father's combo" },
+        action: { "pt-BR": "Pedir", "en-US": "Order" },
+        price: 38.9,
+        accentText: "#ffffff",
+      },
     },
     {
-      key: "high-contrast",
+      key: "dia-dos-namorados",
+      theme: "dark",
+      palette: "red",
+      swatches: ["#120408", "#2a0d14", "#ffc000", "#d9445f"],
+      preview: {
+        badge: { "pt-BR": "A dois", "en-US": "For two" },
+        product: { "pt-BR": "Combo casal", "en-US": "Couple combo" },
+        action: { "pt-BR": "Compartilhar", "en-US": "Share" },
+        price: 42.9,
+        accentText: "#ffffff",
+      },
+    },
+    {
+      key: "dia-das-criancas",
+      theme: "dark",
+      palette: "orange",
+      swatches: ["#090806", "#18140b", "#ffc000", "#2fa7b8"],
+      preview: {
+        badge: { "pt-BR": "Kids", "en-US": "Kids" },
+        product: { "pt-BR": "Combo criança", "en-US": "Kids combo" },
+        action: { "pt-BR": "Adicionar", "en-US": "Add" },
+        price: 24.9,
+        accentText: "#ffffff",
+      },
+    },
+    {
+      key: "natal-fim-de-ano",
       theme: "dark",
       palette: "gold",
-      swatches: ["#000000", "#111111", "#1f1f1f", "#facc15"],
+      swatches: ["#050906", "#102016", "#ffc000", "#c73d2b"],
+      preview: {
+        badge: { "pt-BR": "Fim de ano", "en-US": "Year end" },
+        product: { "pt-BR": "Combo celebração", "en-US": "Holiday combo" },
+        action: { "pt-BR": "Reservar", "en-US": "Reserve" },
+        price: 44.9,
+        accentText: "#ffffff",
+      },
     },
   ]);
+
+  // TEMA | Converte valores antigos salvos para os novos temas oficiais sem mostrar temas genericos no Admin.
+  const LEGACY_THEME_PRESET_MAP = Object.freeze({
+    "light-clean": "tobias-lanches",
+    "burger-red": "sao-joao-nordeste",
+    "fresh-green": "natal-fim-de-ano",
+    "acai-purple": "carnaval",
+    "coffee-brown": "sao-joao-nordeste",
+    "ocean-blue": "dia-dos-pais",
+    "pizza-orange": "sao-joao-nordeste",
+    "bakery-cream": "dia-das-maes",
+    "minimal-black": "dark-premium",
+    "tropical-yellow": "sao-joao-nordeste",
+    "neutral-gray": "tobias-lanches",
+    "pastel-soft": "dia-das-maes",
+    "ice-cream-pink": "dia-das-maes",
+    "rustic-wood": "sao-joao-nordeste",
+    "colorblind-safe": "dia-dos-pais",
+    "high-contrast": "dark-premium",
+  });
 
   const THEME_PRESET_KEYS = new Set(
     THEME_PRESETS.map(function (preset) {
@@ -515,7 +552,8 @@
   );
   function normalizeThemePreset(value) {
     const candidate = String(value || "").trim().toLowerCase();
-    return THEME_PRESET_KEYS.has(candidate) ? candidate : "";
+    const compatibleCandidate = LEGACY_THEME_PRESET_MAP[candidate] || candidate;
+    return THEME_PRESET_KEYS.has(compatibleCandidate) ? compatibleCandidate : "";
   }
   function getThemePresetConfig(value) {
     const key = normalizeThemePreset(value);
@@ -535,27 +573,27 @@
     const palette = String(appearance?.palette || "gold").trim().toLowerCase();
 
     if (theme !== "dark") {
-      return "light-clean";
+      return "tobias-lanches";
     }
 
     if (palette === "green") {
-      return "fresh-green";
+      return "natal-fim-de-ano";
     }
 
     if (palette === "red") {
-      return "burger-red";
+      return "dia-dos-namorados";
     }
 
     if (palette === "purple") {
-      return "acai-purple";
+      return "carnaval";
     }
 
     if (palette === "brown" || palette === "orange") {
-      return "coffee-brown";
+      return "sao-joao-nordeste";
     }
 
     if (palette === "sky" || palette === "cyan") {
-      return "ocean-blue";
+      return "dia-dos-pais";
     }
 
     return "tobias-lanches";

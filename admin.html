@@ -37,6 +37,84 @@
       background: #030303;
       color: #fffdf4;
     }
+
+    .page-transition-card {
+      display: grid;
+      justify-items: center;
+      gap: 18px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: page-transition-card-in 420ms cubic-bezier(0.2, 0.72, 0.18, 1) 80ms both;
+    }
+
+    .page-transition-kicker {
+      display: none;
+    }
+
+    .page-transition-title {
+      color: rgba(255, 253, 244, 0.92);
+      font-size: 0.94rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .page-transition-loader {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 94px;
+      height: 94px;
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 1px rgba(255, 196, 0, 0.07),
+        0 0 34px rgba(255, 196, 0, 0.08);
+    }
+
+    .page-transition-logo {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      animation: page-transition-logo-breathe 1800ms ease-in-out infinite;
+    }
+
+    .page-transition-loader > span {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0 54%, rgba(255, 196, 0, 0.2) 68%, #ffc400 82%, transparent 100%);
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+      animation: page-transition-loader 1150ms linear infinite;
+    }
+
+    @keyframes page-transition-card-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes page-transition-logo-breathe {
+      50% {
+        transform: scale(1.025);
+      }
+    }
+
+    @keyframes page-transition-loader {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page-transition-card,
+      .page-transition-logo,
+      .page-transition-loader > span {
+        animation: none !important;
+        transform: none !important;
+      }
+    }
   </style>
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./assets/favicon.png">
@@ -53,7 +131,10 @@
     <div class="page-transition-card" role="status" aria-live="polite">
       <span class="page-transition-kicker" data-page-transition-brand>Tobia's Lanches</span>
       <strong class="page-transition-title" data-page-transition-message>Carregando Admin</strong>
-      <span class="page-transition-loader" aria-hidden="true"><span></span></span>
+      <span class="page-transition-loader" aria-hidden="true">
+        <img class="page-transition-logo" src="./assets/NovaLogoTobias.png" alt="" decoding="async">
+        <span></span>
+      </span>
     </div>
   </div>
 
