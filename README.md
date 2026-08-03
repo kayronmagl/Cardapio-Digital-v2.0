@@ -15,7 +15,7 @@
 
 <div align="center">
   <p>
-    Conhecça a evolução do Cardápio Digital do Tobia's Lanches!
+    Conheça a evolução do Cardápio Digital do Tobia's Lanches!
   </p>
 
   <p>
