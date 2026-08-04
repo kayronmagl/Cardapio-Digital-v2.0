@@ -34,6 +34,7 @@
   const AUTHOR_URL = "https://www.instagram.com/kayronmagl/";
   const APP_VERSION = "2.0";
 
+  // TEXTOS ADMIN | Reune rotulos, avisos e descricoes do painel para a interface nao espalhar frase fixa pelo codigo.
   const MESSAGES = {
     "pt-BR": {
       panelKicker: "Painel",
@@ -1445,6 +1446,7 @@
     themeChanged: "Theme preview active. Save to apply it to the public menu.",
   });
 
+  // MEMORIA ADMIN | Guarda aba ativa, rascunhos, filtros e avisos temporarios usados durante a edicao do painel.
   const state = {
     locale: shared?.loadStorageValue(LOCALE_KEY, "", "local"),
     states: system?.getStates(),
@@ -1505,6 +1507,7 @@
     "external-storage",
   ]);
 
+  // ARMAZENAMENTO ADMIN | Leitura e escrita passam pelos utilitarios para manter local e sessao com o mesmo tratamento.
   const loadStorageValue = function (key, fallback, mode) {
     return shared?.loadStorageValue(key, fallback, mode || "local");
   };
@@ -1530,6 +1533,7 @@
     return state?.states?.brandConfig?.i18n?.defaultLocale || "pt-BR";
   }
 
+  // IDIOMA ADMIN | Centraliza mensagens e nomes de idioma para cabecalho, abas, formularios e feedback.
   const localeTools = shared?.createLocaleTools({
     messages: MESSAGES,
     getSupportedLocales: getSupportedLocales,
@@ -1607,6 +1611,7 @@
     const app = $("adminApp");
     return Boolean(authPanel && !authPanel.hidden && (!app || app.hidden));
   }
+  // TELA ADMIN | Alterna modo de login e modo painel para estilos e avisos aparecerem no lugar certo.
   function syncAdminSurfaceMode() {
     const authScreenActive = isAuthScreenActive();
     document?.body?.classList?.toggle?.("admin-auth-screen-active", authScreenActive);
@@ -1688,6 +1693,7 @@
       }
     });
   }
+  // DADOS ADMIN | Atalhos de leitura mantem produtos, categorias, adicionais e combos vindo do estado central.
   function categoryName(category) {
     return textValue(category?.name, currentLocale()) || category?.slug || "";
   }
@@ -1806,6 +1812,7 @@
 
     return true;
   }
+  // RELATORIOS | Escolhe entre metricas online e locais sem bloquear o restante do painel.
   function canUseOnlineReports() {
     return Boolean(
       isOnlineAdminMode()
@@ -1897,6 +1904,7 @@
         }
       });
   }
+  // SESSAO ADMIN | Decide se o acesso depende da senha local ou do login online no Supabase.
   function isAdminAuthenticated() {
     return isOnlineAdminMode() ? auth?.isSupabaseAuthenticated?.() : isAuthenticated();
   }
@@ -1925,6 +1933,7 @@
     auth?.logout();
     stopCloudMonitor();
   }
+  // RETORNO ADMIN | Distribui mensagens entre topo, toast e aviso inline conforme tamanho da tela e contexto.
   function showStatus(message, type, options) {
     const status = $("adminStatus");
     const text = String(message || "").trim();
@@ -2211,6 +2220,7 @@
       }, Number(options?.timeout || 5200));
     }
   }
+  // FOCO ADMIN | Agenda scroll, destaque e foco depois da renderizacao para o Admin enxergar onde a acao aconteceu.
   function scheduleUiTask(callback) {
     if (typeof callback !== "function") {
       return;
@@ -2334,6 +2344,7 @@
 
     return primary + " " + detail;
   }
+  // PUBLICACAO ADMIN | Define quais formularios podem publicar online logo apos salvar no painel.
   function shouldAutoPublishAdminForm(formId) {
     return [
       "productForm",
@@ -2407,6 +2418,7 @@
         setButtonBusy(button, false);
       });
   }
+  // RASCUNHO ADMIN | Protege edicoes abertas contra recargas remotas, troca de aba e renderizacoes do painel.
   function getAdminEditGuard() {
     if (!state.adminEditGuard || typeof state.adminEditGuard !== "object") {
       state.adminEditGuard = {
@@ -2935,6 +2947,7 @@
     }
     return "";
   }
+  // CABECALHO ADMIN | Atualiza idioma, titulo e atalhos fixos sempre que a sessao ou a lingua muda.
   function applyLocaleToHeader() {
     const selector = $("adminLocaleSelector");
     const supported = getSupportedLocales();
@@ -2980,6 +2993,7 @@
     document.title = pageTitle;
     if (metaDescription) metaDescription.setAttribute("content", `${t("panelSubtitle")} ${brandName}.`);
   }
+  // LOGIN ADMIN | Monta a tela de entrada de acordo com senha local ou acesso online pelo Supabase.
   function renderAuth() {
     const authPanel = $("authPanel");
     const app = $("adminApp");
@@ -3093,6 +3107,7 @@
       state.tabsScrollLeft = Number(tabs?.scrollLeft || 0);
     });
   }
+  // PAINEL ADMIN | Renderiza abas e conteudo principal a partir do estado atual sem gravar dados por conta propria.
   function renderDashboard(options) {
     if (options?.preserveProductDraft !== false && options?.preserveAdminDrafts !== false) {
       captureActiveAdminFormDrafts();
@@ -3236,6 +3251,7 @@
         return compareMenuOrder(left?.sortOrder, right?.sortOrder, productName(left), productName(right));
       });
   }
+  // PRODUTOS ADMIN | Monta ferramentas, formulario e lista para cadastro e edicao ficarem na mesma area de trabalho.
   function renderProductsPanel() {
     const products = getFilteredProducts();
     const categories = getMenuState()?.categories || [];
@@ -3364,6 +3380,7 @@
   function optionHtml(value, label, selected) {
     return '<option value="' + escapeHtml(value) + '"' + (value === selected ? " selected" : "") + ">" + escapeHtml(label) + "</option>";
   }
+  // IMAGENS ADMIN | Mantem foto principal, galeria, upload e link manual usando o mesmo componente nos formularios.
   function sanitizeImageValue(value) {
     if (typeof system?.sanitizeImageSource === "function") {
       return system?.sanitizeImageSource(value);
@@ -3743,6 +3760,7 @@
       "</div>"
     );
   }
+  // CATEGORIAS ADMIN | Formularios e cards controlam os grupos que aparecem como filtros no cardapio publico.
   function renderCategoryForm(category) {
     const formId = "categoryForm";
     const slugOriginal = adminDraftFieldValue(formId, "slugOriginal", category?.slug || "");
@@ -3805,6 +3823,7 @@
       "</article>"
     );
   }
+  // ADICIONAIS ADMIN | Organiza acompanhamentos opcionais que depois podem ser ligados aos produtos.
   function renderAddOnsPanel() {
     const addOns = getMenuState()?.addOns || [];
     const editingAddOn = state?.editingAddOnId ? getAddOnById(state?.editingAddOnId) : null;
@@ -3890,6 +3909,7 @@
       "</article>"
     );
   }
+  // COMBOS ADMIN | Editor junta produtos existentes, quantidades e preco final para montar ofertas vendaveis.
   function renderOffersPanel() {
     const offers = getOffersState();
     const editingCombo = state?.editingComboId ? getComboById(state?.editingComboId) : null;
@@ -4370,6 +4390,7 @@
       "</article>"
     );
   }
+  // TEMA ADMIN | Separa tema salvo, tema selecionado e previa para testar visual sem publicar por acidente.
   function resolveSelectedThemePreset(appearance) {
     return shared?.suggestThemePreset?.(appearance || {}) || "tobias-lanches";
   }
@@ -4597,6 +4618,7 @@
       "</fieldset>"
     );
   }
+  // CONFIGURACOES ADMIN | Agrupa marca, pedido, politicas, entrega, localizacao, aparencia e horarios no mesmo formulario.
   function renderSettingsPanel() {
     const previousDraftContext = state.formDraftContext;
     state.formDraftContext = "settingsForm";
@@ -5260,6 +5282,7 @@
       "</label>"
     );
   }
+  // NUVEM ADMIN | Mostra conexao, publicacao e referencias online sem misturar com cadastro de produtos.
   function renderCloudPanel() {
     const previousDraftContext = state.formDraftContext;
     state.formDraftContext = "cloudForm";
@@ -5371,6 +5394,7 @@
       '</div>'
     );
   }
+  // RELATORIOS ADMIN | Exibe leituras de uso do cardapio para ajudar o dono a entender busca, carrinho e pedidos.
   function renderReportsPanel() {
     const reportData = currentReportData(5);
     const status = reportData?.status;
@@ -6274,6 +6298,7 @@
     system?.downloadJsonFile("relatorio-cardapio-" + Date?.now() + ".json", report);
     showStatus(t("reportExported"), "ok");
   }
+  // BACKUP ADMIN | Exporta os dados atuais em arquivo para recuperacao manual ou transferencia do cardapio.
   function downloadBackup(filename) {
     system?.downloadJsonFile(filename, system?.exportBackup());
     showStatus(t("backupDownloaded"), "ok");
@@ -6307,6 +6332,7 @@
       });
     }, Number(cloud?.reconnectIntervalMs || 30000));
   }
+  // LOGIN ADMIN | Valida senha local ou login online antes de liberar o painel.
   async function handleAuthSubmit(form) {
     const formData = new FormData(form);
     const password = String(formData?.get("password") || "");
@@ -6345,6 +6371,7 @@
     createSession();
     renderDashboard();
   }
+  // EVENTOS ADMIN | Concentra envios, cliques e mudancas do painel para manter renderizacao e salvamento previsiveis.
   function bindEvents() {
     document?.addEventListener("error", handleAdminImageError, true);
 
@@ -6361,6 +6388,7 @@
       clearStatus();
     });
 
+    // ENVIO ADMIN | Cada formulario valida, salva localmente e publica online quando o modo do painel permitir.
     document?.addEventListener("submit", function (event) {
       const form = event?.target;
       if (!(form instanceof HTMLFormElement)) {
@@ -6575,6 +6603,7 @@
         });
     });
 
+    // DIGITACAO ADMIN | Campos editados marcam rascunho pendente para evitar perder alteracoes em nova renderizacao.
     document?.addEventListener("input", function (event) {
       clearFieldError(event?.target);
 
@@ -6629,6 +6658,7 @@
       markAdminFormDirty(event?.target);
     });
 
+    // MUDANCA ADMIN | Selects, uploads e checkboxes atualizam filtros, imagens e rascunhos sem esperar o formulario salvar.
     document?.addEventListener("change", function (event) {
       clearFieldError(event?.target);
 
@@ -6781,6 +6811,7 @@
       markAdminFormDirty(event?.target);
     });
 
+    // CLIQUES ADMIN | Botoes e atalhos delegam a acao para funcoes especificas de produto, categoria, nuvem ou sistema.
     document?.addEventListener("click", function (event) {
       const comboProductCard = event?.target?.closest?.("[data-combo-product-card]");
       if (comboProductCard && !event?.target?.closest?.("input, select, textarea, button, a, label")) {
@@ -7189,6 +7220,7 @@
       }
     });
 
+    // ESTADO EXTERNO | Mudancas vindas da nuvem ou de outra aba atualizam a tela sem apagar edicao aberta.
     window?.addEventListener("template:state-change", function (event) {
       if (shouldDeferAdminStateChange(event?.detail)) {
         deferRemoteAdminUpdate(event?.detail);
@@ -7201,6 +7233,7 @@
       }
     });
   }
+  // ACOES PRODUTO | Editar, duplicar, ativar e remover passam por uma unica entrada para manter lista e formulario coerentes.
   async function handleProductAction(action, productId) {
     const product = getProductById(productId);
     if (!product) {
@@ -7322,6 +7355,7 @@
       });
     }
   }
+  // ACOES CATEGORIA | Atualiza grupos e realoca produtos afetados para o cardapio publico nao ficar com filtro quebrado.
   async function handleCategoryAction(action, categorySlug) {
     const category = getCategoryBySlug(categorySlug);
     if (!category) {
@@ -7396,6 +7430,7 @@
       });
     }
   }
+  // ACOES ADICIONAL | Edita ou remove adicionais atualizando tambem os produtos que dependem deles.
   async function handleAddOnAction(action, addOnId) {
     const addOn = getAddOnById(addOnId);
     if (!addOn) {
@@ -7470,6 +7505,7 @@
       });
     }
   }
+  // ACOES COMBO | Controla edicao, duplicacao e remocao de ofertas sem misturar com produtos individuais.
   async function handleComboAction(action, comboId) {
     const combo = getComboById(comboId);
     if (!combo) {
@@ -7558,6 +7594,7 @@
       });
     }
   }
+  // INICIALIZACAO ADMIN | Prepara idioma, autenticacao, eventos, nuvem e tela de carregamento antes de mostrar o painel.
   function init() {
     refreshStates();
     state.locale = resolveLocale(state?.locale || getDefaultLocale());

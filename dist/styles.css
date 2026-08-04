@@ -1,3 +1,4 @@
+/* FONTES | Carrega as duas familias locais para evitar troca visual de fonte durante a abertura do cardapio e do Admin. */
 @font-face {
   font-family: "Manrope";
   src: url("../assets/fonts/manrope-latin-variable.woff2") format("woff2");
@@ -1313,6 +1314,7 @@ html[data-accessibility="enhanced"] .pix-valor {
   align-items: stretch;
 }
 
+/* DESTAQUE | Controla a chamada "Peça rápido" e os blocos de informacao do topo sem depender de ajustes soltos por tela. */
 .destaque-inicial,
 .painel-horario {
   position: relative;
@@ -2210,6 +2212,7 @@ html[data-accessibility="enhanced"] .pix-valor {
 }
 
 .resumo-topo-carrinho,
+/* CARRINHO | Cards internos do pedido separam topo, total, entrega e pagamento mantendo a mesma linguagem visual do cardapio. */
 .cart-card,
 .bloco-form,
 .resumo-confirmacao {
@@ -3326,6 +3329,7 @@ body {
 .caixa-centro,
 .barra-mobile,
 .admin-card,
+/* LISTAS ADMIN | Cards de produtos, categorias, adicionais e combos usam a mesma base de leitura e acoes. */
 .admin-product-card {
   background: var(--admin-superficie-cartao);
   border-color: var(--admin-contorno);
@@ -4714,6 +4718,7 @@ body.admin-page [data-admin-tab-panel="products"] .admin-products-list-card {
   min-width: 0;
 }
 
+/* HORARIOS ADMIN | Mantem dias, chave aberto/fechado e campos de hora alinhados para o dono editar a agenda com menos ruido. */
 .admin-hours-fieldset {
   display: grid;
   gap: 0.7rem;
@@ -5808,6 +5813,7 @@ body.admin-page .admin-cloud-action-disabled-note {
   line-height: 1.35;
 }
 
+/* RELATORIOS ADMIN | Cards e listas de metricas mantem numeros, produtos e escolhas em blocos faceis de comparar. */
 .admin-metric-grid {
   display: grid;
   gap: 0.85rem;
@@ -5931,6 +5937,7 @@ body.admin-page .admin-cloud-action-disabled-note {
 }
 
 
+/* TOPO PUBLICO | Ajusta a versao sem imagem para chamada, horarios e informacoes continuarem compactos e alinhados. */
 .topo-blocos--without-hero-image {
   grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.88fr);
   gap: 0.85rem;
@@ -6602,6 +6609,7 @@ body.admin-page .admin-cloud-action-disabled-note {
   font-size: 0.86rem;
 }
 
+/* SISTEMA ADMIN | Acoes de backup, limpeza e reset ficam em cards separados para reduzir risco de clique errado. */
 .admin-system-actions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
@@ -7011,6 +7019,7 @@ body.admin-page .admin-cloud-action-disabled-note {
   letter-spacing: 0.015em;
 }
 
+/* FORMULARIO PRODUTO | Campos principais do produto se reorganizam em desktop sem mudar a ordem de preenchimento. */
 body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block-grid {
   grid-template-columns: 1fr;
 }
@@ -7204,6 +7213,7 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
   margin-top: 0.15rem;
 }
 
+/* PRODUTOS ADMIN | Lista visual de produtos destaca disponibilidade, categoria, preco e acoes rapidas. */
 .admin-product-card.admin-catalog-product-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -7398,6 +7408,7 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
   font-weight: var(--peso-forte);
 }
 
+/* NUVEM ADMIN | Status, publicacao e credenciais ficam juntos para o Admin entender conexao e envio ao Supabase. */
 .admin-cloud-grid {
   align-items: start;
   grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
@@ -9100,6 +9111,7 @@ body.admin-page [data-admin-tab-panel="products"] #productForm .admin-form-block
   padding: 0.72rem 0.88rem;
 }
 
+/* FILTROS PUBLICOS | Busca, seletores e modos de catalogo ficam juntos para o cliente refinar produtos sem sair da grade. */
 .catalog-toolbar {
   grid-template-columns: minmax(260px, 1.35fr) repeat(4, minmax(178px, 0.9fr));
   gap: 0.72rem;
@@ -12011,6 +12023,7 @@ body:not(.cart-has-items) .barra-mobile {
   padding-top: 0.54rem;
 }
 
+/* PRODUTOS PUBLICOS | Refinos dos cards mantem foto, titulo, selos, preco e botao com leitura consistente. */
 .produto-card {
   gap: clamp(0.72rem, 1vw, 0.88rem);
   padding: clamp(0.88rem, 1.05vw, 1.04rem);
@@ -13533,6 +13546,7 @@ body.admin-page.admin-auth-screen-active #adminStatus {
   color: var(--cor-contraste-destaque);
 }
 
+/* CARREGAMENTO | Controla a tela inicial compartilhada pelo cardapio e pelo Admin antes da interface ficar pronta. */
 body.page-transition-active {
   cursor: progress;
 }
@@ -13670,6 +13684,7 @@ body.page-transition-arrive {
   }
 }
 
+/* ENTRADA PUBLICA | Aplica surgimento suave so nos blocos principais do cardapio depois que o carregamento termina. */
 body.menu-entry-reveal .topo,
 body.menu-entry-reveal .topo-blocos,
 body.menu-entry-reveal .menu-categorias,

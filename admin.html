@@ -13,6 +13,7 @@
     content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'">
   <title>Painel - Tobia's Lanches</title>
   <style>
+    /* CARREGAMENTO | Mantem o fundo e a tela inicial prontos antes do CSS principal terminar de carregar. */
     html {
       color-scheme: dark;
       background: #030303;
@@ -127,6 +128,7 @@
 </head>
 
 <body class="admin-page page-transition-active">
+  <!-- CARREGAMENTO | Mostra uma entrada visual enquanto autenticacao, estado e painel ficam prontos. -->
   <div id="templatePageTransition" class="page-transition-overlay page-transition-overlay--show" aria-hidden="false">
     <div class="page-transition-card" role="status" aria-live="polite">
       <span class="page-transition-kicker" data-page-transition-brand>Tobia's Lanches</span>
@@ -138,7 +140,9 @@
     </div>
   </div>
 
+  <!-- ADMIN | Estrutura fixa do painel; o JavaScript preenche login e secoes dentro dela. -->
   <main class="admin-shell">
+    <!-- TOPO ADMIN | Reune titulo, link para o cardapio publico, idioma e saida da sessao. -->
     <header class="admin-topo">
       <div>
         <p class="admin-kicker">Painel</p>
@@ -155,11 +159,13 @@
       </div>
     </header>
 
+    <!-- PAINEL DINAMICO | Status, login e conteudo principal mudam conforme sessao e aba ativa. -->
     <p id="adminStatus" class="admin-status" aria-live="polite"></p>
     <section id="authPanel" class="admin-card"></section>
     <section id="adminApp" hidden></section>
   </main>
 
+  <!-- SCRIPTS | Carrega configuracao, utilitarios, autenticacao, estado e painel nesta ordem. -->
   <script src="./config.js?v=1.0.0"></script>
   <script src="./dist/core/shared-utils.js?v=2.1.5"></script>
   <script src="./dist/core/admin-auth.js?v=2.1.0"></script>

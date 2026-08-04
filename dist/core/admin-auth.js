@@ -7,6 +7,7 @@
   }
 
   const REMOTE_SESSION_KEY = "template-cardapio-supabase-session-v1";
+  // SESSAO ONLINE | Guarda o token do Supabase separado da senha local para limitar o que cada login libera.
   function buildAuthBaseUrl(cloudConfig) {
     return String(cloudConfig?.url || "").replace(/\/+$/, "");
   }
@@ -134,6 +135,7 @@
   function isSupabaseAuthenticated() {
     return Boolean(getSupabaseSession()?.access_token);
   }
+  // API AUTH | Reune login local e login Supabase em funcoes simples para o Admin consumir.
   function createAuthHelpers(config) {
     // SESSÃO | A senha local protege o painel; o token remoto só libera ações online no Supabase.
     const keys = {

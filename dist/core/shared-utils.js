@@ -1,5 +1,6 @@
 (function () {
   // COMPARTILHADO | Funções pequenas usadas pelo público, Admin e estado para evitar regras duplicadas entre arquivos.
+  // ARMAZENAMENTO | Centraliza leitura e gravacao local para os outros arquivos nao repetirem try/catch do navegador.
   function getStorage(mode) {
     try {
       return mode === "session" ? window.sessionStorage : window.localStorage;
@@ -47,6 +48,7 @@
       return false;
     }
   }
+  // SEGURANCA | Escapa textos antes de montar HTML para impedir que nomes e descricoes quebrem a tela.
   function escapeHtml(value) {
     return String(value == null ? "" : value)
       .replaceAll("&", "&amp;")
@@ -72,6 +74,7 @@
 
     return source || String(fallback || "item");
   }
+  // TEXTO | Limpa listas escritas em linhas para selos, observacoes e campos parecidos nao salvarem repetidos.
   function uniqueLines(value) {
     return Array.from(
       new Set(
@@ -100,6 +103,7 @@
       })
       .join("");
   }
+  // MOEDA | Formata valores com o idioma ativo para cardapio, carrinho e Admin mostrarem o mesmo preco.
   function formatCurrency(value, options) {
     const locale = options?.locale || "pt-BR";
     const currency = options?.currency || "BRL";
@@ -164,6 +168,7 @@
       return false;
     }
   }
+  // CARREGAMENTO | Cria a tela de transicao se a pagina ainda nao trouxe uma pronta no HTML.
   function getPageTransitionOverlay() {
     let overlay = document?.getElementById("templatePageTransition");
     if (overlay) {
@@ -305,6 +310,7 @@
     window?.setTimeout(clearArrival, 260);
     return true;
   }
+  // CARREGAMENTO | Espera fontes, imagens e uma janela minima antes de esconder a tela inicial.
   function waitForVisualReady(options) {
     const timeoutMs = Math.max(320, Math.min(Number(options?.timeoutMs ?? 2400), 5000));
     const waitFrame = new Promise(function (resolve) {
@@ -625,6 +631,7 @@
       palette,
     };
   }
+  // IDIOMA | Entrega traducao, fallback e leitura de textos por localidade para publico e Admin usarem igual.
   function createLocaleTools(config) {
     const messages = config?.messages || {};
     const getSupportedLocales = config?.getSupportedLocales || function () { return {}; };

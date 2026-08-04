@@ -22,6 +22,7 @@
   const AUTHOR_NAME = "Kayron Magalhães";
   const AUTHOR_URL = "https://www.instagram.com/kayronmagl/";
 
+  // TEXTOS PUBLICOS | Reune rotulos, mensagens e ajudas que aparecem para o cliente no cardapio e no carrinho.
   const MESSAGES = {
     "pt-BR": {
       languageLabel: "Idioma",
@@ -831,6 +832,7 @@
     },
   };
 
+  // MEMORIA PUBLICA | Guarda filtros, carrinho, favoritos, conexao online e avisos visuais usados durante a visita.
   const state = {
     states: system?.getStates(),
     locale: shared?.loadStorageValue(STORAGE_KEYS?.locale, "", "local"),
@@ -864,6 +866,7 @@
     feedbackTimer: null,
   };
 
+  // ARMAZENAMENTO PUBLICO | Persiste carrinho, filtros e dados lembrados sem espalhar localStorage pelo cardapio.
   const loadJson = function (key, fallback) {
     return shared?.loadStorageValue(key, fallback, "local");
   };
@@ -883,6 +886,7 @@
     return state?.states?.brandConfig?.i18n?.defaultLocale || "pt-BR";
   }
 
+  // IDIOMA | Usa as mesmas mensagens para texto inicial, carrinho, legal e filtros acompanharem a lingua ativa.
   const localeTools = shared?.createLocaleTools({
     messages: MESSAGES,
     getSupportedLocales: getSupportedLocales,
@@ -931,6 +935,7 @@
     return localeTools?.listValue(value, locale);
   }
 
+  // DADOS DO CARDAPIO | Atalhos de leitura mantem produtos, marca e textos sempre vindos do estado central.
   const escapeHtml = shared?.escapeHtml;
   const $ = shared?.byId;
   function getMenuState() {
@@ -956,6 +961,7 @@
   function prefersReducedMotion() {
     return Boolean(window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
   }
+  // NAVEGACAO | Ajusta retorno do Admin e transicao entre paginas sem deixar o usuario cair no meio da rolagem.
   function isBackForwardNavigation(event) {
     if (event?.persisted) {
       return true;
@@ -1229,6 +1235,7 @@
       closeRealtimeSubscription();
     }
   }
+  // CATALOGO ONLINE | Carrega dados publicados e liga realtime somente quando o Supabase esta pronto.
   function bootCloudCatalog() {
     if (!isCloudOnlineMode()) {
       closeRealtimeSubscription();
@@ -1244,6 +1251,7 @@
       return false;
     });
   }
+  // PRODUTOS | Resolve produtos, categorias, adicionais e combos antes de renderizar ou adicionar ao carrinho.
   function getProductById(productId) {
     return getMenuState().products.find((product) => product?.id === productId) || null;
   }
@@ -1361,6 +1369,7 @@
       return "";
     }
   }
+  // LEGAL | Monta politica e termos com dados da loja para o rodape abrir documentos dentro do proprio cardapio.
   function getLegalConfig() {
     const brandConfig = getBrandConfig();
     const legal = brandConfig?.legal && typeof brandConfig?.legal === "object" ? brandConfig.legal : {};
@@ -1456,6 +1465,7 @@
     return safeExternalUrl(form?.customerMapsUrl);
   }
 
+  // APARENCIA | Aplica tema, paleta, idioma do HTML e modos visuais antes das secoes serem renderizadas.
   const normalizePhone = shared?.normalizePhone;
   function applyTheme() {
     const appearance = getBrandConfig()?.appearance || {};
@@ -1886,6 +1896,7 @@
     $("trocoPara").placeholder = t("changeForPlaceholder");
     $("observacoes").placeholder = t("notesPlaceholder");
   }
+  // MARCA | Atualiza textos, logo, endereco, horarios e selos que aparecem antes da lista de produtos.
   function renderLocationSection() {
     const section = $("secaoLocalizacao");
     if (!section) {
@@ -2092,6 +2103,7 @@
       destaqueImagemArquivo.alt = "";
     }
   }
+  // HORARIOS | Calcula status aberto ou fechado e monta agenda visivel sem depender de texto fixo no HTML.
   function renderSchedule() {
     const agenda = $("agendaHorario");
     const schedule = Array.isArray(getBrandConfig()?.schedule) ? getBrandConfig()?.schedule : [];
@@ -2130,6 +2142,7 @@
     $("rotuloProximoHorario").textContent = status?.heading || t("nextSchedule");
     $("detalheHorario").textContent = status?.detail;
   }
+  // CATEGORIAS | Mostra apenas grupos com produto visivel para o cliente nao entrar em categoria vazia.
   function getCategoryProductCount(slug) {
     return getMenuState()?.products?.filter(function (product) {
       return product?.category === slug && isProductPurchasable(product);
@@ -2259,6 +2272,7 @@
       escapeHtml(t("clearFilters")) +
       "</button>";
   }
+  // FILTROS | Monta controles de busca, preco, favoritos e visual sem espalhar HTML pelo restante do catalogo.
   function buildOptions(options, selectedValue) {
     return options
       ?.map(function (item) {
@@ -2457,6 +2471,7 @@
 
     return sorted;
   }
+  // RENDERIZACAO | Atualiza categorias, ofertas e grade de produtos de acordo com os filtros atuais.
   function emptyProductsMessage() {
     const hasSearchQuery = Boolean(String(state?.filters?.query || "")?.trim());
     const hasSecondaryFilters = state?.filters?.status !== "all"
@@ -2832,6 +2847,7 @@
     state?.viewTracker?.add(productId);
     system?.trackView(productId);
   }
+  // CARRINHO | Leitura dos cards transforma produto, adicional e observacao em item unico no pedido.
   function readCardAddOns(card) {
     return Array?.from(card?.querySelectorAll("input[data-product-add-on]:checked"))?.map(function (input) {
       return String(input?.value || "");
@@ -3023,6 +3039,7 @@
       })
       ?.filter(Boolean);
   }
+  // ENTREGA | Resolve localidades, taxas e bloqueios antes de calcular o total do carrinho.
   function deliveryLocations() {
     const delivery = getBrandConfig()?.delivery || {};
     const source = Array.isArray(delivery?.locations)
@@ -3279,6 +3296,7 @@
     const cart = $("caixaCarrinho");
     return Boolean(cart && !cart?.hidden && cart?.classList?.contains("show"));
   }
+  // RESUMO DO PEDIDO | Recalcula itens, taxa, total e estado dos botoes sempre que o carrinho muda.
   function renderCart() {
     sanitizeCart();
     const list = $("listaCarrinho");
@@ -3437,6 +3455,7 @@
     );
     feedback.classList.add("public-action-feedback--" + tone);
   }
+  // RETORNO VISUAL | Decide se a mensagem aparece no formulario ou flutuando perto da acao do cliente.
   function showStatus(message, type, options) {
     const text = String(message || "").trim();
     const success = $("mensagemStatus");
@@ -4108,6 +4127,7 @@
       image?.remove();
     }
   }
+  // EVENTOS PUBLICOS | Liga cliques, filtros, formulario e modais para cada acao chamar a funcao responsavel.
   function bindEvents() {
     document?.addEventListener("error", handleMenuImageError, true);
 
@@ -4118,6 +4138,7 @@
       syncFromSystem();
     });
 
+    // DIGITACAO PUBLICA | Busca e campos do pedido atualizam tela, totais e dados lembrados enquanto o cliente escreve.
     document?.addEventListener("input", function (event) {
       if (event?.target?.id === "catalogSearch") {
         state.filters.query = String(event?.target?.value || "");
@@ -4149,6 +4170,7 @@
       }
     });
 
+    // MUDANCA PUBLICA | Filtros e escolhas do checkout recalculam catalogo, entrega e pagamento na hora.
     document?.addEventListener("change", function (event) {
       if (event?.target?.id === "catalogCategory") {
         state.filters.category = event?.target?.value || "all";
@@ -4198,6 +4220,7 @@
       }
     });
 
+    // CLIQUES PUBLICOS | Produtos, carrinho, filtros, modais e WhatsApp passam por delegacao para evitar eventos duplicados.
     document?.addEventListener("click", function (event) {
       const button = event?.target?.closest("button");
       if (!button) {
@@ -4405,6 +4428,7 @@
       }
     });
 
+    // ESTADO ONLINE | Atualizacoes do sistema recarregam o cardapio sem reagir a eventos que sao apenas metricas.
     window?.addEventListener("template:state-change", function (event) {
       if (isMetricStateChange(event?.detail)) {
         return;
@@ -4437,6 +4461,7 @@
       }
     });
   }
+  // INICIALIZACAO PUBLICA | Prepara idioma, carrinho, carregamento, dados online e primeira renderizacao do cardapio.
   function init() {
     state.locale = resolveLocale(state?.locale || getDefaultLocale());
     state.accessibilityMode = normalizeAccessibilityMode(state?.accessibilityMode);

@@ -42,6 +42,7 @@
   const PRODUCT_IMAGE_BUCKET = "product-images";
   const CURRENT_LOGO_URL = "./assets/NovaLogoTobias.png";
 
+  // PADRAO DA LOJA | Define marca, entrega, horarios e aparencia usados quando ainda nao existe configuracao salva.
   const DEFAULT_BRAND = {
       "i18n": {
           "defaultLocale": "pt-BR",
@@ -217,6 +218,7 @@
       }
   };
 
+  // CARDAPIO PADRAO | Mantem um catalogo inicial valido para o sistema abrir mesmo antes da primeira publicacao.
   const DEFAULT_MENU = {
       "version": 1,
       "locale": "pt-BR",
@@ -1115,6 +1117,7 @@
       "updatedAt": "2026-05-17T09:11:59-03:00"
   };
 
+  // TRADUCOES CONHECIDAS | Reaproveita traducoes de conteudos antigos para nao perder ingles ao normalizar backups.
   const KNOWN_EN_TRANSLATIONS = {
       "Peça rápido e sem complicação.": "Order quickly and easily.",
       "Delivery, retirada e pedido no local com confirmação no WhatsApp.": "Delivery, pickup, and dine-in orders with WhatsApp confirmation.",
@@ -1205,6 +1208,7 @@
     catalogMode: "default",
     highlightMode: false,
   };
+  // ARMAZENAMENTO | Leitura e escrita local sempre passam por copia e fallback para evitar estado quebrado no navegador.
   function clone(value) {
     return JSON?.parse(JSON?.stringify(value));
   }
@@ -1243,6 +1247,7 @@
       return false;
     }
   }
+  // TRATAMENTO | Limpa textos vindos de formulario, backup ou nuvem antes de gravar no estado oficial.
   function sanitizeText(value, fallback, maxLength) {
     const resolved = String(value == null ? fallback || "" : value)
       ?.replace(/[<>"]/g, "")
@@ -1279,6 +1284,7 @@
       return "";
     }
   }
+  // LEGAL | Normaliza politica e termos para o rodape publico sempre receber links e dados seguros.
   function sanitizeLegalConfig(rawLegal) {
     const input = rawLegal && typeof rawLegal === "object" ? rawLegal : {};
     const source = { ...(DEFAULT_BRAND?.legal || {}), ...clone(input) };
@@ -1320,6 +1326,7 @@
       !/YOUR_PROJECT|YOUR-PROJECT|YOUR_SUPABASE_ANON_KEY|YOUR_ANON_PUBLIC_KEY|SEU-PROJETO|SUA_ANON_PUBLIC_KEY/i.test(combined)
     );
   }
+  // NUVEM | Normaliza Supabase vindo do config.js ou do Admin para todas as chamadas usarem o mesmo formato.
   function normalizePublicCloudConfig(rawConfig) {
     const input = rawConfig && typeof rawConfig === "object" ? rawConfig : {};
     const tables = input?.tables && typeof input?.tables === "object" ? input?.tables : {};
@@ -1442,6 +1449,7 @@
     usedIds?.add(nextId);
     return nextId;
   }
+  // TRADUCAO | Recupera textos antigos ou incompletos e preenche traducoes sem apagar o conteudo principal.
   function firstObjectText(value) {
     if (!value || typeof value !== "object" || Array.isArray(value)) {
       return "";
@@ -1698,6 +1706,7 @@
       discounts,
     };
   }
+  // CARDAPIO | Valida categorias, adicionais, produtos e ofertas antes de qualquer tela usar esses dados.
   function sanitizeMenuState(rawMenuState) {
     const issues = [];
     const input = rawMenuState && typeof rawMenuState === "object" ? rawMenuState : {};
@@ -1891,6 +1900,7 @@
       )
     );
   }
+  // CONFIGURACAO DA LOJA | Valida marca, pedido, entrega, tema, horarios e textos legais antes de salvar ou publicar.
   function sanitizeBrandConfig(rawBrandConfig) {
     const input = rawBrandConfig && typeof rawBrandConfig === "object" ? rawBrandConfig : {};
     const next = clone(DEFAULT_BRAND);
@@ -2099,6 +2109,7 @@
       issues,
     };
   }
+  // COMPATIBILIDADE ANTIGA | Gera o formato legado para partes do sistema que ainda leem catalogo e settings separados.
   function legacyCatalogFromState(menuState) {
     return {
       categories: menuState.categories.map((category) => ({
@@ -2178,6 +2189,7 @@
     );
     emitStateChange(meta || { type: "sync" });
   }
+  // METRICAS | Mantem contadores locais em formato previsivel para relatorios e backup nao quebrarem.
   function metricBucket(value) {
     return value && typeof value === "object" && !Array.isArray(value) ? { ...value } : {};
   }
@@ -2221,6 +2233,7 @@
     "service_selected",
     "search_no_result",
   ]);
+  // METRICAS ONLINE | Prepara eventos anonimos do cardapio para enviar ao Supabase sem dados sensiveis do cliente.
   function metricEventTableName(cloudConfig) {
     return sanitizeText(
       cloudConfig?.tables?.metricEvents,
@@ -2352,6 +2365,7 @@
     emitStateChange({ type: "client-ui" });
     return ui;
   }
+  // CARREGAMENTO DO ESTADO | Junta dados atuais e formatos antigos para abrir o sistema com a versao mais completa.
   function loadStates() {
     const states = buildCanonicalStates();
     return clone(states);
@@ -2689,6 +2703,7 @@
     saveFavorites(Array?.from(favorites));
     return getFavorites();
   }
+  // SUPABASE | Monta URLs, cabecalhos e permissoes usados por publicacao, leitura online e envio de imagens.
   function isSupabaseConfigured(cloudConfig) {
     return hasConfiguredCloudCredentials(cloudConfig);
   }
@@ -2826,6 +2841,7 @@
     error.userMessage = cloudRequestErrorMessage(status, details, context);
     return error;
   }
+  // IMAGENS ONLINE | Converte imagens coladas em arquivo publico para o cardapio nao carregar base64 pesado.
   function extensionFromMimeType(mimeType) {
     const normalized = String(mimeType || "").trim().toLowerCase();
     if (normalized === "image/png") {
@@ -3041,6 +3057,7 @@
       imageUploadWarnings,
     };
   }
+  // CONEXAO ONLINE | Testa uma leitura simples e salva o resultado para o Admin mostrar se a nuvem esta pronta.
   async function checkCloudConnection() {
     const cloudConfig = getStates()?.cloudConfig;
 
@@ -3119,6 +3136,7 @@
       console.warn(message, details || {});
     }
   }
+  // PUBLICACAO | Monta uma fotografia valida do catalogo antes de enviar categorias, produtos e adicionais.
   function buildCloudCatalogSnapshot(sourceStates) {
     const states = sourceStates || getStates();
     const menuState = sanitizeMenuState(states?.menuState)?.state || {
@@ -3210,6 +3228,7 @@
       },
     };
   }
+  // CONFIGURACOES ONLINE | Agrupa marca, entrega, tema, horarios e combos em linhas estaveis de publicacao.
   function buildMenuSettingsRows(brandConfig, cloudConfig, menuState) {
     const brand = sanitizeBrandConfig(brandConfig);
     const cloud = sanitizeCloudConfig(cloudConfig);
@@ -3388,6 +3407,7 @@
       return [];
     }
   }
+  // SINCRONIZACAO ONLINE | Busca o catalogo publicado no Supabase e substitui o estado local somente depois de validar tudo.
   async function syncCloudToLocal() {
     const states = getStates();
     const cloudConfig = states?.cloudConfig;
@@ -3929,6 +3949,7 @@
       imageUploadWarnings: result?.imageUploadWarnings || [],
     };
   }
+  // REPUBLICACAO ONLINE | Refaz categorias, produtos, adicionais e configuracoes no Supabase quando o Admin pede envio completo.
   async function replaceCloudCatalog(options) {
     const publication = await prepareCloudCatalogPublication(options);
     const tables = publication?.tables;

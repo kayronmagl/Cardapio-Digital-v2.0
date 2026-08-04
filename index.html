@@ -12,6 +12,7 @@
     content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'">
   <title>Cardápio digital do Tobia's Lanches</title>
   <style>
+    /* CARREGAMENTO | Mantem o fundo e a tela inicial prontos antes do CSS principal terminar de carregar. */
     html {
       color-scheme: dark;
       background: #030303;
@@ -126,6 +127,7 @@
 </head>
 
 <body class="page-transition-active">
+  <!-- CARREGAMENTO | Mostra uma entrada visual enquanto o cardapio e os dados iniciais ficam prontos. -->
   <div id="templatePageTransition" class="page-transition-overlay page-transition-overlay--show" aria-hidden="false">
     <div class="page-transition-card" role="status" aria-live="polite">
       <span class="page-transition-kicker" data-page-transition-brand>Tobia's Lanches</span>
@@ -139,6 +141,7 @@
 
   <div class="fundo-animado" aria-hidden="true"></div>
 
+  <!-- CABECALHO | Reune marca, idioma, acessibilidade, status e atalho do carrinho no primeiro contato do cliente. -->
   <header class="topo layout-shell" id="topo">
     <div class="caixa-logo">
       <img id="logoSite" src="./assets/NovaLogoTobias.png" alt="Logo Tobia's Lanches" class="logo-site" width="500"
@@ -172,6 +175,7 @@
     </div>
   </header>
 
+  <!-- INICIO | Junta chamada principal e horarios para o cliente saber rapidamente se pode pedir agora. -->
   <section id="topoBlocos" class="topo-blocos layout-shell topo-blocos--without-hero-image" aria-label="Resumo inicial">
     <section id="secaoDestaqueInicial" class="destaque-inicial destaque-inicial--without-image"
       aria-label="Destaques do atendimento">
@@ -223,6 +227,7 @@
     </section>
   </section>
 
+  <!-- CATALOGO | Categorias, busca e filtros controlam quais produtos aparecem na grade principal. -->
   <nav id="menuCategorias" class="menu-categorias layout-shell" aria-label="Categorias do cardápio"></nav>
   <p id="statusCategoria" class="sr-only" aria-live="polite"></p>
 
@@ -247,8 +252,10 @@
 
   <main id="areaProdutos" class="grade-produtos layout-shell" aria-live="polite"></main>
 
+  <!-- LEGAL | Area reutilizada para politica e termos quando o cliente abre links do rodape. -->
   <main id="paginaLegal" class="legal-page layout-shell oculto" hidden aria-live="polite"></main>
 
+  <!-- RODAPE | Guarda links de navegacao, credito e documentos legais sem disputar espaco com o cardapio. -->
   <footer id="rodapeUtilitarios" class="rodape-utilitarios layout-shell" aria-label="Informações do cardápio">
     <p id="rodapeNota" class="rodape-nota">Atendimento direto do Tobia's Lanches.</p>
     <nav id="rodapeLinks" class="rodape-links" aria-label="Links do site">
@@ -271,6 +278,7 @@
     </div>
   </footer>
 
+  <!-- CARRINHO | Modal onde o cliente revisa itens, informa entrega ou retirada e prepara o pedido para o WhatsApp. -->
   <section id="caixaCarrinho" class="fundo-escuro oculto" tabindex="-1" hidden inert aria-hidden="true">
     <div class="caixa-centro caixa-carrinho" role="dialog" aria-modal="true" aria-labelledby="tituloCarrinho"
       aria-describedby="descricaoCarrinho">
@@ -456,6 +464,7 @@
     </div>
   </section>
 
+  <!-- CONFIRMACAO | Ultima revisao antes de abrir o WhatsApp com a mensagem pronta. -->
   <section id="modalConfirmacao" class="fundo-escuro oculto" tabindex="-1" hidden inert aria-hidden="true">
     <div class="caixa-centro caixa-confirmacao" role="dialog" aria-modal="true" aria-labelledby="tituloConfirmacao"
       aria-describedby="descricaoConfirmacao">
@@ -469,6 +478,7 @@
     </div>
   </section>
 
+  <!-- MOBILE | Mantem total e abertura do carrinho sempre acessiveis em telas pequenas. -->
   <div class="barra-mobile" id="barraMobile">
     <div class="barra-mobile-info">
       <span id="barraMobileLabel" class="barra-mobile-label">
@@ -482,6 +492,7 @@
     </button>
   </div>
 
+  <!-- SCRIPTS | Carrega configuracao, utilitarios, estado e a interface publica nesta ordem. -->
   <script src="./config.js?v=1.0.0"></script>
   <script src="./dist/core/shared-utils.js?v=2.1.5"></script>
   <script src="./dist/core/state-manager.js?v=2.0.5"></script>
